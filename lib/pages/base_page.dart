@@ -1,0 +1,34 @@
+import 'package:cartanawc_app/provider/loader_provider.dart';
+import 'package:cartanawc_app/utils/progress_hud.dart';
+import 'package:cartanawc_app/widgets/appbar_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class BasePage extends StatefulWidget {
+  const BasePage({Key key}) : super(key: key);
+
+  @override
+  BasePageState createState() => BasePageState();
+}
+
+class BasePageState<T extends BasePage> extends State<T> {
+  bool isApiCallProcess = false;
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<LoaderProvider>(builder: (context, loaderProvider, child) {
+      return Scaffold(
+        appBar: buildAppBar(context),
+        body: ProgressHUD(
+          isAsyncCall: isApiCallProcess,
+          opacity: 0.3,
+          color: Colors.black,
+          child: pageUI(),
+        ),
+      );
+    });
+  }
+
+  Widget pageUI() {
+    return null;
+  }
+}
