@@ -51,6 +51,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
   }
 
   Widget _customerDetailsView(BuildContext context) {
+    Map<String, String> customerDetailsFields = {};
     return FutureBuilder(
       future: fetchCustomerDetails,
       builder: (context, AsyncSnapshot<CustomerDetailModel> snapshot) {
