@@ -109,6 +109,13 @@ class _MyAccountPageState extends State<MyAccountPage> {
                               context, snapshot.data.email),
                           Align(
                             alignment: Alignment.centerLeft,
+                            child: FormHelper.fieldLabel('Téléphone',
+                                labelColor: ThemeConfig.cartanaColorGrey),
+                          ),
+                          FormHelper.fieldLabelValue(
+                              context, snapshot.data.billing.phone),
+                          Align(
+                            alignment: Alignment.centerLeft,
                             child: FormHelper.fieldLabel('Adresse',
                                 labelColor: ThemeConfig.cartanaColorGrey),
                           ),
