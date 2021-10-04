@@ -69,94 +69,93 @@ class _MyAccountPageState extends State<MyAccountPage> {
                     horizontal: 20.0, vertical: 40.0),
                 color: Colors.white,
                 child: FutureBuilder(
-                    future: fetchCustomerDetails,
-                    builder:
-                        (context, AsyncSnapshot<CustomerDetailModel> snapshot) {
-                      if (snapshot.hasData) {
-                        final List<Map<String, String>> _customerDetailsFields =
-                            [
-                          {'NOM': snapshot.data.firstName},
-                          {'Prénom': snapshot.data.lastName},
-                          {'Type': snapshot.data.role},
-                          {'E-mail': snapshot.data.email},
-                          {'Téléphone': snapshot.data.billing.phone},
-                          {'Adresse': snapshot.data.billing.address1},
-                          {
-                            "Complement d'adresse":
-                                snapshot.data.billing.address2
-                          },
-                          {'Wilaya': snapshot.data.billing.city},
-                          {'Code postal': snapshot.data.billing.postcode},
-                        ];
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            CircleAvatar(
-                              radius: 75.0,
-                              child: Image.network(snapshot.data.avatarUrl),
-                            ),
-                            const SizedBox(height: 20.0),
-                            SizedBox(
-                              height: 900.0,
-                              child: ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: _customerDetailsFields.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: FormHelper.fieldLabel(
-                                            _customerDetailsFields[index]
-                                                .keys
-                                                .first,
-                                            labelColor:
-                                                ThemeConfig.cartanaColorGrey),
-                                      ),
-                                      FormHelper.fieldLabelValue(
-                                          context,
+                  future: fetchCustomerDetails,
+                  builder:
+                      (context, AsyncSnapshot<CustomerDetailModel> snapshot) {
+                    if (snapshot.hasData) {
+                      final List<Map<String, String>> _customerDetailsFields = [
+                        {'Nom': snapshot.data.firstName},
+                        {'Prénom': snapshot.data.lastName},
+                        {'Type': snapshot.data.role},
+                        {'E-mail': snapshot.data.email},
+                        {'Téléphone': snapshot.data.billing.phone},
+                        {'Adresse': snapshot.data.billing.address1},
+                        {
+                          "Complement d'adresse": snapshot.data.billing.address2
+                        },
+                        {'Wilaya': snapshot.data.billing.city},
+                        {'Code postal': snapshot.data.billing.postcode},
+                      ];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          CircleAvatar(
+                            radius: 75.0,
+                            child: Image.network(snapshot.data.avatarUrl),
+                          ),
+                          const SizedBox(height: 20.0),
+                          SizedBox(
+                            height: 900.0,
+                            child: ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: _customerDetailsFields.length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: FormHelper.fieldLabel(
                                           _customerDetailsFields[index]
-                                              .values
-                                              .first),
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 15.0,
-                            ),
-                            const Text(
-                              'informations non corrects ?',
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 10.0),
-                            textButton(
-                              onPressed: () {},
-                              text: 'MODIFIER',
-                              textColor: Colors.white,
-                              backgroundColor: Colors.black,
-                            ),
-                            const SizedBox(height: 10.0),
-                            textButton(
-                              onPressed: () {
-                                SharedService.logout();
-                                Navigator.pop(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const HomePage(),
-                                  ),
+                                              .keys
+                                              .first,
+                                          labelColor:
+                                              ThemeConfig.cartanaColorGrey),
+                                    ),
+                                    FormHelper.fieldLabelValue(
+                                        context,
+                                        _customerDetailsFields[index]
+                                            .values
+                                            .first),
+                                  ],
                                 );
                               },
-                              text: 'Se déconnecter',
                             ),
-                          ],
-                        );
-                      }
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                          ),
+                          const SizedBox(
+                            height: 15.0,
+                          ),
+                          const Text(
+                            'informations non corrects ?',
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 10.0),
+                          textButton(
+                            onPressed: () {},
+                            text: 'MODIFIER',
+                            textColor: Colors.white,
+                            backgroundColor: Colors.black,
+                          ),
+                          const SizedBox(height: 10.0),
+                          textButton(
+                            onPressed: () {
+                              SharedService.logout();
+                              Navigator.pop(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ),
+                              );
+                            },
+                            text: 'Se déconnecter',
+                          ),
+                        ],
                       );
-                    }),
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
               ),
             ],
           ),
