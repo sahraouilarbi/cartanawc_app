@@ -24,6 +24,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
   APIService apiService;
   Future<CustomerDetailModel> fetchCustomerDetails;
   AuthProvider authProvider;
+
   @override
   void initState() {
     super.initState();
@@ -51,137 +52,151 @@ class _MyAccountPageState extends State<MyAccountPage> {
   }
 
   Widget _customerDetailsView(BuildContext context) {
-    Map<String, String> customerDetailsFields = {};
-    return FutureBuilder(
-      future: fetchCustomerDetails,
-      builder: (context, AsyncSnapshot<CustomerDetailModel> snapshot) {
-        if (snapshot.hasData) {
-          return Scaffold(
-            drawer: buildDrawer(context),
-            appBar: buildAppBar(context, isUserProfilePage: true),
-            body: SingleChildScrollView(
-              child: Container(
-                color: Colors.black,
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    pageHeaderStack(pageHeader: 'PROFIL'),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 40.0),
-                      color: Colors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          CircleAvatar(
-                            radius: 75.0,
-                            child: Image.network(snapshot.data.avatarUrl),
-                          ),
-                          const SizedBox(height: 20.0),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: FormHelper.fieldLabel('Nom',
-                                labelColor: ThemeConfig.cartanaColorGrey),
-                          ),
-                          FormHelper.fieldLabelValue(
-                              context, snapshot.data.firstName),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: FormHelper.fieldLabel('Prénom',
-                                labelColor: ThemeConfig.cartanaColorGrey),
-                          ),
-                          FormHelper.fieldLabelValue(
-                              context, snapshot.data.lastName),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: FormHelper.fieldLabel('Type',
-                                labelColor: ThemeConfig.cartanaColorGrey),
-                          ),
-                          FormHelper.fieldLabelValue(
-                              context, snapshot.data.role),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: FormHelper.fieldLabel('E-mail',
-                                labelColor: ThemeConfig.cartanaColorGrey),
-                          ),
-                          FormHelper.fieldLabelValue(
-                              context, snapshot.data.email),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: FormHelper.fieldLabel('Téléphone',
-                                labelColor: ThemeConfig.cartanaColorGrey),
-                          ),
-                          FormHelper.fieldLabelValue(
-                              context, snapshot.data.billing.phone),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: FormHelper.fieldLabel('Adresse',
-                                labelColor: ThemeConfig.cartanaColorGrey),
-                          ),
-                          FormHelper.fieldLabelValue(
-                              context, snapshot.data.billing.address1),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: FormHelper.fieldLabel("Complement d'adresse",
-                                labelColor: ThemeConfig.cartanaColorGrey),
-                          ),
-                          FormHelper.fieldLabelValue(
-                              context, snapshot.data.billing.address2),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: FormHelper.fieldLabel('Wilaya',
-                                labelColor: ThemeConfig.cartanaColorGrey),
-                          ),
-                          FormHelper.fieldLabelValue(
-                              context, snapshot.data.billing.city),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: FormHelper.fieldLabel('Code postal',
-                                labelColor: ThemeConfig.cartanaColorGrey),
-                          ),
-                          FormHelper.fieldLabelValue(
-                              context, snapshot.data.billing.postcode),
-                          const SizedBox(
-                            height: 15.0,
-                          ),
-                          const Text(
-                            'informations non corrects ?',
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 10.0),
-                          textButton(
-                            onPressed: () {},
-                            text: 'MODIFIER',
-                            textColor: Colors.white,
-                            backgroundColor: Colors.black,
-                          ),
-                          const SizedBox(height: 10.0),
-                          textButton(
-                            onPressed: () {
-                              SharedService.logout();
-                              Navigator.pop(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
-                                ),
-                              );
-                            },
-                            text: 'Se déconnecter',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+    return Scaffold(
+      drawer: buildDrawer(context),
+      appBar: buildAppBar(context, isUserProfilePage: true),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.black,
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              pageHeaderStack(pageHeader: 'PROFIL'),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 40.0),
+                color: Colors.white,
+                child: FutureBuilder(
+                    future: fetchCustomerDetails,
+                    builder:
+                        (context, AsyncSnapshot<CustomerDetailModel> snapshot) {
+                      if (snapshot.hasData) {
+                        List<Map<String, String>> customerDetailsFields = [
+                          {'Nom': snapshot.data.firstName},
+                          {'Prénom': snapshot.data.lastName},
+                          {'Type': snapshot.data.role},
+                          {'E-mail': snapshot.data.email},
+                          {'Téléphone': snapshot.data.billing.phone},
+                          {'Adresse': snapshot.data.billing.address1},
+                          {
+                            "Complement d'adresse":
+                                snapshot.data.billing.address2
+                          },
+                          {'Wilaya': snapshot.data.billing.city},
+                          {'Code postal': snapshot.data.billing.postcode},
+                        ];
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            CircleAvatar(
+                              radius: 75.0,
+                              child: Image.network(snapshot.data.avatarUrl),
+                            ),
+                            const SizedBox(height: 20.0),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: FormHelper.fieldLabel('Nom',
+                                  labelColor: ThemeConfig.cartanaColorGrey),
+                            ),
+                            FormHelper.fieldLabelValue(
+                                context, snapshot.data.firstName),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: FormHelper.fieldLabel('Prénom',
+                                  labelColor: ThemeConfig.cartanaColorGrey),
+                            ),
+                            FormHelper.fieldLabelValue(
+                                context, snapshot.data.lastName),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: FormHelper.fieldLabel('Type',
+                                  labelColor: ThemeConfig.cartanaColorGrey),
+                            ),
+                            FormHelper.fieldLabelValue(
+                                context, snapshot.data.role),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: FormHelper.fieldLabel('E-mail',
+                                  labelColor: ThemeConfig.cartanaColorGrey),
+                            ),
+                            FormHelper.fieldLabelValue(
+                                context, snapshot.data.email),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: FormHelper.fieldLabel('Téléphone',
+                                  labelColor: ThemeConfig.cartanaColorGrey),
+                            ),
+                            FormHelper.fieldLabelValue(
+                                context, snapshot.data.billing.phone),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: FormHelper.fieldLabel('Adresse',
+                                  labelColor: ThemeConfig.cartanaColorGrey),
+                            ),
+                            FormHelper.fieldLabelValue(
+                                context, snapshot.data.billing.address1),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: FormHelper.fieldLabel(
+                                  "Complement d'adresse",
+                                  labelColor: ThemeConfig.cartanaColorGrey),
+                            ),
+                            FormHelper.fieldLabelValue(
+                                context, snapshot.data.billing.address2),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: FormHelper.fieldLabel('Wilaya',
+                                  labelColor: ThemeConfig.cartanaColorGrey),
+                            ),
+                            FormHelper.fieldLabelValue(
+                                context, snapshot.data.billing.city),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: FormHelper.fieldLabel('Code postal',
+                                  labelColor: ThemeConfig.cartanaColorGrey),
+                            ),
+                            FormHelper.fieldLabelValue(
+                                context, snapshot.data.billing.postcode),
+                            const SizedBox(
+                              height: 15.0,
+                            ),
+                            const Text(
+                              'informations non corrects ?',
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 10.0),
+                            textButton(
+                              onPressed: () {},
+                              text: 'MODIFIER',
+                              textColor: Colors.white,
+                              backgroundColor: Colors.black,
+                            ),
+                            const SizedBox(height: 10.0),
+                            textButton(
+                              onPressed: () {
+                                SharedService.logout();
+                                Navigator.pop(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomePage(),
+                                  ),
+                                );
+                              },
+                              text: 'Se déconnecter',
+                            ),
+                          ],
+                        );
+                      }
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }),
               ),
-            ),
-          );
-        }
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
