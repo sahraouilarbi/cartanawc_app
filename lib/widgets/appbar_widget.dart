@@ -95,13 +95,13 @@ AppBar buildAppBar(
           },
           icon:
               //TODO !!!!
-              //authProvider.loggedInStatus == Status.loggedIn
-              //    ? CircleAvatar(
-              //        child: Image.network(
-              //            customerProvider.customerDetailModel.avatarUrl),
-              //      )
-              //    :
-              const Icon(Icons.person)),
+              authProvider.loggedInStatus == Status.loggedIn
+                  ? const Icon(Icons.person, color: Colors.white)
+                  // CircleAvatar(
+                  //         child: Image.network(
+                  //             customerProvider.customerDetailModel.avatarUrl),
+                  //       )
+                  : const Icon(Icons.person, color: Colors.grey)),
     ],
   );
 }
