@@ -36,7 +36,6 @@ class HttpService {
   }
 
   Future<Response> postRequest(String endPoint, dynamic data) async {
-    print("http_service.postrequest line 39 - data: $data");
     Response response;
     try {
       response = await _dio.post(

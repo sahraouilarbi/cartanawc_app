@@ -101,7 +101,7 @@ AppBar buildAppBar(
                   //         child: Image.network(
                   //             customerProvider.customerDetailModel.avatarUrl),
                   //       )
-                  : const Icon(Icons.person, color: Colors.grey)),
+                  : Icon(Icons.person, color: Colors.grey[800])),
     ],
   );
 }
