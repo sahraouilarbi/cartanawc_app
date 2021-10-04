@@ -56,6 +56,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
       drawer: buildDrawer(context),
       appBar: buildAppBar(context, isUserProfilePage: true),
       body: SingleChildScrollView(
+        physics: const ScrollPhysics(),
         child: Container(
           color: Colors.black,
           padding: const EdgeInsets.all(10.0),
@@ -72,8 +73,9 @@ class _MyAccountPageState extends State<MyAccountPage> {
                     builder:
                         (context, AsyncSnapshot<CustomerDetailModel> snapshot) {
                       if (snapshot.hasData) {
-                        List<Map<String, String>> customerDetailsFields = [
-                          {'Nom': snapshot.data.firstName},
+                        final List<Map<String, String>> _customerDetailsFields =
+                            [
+                          {'NOM': snapshot.data.firstName},
                           {'Prénom': snapshot.data.lastName},
                           {'Type': snapshot.data.role},
                           {'E-mail': snapshot.data.email},
@@ -94,70 +96,33 @@ class _MyAccountPageState extends State<MyAccountPage> {
                               child: Image.network(snapshot.data.avatarUrl),
                             ),
                             const SizedBox(height: 20.0),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: FormHelper.fieldLabel('Nom',
-                                  labelColor: ThemeConfig.cartanaColorGrey),
+                            SizedBox(
+                              height: 900.0,
+                              child: ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: _customerDetailsFields.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: FormHelper.fieldLabel(
+                                            _customerDetailsFields[index]
+                                                .keys
+                                                .first,
+                                            labelColor:
+                                                ThemeConfig.cartanaColorGrey),
+                                      ),
+                                      FormHelper.fieldLabelValue(
+                                          context,
+                                          _customerDetailsFields[index]
+                                              .values
+                                              .first),
+                                    ],
+                                  );
+                                },
+                              ),
                             ),
-                            FormHelper.fieldLabelValue(
-                                context, snapshot.data.firstName),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: FormHelper.fieldLabel('Prénom',
-                                  labelColor: ThemeConfig.cartanaColorGrey),
-                            ),
-                            FormHelper.fieldLabelValue(
-                                context, snapshot.data.lastName),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: FormHelper.fieldLabel('Type',
-                                  labelColor: ThemeConfig.cartanaColorGrey),
-                            ),
-                            FormHelper.fieldLabelValue(
-                                context, snapshot.data.role),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: FormHelper.fieldLabel('E-mail',
-                                  labelColor: ThemeConfig.cartanaColorGrey),
-                            ),
-                            FormHelper.fieldLabelValue(
-                                context, snapshot.data.email),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: FormHelper.fieldLabel('Téléphone',
-                                  labelColor: ThemeConfig.cartanaColorGrey),
-                            ),
-                            FormHelper.fieldLabelValue(
-                                context, snapshot.data.billing.phone),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: FormHelper.fieldLabel('Adresse',
-                                  labelColor: ThemeConfig.cartanaColorGrey),
-                            ),
-                            FormHelper.fieldLabelValue(
-                                context, snapshot.data.billing.address1),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: FormHelper.fieldLabel(
-                                  "Complement d'adresse",
-                                  labelColor: ThemeConfig.cartanaColorGrey),
-                            ),
-                            FormHelper.fieldLabelValue(
-                                context, snapshot.data.billing.address2),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: FormHelper.fieldLabel('Wilaya',
-                                  labelColor: ThemeConfig.cartanaColorGrey),
-                            ),
-                            FormHelper.fieldLabelValue(
-                                context, snapshot.data.billing.city),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: FormHelper.fieldLabel('Code postal',
-                                  labelColor: ThemeConfig.cartanaColorGrey),
-                            ),
-                            FormHelper.fieldLabelValue(
-                                context, snapshot.data.billing.postcode),
                             const SizedBox(
                               height: 15.0,
                             ),
