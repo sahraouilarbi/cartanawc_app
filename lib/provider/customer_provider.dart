@@ -26,11 +26,12 @@ class AuthProvider with ChangeNotifier {
   CustomerDetailModel _customerDetailModel;
 
   CustomerDetailModel get customerDetailModel => _customerDetailModel;
-  LoginResponseModel loginResponseModel;
 
   Future<LoginResponseModel> login(String username, String password) async {
     _loggedInStatus = Status.authenticating;
     notifyListeners();
+
+    LoginResponseModel loginResponseModel;
 
     try {
       loginResponseModel = await _apiService.customerLogin(username, password);
@@ -49,13 +50,13 @@ class AuthProvider with ChangeNotifier {
   }
 }
 
-class CustomerProvider with ChangeNotifier {
-  CustomerDetailModel _customerDetailModel = CustomerDetailModel();
-
-  CustomerDetailModel get customerDetailModel => _customerDetailModel;
-
-  void setCustomerDetailModel(CustomerDetailModel customerDetailModel) {
-    _customerDetailModel = customerDetailModel;
-    notifyListeners();
-  }
-}
+// class CustomerProvider with ChangeNotifier {
+//   CustomerDetailModel _customerDetailModel = CustomerDetailModel();
+//
+//   CustomerDetailModel get customerDetailModel => _customerDetailModel;
+//
+//   void setCustomerDetailModel(CustomerDetailModel customerDetailModel) {
+//     _customerDetailModel = customerDetailModel;
+//     notifyListeners();
+//   }
+// }
