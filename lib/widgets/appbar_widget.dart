@@ -15,10 +15,6 @@ AppBar buildAppBar(
   bool isLoginPage = false,
   bool isUserProfilePage = false,
 }) {
-  final AuthProvider authProvider =
-      Provider.of<AuthProvider>(context, listen: false);
-  final CustomerProvider customerProvider =
-      Provider.of<CustomerProvider>(context, listen: false);
   return AppBar(
     elevation: 0,
     title: buildAppBarCartanaLogo(),
@@ -82,26 +78,32 @@ AppBar buildAppBar(
           ),
         );
       }),
-      IconButton(
-          onPressed: () {
-            if (!isLoginPage && !isUserProfilePage) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const MyAccountPage(),
-                ),
-              );
-            }
-          },
-          icon:
-              //TODO !!!!
-              authProvider.loggedInStatus == Status.loggedIn
-                  ? const Icon(Icons.person, color: Colors.white)
-                  // CircleAvatar(
-                  //         child: Image.network(
-                  //             customerProvider.customerDetailModel.avatarUrl),
-                  //       )
-                  : const Icon(Icons.person, color: Colors.grey)),
+      Consumer<AuthProvider>(
+        builder: (context, authProvider, child) {
+          return IconButton(
+            onPressed: () {
+              if (!isLoginPage && !isUserProfilePage) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MyAccountPage(),
+                  ),
+                );
+              }
+            },
+            icon:
+                //TODO !!!!
+                authProvider.loggedInStatus == Status.loggedIn
+                    ? CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        child: Icon(Icons.person, color: Colors.white),
+                        //backgroundImage: NetworkImage(
+                        //    authProvider.customerDetailModel.avatarUrl),
+                      )
+                    : const Icon(Icons.person, color: Colors.grey),
+          );
+        },
+      ),
     ],
   );
 }
