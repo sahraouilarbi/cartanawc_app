@@ -35,9 +35,9 @@ class CartanaApp extends StatelessWidget {
           create: (context) => AuthProvider(),
           //child: const MyAccountPage(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => CustomerProvider(),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (context) => CustomerProvider(),
+        // ),
         FutureProvider(
           create: (context) => GeoLocatorService().getLocation(),
         ),
