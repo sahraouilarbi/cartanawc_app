@@ -25,59 +25,64 @@ AppBar buildAppBar(
       hasTabs: hasTabs,
     ),
     actions: [
-      Consumer<CartProvider>(builder: (context, cartModel, child) {
-        return IconButton(
-          onPressed: () {
-            if (cartModel.cartItems.isEmpty) {
-              final snackBar = SnackBar(
-                content: const Text('Panier vide!'),
-                backgroundColor: ThemeConfig.cartanaColorRed,
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            }
-            if (cartModel.cartItems.isNotEmpty) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CartPage(),
+      Consumer<CartProvider>(
+        builder: (context, cartModel, child) {
+          return IconButton(
+            onPressed: () {
+              if (cartModel.cartItems.isEmpty) {
+                final snackBar = SnackBar(
+                  content: const Text('Panier vide!'),
+                  backgroundColor: ThemeConfig.cartanaColorRed,
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+              if (cartModel.cartItems.isNotEmpty) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CartPage(),
+                  ),
+                );
+              }
+            },
+            icon: Stack(
+              children: [
+                Icon(
+                  Icons.shopping_cart,
+                  color: cartModel.cartItems.isNotEmpty
+                      ? Colors.white
+                      : Colors.grey,
                 ),
-              );
-            }
-          },
-          icon: Stack(
-            children: [
-              const Icon(
-                Icons.shopping_cart,
-              ),
-              Visibility(
-                visible: cartModel.cartItems.isNotEmpty,
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 2.5,
-                      horizontal: 5.0,
-                    ),
-                    decoration: const BoxDecoration(
-                      color: Colors.redAccent,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
+                Visibility(
+                  visible: cartModel.cartItems.isNotEmpty,
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 2.5,
+                        horizontal: 5.0,
                       ),
-                    ),
-                    child: Text(
-                      cartModel.cartItems.length.toString(),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 11.0,
+                      decoration: const BoxDecoration(
+                        color: Colors.redAccent,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20.0),
+                        ),
+                      ),
+                      child: Text(
+                        cartModel.cartItems.length.toString(),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 11.0,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
-      }),
+              ],
+            ),
+          );
+        },
+      ),
       Consumer<AuthProvider>(
         builder: (context, authProvider, child) {
           return IconButton(
@@ -94,11 +99,12 @@ AppBar buildAppBar(
             icon:
                 //TODO !!!!
                 authProvider.loggedInStatus == Status.loggedIn
-                    ? CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        child: Icon(Icons.person, color: Colors.white),
-                        //backgroundImage: NetworkImage(
-                        //    authProvider.customerDetailModel.avatarUrl),
+                    ? const CircleAvatar(
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.white,
+                          size: 20.0,
+                        ),
                       )
                     : const Icon(Icons.person, color: Colors.grey),
           );
