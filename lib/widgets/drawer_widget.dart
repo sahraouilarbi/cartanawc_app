@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/models/drawer_model.dart';
 import 'package:cartanawc_app/pages/apropos_page.dart';
 import 'package:cartanawc_app/pages/home_page.dart';
-import 'package:cartanawc_app/provider/customer_provider.dart';
+import 'package:cartanawc_app/provider/auth_provider.dart';
 import 'package:cartanawc_app/utils/size_config.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:flutter/material.dart';

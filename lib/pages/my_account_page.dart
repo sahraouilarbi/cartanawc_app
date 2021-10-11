@@ -1,8 +1,8 @@
+import 'package:cartanawc_app/provider/auth_provider.dart';
 import 'package:cartanawc_app/services/api_service.dart';
 import 'package:cartanawc_app/models/customer_detail_model.dart';
 import 'package:cartanawc_app/pages/home_page.dart';
 import 'package:cartanawc_app/pages/login_page.dart';
-import 'package:cartanawc_app/provider/customer_provider.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/utils/form_helper.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';

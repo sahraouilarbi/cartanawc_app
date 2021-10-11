@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/pages/cart_page.dart';
 import 'package:cartanawc_app/pages/my_account_page.dart';
+import 'package:cartanawc_app/provider/auth_provider.dart';
 import 'package:cartanawc_app/provider/cart_provider.dart';
-import 'package:cartanawc_app/provider/customer_provider.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:cartanawc_app/widgets/cartana_logo_widget.dart';
 import 'package:flutter/material.dart';
