@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cartanawc_app/provider/customer_provider.dart';
+import 'package:cartanawc_app/provider/auth_provider.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:cartanawc_app/utils/form_helper.dart';

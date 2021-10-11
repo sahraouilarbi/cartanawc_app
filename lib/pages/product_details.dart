@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/models/cart_request_model.dart';
 import 'package:cartanawc_app/models/product_model.dart';
+import 'package:cartanawc_app/provider/auth_provider.dart';
 import 'package:cartanawc_app/provider/cart_provider.dart';
-import 'package:cartanawc_app/provider/customer_provider.dart';
 import 'package:cartanawc_app/provider/loader_provider.dart';
 import 'package:cartanawc_app/widgets/expanded_text.dart';
 import 'package:cartanawc_app/utils/size_config.dart';
