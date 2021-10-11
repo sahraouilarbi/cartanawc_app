@@ -17,10 +17,17 @@ enum Status {
 
 class AuthProvider with ChangeNotifier {
   Status _loggedInStatus = Status.notLoggedIn;
-  final Status _registeredInStatus = Status.notRegistered;
+  Status _registeredInStatus = Status.notRegistered;
 
   Status get loggedInStatus => _loggedInStatus;
+  set loggedInStatus(Status value) {
+    _loggedInStatus = value;
+  }
+
   Status get registeredInStatus => _registeredInStatus;
+  set registrationInStatus(Status value) {
+    _registeredInStatus = value;
+  }
 
   final APIService _apiService = APIService();
   CustomerDetailModel _customerDetailModel;
