@@ -52,36 +52,40 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
                   ListView.separated(
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return RadioListTile(
-                        title: Text(
-                          snapshot.data[index].title,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: Text(
-                          snapshot.data[index].description,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                        value: snapshot.data[index].id,
-                        groupValue: _paymentGatewaysID,
-                        toggleable: true,
-                        onChanged: (value) {
-                          setState(() {
-                            _paymentGatewaysID = value as String;
-                          });
-                          cartProvider.orderModel.paymentMethod =
-                              snapshot.data[index].id;
-                          cartProvider.orderModel.paymentMethodTitle =
-                              snapshot.data[index].title;
-                          cartProvider.orderModel.setPaid = false;
-                        },
-                        isThreeLine: true,
-                      );
+                      if (snapshot.data[index].enabled == true) {
+                        return RadioListTile(
+                          title: Text(
+                            snapshot.data[index].title,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            snapshot.data[index].description,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          value: snapshot.data[index].id,
+                          groupValue: _paymentGatewaysID,
+                          toggleable: true,
+                          onChanged: (value) {
+                            setState(() {
+                              _paymentGatewaysID = value as String;
+                            });
+                            cartProvider.orderModel.paymentMethod =
+                                snapshot.data[index].id;
+                            cartProvider.orderModel.paymentMethodTitle =
+                                snapshot.data[index].title;
+                            cartProvider.orderModel.setPaid = false;
+                          },
+                          isThreeLine: true,
+                        );
+                      }
+                      return null;
                     },
                     separatorBuilder: (context, index) {
                       return const Divider();
                     },
-                    itemCount: 3,
+                    //itemCount: 3,
+                    itemCount: snapshot.data.length,
                   ),
                   const SizedBox(
                     height: 20.0,
