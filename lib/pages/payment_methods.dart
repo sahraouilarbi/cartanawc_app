@@ -73,7 +73,7 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
                           subtitle: Text(
                             snapshot.data[index].description,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                            maxLines: 3,
                           ),
                           isThreeLine: true,
                         );
