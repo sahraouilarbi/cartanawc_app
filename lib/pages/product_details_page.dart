@@ -10,7 +10,6 @@ import 'package:cartanawc_app/widgets/appbar_widget.dart';
 import 'package:cartanawc_app/widgets/image_network_loading_progress.dart';
 import 'package:cartanawc_app/widgets/no_image_placeholder.dart';
 import 'package:cartanawc_app/widgets/row_montant.dart';
-import 'package:cartanawc_app/widgets/textbuttom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
