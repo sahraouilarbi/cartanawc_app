@@ -30,6 +30,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   double montant = 0;
   int productStep, productMinQty, productMaxQty;
   AuthProvider authProvider;
+  bool inProgress = false;
 
   void calculMontant() {
     montant = double.parse(widget.data.price) * qty * productStep;
@@ -211,9 +212,12 @@ class _ProductDetailsState extends State<ProductDetails> {
 
                     const SizedBox(height: 10.0),
 
-                    textButton(
+                    TextButton(
                       onPressed: () {
                         if (qty > 0) {
+                          setState(() {
+                            inProgress = !inProgress;
+                          });
                           Provider.of<LoaderProvider>(context, listen: false)
                               .setLoadingStatus(status: true);
                           final cartProvider =
@@ -227,24 +231,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                           cartProvider.addToCart(
                             widget.cartProducts,
                             (val) {
-                              // final snackBar = SnackBar(
-                              //   // Orthographe : Verifier si la variable qty est supèrieure a 1 pour ajouter 's' à carton
-                              //   // Idem pour la variable step pour ajouter 's' à pièce
-                              //   content: qty > 1
-                              //       ? int.parse(widget.cartProducts.step) > 1
-                              //           ? Text(
-                              //               '($qty) cartons de (${widget.cartProducts.step} x pièces) ajoutés au panier')
-                              //           : Text(
-                              //               '($qty) cartons de (${widget.cartProducts.step} x pièce) ajoutés au panier')
-                              //       : int.parse(widget.cartProducts.step) > 1
-                              //           ? Text(
-                              //               '($qty) carton de (${widget.cartProducts.step} x pièces) ajouté au panier')
-                              //           : Text(
-                              //               '($qty) carton de (${widget.cartProducts.step} x pièce) ajouté au panier'),
-                              //   backgroundColor: ThemeConfig.cartanaColorGreen,
-                              // );
-                              // ScaffoldMessenger.of(context)
-                              //     .showSnackBar(snackBar);
+                              setState(() {
+                                inProgress = !inProgress;
+                              });
+                              final snackBar = SnackBar(
+                                content:
+                                    const Text('Produit ajoutés au panier'),
+                                backgroundColor: ThemeConfig.cartanaColorGreen,
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
                               Provider.of<LoaderProvider>(context,
                                       listen: false)
                                   .setLoadingStatus(status: false);
@@ -252,10 +248,25 @@ class _ProductDetailsState extends State<ProductDetails> {
                           );
                         }
                       },
-                      text: 'AJOUTER AU PANIER',
-                      textColor: Colors.white,
-                      iconRight: const Icon(Icons.add_shopping_cart),
-                      backgroundColor: ThemeConfig.cartanaColorBlue,
+                      style: TextButton.styleFrom(
+                        primary: Colors.white,
+                        backgroundColor: ThemeConfig.cartanaColorBlue,
+                        padding: const EdgeInsets.all(20.0),
+                      ),
+                      child: !inProgress
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text('AJOUTER AU PANIER'),
+                                SizedBox(width: 5.0),
+                                Icon(Icons.add_shopping_cart)
+                              ],
+                            )
+                          : const Center(
+                              child: CircularProgressIndicator(
+                                backgroundColor: Colors.white,
+                              ),
+                            ),
                     ),
                   ],
                 ),
