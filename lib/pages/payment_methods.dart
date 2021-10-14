@@ -29,31 +29,43 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
 
   @override
   Widget pageUI() {
-    return FutureBuilder(
-      future: paymentGateways,
-      builder: (BuildContext context,
-          AsyncSnapshot<List<PaymentGateways>> snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            //return snapShotHasError();
-            return Text(snapshot.error.toString());
-            break;
-          case ConnectionState.active:
-          case ConnectionState.waiting:
-            return const Center(child: CircularProgressIndicator());
-            break;
-          case ConnectionState.done:
-            if (snapshot.hasError) {
-              return Text(snapshot.error.toString()); //snapShotHasError();
-            }
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  ListView.separated(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          FutureBuilder(
+            future: paymentGateways,
+            builder: (BuildContext context,
+                AsyncSnapshot<List<PaymentGateways>> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  return Text(snapshot.error.toString());
+                  break;
+                case ConnectionState.active:
+                case ConnectionState.waiting:
+                  return const Center(child: CircularProgressIndicator());
+                  break;
+                case ConnectionState.done:
+                  if (snapshot.hasError) {
+                    return Text(snapshot.error.toString());
+                  }
+                  return ListView.separated(
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       if (snapshot.data[index].enabled == true) {
                         return RadioListTile(
+                          value: snapshot.data[index].id,
+                          groupValue: _paymentGatewaysID,
+                          onChanged: (value) {
+                            setState(() {
+                              _paymentGatewaysID = value.toString();
+                            });
+                            cartProvider.orderModel.paymentMethod =
+                                snapshot.data[index].id;
+                            cartProvider.orderModel.paymentMethodTitle =
+                                snapshot.data[index].title;
+                            cartProvider.orderModel.setPaid = false;
+                          },
+                          toggleable: true,
                           title: Text(
                             snapshot.data[index].title,
                             style: const TextStyle(fontWeight: FontWeight.bold),
@@ -63,19 +75,6 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                           ),
-                          value: snapshot.data[index].id,
-                          groupValue: _paymentGatewaysID,
-                          toggleable: true,
-                          onChanged: (value) {
-                            setState(() {
-                              _paymentGatewaysID = value as String;
-                            });
-                            cartProvider.orderModel.paymentMethod =
-                                snapshot.data[index].id;
-                            cartProvider.orderModel.paymentMethodTitle =
-                                snapshot.data[index].title;
-                            cartProvider.orderModel.setPaid = false;
-                          },
                           isThreeLine: true,
                         );
                       }
@@ -84,36 +83,28 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
                     separatorBuilder: (context, index) {
                       return const Divider();
                     },
-                    //itemCount: 3,
                     itemCount: snapshot.data.length,
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  FormHelper.saveButton('Suivant', () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => OrderSuccessWidget(),
-                      ),
-                    );
-                  }),
-                ],
-              ), //snapshot.data.length
-            );
-            break;
-          default:
-            return const Text('default');
-        }
-      },
-    );
-  }
-
-  Padding snapShotHasError() {
-    return const Padding(
-      padding: EdgeInsets.all(20.0),
-      child: Text(
-          "Un problème inconnu est survenue.\nImpossible d'obtenir les données!.\nVeuillez réessayer ultérieurement"),
+                  );
+              }
+              return null;
+            },
+          ),
+          const SizedBox(
+            height: 20.0,
+          ),
+          FormHelper.saveButton(
+            'Suivant',
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OrderSuccessWidget(),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
