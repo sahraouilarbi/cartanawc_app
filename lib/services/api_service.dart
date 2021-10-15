@@ -248,7 +248,6 @@ class APIService {
       model.customerId = loginResponseModel.data.id;
     }
     bool isOrderCreated = false;
-    //final String _url = APIConfig().orderUrl;
     try {
       final Response response = await httpService.postRequest(
           APIConfig().ordersEndPoint, model.toJson());
