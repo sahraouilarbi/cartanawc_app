@@ -17,6 +17,7 @@ dependencies:
   flutter_html: ^0.11.1
   flutter_svg: ^0.19.0
   geolocator: ^6.2.1
+  get_version: ^0.2.2
   google_maps_flutter: ^1.2.0
   overlay_support: ^1.0.5
   path_provider:
