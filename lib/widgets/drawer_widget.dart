@@ -21,7 +21,7 @@ Widget buildDrawer(BuildContext context) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const HomePage(tabSelected: 1),
+              builder: (context) => HomePage(tabSelected: 1),
             ),
           );
         }),
@@ -33,7 +33,7 @@ Widget buildDrawer(BuildContext context) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const HomePage(),
+              builder: (context) => HomePage(tabSelected: 0),
             ),
           );
         }),
@@ -45,7 +45,7 @@ Widget buildDrawer(BuildContext context) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const HomePage(tabSelected: 2),
+              builder: (context) => HomePage(tabSelected: 2),
             ),
           );
         }),

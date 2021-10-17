@@ -21,8 +21,8 @@ class _AProposPageState extends State<AProposPage> {
 
   @override
   void initState() {
-    _initPlateformState();
     super.initState();
+    _initPlateformState();
   }
 
   void _initPlateformState() async {

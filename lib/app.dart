@@ -44,7 +44,7 @@ class CartanaApp extends StatelessWidget {
             primaryColor: Colors.black,
             primarySwatch: Colors.blue,
           ),
-          home: const HomePage(),
+          home: HomePage(),
         ),
       ),
     );

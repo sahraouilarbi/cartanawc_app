@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/provider/auth_provider.dart';
 import 'package:cartanawc_app/utils/size_config.dart';
 import 'package:cartanawc_app/widgets/appbar_widget.dart';
 import 'package:cartanawc_app/widgets/drawer_widget.dart';
@@ -7,8 +8,8 @@ import 'package:cartanawc_app/widgets/tabview_wc_categories_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key, this.tabSelected = 0}) : super(key: key);
-  final int tabSelected;
+  HomePage({Key key, this.tabSelected}) : super(key: key);
+  int tabSelected;
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -20,14 +21,19 @@ class _HomePageState extends State<HomePage>
     Tab(text: 'Accueil'),
     Tab(text: 'Explorer'),
   ];
+  int firstComing = 0;
 
   TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    print(widget.tabSelected);
     _tabController = TabController(length: homePageTabs.length, vsync: this);
-    _tabController.index = widget.tabSelected;
+
+    widget.tabSelected == null
+        ? _tabController.index = 1
+        : _tabController.index = widget.tabSelected;
   }
 
   @override

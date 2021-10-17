@@ -64,7 +64,8 @@ class _OrderSuccessWidgetState
                   padding: const EdgeInsets.symmetric(
                       vertical: 25.0, horizontal: 15.0),
                   child: Text(
-                      'Votre commande a été passée, vous serez contacté par le service commercial.',
+                      //TODO Inserer numéro de Commande à ?????
+                      'Votre commande #????? a été passée, vous serez contacté par le service commercial.',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headline5),
                 ),
@@ -73,7 +74,10 @@ class _OrderSuccessWidgetState
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomePage()),
+                          builder: (context) => HomePage(
+                            tabSelected: 0,
+                          ),
+                        ),
                         ModalRoute.withName('/Home'));
                   },
                   text: 'Terminer',
