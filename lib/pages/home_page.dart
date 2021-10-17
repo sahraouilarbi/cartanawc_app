@@ -1,4 +1,3 @@
-import 'package:cartanawc_app/provider/auth_provider.dart';
 import 'package:cartanawc_app/utils/size_config.dart';
 import 'package:cartanawc_app/widgets/appbar_widget.dart';
 import 'package:cartanawc_app/widgets/drawer_widget.dart';
