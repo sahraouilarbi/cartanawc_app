@@ -11,9 +11,9 @@ Cartana Woocommerce application.
 ### Bug Fixes
 - Corrections de certains bugs
 
-##10.0.0+1
+## 10.0.0+1
 ### Bug Fixes
 - Corrections de certains bugs
 
-##10.0.0
+## 10.0.0
 - Version initiale
