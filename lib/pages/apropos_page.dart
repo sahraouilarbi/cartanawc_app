@@ -4,21 +4,58 @@ import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:cartanawc_app/widgets/cartana_logo_widget.dart';
 import 'package:cartanawc_app/widgets/page_header_stack_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_version/get_version.dart';
 
-class AProposPage extends StatelessWidget {
+class AProposPage extends StatefulWidget {
   const AProposPage({Key key}) : super(key: key);
+
+  @override
+  _AProposPageState createState() => _AProposPageState();
+}
+
+class _AProposPageState extends State<AProposPage> {
+  String _appVersion = 'Inconnu';
+  String _buildNumber = 'Inconnu';
+
+  @override
+  void initState() {
+    _initPlateformState();
+    super.initState();
+  }
+
+  void _initPlateformState() async {
+    String projectVersion;
+    try {
+      projectVersion = await GetVersion.projectVersion;
+    } on PlatformException {
+      projectVersion = 'Failed to get project version';
+    }
+
+    String projectCode;
+    try {
+      projectCode = await GetVersion.projectCode;
+    } on PlatformException {
+      projectCode = 'Failed to get project code';
+    }
+
+    setState(() {
+      _appVersion = projectVersion;
+      _buildNumber = projectCode;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Cartana'),
-        ),
-        body: Container(
-          color: Colors.black,
-          child: SingleChildScrollView(
-              child: Padding(
+      appBar: AppBar(
+        title: const Text('Cartana'),
+      ),
+      body: Container(
+        color: Colors.black,
+        child: SingleChildScrollView(
+          child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Container(
               color: Colors.black,
@@ -131,14 +168,24 @@ class AProposPage extends StatelessWidget {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 10.0),
+                        const Divider(color: Colors.grey),
+                        const SizedBox(height: 10.0),
+                        Text(
+                          'App Version : $_appVersion+$_buildNumber',
+                          style: const TextStyle(
+                              color: Colors.grey, fontSize: 12.0),
+                        ),
                       ],
                     ),
                   )
                 ],
               ),
             ),
-          )),
-        ));
+          ),
+        ),
+      ),
+    );
   }
 
   Widget buildSocialMediaLink({String asset}) {
