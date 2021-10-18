@@ -44,7 +44,9 @@ class _ProductDetailsState extends State<ProductDetails> {
     authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     // Récuperer le prix
-    productPrice = double.parse(widget.data.price);
+    widget.data.price != null && widget.data.price != ''
+        ? productPrice = double.parse(widget.data.price)
+        : productPrice = 0;
 
     // Récuperer la valeur step du produit des metadata
     productStep = int.parse(widget.data.productMetaData
@@ -131,7 +133,8 @@ class _ProductDetailsState extends State<ProductDetails> {
 
               // Prix
               Visibility(
-                visible: widget.data.price != '',
+                //visible: widget.data.price != '',
+                visible: authProvider.loggedInStatus == Status.loggedIn,
                 child: Container(
                   color: Colors.white,
                   child: Row(
@@ -181,8 +184,7 @@ class _ProductDetailsState extends State<ProductDetails> {
 
               const SizedBox(height: 10.0),
               Visibility(
-                visible:
-                    true, // TODO authProvider.loggedInStatus == Status.loggedIn,
+                visible: authProvider.loggedInStatus == Status.loggedIn,
                 child: Column(
                   children: [
                     //*** Stepper
