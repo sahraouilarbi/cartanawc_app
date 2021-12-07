@@ -1,9 +1,9 @@
-import 'package:cartanawc_app/pages/home_page.dart';
-import 'package:cartanawc_app/provider/auth_provider.dart';
-import 'package:cartanawc_app/provider/cart_provider.dart';
-import 'package:cartanawc_app/provider/loader_provider.dart';
-import 'package:cartanawc_app/provider/order_provider.dart';
-import 'package:cartanawc_app/provider/product_provider.dart';
+import 'package:cartanawc_app/views/home_view/home_view.dart';
+import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
+import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
+import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
+import 'package:cartanawc_app/model_views/providers/order_provider.dart';
+import 'package:cartanawc_app/model_views/providers/product_provider.dart';
 import 'package:cartanawc_app/services/geolocator_service.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -29,9 +29,11 @@ class CartanaApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthProvider(),
         ),
+
         // ChangeNotifierProvider(
         //   create: (context) => CustomerProvider(),
         // ),
+
         FutureProvider(
           create: (context) => GeoLocatorService().getLocation(),
         ),
@@ -44,7 +46,7 @@ class CartanaApp extends StatelessWidget {
             primaryColor: Colors.black,
             primarySwatch: Colors.blue,
           ),
-          home: HomePage(),
+          home: const HomePage(),
         ),
       ),
     );

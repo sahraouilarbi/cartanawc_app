@@ -257,12 +257,12 @@ class PointDeVente {
       };
 }
 
-enum Placeholder { EMPTY, OPTIONNEL, YOU_YOUREMAIL_COM }
+enum Placeholder { empty, optionnel, youYourEmailCom }
 
 final placeholderValues = EnumValues({
-  "": Placeholder.EMPTY,
-  "Optionnel": Placeholder.OPTIONNEL,
-  "you@youremail.com": Placeholder.YOU_YOUREMAIL_COM
+  "": Placeholder.empty,
+  "Optionnel": Placeholder.optionnel,
+  "you@youremail.com": Placeholder.youYourEmailCom
 });
 
 class EnumValues<T> {

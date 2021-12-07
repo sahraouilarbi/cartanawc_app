@@ -9,7 +9,7 @@ import 'package:cartanawc_app/models/order_model.dart';
 import 'package:cartanawc_app/models/payment_method_model.dart';
 import 'package:cartanawc_app/models/product_model.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
-import 'package:cartanawc_app/utils/api_config.dart';
+import 'package:cartanawc_app/services/api_config.dart';
 import 'package:cartanawc_app/utils/utils.dart';
 import 'package:dio/dio.dart';
 
@@ -227,8 +227,6 @@ class APIService {
       final Response response =
           await httpService.getRequest(APIConfig().cartItemsEndPoint(_userId));
       if (response.statusCode == 200) {
-        print(
-            "api_service.getcartitem line 230 response : ${response.data.toString()}");
         responseModel =
             CartResponseModel.fromJson(response.data as Map<String, dynamic>);
       }

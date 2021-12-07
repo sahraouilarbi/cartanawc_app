@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cartanawc_app/utils/api_config.dart';
+import 'package:cartanawc_app/services/api_config.dart';
 import 'package:cartanawc_app/utils/utils.dart';
 import 'package:dio/dio.dart';
 
@@ -36,7 +36,6 @@ class HttpService {
   }
 
   Future<Response> postRequest(String endPoint, dynamic data) async {
-    print("http_service.postrequest line 39 - data: $data");
     Response response;
     try {
       response = await _dio.post(
