@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
 Row rowMontant(
@@ -6,7 +7,7 @@ Row rowMontant(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
       Container(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(AppPadding.p10),
         decoration: BoxDecoration(
           color: Colors.black,
           border: Border.all(),
@@ -19,7 +20,7 @@ Row rowMontant(
       ),
       Expanded(
         child: Container(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(AppPadding.p10),
           decoration: BoxDecoration(
             border: Border.all(),
           ),

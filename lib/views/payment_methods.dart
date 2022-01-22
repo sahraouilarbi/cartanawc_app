@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/services/api_service.dart';
 import 'package:cartanawc_app/models/payment_method_model.dart';
 import 'package:cartanawc_app/views/checkout_base.dart';
@@ -90,7 +91,7 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
             },
           ),
           const SizedBox(
-            height: 20.0,
+            height: AppSize.s20,
           ),
           FormHelper.saveButton(
             'Suivant',

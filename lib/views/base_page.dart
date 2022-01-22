@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/utils/progress_hud.dart';
 import 'package:cartanawc_app/core/widgets/appbar_widget.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class BasePageState<T extends BasePage> extends State<T> {
         appBar: buildAppBar(context),
         body: ProgressHUD(
           isAsyncCall: isApiCallProcess,
-          opacity: 0.3,
+          opacity: AppSize.s0_3,
           color: Colors.black,
           child: pageUI(),
         ),

@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:flutter/material.dart';
 
@@ -9,11 +10,11 @@ class WhiteAndGreenBar extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 14.0,
+          height: AppSize.s14,
           color: Colors.white,
         ),
         Container(
-          height: 4.0,
+          height: AppSize.s4,
           color: ThemeConfig.kSecondaryColor,
         ),
       ],

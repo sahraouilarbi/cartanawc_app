@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:cartanawc_app/views/cart_page.dart';
 import 'package:flutter/material.dart';
@@ -44,13 +45,13 @@ class AppBarActionShoppingIcon extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                      vertical: 2.5,
-                      horizontal: 5.0,
+                      vertical: AppPadding.p2_5,
+                      horizontal: AppPadding.p5,
                     ),
                     decoration: const BoxDecoration(
                       color: Colors.redAccent,
                       borderRadius: BorderRadius.all(
-                        Radius.circular(20.0),
+                        Radius.circular(AppSize.s20),
                       ),
                     ),
                     child: Text(

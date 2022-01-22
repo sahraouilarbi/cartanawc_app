@@ -3,6 +3,7 @@ import 'package:cartanawc_app/models/product_model.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/views/widgets/expanded_text.dart';
 import 'package:cartanawc_app/utils/size_config.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
@@ -83,13 +84,13 @@ class _ProductDetailsState extends State<ProductDetails> {
       body: SingleChildScrollView(
         child: Container(
           color: const Color(0xFFF3F3F3),
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(AppPadding.p20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 color: Colors.white,
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(AppPadding.p20),
                 child: Text(
                   widget.data.name,
                   style: const TextStyle(
@@ -99,7 +100,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ),
               const Divider(
-                height: 2.0,
+                height: AppSize.s2,
                 color: Colors.black,
               ),
               Container(
@@ -108,7 +109,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   children: [
                     if (widget.data.images[0].woocommerceSingle != null)
                       SizedBox(
-                        height: getProportionateScreenHeight(335.0),
+                        height: getProportionateScreenHeight(AppSize.s335),
                         child: Image.network(
                           widget.data.images[0].woocommerceSingle,
                           fit: BoxFit.cover,
@@ -129,7 +130,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ),
 
-              const SizedBox(height: 10.0),
+              const SizedBox(height: AppSize.s10),
 
               // Prix
               Visibility(
@@ -140,8 +141,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: Row(
                     children: [
                       Container(
-                        width: 50.0,
-                        height: 50.0,
+                        width: AppSize.s50,
+                        height: AppSize.s50,
                         color: Colors.black,
                         child: Image.asset(
                           'assets/images/icon_bottle.png',
@@ -149,7 +150,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(left: 20.0),
+                        margin: const EdgeInsets.only(left: AppMargin.m20),
                         child: Text(
                             '${widget.data.price.replaceAll('.', ',')} DA / U'),
                       ),
@@ -158,7 +159,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ),
 
-              const SizedBox(height: 10.0),
+              const SizedBox(height: AppSize.s10),
 
               //*** Packaging
               Container(
@@ -166,8 +167,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 child: Row(
                   children: [
                     Container(
-                      width: 50.0,
-                      height: 50.0,
+                      width: AppSize.s50,
+                      height: AppSize.s50,
                       color: Colors.black,
                       child: Image.asset(
                         'assets/images/icon_packaging.png',
@@ -175,14 +176,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(left: 20.0),
+                      margin: const EdgeInsets.only(left: AppMargin.m20),
                       child: Text('$productStep x pièces / carton'),
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 10.0),
+              const SizedBox(height: AppSize.s10),
               Visibility(
                 visible: authProvider.loggedInStatus == Status.loggedIn,
                 child: Column(
@@ -203,7 +204,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ],
                     ),
 
-                    const SizedBox(height: 10.0),
+                    const SizedBox(height: AppSize.s10),
 
                     //*** Montant
                     rowMontant(
@@ -211,7 +212,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         valeurMontant: montant,
                         fontSize: 18.0),
 
-                    const SizedBox(height: 10.0),
+                    const SizedBox(height: AppSize.s10),
 
                     TextButton(
                       onPressed: () {
@@ -252,14 +253,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                       style: TextButton.styleFrom(
                         primary: Colors.white,
                         backgroundColor: ThemeConfig.cartanaColorBlue,
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(AppPadding.p20),
                       ),
                       child: !inProgress
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
                                 Text('AJOUTER AU PANIER'),
-                                SizedBox(width: 5.0),
+                                SizedBox(width: AppSize.s5),
                                 Icon(Icons.add_shopping_cart)
                               ],
                             )
@@ -287,7 +288,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         buildContainerIconButton(Icons.remove, min, max, step, price),
         // TextField
         SizedBox(
-          width: 75.0,
+          width: AppSize.s75,
           child: TextField(
             controller: myController,
             keyboardType: TextInputType.number,
@@ -327,7 +328,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     double price,
   ) {
     return Container(
-      width: 50.0,
+      width: AppSize.s50,
       color: Colors.black,
       child: IconButton(
         icon: Icon(iconSign),

@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/views/verify_address.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
@@ -60,15 +61,15 @@ class _CartPageState extends State<CartPage> {
                 border: const Border(bottom: BorderSide()),
                 color: ThemeConfig.cartanaColorBlue,
               ),
-              padding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 30.0),
+              padding: const EdgeInsets.symmetric(
+                  vertical: AppPadding.p10, horizontal: AppPadding.p30),
               child: Row(
                 children: const [
                   Icon(
                     Icons.shopping_cart,
                     color: Colors.white,
                   ),
-                  SizedBox(width: 5.0),
+                  SizedBox(width: AppSize.s5),
                   Text(
                     'PANIER',
                     style: TextStyle(
@@ -96,7 +97,7 @@ class _CartPageState extends State<CartPage> {
               );
             }),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(AppPadding.p10),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -126,9 +127,9 @@ class _CartPageState extends State<CartPage> {
             Container(
               color: Colors.white,
               width: MediaQuery.of(context).size.width,
-              height: 150.0,
+              height: AppSize.s150,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
 Stack pageHeaderStack({String pageHeader}) {
@@ -5,11 +6,11 @@ Stack pageHeaderStack({String pageHeader}) {
     alignment: Alignment.center,
     children: [
       Container(
-        height: 3.0,
+        height: AppSize.s3,
         color: Colors.white,
       ),
       Container(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(AppPadding.p10),
         color: Colors.black,
         child: Text(
           pageHeader,

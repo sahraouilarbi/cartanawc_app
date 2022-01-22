@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/services/api_service.dart';
 import 'package:cartanawc_app/models/order_detail_model.dart';
 import 'package:cartanawc_app/views/base_page.dart';
@@ -40,27 +41,27 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
 
   Widget orderDetailUI(OrderDetailModel model) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(AppPadding.p10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('#${model.orderId}'),
           Text('${model.orderDate}'),
           const SizedBox(
-            height: 20.0,
+            height: AppSize.s20,
           ),
           const Text('Livrer à :'),
           Text(model.shipping.address1),
           Text(model.shipping.address2),
           Text('${model.shipping.city}, ${model.shipping.state}'),
           const SizedBox(
-            height: 20.0,
+            height: AppSize.s20,
           ),
           const Text('Methode de paiement :'),
           Text(model.paymentMethod),
           Divider(color: ThemeConfig.cartanaColorGrey),
           const SizedBox(
-            height: 5.0,
+            height: AppSize.s5,
           ),
           CheckPoints(
             checkedTill: 0,
@@ -91,11 +92,11 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
   Widget _productItems(LineItems product) {
     return ListTile(
       dense: true,
-      contentPadding: const EdgeInsets.all(2.0),
+      contentPadding: const EdgeInsets.all(AppPadding.p2),
       onTap: () {},
       title: Text(product.productName),
       subtitle: Padding(
-        padding: const EdgeInsets.all(1.0),
+        padding: const EdgeInsets.all(AppPadding.p1),
         child: Text('Qte: ${product.quantity}'),
       ),
       trailing: Text('${product.totalAmount} DA'),
@@ -105,8 +106,11 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
   Widget _itemTotal(String label, String value, {TextStyle textStyle}) {
     return ListTile(
       dense: true,
-      visualDensity: const VisualDensity(vertical: -4),
-      contentPadding: const EdgeInsets.fromLTRB(2.0, -10, 2, -10),
+      // s_4 = -4.0;
+      visualDensity: const VisualDensity(vertical: AppSize.s_4),
+      // p_10 = -10.0;
+      contentPadding: const EdgeInsets.fromLTRB(
+          AppPadding.p2, AppPadding.p_10, AppPadding.p2, AppPadding.p_10),
       title: Text(
         label,
         style: textStyle,

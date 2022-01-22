@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/services/api_service.dart';
 import 'package:cartanawc_app/models/customer_detail_model.dart';
 import 'package:cartanawc_app/views/home_view/home_view.dart';
@@ -59,14 +60,14 @@ class _MyAccountPageState extends State<MyAccountPage> {
         physics: const ScrollPhysics(),
         child: Container(
           color: Colors.black,
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(AppPadding.p10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               pageHeaderStack(pageHeader: 'PROFIL'),
               Container(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 40.0),
+                    horizontal: AppPadding.p20, vertical: AppPadding.p40),
                 color: Colors.white,
                 child: FutureBuilder(
                   future: fetchCustomerDetails,
@@ -90,10 +91,10 @@ class _MyAccountPageState extends State<MyAccountPage> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           CircleAvatar(
-                            radius: 75.0,
+                            radius: AppSize.s75,
                             child: Image.network(snapshot.data.avatarUrl),
                           ),
-                          const SizedBox(height: 20.0),
+                          const SizedBox(height: AppSize.s20),
                           SizedBox(
                             height: 900.0,
                             child: ListView.builder(
@@ -122,20 +123,20 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 15.0,
+                            height: AppSize.s15,
                           ),
                           const Text(
                             'informations non corrects ?',
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 10.0),
+                          const SizedBox(height: AppSize.s10),
                           textButton(
                             onPressed: () {},
                             text: 'MODIFIER',
                             textColor: Colors.white,
                             backgroundColor: Colors.black,
                           ),
-                          const SizedBox(height: 10.0),
+                          const SizedBox(height: AppSize.s10),
                           textButton(
                             onPressed: () {
                               SharedService.logout();

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:cartanawc_app/utils/form_helper.dart';
@@ -35,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return ProgressHUD(
       isAsyncCall: isApiCallProcess,
-      opacity: 0.3,
+      opacity: AppSize.s0_3,
       child: _uiSetup(context),
     );
   }
@@ -46,25 +47,29 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Container(
           color: Colors.black,
-          padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+          padding: const EdgeInsets.only(
+            left: AppPadding.p10,
+            right: AppPadding.p10,
+            bottom: AppPadding.p10,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               pageHeaderStack(pageHeader: 'MON ESPACE'),
               Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
-                  vertical: 50.0,
+                  horizontal: AppPadding.p20,
+                  vertical: AppPadding.p50,
                 ),
                 color: Colors.white,
                 child: Column(
                   children: [
                     const Icon(
                       Icons.person,
-                      size: 120.0,
+                      size: AppSize.s120,
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(bottom: 20.0),
+                      padding: EdgeInsets.only(bottom: AppPadding.p20),
                       child: Text(
                         'Bienvenue',
                         style: TextStyle(
@@ -76,9 +81,9 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: <Widget>[
                           textFormFieldUserName(),
-                          const SizedBox(height: 20.0),
+                          const SizedBox(height: AppSize.s20),
                           textFormFieldPassword(),
-                          const SizedBox(height: 30.0),
+                          const SizedBox(height: AppSize.s30),
                           textButtonRecoverAccount(),
                           textButtonLogin(context),
                         ],
@@ -179,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
 
               SharedService.setLoginDetails(ret);
 
-              Timer(const Duration(seconds: 2), () {
+              Timer(const Duration(seconds: AppDuration.ts2), () {
                 Navigator.of(context).popUntil((route) {
                   return _count++ == 2;
                 });
@@ -211,10 +216,10 @@ class _LoginPageState extends State<LoginPage> {
       },
       style: const ButtonStyle(),
       child: Container(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(AppPadding.p20),
         decoration: BoxDecoration(
           color: Colors.black,
-          borderRadius: BorderRadius.circular(5.0),
+          borderRadius: BorderRadius.circular(AppSize.s5),
         ),
         child: const Text(
           'SE CONNECTER',

@@ -2,6 +2,7 @@ import 'package:cartanawc_app/core/widgets/appbar_content/appbar_actions_shoppin
 import 'package:cartanawc_app/core/widgets/appbar_content/appbar_actions_customer_icon.dart';
 import 'package:cartanawc_app/core/widgets/appbar_content/appbar_cartana_logo.dart';
 import 'package:cartanawc_app/core/widgets/white_and_green_top_bar.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,7 @@ PreferredSize buildBottomAppBar({
   List<Tab> tabs,
 }) {
   return PreferredSize(
-    preferredSize: hasTabs ? const Size.fromHeight(50.0) : Size.zero,
+    preferredSize: hasTabs ? const Size.fromHeight(AppSize.s50) : Size.zero,
     child: Column(
       children: [
         const WhiteAndGreenBar(),

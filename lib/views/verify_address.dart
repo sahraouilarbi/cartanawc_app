@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/models/customer_detail_model.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/views/checkout_base.dart';
 import 'package:cartanawc_app/views/payment_methods.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
@@ -35,7 +36,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
   Widget _formUI(CustomerDetailModel model) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(AppPadding.p10),
         child: Align(
           alignment: Alignment.topLeft,
           child: Column(
@@ -45,7 +46,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                 'Adresse de livraison : ',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
-              const SizedBox(height: 10.0),
+              const SizedBox(height: AppSize.s10),
               Row(
                 children: [
                   Flexible(
@@ -64,7 +65,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                     fit: FlexFit.tight,
                     child: FormHelper.fieldLabelValue(context, model.firstName),
                   ),
-                  const SizedBox(width: 5.0),
+                  const SizedBox(width: AppSize.s5),
                   Flexible(
                     fit: FlexFit.tight,
                     child: FormHelper.fieldLabelValue(context, model.lastName),
@@ -73,10 +74,10 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
               ),
               FormHelper.fieldLabel('Adresse'),
               FormHelper.fieldLabelValue(context, model.shipping.address1),
-              const SizedBox(height: 5.0),
+              const SizedBox(height: AppSize.s5),
               FormHelper.fieldLabel("Complement d'adresse."),
               FormHelper.fieldLabelValue(context, model.shipping.address2),
-              const SizedBox(height: 5.0),
+              const SizedBox(height: AppSize.s5),
               Row(
                 children: [
                   Flexible(
@@ -96,7 +97,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                     child: FormHelper.fieldLabelValue(
                         context, model.shipping.city),
                   ),
-                  const SizedBox(width: 5.0),
+                  const SizedBox(width: AppSize.s5),
                   Flexible(
                     fit: FlexFit.tight,
                     child: FormHelper.fieldLabelValue(
@@ -105,12 +106,12 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                 ],
               ),
               const Divider(),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: AppSize.s20),
               const Text(
                 'Adresse de facturation : ',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
-              const SizedBox(height: 10.0),
+              const SizedBox(height: AppSize.s10),
               Row(
                 children: [
                   Flexible(
@@ -129,7 +130,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                     fit: FlexFit.tight,
                     child: FormHelper.fieldLabelValue(context, model.firstName),
                   ),
-                  const SizedBox(width: 5.0),
+                  const SizedBox(width: AppSize.s5),
                   Flexible(
                     fit: FlexFit.tight,
                     child: FormHelper.fieldLabelValue(context, model.lastName),
@@ -138,10 +139,10 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
               ),
               FormHelper.fieldLabel('Adresse'),
               FormHelper.fieldLabelValue(context, model.billing.address1),
-              const SizedBox(height: 5.0),
+              const SizedBox(height: AppSize.s5),
               FormHelper.fieldLabel("Complement d'adresse."),
               FormHelper.fieldLabelValue(context, model.billing.address2),
-              const SizedBox(height: 5.0),
+              const SizedBox(height: AppSize.s5),
               Row(
                 children: [
                   Flexible(
@@ -161,7 +162,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                     child:
                         FormHelper.fieldLabelValue(context, model.billing.city),
                   ),
-                  const SizedBox(width: 5.0),
+                  const SizedBox(width: AppSize.s5),
                   Flexible(
                     fit: FlexFit.tight,
                     child: FormHelper.fieldLabelValue(
@@ -170,7 +171,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                 ],
               ),
               const Divider(),
-              const SizedBox(height: 20.0),
+              const SizedBox(height: AppSize.s20),
               Center(
                 child: FormHelper.saveButton(
                   'Suivant',

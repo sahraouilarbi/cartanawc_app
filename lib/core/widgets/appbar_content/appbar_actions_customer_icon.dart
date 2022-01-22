@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/views/my_account_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class AppBarActionConsumerIcon extends StatelessWidget {
                       child: Icon(
                         Icons.person,
                         color: Colors.white,
-                        size: 20.0,
+                        size: AppSize.s20,
                       ),
                     )
                   : const Icon(Icons.person, color: Colors.grey),

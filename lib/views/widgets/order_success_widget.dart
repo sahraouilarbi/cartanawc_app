@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/views/checkout_base.dart';
 import 'package:cartanawc_app/views/home_view/home_view.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
@@ -32,37 +33,39 @@ class _OrderSuccessWidgetState
       if (orderModel.isOrderCreated) {
         return Center(
           child: Container(
-            margin: const EdgeInsets.only(top: 100.0),
+            margin: const EdgeInsets.only(top: AppMargin.m100),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Stack(
                   children: <Widget>[
                     Container(
-                      width: 120,
-                      height: 120,
+                      width: AppSize.s120,
+                      height: AppSize.s120,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         gradient: LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
                           colors: [
-                            ThemeConfig.cartanaColorGreen.withOpacity(1.0),
-                            ThemeConfig.cartanaColorGreen.withOpacity(0.2),
+                            ThemeConfig.cartanaColorGreen
+                                .withOpacity(AppSize.s1),
+                            ThemeConfig.cartanaColorGreen
+                                .withOpacity(AppSize.s0_2),
                           ],
                         ),
                       ),
                       child: const Icon(
                         Icons.check,
                         color: Colors.white,
-                        size: 75,
+                        size: AppSize.s75,
                       ),
                     ),
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 25.0, horizontal: 15.0),
+                      vertical: AppPadding.p25, horizontal: AppPadding.p15),
                   child: Text(
                       //TODO Inserer numéro de Commande à ?????
                       'Votre commande #????? a été passée, vous serez contacté par le service commercial.',

@@ -1,6 +1,7 @@
 import 'package:cartanawc_app/models/cart_response_model.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:cartanawc_app/utils/utils.dart';
 import 'package:cartanawc_app/views/widgets/row_montant.dart';
@@ -22,8 +23,9 @@ class _CartProductState extends State<CartProduct> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 0.5,
-      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+      elevation: AppSize.s0_5,
+      margin: const EdgeInsets.symmetric(
+          horizontal: AppMargin.m10, vertical: AppMargin.m6),
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -35,15 +37,16 @@ class _CartProductState extends State<CartProduct> {
 
   Widget makeListTitle(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppPadding.p20, vertical: AppPadding.p15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: 10.0),
+          const SizedBox(height: AppSize.s10),
           Container(
             color: ThemeConfig.cartanaColorYellow,
-            padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(
+                vertical: AppPadding.p5, horizontal: AppPadding.p10),
             child: Text(
               widget.data.variationId == 0
                   ? widget.data.productName
@@ -54,14 +57,14 @@ class _CartProductState extends State<CartProduct> {
                   fontSize: 16.0),
             ),
           ),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: AppSize.s10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 75.0,
-                height: 75.0,
+                width: AppSize.s75,
+                height: AppSize.s75,
                 decoration: BoxDecoration(border: Border.all()),
                 alignment: Alignment.center,
                 child: Image.network(
@@ -77,7 +80,7 @@ class _CartProductState extends State<CartProduct> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 5.0),
+                  const SizedBox(height: AppSize.s5),
                   Container(
                     decoration: const BoxDecoration(color: Colors.black),
                     child: Row(
@@ -101,7 +104,7 @@ class _CartProductState extends State<CartProduct> {
                               });
                             }),
                         Container(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(AppPadding.p10),
                           decoration: BoxDecoration(
                               color: Colors.white, border: Border.all()),
                           child: Text(
@@ -125,10 +128,10 @@ class _CartProductState extends State<CartProduct> {
               ),
             ],
           ),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: AppSize.s10),
           rowMontant(
               textLabel: 'MONTANT', valeurMontant: widget.data.lineSubtotal),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: AppSize.s10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -136,8 +139,8 @@ class _CartProductState extends State<CartProduct> {
                 onPressed: () {},
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 20.0,
+                    vertical: AppPadding.p10,
+                    horizontal: AppPadding.p20,
                   ),
                   color: ThemeConfig.cartanaColorGrey,
                   child: const Text(
@@ -172,8 +175,8 @@ class _CartProductState extends State<CartProduct> {
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 20.0,
+                    vertical: AppPadding.p10,
+                    horizontal: AppPadding.p20,
                   ),
                   color: ThemeConfig.cartanaColorRed,
                   child: const Text(
@@ -198,7 +201,7 @@ class _CartProductState extends State<CartProduct> {
         buildContainerIconButton(Icons.remove, min, max, step, price),
         // TextField
         SizedBox(
-          width: 75.0,
+          width: AppSize.s75,
           child: TextField(
             controller: myController,
             keyboardType: TextInputType.number,
@@ -238,7 +241,7 @@ class _CartProductState extends State<CartProduct> {
     double price,
   ) {
     return Container(
-      width: 50.0,
+      width: AppSize.s50,
       color: Colors.black,
       child: IconButton(
         icon: Icon(iconSign),

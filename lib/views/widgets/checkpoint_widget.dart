@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
 class CheckPoints extends StatelessWidget {
@@ -12,7 +13,7 @@ class CheckPoints extends StatelessWidget {
   final List<String> checkPoints;
   final Color checkPointFilledColor;
 
-  static double circleDia = 32.0;
+  static double circleDia = AppSize.s32;
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +22,12 @@ class CheckPoints extends StatelessWidget {
           (s.maxWidth - circleDia * (checkPoints.length + 1)) /
               (checkPoints.length - 1);
       return SizedBox(
-        height: 56.0,
+        height: AppSize.s56,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
               child: Row(
                 children: checkPoints.map((e) {
                   final int index = checkPoints.indexOf(e);
@@ -36,26 +37,28 @@ class CheckPoints extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           width: circleDia,
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.all(AppPadding.p4),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: index <= checkedTill
                                 ? checkPointFilledColor
-                                : checkPointFilledColor.withOpacity(0.2),
+                                : checkPointFilledColor
+                                    .withOpacity(AppSize.s0_2),
                           ),
                           child: const Icon(
                             Icons.done,
                             color: Colors.white,
-                            size: 18.0,
+                            size: AppSize.s18,
                           ),
                         ),
                         if (index != (checkPoints.length - 1))
                           Container(
                             width: cWidth,
-                            height: 2.0,
+                            height: AppSize.s2,
                             color: index < checkedTill
                                 ? checkPointFilledColor
-                                : checkPointFilledColor.withOpacity(0.2),
+                                : checkPointFilledColor
+                                    .withOpacity(AppSize.s0_2),
                           )
                         else
                           Container(),
@@ -66,7 +69,7 @@ class CheckPoints extends StatelessWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 2.0),
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: checkPoints.map((e) {
