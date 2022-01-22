@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:cartanawc_app/views/widgets/page_header_stack_widget.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ Widget tabViewAccueil() {
             badgeText: 'TESTER',
             badgeBgColor: ThemeConfig.cartanaColorPurple,
           ),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: AppSize.s10),
           buildStackEspaceProfessionnel(
             src: 'assets/images/magasin_cosmetique.jpg',
             headerText: 'MAGASIN\nCOSMETIQUE',
@@ -61,11 +62,11 @@ Stack buildStackPartenaire() {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 25.0),
+                const SizedBox(height: AppSize.s25),
                 SvgPicture.asset(
                   'assets/images/style_chic.svg',
                   color: Colors.white,
-                  height: 110.0,
+                  height: AppSize.s110,
                 ),
               ],
             ),
@@ -108,9 +109,10 @@ Stack buildStackNouveautes() {
     alignment: AlignmentDirectional.centerStart,
     children: [
       buildStackBackgroundImageWithOverlay(
-          src: 'assets/images/serum_capillaire_bg.jpg', overlayOpacity: 0.1),
+          src: 'assets/images/serum_capillaire_bg.jpg',
+          overlayOpacity: AppSize.s0_1),
       Padding(
-        padding: const EdgeInsets.only(left: 20.0),
+        padding: const EdgeInsets.only(left: AppPadding.p20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -123,11 +125,11 @@ Stack buildStackNouveautes() {
               onPressed: () {},
               child: Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 10.0),
+                      vertical: AppPadding.p5, horizontal: AppPadding.p10),
                   decoration: const BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.all(
-                      Radius.circular(5.0),
+                      Radius.circular(AppSize.s5),
                     ),
                   ),
                   child: const Text(
@@ -164,18 +166,19 @@ Stack buildStackEspaceProfessionnel({
       buildStackBackgroundImageWithOverlay(src: src),
       Column(
         children: [
-          const SizedBox(height: 30.0),
+          const SizedBox(height: AppSize.s30),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20.0),
+            margin: const EdgeInsets.symmetric(horizontal: AppMargin.m20),
             decoration: const BoxDecoration(
-              border: Border(left: BorderSide(width: 3.0, color: Colors.white)),
+              border: Border(
+                  left: BorderSide(width: AppSize.s3, color: Colors.white)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 10.0),
+                      vertical: AppPadding.p5, horizontal: AppPadding.p10),
                   child: Text(
                     headerText,
                     style: const TextStyle(
@@ -186,7 +189,7 @@ Stack buildStackEspaceProfessionnel({
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 10.0),
+                      vertical: AppPadding.p5, horizontal: AppPadding.p10),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -224,11 +227,11 @@ Stack buildStackDevenirDistributeur() {
       Row(
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 20.0),
-            padding: const EdgeInsets.all(10.0),
+            margin: const EdgeInsets.only(left: AppMargin.m20),
+            padding: const EdgeInsets.all(AppPadding.p10),
             decoration: const BoxDecoration(
               border: Border(
-                left: BorderSide(width: 3.0, color: Colors.white),
+                left: BorderSide(width: AppSize.s3, color: Colors.white),
               ),
             ),
             child: const Text(
@@ -242,12 +245,12 @@ Stack buildStackDevenirDistributeur() {
           TextButton(
               onPressed: () {},
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: AppPadding.p5, horizontal: AppPadding.p10),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(5.0),
+                    Radius.circular(AppPadding.p5),
                   ),
                 ),
                 child: const Text(
@@ -263,11 +266,11 @@ Stack buildStackDevenirDistributeur() {
 
 /// Build Background Image with Overlay
 Stack buildStackBackgroundImageWithOverlay(
-    {String src, double overlayOpacity = 0.3}) {
+    {String src, double overlayOpacity = AppSize.s0_3}) {
   return Stack(
     children: [
       SizedBox(
-        height: 170.0,
+        height: AppSize.s170,
         width: double.maxFinite,
         child: Image.asset(
           src,
@@ -275,7 +278,7 @@ Stack buildStackBackgroundImageWithOverlay(
         ),
       ),
       Container(
-        height: 170,
+        height: AppSize.s170,
         width: double.maxFinite,
         color: Colors.black.withOpacity(overlayOpacity),
       ),
@@ -291,13 +294,15 @@ Align buildBadgeAlign({
   bool left = false,
 }) {
   return Align(
-    heightFactor: 6,
+    heightFactor: AppSize.s6,
     alignment: alignment,
     child: Container(
       color: backgroundColor,
       padding: left
-          ? const EdgeInsets.fromLTRB(12.0, 2.0, 6.0, 2.0)
-          : const EdgeInsets.fromLTRB(6.0, 2.0, 12.0, 2.0),
+          ? const EdgeInsets.fromLTRB(
+              AppPadding.p12, AppPadding.p2, AppPadding.p6, AppPadding.p2)
+          : const EdgeInsets.fromLTRB(
+              AppPadding.p6, AppPadding.p2, AppPadding.p12, AppPadding.p2),
       child: Text(
         text,
         style: const TextStyle(color: Colors.white),

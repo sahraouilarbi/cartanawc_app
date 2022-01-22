@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:cartanawc_app/views/widgets/cartana_logo_widget.dart';
 import 'package:cartanawc_app/views/widgets/page_header_stack_widget.dart';
@@ -56,7 +57,7 @@ class _AProposPageState extends State<AProposPage> {
         color: Colors.black,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(AppPadding.p20),
             child: Container(
               color: Colors.black,
               child: Column(
@@ -64,35 +65,36 @@ class _AProposPageState extends State<AProposPage> {
                   pageHeaderStack(pageHeader: 'A Propos'),
                   Container(
                     color: Colors.white,
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(AppPadding.p20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const SizedBox(height: 30.0),
-                        SizedBox(height: 100.0, child: buildCartanaLogo()),
-                        const SizedBox(height: 30.0),
+                        const SizedBox(height: AppSize.s30),
+                        SizedBox(
+                            height: AppSize.s100, child: buildCartanaLogo()),
+                        const SizedBox(height: AppSize.s30),
                         buildContainer('Notre Histoire'),
-                        const SizedBox(height: 5.0),
+                        const SizedBox(height: AppSize.s5),
                         const Text(aPropos),
-                        const SizedBox(height: 10.0),
+                        const SizedBox(height: AppSize.s10),
                         buildContainer('Nos Valeurs'),
                         const Text('Valeur 1,\nValeur 2,\nValeur 3'),
-                        const SizedBox(height: 10.0),
+                        const SizedBox(height: AppSize.s10),
                         buildContainer('Nos Marques'),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SvgPicture.asset(
                               'assets/images/touareg.svg',
-                              height: 60.0,
+                              height: AppSize.s60,
                             ),
                             SvgPicture.asset(
                               'assets/images/style_chic.svg',
-                              height: 60.0,
+                              height: AppSize.s60,
                             ),
                             SvgPicture.asset(
                               'assets/images/cartana.svg',
-                              height: 60.0,
+                              height: AppSize.s60,
                             ),
                           ],
                         ),
@@ -104,7 +106,7 @@ class _AProposPageState extends State<AProposPage> {
                     child: Column(
                       children: [
                         pageHeaderStack(pageHeader: 'SUIVER NOUS'),
-                        const SizedBox(height: 10.0),
+                        const SizedBox(height: AppSize.s10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -118,14 +120,14 @@ class _AProposPageState extends State<AProposPage> {
                                 asset: 'assets/images/twitter.svg'),
                           ],
                         ),
-                        const SizedBox(height: 50.0),
+                        const SizedBox(height: AppSize.s50),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: 75.0,
-                              height: 75.0,
+                              width: AppSize.s75,
+                              height: AppSize.s75,
                               child: SvgPicture.asset(
                                 'assets/images/cartana_logo_bw.svg',
                                 color: Colors.white,
@@ -138,14 +140,14 @@ class _AProposPageState extends State<AProposPage> {
                                 Row(
                                   children: [
                                     SizedBox(
-                                      height: 20.0,
-                                      width: 20.0,
+                                      height: AppSize.s20,
+                                      width: AppSize.s20,
                                       child: SvgPicture.asset(
                                         'assets/images/headset.svg',
                                         color: Colors.white,
                                       ),
                                     ),
-                                    const SizedBox(width: 10.0),
+                                    const SizedBox(width: AppSize.s10),
                                     const Text(
                                       'Service Clients',
                                       style: TextStyle(
@@ -155,7 +157,7 @@ class _AProposPageState extends State<AProposPage> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 20.0),
+                                const SizedBox(height: AppSize.s20),
                                 const Text(
                                   'E-mail : info@cartana.dz',
                                   style: TextStyle(color: Colors.white),
@@ -168,9 +170,9 @@ class _AProposPageState extends State<AProposPage> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 10.0),
+                        const SizedBox(height: AppSize.s10),
                         const Divider(color: Colors.grey),
-                        const SizedBox(height: 10.0),
+                        const SizedBox(height: AppSize.s10),
                         Text(
                           'App Version : $_appVersion+$_buildNumber',
                           style: const TextStyle(
@@ -196,10 +198,10 @@ class _AProposPageState extends State<AProposPage> {
       },
       child: CircleAvatar(
         backgroundColor: Colors.white,
-        radius: 25.0,
+        radius: AppSize.s25,
         child: SizedBox(
-          width: 25.0,
-          height: 25.0,
+          width: AppSize.s25,
+          height: AppSize.s25,
           child: SvgPicture.asset(
             asset,
             color: Colors.black,
@@ -211,7 +213,7 @@ class _AProposPageState extends State<AProposPage> {
 
   Container buildContainer(String text) {
     return Container(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(AppPadding.p10),
       decoration: BoxDecoration(color: ThemeConfig.cartanaColorGreen),
       child: Text(
         text,

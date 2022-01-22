@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
 Widget textButton({
@@ -11,12 +12,16 @@ Widget textButton({
     style: TextButton.styleFrom(
         primary: textColor,
         backgroundColor: backgroundColor,
-        padding: const EdgeInsets.all(20.0)),
+        padding: const EdgeInsets.all(AppPadding.p20)),
     onPressed: onPressed,
     child: iconRight != null
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text(text), const SizedBox(width: 5.0), iconRight],
+            children: [
+              Text(text),
+              const SizedBox(width: AppSize.s5),
+              iconRight
+            ],
           )
         : Text(text),
   );

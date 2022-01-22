@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/core/widgets/appbar_content/appbar_cartana_logo.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/views/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,20 +13,21 @@ class UnAuthWidget extends StatelessWidget {
       ),
       body: Center(
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 100.0, horizontal: 20.0),
+          margin: const EdgeInsets.symmetric(
+              vertical: AppMargin.m100, horizontal: AppMargin.m20),
           child: Column(
             children: [
               const Icon(
                 Icons.lock,
-                size: 90,
+                size: AppSize.s90,
               ),
               const SizedBox(
-                height: 15.0,
+                height: AppSize.s15,
               ),
               const Text(
                   'Vous devez être connecter pour acceder à cette section'),
               const SizedBox(
-                height: 20.0,
+                height: AppSize.s20,
               ),
               TextButton(
                 onPressed: () {
@@ -33,9 +35,9 @@ class UnAuthWidget extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => LoginPage()));
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(AppPadding.p20),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(AppSize.s5),
                       color: Colors.black),
                   child: const Text(
                     'Se connecter',

@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/utils/progress_hud.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:cartanawc_app/views/widgets/checkpoint_widget.dart';
@@ -33,7 +34,12 @@ class CheckoutBasePageState<T extends CheckoutBasePage> extends State<T> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 10.0),
+                    padding: const EdgeInsets.fromLTRB(
+                      AppPadding.p15,
+                      AppPadding.p15,
+                      AppPadding.p15,
+                      AppPadding.p10,
+                    ),
                     child: CheckPoints(
                       checkedTill: currentPage,
                       checkPoints: const [

@@ -1,5 +1,6 @@
 import 'package:cartanawc_app/models/order_model.dart';
 import 'package:cartanawc_app/model_views/providers/order_provider.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/utils/size_config.dart';
 import 'package:cartanawc_app/views/widgets/widget_orders_item.dart';
 import 'package:flutter/material.dart';
@@ -42,14 +43,14 @@ class _OrdersPageState extends State<OrdersPage> {
             itemCount: orders.length,
             physics: const ScrollPhysics(),
             padding: EdgeInsets.all(
-              getProportionateScreenHeight(8.0),
+              getProportionateScreenHeight(AppPadding.p8),
             ),
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return Card(
                 elevation: 0,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
+                  borderRadius: BorderRadius.circular(AppSize.s16),
                 ),
                 child: WidgetOrderItem(
                   orderModel: orders[index],

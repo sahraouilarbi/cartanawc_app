@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/services/api_service.dart';
 import 'package:cartanawc_app/models/product_model.dart';
 import 'package:cartanawc_app/views/base_page.dart';
@@ -50,7 +51,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
   void _onSearchChange() {
     final productList = Provider.of<ProductProvider>(context, listen: false);
     if (_debounce?.isActive ?? false) _debounce.cancel();
-    _debounce = Timer(const Duration(milliseconds: 750), () {
+    _debounce = Timer(const Duration(milliseconds: AppDuration.tm750), () {
       productList.resetStreams();
       productList.setLoadingState(LoadMoreStatus.initial);
       productList.fetchProducts(_page,
@@ -101,7 +102,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
         Visibility(
           visible: isLoadingMore,
           child: Container(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(AppPadding.p5),
             height: 35.0,
             width: 35.0,
             child: const CircularProgressIndicator(),
@@ -114,7 +115,8 @@ class _ProductPageState extends BasePageState<ProductPage> {
   Widget _productFilter() {
     return Container(
       height: getProportionateScreenHeight(51.0),
-      margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 5.0),
+      margin: const EdgeInsets.fromLTRB(
+          AppMargin.m10, AppMargin.m10, AppMargin.m10, AppMargin.m5),
       child: Row(
         children: [
           Flexible(
@@ -124,7 +126,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
                 prefixIcon: const Icon(Icons.search),
                 hintText: 'Recherche',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(AppSize.s15),
                   borderSide: BorderSide.none,
                 ),
                 fillColor: const Color(0xFFE6E6EC),
@@ -132,11 +134,11 @@ class _ProductPageState extends BasePageState<ProductPage> {
               ),
             ),
           ),
-          const SizedBox(width: 15.0),
+          const SizedBox(width: AppSize.s15),
           Container(
             decoration: BoxDecoration(
               color: const Color(0xFFE6E6EC),
-              borderRadius: BorderRadius.circular(9.0),
+              borderRadius: BorderRadius.circular(AppSize.s9),
             ),
             child: PopupMenuButton(
               onSelected: (SortBy sortBy) {

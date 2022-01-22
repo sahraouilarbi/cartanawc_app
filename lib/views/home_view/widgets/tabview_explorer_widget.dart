@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -18,11 +19,11 @@ Widget tabViewExplorer(BuildContext context) {
                   currentPosition.latitude,
                   currentPosition.longitude,
                 ),
-                zoom: 16.0,
+                zoom: AppSize.s16,
               ),
             ),
             SizedBox(
-              height: 120,
+              height: AppSize.s120,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 9,
@@ -31,12 +32,12 @@ Widget tabViewExplorer(BuildContext context) {
                       decoration: const BoxDecoration(
                         color: Colors.greenAccent,
                         borderRadius: BorderRadius.all(
-                          Radius.circular(5.0),
+                          Radius.circular(AppSize.s5),
                         ),
                       ),
-                      margin: const EdgeInsets.all(5.0),
-                      height: 120,
-                      width: 80,
+                      margin: const EdgeInsets.all(AppMargin.m5),
+                      height: AppSize.s120,
+                      width: AppSize.s80,
                       child: Center(child: Text((index + 1).toString())),
                     );
                   }),

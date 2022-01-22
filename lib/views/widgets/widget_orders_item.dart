@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/models/order_model.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/views/order_details_page.dart';
 import 'package:cartanawc_app/utils/theme_config.dart';
 import 'package:cartanawc_app/views/widgets/textbuttom_widget.dart';
@@ -11,7 +12,7 @@ class WidgetOrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.all(AppMargin.m10),
       child: Column(
         children: [
           _orderStatus(orderModel.status),
@@ -19,7 +20,7 @@ class WidgetOrderItem extends StatelessWidget {
             color: ThemeConfig.cartanaColorGrey,
           ),
           const SizedBox(
-            height: 10.0,
+            height: AppSize.s10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,7 +39,7 @@ class WidgetOrderItem extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 10.0,
+            height: AppSize.s10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -105,7 +106,7 @@ class WidgetOrderItem extends StatelessWidget {
       children: [
         icon,
         const SizedBox(
-          width: 5.0,
+          width: AppSize.s5,
         ),
         text
       ],

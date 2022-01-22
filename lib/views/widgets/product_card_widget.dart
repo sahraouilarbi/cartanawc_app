@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/models/product_model.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/views/product_details_page.dart';
 import 'package:cartanawc_app/views/widgets/image_network_loading_progress.dart';
 import 'package:cartanawc_app/views/widgets/no_image_placeholder.dart';
@@ -21,9 +22,9 @@ class ProductTile extends StatelessWidget {
       },
       leading: data.images[0].woocommerceGalleryThumbnail != null
           ? Container(
-              width: 56.0,
-              height: 56.0,
-              padding: const EdgeInsets.all(4.0),
+              width: AppSize.s56,
+              height: AppSize.s56,
+              padding: const EdgeInsets.all(AppPadding.p4),
               child: Image.network(
                 data.images[0].woocommerceGalleryThumbnail,
                 fit: BoxFit.cover,
