@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cartanawc_app/app.dart';
+import 'package:cartanawc_app/core/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
