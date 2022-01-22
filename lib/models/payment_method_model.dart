@@ -6,8 +6,9 @@ import 'dart:convert';
 
 List<PaymentGateways> paymentGatewaysFromJson(String str) =>
     List<PaymentGateways>.from(json
-        .decode(str)
-        .map((x) => PaymentGateways.fromJson(x as Map<String, dynamic>)));
+            .decode(str)
+            .map((x) => PaymentGateways.fromJson(x as Map<String, dynamic>))
+        as List);
 
 String paymentGatewaysToJson(List<PaymentGateways> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
