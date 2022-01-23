@@ -87,6 +87,7 @@ class _OrderSuccessWidgetState
                   textColor: Colors.white,
                   backgroundColor: ThemeConfig.cartanaColorGreen,
                 ),
+                const SizedBox(height: AppSize.s20),
               ],
             ),
           ),
