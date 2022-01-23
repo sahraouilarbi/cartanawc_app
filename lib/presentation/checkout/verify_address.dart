@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/models/customer_detail_model.dart';
+import 'package:cartanawc_app/domain/entities/customer_detail_model.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/checkout/checkout_base.dart';
 import 'package:cartanawc_app/presentation/checkout/payment_methods.dart';

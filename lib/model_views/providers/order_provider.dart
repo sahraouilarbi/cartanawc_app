@@ -1,5 +1,5 @@
 import 'package:cartanawc_app/services/api_service.dart';
-import 'package:cartanawc_app/models/order_model.dart';
+import 'package:cartanawc_app/domain/entities/order_model.dart';
 import 'package:flutter/material.dart';
 
 class OrderProvider with ChangeNotifier {
