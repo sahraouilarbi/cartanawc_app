@@ -5,9 +5,7 @@ import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/common/cartana_logo_widget.dart';
 import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get_version/get_version.dart';
 
 class AProposPage extends StatefulWidget {
   const AProposPage({Key key}) : super(key: key);
@@ -17,36 +15,6 @@ class AProposPage extends StatefulWidget {
 }
 
 class _AProposPageState extends State<AProposPage> {
-  String _appVersion = 'Inconnu';
-  String _buildNumber = 'Inconnu';
-
-  @override
-  void initState() {
-    super.initState();
-    _initPlateformState();
-  }
-
-  void _initPlateformState() async {
-    String projectVersion;
-    try {
-      projectVersion = await GetVersion.projectVersion;
-    } on PlatformException {
-      projectVersion = 'Failed to get project version';
-    }
-
-    String projectCode;
-    try {
-      projectCode = await GetVersion.projectCode;
-    } on PlatformException {
-      projectCode = 'Failed to get project code';
-    }
-
-    setState(() {
-      _appVersion = projectVersion;
-      _buildNumber = projectCode;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,14 +55,17 @@ class _AProposPageState extends State<AProposPage> {
                             SvgPicture.asset(
                               'assets/images/touareg.svg',
                               height: AppSize.s60,
+                              color: Colors.black,
                             ),
                             SvgPicture.asset(
                               'assets/images/style_chic.svg',
                               height: AppSize.s60,
+                              color: Colors.black,
                             ),
                             SvgPicture.asset(
                               'assets/images/cartana.svg',
                               height: AppSize.s60,
+                              color: Colors.black,
                             ),
                           ],
                         ),
@@ -169,14 +140,6 @@ class _AProposPageState extends State<AProposPage> {
                               ],
                             ),
                           ],
-                        ),
-                        const SizedBox(height: AppSize.s10),
-                        const Divider(color: Colors.grey),
-                        const SizedBox(height: AppSize.s10),
-                        Text(
-                          'App Version : $_appVersion+$_buildNumber',
-                          style: const TextStyle(
-                              color: Colors.grey, fontSize: 12.0),
                         ),
                       ],
                     ),
