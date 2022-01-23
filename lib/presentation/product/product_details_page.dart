@@ -5,7 +5,7 @@ import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/common/expanded_text.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/image_network_loading_progress.dart';
@@ -239,7 +239,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               final snackBar = SnackBar(
                                 content:
                                     const Text('Produit ajoutés au panier'),
-                                backgroundColor: ThemeConfig.cartanaColorGreen,
+                                backgroundColor: ColorManager.greenAccent,
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
@@ -252,7 +252,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       },
                       style: TextButton.styleFrom(
                         primary: Colors.white,
-                        backgroundColor: ThemeConfig.cartanaColorBlue,
+                        backgroundColor: ColorManager.blue,
                         padding: const EdgeInsets.all(AppPadding.p20),
                       ),
                       child: !inProgress

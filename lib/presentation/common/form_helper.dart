@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 
 class FormHelper {
@@ -43,16 +43,23 @@ class FormHelper {
     Widget suffixIcon,
   }) {
     return InputDecoration(
-      contentPadding: const EdgeInsets.all(6.0),
+      contentPadding: const EdgeInsets.all(
+        //TODO Ajouter AppPadding.p
+        6.0,
+      ),
       hintText: hintText,
       helperText: helperText,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: ThemeConfig.cartanaColorGrey),
+      enabledBorder: const OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey,
+        ),
       ),
-      border: OutlineInputBorder(
-        borderSide: BorderSide(color: ThemeConfig.cartanaColorGrey),
+      border: const OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey,
+        ),
       ),
     );
   }
@@ -60,6 +67,7 @@ class FormHelper {
   static Widget fieldLabel(String labelName,
       {Color labelColor = Colors.black}) {
     return Padding(
+      //TODO Ajouter AppPadding.p
       padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
       child: Text(
         labelName,

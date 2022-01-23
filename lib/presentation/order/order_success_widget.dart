@@ -2,7 +2,7 @@ import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/checkout/checkout_base.dart';
 import 'package:cartanawc_app/presentation/home/home_view.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -48,10 +48,8 @@ class _OrderSuccessWidgetState
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
                           colors: [
-                            ThemeConfig.cartanaColorGreen
-                                .withOpacity(AppSize.s1),
-                            ThemeConfig.cartanaColorGreen
-                                .withOpacity(AppSize.s0_2),
+                            ColorManager.greenAccent.withOpacity(AppSize.s1),
+                            ColorManager.greenAccent.withOpacity(AppSize.s0_2),
                           ],
                         ),
                       ),
@@ -86,7 +84,7 @@ class _OrderSuccessWidgetState
                   },
                   text: 'Terminer',
                   textColor: Colors.white,
-                  backgroundColor: ThemeConfig.cartanaColorGreen,
+                  backgroundColor: ColorManager.greenAccent,
                 ),
                 const SizedBox(height: AppSize.s20),
               ],
