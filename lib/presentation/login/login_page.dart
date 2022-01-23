@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
 import 'package:cartanawc_app/presentation/common/form_helper.dart';
 import 'package:cartanawc_app/presentation/ressources/progress_hud.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: ThemeConfig.cartanaColorGreen,
+            color: ColorManager.greenAccent,
           ),
         ),
       ),
@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: ThemeConfig.cartanaColorGreen,
+            color: ColorManager.greenAccent,
           ),
         ),
         suffixIcon: IconButton(

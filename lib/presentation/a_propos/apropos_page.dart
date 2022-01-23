@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/common/cartana_logo_widget.dart';
 import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
 import 'package:flutter/material.dart';
@@ -214,7 +214,7 @@ class _AProposPageState extends State<AProposPage> {
   Container buildContainer(String text) {
     return Container(
       padding: const EdgeInsets.all(AppPadding.p10),
-      decoration: BoxDecoration(color: ThemeConfig.cartanaColorGreen),
+      decoration: BoxDecoration(color: ColorManager.greenAccent),
       child: Text(
         text,
         style:

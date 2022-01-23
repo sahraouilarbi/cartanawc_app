@@ -3,7 +3,7 @@ import 'package:cartanawc_app/presentation/common/appbar/appbar_actions_customer
 import 'package:cartanawc_app/presentation/common/appbar/appbar_cartana_logo.dart';
 import 'package:cartanawc_app/presentation/common/white_and_green_top_bar.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 
 AppBar buildAppBar(
@@ -43,8 +43,8 @@ PreferredSize buildBottomAppBar({
         if (hasTabs)
           TabBar(
             controller: tabController,
-            indicatorColor: ThemeConfig.cartanaColorGreen,
-            unselectedLabelColor: ThemeConfig.cartanaColorGrey,
+            indicatorColor: ColorManager.greenAccent,
+            unselectedLabelColor: ColorManager.grey,
             tabs: tabs,
           ),
       ],

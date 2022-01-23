@@ -2,7 +2,7 @@ import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/checkout/verify_address.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/presentation/ressources/progress_hud.dart';
 import 'package:cartanawc_app/presentation/cart/cart_product_widget.dart';
@@ -59,7 +59,7 @@ class _CartPageState extends State<CartPage> {
             Container(
               decoration: BoxDecoration(
                 border: const Border(bottom: BorderSide()),
-                color: ThemeConfig.cartanaColorBlue,
+                color: ColorManager.blue,
               ),
               padding: const EdgeInsets.symmetric(
                   vertical: AppPadding.p10, horizontal: AppPadding.p30),
@@ -142,6 +142,7 @@ class _CartPageState extends State<CartPage> {
                             fontSize: 18.0);
                       },
                     ),
+                    const SizedBox(height: AppSize.s10),
                     textButton(
                       onPressed: () {
                         Navigator.push(
@@ -153,8 +154,9 @@ class _CartPageState extends State<CartPage> {
                       },
                       text: 'VALIDER LA COMMANDE',
                       textColor: Colors.white,
-                      backgroundColor: ThemeConfig.cartanaColorGreen,
+                      backgroundColor: ColorManager.greenAccent,
                     ),
+                    const SizedBox(height: AppSize.s10),
                   ],
                 ),
               ),

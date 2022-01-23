@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/domain/entities/order_model.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/order/order_details_page.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class WidgetOrderItem extends StatelessWidget {
         children: [
           _orderStatus(orderModel.status),
           Divider(
-            color: ThemeConfig.cartanaColorGrey,
+            color: ColorManager.grey,
           ),
           const SizedBox(
             height: AppSize.s10,
@@ -79,15 +79,15 @@ class WidgetOrderItem extends StatelessWidget {
     } else if (status == 'completed') {
       icon = Icon(
         Icons.check,
-        color: ThemeConfig.cartanaColorGreen,
+        color: ColorManager.greenAccent,
       );
-      color = ThemeConfig.cartanaColorGreen;
+      color = ColorManager.greenAccent;
     } else if (status == 'cancelled') {
       icon = Icon(
         Icons.clear,
-        color: ThemeConfig.cartanaColorRed,
+        color: ColorManager.red,
       );
-      color = ThemeConfig.cartanaColorRed;
+      color = ColorManager.red;
     }
     return _iconText(
         icon,

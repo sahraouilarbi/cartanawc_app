@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 
 class DrawerNouveautesTile extends StatelessWidget {
@@ -22,7 +22,7 @@ class DrawerNouveautesTile extends StatelessWidget {
           'NOUVEAUTES',
           style: TextStyle(color: Colors.white),
         ),
-        tileColor: ThemeConfig.kTercieryColor,
+        tileColor: ColorManager.primary,
       ),
     );
   }

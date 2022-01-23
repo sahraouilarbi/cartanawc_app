@@ -2,7 +2,7 @@ import 'package:cartanawc_app/domain/entities/cart_response_model.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/common/utils.dart';
 import 'package:cartanawc_app/presentation/common/row_montant.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ class _CartProductState extends State<CartProduct> {
         children: [
           const SizedBox(height: AppSize.s10),
           Container(
-            color: ThemeConfig.cartanaColorYellow,
+            color: ColorManager.yellow,
             padding: const EdgeInsets.symmetric(
                 vertical: AppPadding.p5, horizontal: AppPadding.p10),
             child: Text(
@@ -142,7 +142,7 @@ class _CartProductState extends State<CartProduct> {
                     vertical: AppPadding.p10,
                     horizontal: AppPadding.p20,
                   ),
-                  color: ThemeConfig.cartanaColorGrey,
+                  color: ColorManager.grey,
                   child: const Text(
                     'MODIFIER',
                     textAlign: TextAlign.center,
@@ -178,7 +178,7 @@ class _CartProductState extends State<CartProduct> {
                     vertical: AppPadding.p10,
                     horizontal: AppPadding.p20,
                   ),
-                  color: ThemeConfig.cartanaColorRed,
+                  color: ColorManager.red,
                   child: const Text(
                     'SUPPRIMER',
                     textAlign: TextAlign.center,

@@ -1,6 +1,6 @@
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/cart/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,7 @@ class AppBarActionShoppingIcon extends StatelessWidget {
             if (cartModel.cartItems.isEmpty) {
               final snackBar = SnackBar(
                 content: const Text('Panier vide!'),
-                backgroundColor: ThemeConfig.cartanaColorRed,
+                backgroundColor: ColorManager.red,
               );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }

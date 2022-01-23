@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/progress_hud.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
 import 'package:cartanawc_app/presentation/common/checkpoint_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,10 +47,10 @@ class CheckoutBasePageState<T extends CheckoutBasePage> extends State<T> {
                         'Paiement',
                         'Commander',
                       ],
-                      checkPointFilledColor: ThemeConfig.cartanaColorGreen,
+                      checkPointFilledColor: ColorManager.greenAccent,
                     ),
                   ),
-                  Divider(color: ThemeConfig.cartanaColorGrey),
+                  Divider(color: ColorManager.grey),
                   pageUI(),
                 ],
               ),

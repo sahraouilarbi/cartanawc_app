@@ -1,5 +1,5 @@
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,9 +23,9 @@ Widget tabViewAccueil() {
             paragraphText:
                 "Bénéficiez d'échantillons gratuits\npour tester nos produits",
             paragraphBgGradientColorStart: const Color(0xFF8200D8),
-            paragraphBgGradientColorEnd: ThemeConfig.cartanaColorPurple,
+            paragraphBgGradientColorEnd: ColorManager.purple,
             badgeText: 'TESTER',
-            badgeBgColor: ThemeConfig.cartanaColorPurple,
+            badgeBgColor: ColorManager.purple,
           ),
           const SizedBox(height: AppSize.s10),
           buildStackEspaceProfessionnel(
@@ -34,9 +34,9 @@ Widget tabViewAccueil() {
             paragraphText:
                 "Vous disposez d'un point de vente en cosmétique, et vous souhaitez commercialisez nos offres",
             paragraphBgGradientColorStart: const Color(0xFF000D60),
-            paragraphBgGradientColorEnd: ThemeConfig.cartanaColorBlue,
+            paragraphBgGradientColorEnd: ColorManager.blue,
             badgeText: 'COMMANDER',
-            badgeBgColor: ThemeConfig.cartanaColorBlue,
+            badgeBgColor: ColorManager.blue,
           ),
           pageHeaderStack(pageHeader: 'DEVENIR DISTRIBUTEUR'),
           buildStackDevenirDistributeur(),
@@ -143,7 +143,7 @@ Stack buildStackNouveautes() {
       buildBadgeAlign(
         alignment: Alignment.topLeft,
         text: 'Nouveau',
-        backgroundColor: ThemeConfig.cartanaColorRed,
+        backgroundColor: ColorManager.red,
         left: true,
       ),
     ],
