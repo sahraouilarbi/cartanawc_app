@@ -6,7 +6,7 @@ import 'package:cartanawc_app/presentation/home/home_view.dart';
 import 'package:cartanawc_app/presentation/login/login_page.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/utils/form_helper.dart';
-import 'package:cartanawc_app/utils/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/drawer/drawer_widget.dart';
 import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';

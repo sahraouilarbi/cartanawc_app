@@ -2,7 +2,7 @@ import 'package:cartanawc_app/domain/entities/cart_response_model.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/utils/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
 import 'package:cartanawc_app/utils/utils.dart';
 import 'package:cartanawc_app/presentation/common/row_montant.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/utils/theme_config.dart';
+import 'package:cartanawc_app/presentation/ressources/theme_config.dart';
 import 'package:flutter/material.dart';
 
 class WhiteAndGreenBar extends StatelessWidget {
