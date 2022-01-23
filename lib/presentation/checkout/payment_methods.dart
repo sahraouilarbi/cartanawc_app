@@ -50,6 +50,7 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
                     return Text(snapshot.error.toString());
                   }
                   return ListView.separated(
+                    physics: const ScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       if (snapshot.data[index].enabled == true) {
@@ -90,9 +91,7 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
               return null;
             },
           ),
-          const SizedBox(
-            height: AppSize.s20,
-          ),
+          const SizedBox(height: AppSize.s20),
           FormHelper.saveButton(
             'Suivant',
             () {
@@ -104,6 +103,7 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
               );
             },
           ),
+          const SizedBox(height: AppSize.s20),
         ],
       ),
     );
