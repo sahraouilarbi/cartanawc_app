@@ -10,7 +10,7 @@ import 'package:cartanawc_app/domain/entities/payment_method_model.dart';
 import 'package:cartanawc_app/domain/entities/product_model.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/services/api_config.dart';
-import 'package:cartanawc_app/utils/utils.dart';
+import 'package:cartanawc_app/presentation/common/utils.dart';
 import 'package:dio/dio.dart';
 
 class APIService {

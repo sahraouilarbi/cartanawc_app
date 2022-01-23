@@ -3,7 +3,7 @@ import 'package:cartanawc_app/services/api_service.dart';
 import 'package:cartanawc_app/domain/entities/payment_method_model.dart';
 import 'package:cartanawc_app/presentation/checkout/checkout_base.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
-import 'package:cartanawc_app/utils/form_helper.dart';
+import 'package:cartanawc_app/presentation/common/form_helper.dart';
 import 'package:cartanawc_app/presentation/order/order_success_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
