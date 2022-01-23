@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cartanawc_app/services/api_config.dart';
+import 'package:cartanawc_app/data/api_config.dart';
 import 'package:cartanawc_app/presentation/common/utils.dart';
 import 'package:dio/dio.dart';
 

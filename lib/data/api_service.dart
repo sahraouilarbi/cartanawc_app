@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/services/http_service.dart';
+import 'package:cartanawc_app/data/http_service.dart';
 import 'package:cartanawc_app/domain/entities/cart_request_model.dart';
 import 'package:cartanawc_app/domain/entities/cart_response_model.dart';
 import 'package:cartanawc_app/domain/entities/categorie_model.dart';
@@ -9,7 +9,7 @@ import 'package:cartanawc_app/domain/entities/order_model.dart';
 import 'package:cartanawc_app/domain/entities/payment_method_model.dart';
 import 'package:cartanawc_app/domain/entities/product_model.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
-import 'package:cartanawc_app/services/api_config.dart';
+import 'package:cartanawc_app/data/api_config.dart';
 import 'package:cartanawc_app/presentation/common/utils.dart';
 import 'package:dio/dio.dart';
 
