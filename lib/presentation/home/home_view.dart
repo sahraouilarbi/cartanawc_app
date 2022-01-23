@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/utils/size_config.dart';
+import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/drawer/drawer_widget.dart';
 import 'package:cartanawc_app/presentation/home/tabview_accueil_widget.dart';

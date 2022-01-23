@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/domain/entities/order_model.dart';
 import 'package:cartanawc_app/model_views/providers/order_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/utils/size_config.dart';
+import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:cartanawc_app/presentation/order/widget_orders_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

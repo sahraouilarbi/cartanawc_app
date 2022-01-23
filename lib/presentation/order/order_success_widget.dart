@@ -74,6 +74,7 @@ class _OrderSuccessWidgetState
                 ),
                 textButton(
                   onPressed: () {
+                    //TODO Ajouter reset du panier
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(

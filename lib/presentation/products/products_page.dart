@@ -4,7 +4,7 @@ import 'package:cartanawc_app/services/api_service.dart';
 import 'package:cartanawc_app/domain/entities/product_model.dart';
 import 'package:cartanawc_app/presentation/common/base_page.dart';
 import 'package:cartanawc_app/model_views/providers/product_provider.dart';
-import 'package:cartanawc_app/utils/size_config.dart';
+import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:cartanawc_app/presentation/product/product_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
