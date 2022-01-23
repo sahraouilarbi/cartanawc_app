@@ -1,6 +1,6 @@
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
-import 'package:cartanawc_app/services/api_service.dart';
+import 'package:cartanawc_app/data/api_service.dart';
 import 'package:cartanawc_app/domain/entities/order_detail_model.dart';
 import 'package:cartanawc_app/presentation/common/base_page.dart';
 import 'package:cartanawc_app/presentation/common/checkpoint_widget.dart';
