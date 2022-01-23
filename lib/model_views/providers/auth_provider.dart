@@ -14,18 +14,18 @@ enum Status {
 }
 
 class AuthProvider with ChangeNotifier {
-  Status _loggedInStatus = Status.notLoggedIn;
-  Status _registeredInStatus = Status.notRegistered;
+  Status loggedInStatus = Status.notLoggedIn;
+  Status registeredInStatus = Status.notRegistered;
 
-  Status get loggedInStatus => _loggedInStatus;
-  set loggedInStatus(Status value) {
-    _loggedInStatus = value;
-  }
+  //Status get loggedInStatus => _loggedInStatus;
+  // set loggedInStatus(Status value) {
+  //   _loggedInStatus = value;
+  // }
 
-  Status get registeredInStatus => _registeredInStatus;
-  set registeredInStatus(Status value) {
-    _registeredInStatus = value;
-  }
+  // Status get registeredInStatus => _registeredInStatus;
+  // set registeredInStatus(Status value) {
+  //   _registeredInStatus = value;
+  // }
 
   final APIService _apiService = APIService();
   CustomerDetailModel _customerDetailModel;
@@ -33,7 +33,7 @@ class AuthProvider with ChangeNotifier {
   CustomerDetailModel get customerDetailModel => _customerDetailModel;
 
   Future<LoginResponseModel> login(String username, String password) async {
-    _loggedInStatus = Status.authenticating;
+    loggedInStatus = Status.authenticating;
     notifyListeners();
 
     LoginResponseModel loginResponseModel;
@@ -41,10 +41,10 @@ class AuthProvider with ChangeNotifier {
     try {
       loginResponseModel = await _apiService.customerLogin(username, password);
       if (loginResponseModel.data.id != null) {
-        _loggedInStatus = Status.loggedIn;
+        loggedInStatus = Status.loggedIn;
         notifyListeners();
       } else {
-        _loggedInStatus = Status.notLoggedIn;
+        loggedInStatus = Status.notLoggedIn;
         notifyListeners();
       }
     } on Exception catch (e) {
