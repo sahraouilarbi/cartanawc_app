@@ -1,5 +1,5 @@
-import 'package:cartanawc_app/models/cart_request_model.dart';
-import 'package:cartanawc_app/models/product_model.dart';
+import 'package:cartanawc_app/domain/entities/cart_request_model.dart';
+import 'package:cartanawc_app/domain/entities/product_model.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
