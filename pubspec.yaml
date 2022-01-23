@@ -20,13 +20,8 @@ dependencies:
   get_version: ^0.2.2
   google_maps_flutter: ^1.2.0
   overlay_support: ^1.0.5
-  path_provider:
-  path_provider_linux:
-  path_provider_macos:
   provider: ^5.0.0
   shared_preferences: ^2.0.6
-  shared_preferences_linux:
-  shared_preferences_macos:
 
 dev_dependencies:
   flutter_test:
