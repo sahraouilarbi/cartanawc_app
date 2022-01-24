@@ -27,44 +27,39 @@ class ErrorHandler implements Exception {
       failure = DataSource.DEFAULT.getFailure();
     }
   }
+  Failure _dioErrorTypeResponse(int error) {
+    switch (error) {
+      case ResponseCode.BAD_REQUEST:
+        return DataSource.BAD_REQUEST.getFailure();
+      case ResponseCode.FORBIDEN:
+        return DataSource.FORBIDEN.getFailure();
+      case ResponseCode.INTERNAL_SERVER_ERROR:
+        return DataSource.INTERNAL_SERVER_ERROR.getFailure();
+      case ResponseCode.NOT_FOUND:
+        return DataSource.NOT_FOUND.getFailure();
+      case ResponseCode.UNAUTHORISED:
+        return DataSource.UNAUTHORISED.getFailure();
+      default:
+        return DataSource.DEFAULT.getFailure();
+    }
+  }
+
   Failure _handleError(DioError error) {
     switch (error.type) {
-      case DioErrorType.connectTimeout:
-        return DataSource.CONNECT_TIMEOUT.getFailure();
-        break;
-      case DioErrorType.receiveTimeout:
-        return DataSource.RECEIVE_TIMEOUT.getFailure();
-        break;
-      case DioErrorType.sendTimeout:
-        return DataSource.SEND_TIMEOUT.getFailure();
-        break;
-      // case DioErrorType.response:
-      //   switch (error.response.statusCode) {
-      //     case ResponseCode.BAD_REQUEST:
-      //       return DataSource.BAD_REQUEST.getFailure();
-      //       break;
-      //     case ResponseCode.FORBIDEN:
-      //       return DataSource.FORBIDEN.getFailure();
-      //       break;
-      //     case ResponseCode.INTERNAL_SERVER_ERROR:
-      //       return DataSource.INTERNAL_SERVER_ERROR.getFailure();
-      //       break;
-      //     case ResponseCode.NOT_FOUND:
-      //       return DataSource.NOT_FOUND.getFailure();
-      //       break;
-      //     case ResponseCode.UNAUTHORISED:
-      //       return DataSource.UNAUTHORISED.getFailure();
-      //       break;
-      //     default:
-      //       return DataSource.DEFAULT.getFailure();
-      //       break;
-      //   }
       case DioErrorType.cancel:
         return DataSource.CANCEL.getFailure();
-        break;
+      case DioErrorType.connectTimeout:
+        return DataSource.CONNECT_TIMEOUT.getFailure();
+      case DioErrorType.receiveTimeout:
+        return DataSource.RECEIVE_TIMEOUT.getFailure();
+      case DioErrorType.sendTimeout:
+        return DataSource.SEND_TIMEOUT.getFailure();
+      case DioErrorType.response:
+        return _dioErrorTypeResponse(error.response.statusCode);
       case DioErrorType.other:
         return DataSource.DEFAULT.getFailure();
-        break;
+      default:
+        return DataSource.DEFAULT.getFailure();
     }
   }
 }
@@ -126,22 +121,22 @@ class ResponseCode {
 
 class ResponseMessage {
   // Api response codes
-  static const String SUCCESS = '';
-  static const String NO_CONTENT = '';
-  static const String BAD_REQUEST = '';
-  static const String UNAUTHORISED = '';
-  static const String FORBIDEN = '';
-  static const String NOT_FOUND = '';
-  static const String INTERNAL_SERVER_ERROR = '';
+  static const String SUCCESS = 'success';
+  static const String NO_CONTENT = 'no_content';
+  static const String BAD_REQUEST = 'bad_request_error';
+  static const String UNAUTHORISED = 'unauthorized_error';
+  static const String FORBIDEN = 'forbiden_error';
+  static const String NOT_FOUND = 'not_found_error';
+  static const String INTERNAL_SERVER_ERROR = 'internal_server_error';
 
   // local response codes
-  static const String DEFAULT = '';
-  static const String CONNECT_TIMEOUT = '';
-  static const String CANCEL = '';
-  static const String RECEIVE_TIMEOUT = '';
-  static const String SEND_TIMEOUT = '';
-  static const String CACHE_ERROR = '';
-  static const String NO_INTERNET_CONNECTION = '';
+  static const String DEFAULT = 'default_error';
+  static const String CONNECT_TIMEOUT = 'timoeout_error';
+  static const String CANCEL = 'default_error';
+  static const String RECEIVE_TIMEOUT = 'timeout_error';
+  static const String SEND_TIMEOUT = 'timeout_error';
+  static const String CACHE_ERROR = 'cache_error';
+  static const String NO_INTERNET_CONNECTION = 'no_internet_error';
 }
 
 class ApiInternalStatus {
