@@ -1,5 +1,5 @@
 import 'package:cartanawc_app/data/api_service.dart';
-import 'package:cartanawc_app/domain/entities/product_model.dart';
+import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class SortBy {

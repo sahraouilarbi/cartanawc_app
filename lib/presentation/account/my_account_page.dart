@@ -2,7 +2,7 @@ import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/data/api_service.dart';
-import 'package:cartanawc_app/domain/entities/customer_detail_model.dart';
+import 'package:cartanawc_app/data/models/customer_detail_model.dart';
 import 'package:cartanawc_app/presentation/home/home_view.dart';
 import 'package:cartanawc_app/presentation/login/login_page.dart';
 import 'package:cartanawc_app/services/shared_service.dart';

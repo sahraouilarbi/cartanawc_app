@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/domain/entities/variable_product_model.dart';
+import 'package:cartanawc_app/data/models/variable_product_model.dart';
 
 class Product {
   Product({

@@ -1,6 +1,6 @@
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/data/api_service.dart';
-import 'package:cartanawc_app/domain/entities/payment_method_model.dart';
+import 'package:cartanawc_app/data/models/payment_method_model.dart';
 import 'package:cartanawc_app/presentation/checkout/checkout_base.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/presentation/common/form_helper.dart';

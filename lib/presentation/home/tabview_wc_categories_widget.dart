@@ -1,5 +1,5 @@
 import 'package:cartanawc_app/data/api_service.dart';
-import 'package:cartanawc_app/domain/entities/categorie_model.dart';
+import 'package:cartanawc_app/data/models/categorie_model.dart';
 import 'package:cartanawc_app/presentation/products/products_page.dart';
 import 'package:flutter/material.dart';
 

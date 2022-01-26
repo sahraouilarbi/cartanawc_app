@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/domain/entities/product_model.dart';
+import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/product/product_details_page.dart';
 import 'package:cartanawc_app/presentation/common/image_network_loading_progress.dart';
