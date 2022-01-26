@@ -9,7 +9,7 @@ class LoginResponseModel {
   int statusCode;
   String code;
   String message;
-  Data data;
+  DataModel data;
 
   LoginResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'] as bool;
@@ -17,7 +17,7 @@ class LoginResponseModel {
     code = json['code'] as String;
     message = json['message'] as String;
     data = json['data'] != null
-        ? Data.fromJson(json['data'] as Map<String, dynamic>)
+        ? DataModel.fromJson(json['data'] as Map<String, dynamic>)
         : null;
   }
 
@@ -34,8 +34,8 @@ class LoginResponseModel {
   }
 }
 
-class Data {
-  Data({
+class DataModel {
+  DataModel({
     this.token,
     this.id,
     this.email,
@@ -52,7 +52,7 @@ class Data {
   String lastName;
   String displayName;
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataModel.fromJson(Map<String, dynamic> json) {
     token = json['token'] as String;
     id = json['id'] as int;
     email = json['email'] as String;

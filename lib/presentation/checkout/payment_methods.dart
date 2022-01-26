@@ -15,7 +15,7 @@ class PaymentMethods extends CheckoutBasePage {
 
 class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
   APIService apiService;
-  Future<List<PaymentGateways>> paymentGateways;
+  Future<List<PaymentGatewaysModel>> paymentGateways;
   String _paymentGatewaysID = '';
   CartProvider cartProvider;
 
@@ -36,7 +36,7 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
           FutureBuilder(
             future: paymentGateways,
             builder: (BuildContext context,
-                AsyncSnapshot<List<PaymentGateways>> snapshot) {
+                AsyncSnapshot<List<PaymentGatewaysModel>> snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                   return Text(snapshot.error.toString());

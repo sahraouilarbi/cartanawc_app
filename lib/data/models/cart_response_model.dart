@@ -4,14 +4,14 @@ class CartResponseModel {
     this.data,
   });
   bool status;
-  List<CartItem> data;
+  List<CartItemModel> data;
   int userId;
   CartResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'] as bool;
     if (json['data'] != null) {
-      data = <CartItem>[];
+      data = <CartItemModel>[];
       json['data'].forEach((item) {
-        data.add(CartItem.fromJson(item as Map<String, dynamic>));
+        data.add(CartItemModel.fromJson(item as Map<String, dynamic>));
       });
     }
   }
@@ -25,8 +25,8 @@ class CartResponseModel {
   }
 }
 
-class CartItem {
-  CartItem({
+class CartItemModel {
+  CartItemModel({
     this.productId,
     this.productName,
     this.productRegularPrice,
@@ -54,7 +54,7 @@ class CartItem {
   String attribute;
   String attributeValue;
 
-  CartItem.fromJson(Map<String, dynamic> json) {
+  CartItemModel.fromJson(Map<String, dynamic> json) {
     productId = json['product_id'] as int;
     productName = json['product_name'] as String;
     productRegularPrice = json['product_regular_price'] as String;

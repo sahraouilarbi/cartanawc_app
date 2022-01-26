@@ -17,11 +17,11 @@ enum LoadMoreStatus {
 
 class ProductProvider with ChangeNotifier {
   APIService _apiService;
-  List<Product> _productList;
+  List<ProductModel> _productList;
   SortBy _sortBy;
   int pageSize = 10;
 
-  List<Product> get allProducts => _productList;
+  List<ProductModel> get allProducts => _productList;
 
   double get totalRecords => _productList.length.toDouble();
 
@@ -36,7 +36,7 @@ class ProductProvider with ChangeNotifier {
 
   void resetStreams() {
     _apiService = APIService();
-    _productList = <Product>[];
+    _productList = <ProductModel>[];
   }
 
   void setLoadingState(LoadMoreStatus loadMoreStatus) {
@@ -57,7 +57,7 @@ class ProductProvider with ChangeNotifier {
     String sortBy,
     String setOrder = 'asc',
   }) async {
-    final List<Product> itemModel = await _apiService.getProducts(
+    final List<ProductModel> itemModel = await _apiService.getProducts(
       strSearch: strSearch,
       tagName: tagName,
       pageNumber: pageNumber,

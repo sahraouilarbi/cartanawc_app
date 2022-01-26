@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/data/models/variable_product_model.dart';
 
-class Product {
-  Product({
+class ProductModel {
+  ProductModel({
     this.id,
     this.name,
     this.description,
@@ -32,15 +32,15 @@ class Product {
   String regularPrice;
   String salePrice;
   String stockStatus;
-  List<ImageProduct> images;
-  List<Categories> categories;
-  List<Attributes> attributes;
+  List<ImageProductModel> images;
+  List<CategoriesModel> categories;
+  List<AttributesModel> attributes;
   List<int> relatedIds;
-  VariableProduct variableProduct;
-  List<ProductMetaData> productMetaData;
-  ACF acf;
+  VariableProductModel variableProduct;
+  List<ProductMetaDataModel> productMetaData;
+  ACFModel acf;
 
-  Product.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
     name = json['name'] as String;
     description = json['description'] as String;
@@ -56,38 +56,38 @@ class Product {
     stockStatus = json['stock_status'] as String;
     relatedIds = json['related_ids'].cast<int>() as List<int>;
     if (json['categories'] != null) {
-      categories = <Categories>[];
+      categories = <CategoriesModel>[];
       json['categories'].forEach((v) {
-        categories.add(Categories.fromJson(v as Map<String, dynamic>));
+        categories.add(CategoriesModel.fromJson(v as Map<String, dynamic>));
       });
     }
     if (json['images'] != null) {
-      images = <ImageProduct>[];
+      images = <ImageProductModel>[];
       json['images'].forEach((v) {
-        images.add(ImageProduct.fromJson(v as Map<String, dynamic>));
+        images.add(ImageProductModel.fromJson(v as Map<String, dynamic>));
       });
     }
     if (json['attributes'] != null) {
-      attributes = <Attributes>[];
+      attributes = <AttributesModel>[];
       json['attributes'].forEach((v) {
-        attributes.add(Attributes.fromJson(v as Map<String, dynamic>));
+        attributes.add(AttributesModel.fromJson(v as Map<String, dynamic>));
       });
     }
     if (json['meta_data'] != null) {
-      productMetaData = <ProductMetaData>[];
+      productMetaData = <ProductMetaDataModel>[];
       json['meta_data'].forEach((v) {
         productMetaData
-            .add(ProductMetaData.fromJson(v as Map<String, dynamic>));
+            .add(ProductMetaDataModel.fromJson(v as Map<String, dynamic>));
       });
     }
     acf = (json['acf'] != null)
-        ? ACF.fromJson(json['acf'] as Map<String, dynamic>)
+        ? ACFModel.fromJson(json['acf'] as Map<String, dynamic>)
         : null;
   }
 }
 
-class ImageProduct {
-  ImageProduct({
+class ImageProductModel {
+  ImageProductModel({
     this.src,
     this.woocommerceThumbnail,
     this.woocommerceSingle,
@@ -97,7 +97,7 @@ class ImageProduct {
   String woocommerceThumbnail;
   String woocommerceSingle;
   String woocommerceGalleryThumbnail;
-  ImageProduct.fromJson(Map<String, dynamic> json) {
+  ImageProductModel.fromJson(Map<String, dynamic> json) {
     src = json['src'] as String;
     woocommerceThumbnail = json['woocommerce_thumbnail'] as String;
     woocommerceSingle = json['woocommerce_single'] as String;
@@ -106,11 +106,11 @@ class ImageProduct {
   }
 }
 
-class Categories {
-  Categories({this.id, this.name});
+class CategoriesModel {
+  CategoriesModel({this.id, this.name});
   int id;
   String name;
-  Categories.fromJson(Map<String, dynamic> json) {
+  CategoriesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
     name = json['name'] as String;
   }
@@ -122,20 +122,20 @@ class Categories {
   }
 }
 
-class Attributes {
-  Attributes({this.id, this.name, this.options});
+class AttributesModel {
+  AttributesModel({this.id, this.name, this.options});
   int id;
   String name;
   List<String> options;
-  Attributes.fromJson(Map<String, dynamic> json) {
+  AttributesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
     name = json['name'] as String;
     options = json['option'].cast<String>() as List<String>;
   }
 }
 
-class ProductMetaData {
-  ProductMetaData({
+class ProductMetaDataModel {
+  ProductMetaDataModel({
     this.id,
     this.key,
     this.value,
@@ -143,15 +143,15 @@ class ProductMetaData {
   int id;
   String key;
   String value;
-  ProductMetaData.fromJson(Map<String, dynamic> json) {
+  ProductMetaDataModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
     key = json['key'] as String;
     value = json['value'] as String;
   }
 }
 
-class ACF {
-  ACF({
+class ACFModel {
+  ACFModel({
     this.contenance,
     this.grossite,
     this.superGros,
@@ -164,7 +164,7 @@ class ACF {
   String grandeMoyenneSurface;
   String hypermarche;
 
-  ACF.fromJson(Map<String, dynamic> json) {
+  ACFModel.fromJson(Map<String, dynamic> json) {
     contenance = json['contenance'] as String;
     grossite = json['grossite'] as String;
     superGros = json['super_gros'] as String;

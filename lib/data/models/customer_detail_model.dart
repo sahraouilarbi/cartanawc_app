@@ -14,8 +14,8 @@ class CustomerDetailModel {
   String firstName;
   String lastName;
   String role;
-  Billing billing;
-  Shipping shipping;
+  BillingModel billing;
+  ShippingModel shipping;
   String avatarUrl;
   CustomerDetailModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
@@ -24,17 +24,17 @@ class CustomerDetailModel {
     lastName = json['last_name'] as String;
     role = json['role'] != null ? json['role'] as String : null;
     billing = json['billing'] != null
-        ? Billing.fromJson(json['billing'] as Map<String, dynamic>)
+        ? BillingModel.fromJson(json['billing'] as Map<String, dynamic>)
         : null;
     shipping = json['shipping'] != null
-        ? Shipping.fromJson(json['shipping'] as Map<String, dynamic>)
+        ? ShippingModel.fromJson(json['shipping'] as Map<String, dynamic>)
         : null;
     avatarUrl = json['avatar_url'] as String;
   }
 }
 
-class Billing {
-  Billing({
+class BillingModel {
+  BillingModel({
     this.firstName,
     this.lastName,
     this.company,
@@ -58,7 +58,7 @@ class Billing {
   String state;
   String email;
   String phone;
-  Billing.fromJson(Map<String, dynamic> json) {
+  BillingModel.fromJson(Map<String, dynamic> json) {
     firstName = json['first_name'] as String;
     lastName = json['last_name'] as String;
     company = json['company'] as String;
@@ -88,8 +88,8 @@ class Billing {
   }
 }
 
-class Shipping {
-  Shipping({
+class ShippingModel {
+  ShippingModel({
     this.firstName,
     this.lastName,
     this.company,
@@ -113,7 +113,7 @@ class Shipping {
   String state;
   String email;
   String phone;
-  Shipping.fromJson(Map<String, dynamic> json) {
+  ShippingModel.fromJson(Map<String, dynamic> json) {
     firstName = json['first_name'] as String;
     lastName = json['last_name'] as String;
     company = json['company'] as String;

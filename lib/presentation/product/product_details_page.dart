@@ -16,9 +16,9 @@ import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
   ProductDetails({Key key, this.data}) : super(key: key);
-  final Product data;
+  final ProductModel data;
 
-  final CartProducts cartProducts = CartProducts();
+  final CartProductsModel cartProducts = CartProductsModel();
 
   @override
   _ProductDetailsState createState() => _ProductDetailsState();

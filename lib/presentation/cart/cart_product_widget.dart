@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class CartProduct extends StatefulWidget {
   const CartProduct({Key key, this.data}) : super(key: key);
-  final CartItem data;
+  final CartItemModel data;
 
   @override
   _CartProductState createState() => _CartProductState();

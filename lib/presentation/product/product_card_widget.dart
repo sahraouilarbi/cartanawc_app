@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({Key key, this.data}) : super(key: key);
-  final Product data;
+  final ProductModel data;
 
   @override
   Widget build(BuildContext context) {

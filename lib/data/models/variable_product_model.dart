@@ -1,5 +1,5 @@
-class VariableProduct {
-  VariableProduct({
+class VariableProductModel {
+  VariableProductModel({
     this.id,
     this.sku,
     this.price,
@@ -12,18 +12,19 @@ class VariableProduct {
   String price;
   String regularPrice;
   String salePrice;
-  List<Attributes> attributes;
+  List<AttributesModel> attributes;
 
-  VariableProduct.fromJson(Map<String, dynamic> json) {
+  VariableProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
     sku = json['sku'] as String;
     price = json['price'] as String;
     regularPrice = json['regular_price'] as String;
     salePrice = json['sale_price'] as String;
     if (json['attributes'] != null) {
-      attributes = <Attributes>[];
+      attributes = <AttributesModel>[];
       json['attributes'].forEach((element) {
-        attributes.add(Attributes.fromJson(element as Map<String, dynamic>));
+        attributes
+            .add(AttributesModel.fromJson(element as Map<String, dynamic>));
       });
     }
   }
@@ -42,8 +43,8 @@ class VariableProduct {
   }
 }
 
-class Attributes {
-  Attributes({
+class AttributesModel {
+  AttributesModel({
     this.id,
     this.name,
     this.option,
@@ -51,7 +52,7 @@ class Attributes {
   int id;
   String name;
   String option;
-  Attributes.fromJson(Map<String, dynamic> json) {
+  AttributesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
     name = json['name'] as String;
     option = json['option'] as String;

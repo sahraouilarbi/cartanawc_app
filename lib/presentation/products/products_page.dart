@@ -81,7 +81,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
     );
   }
 
-  Widget _buildList(List<Product> items, bool isLoadingMore) {
+  Widget _buildList(List<ProductModel> items, bool isLoadingMore) {
     return Column(
       children: [
         //_productFilter(),

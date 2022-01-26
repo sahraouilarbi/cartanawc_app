@@ -18,8 +18,8 @@ class OrderDetailModel {
   String paymentMethod;
   String orderStatus;
   DateTime orderDate;
-  Shipping shipping;
-  List<LineItems> lineItems;
+  ShippingModel shipping;
+  List<LineItemsModel> lineItems;
   double totalAmount;
   double shippingTotal;
   double itemTotalAmount;
@@ -30,12 +30,12 @@ class OrderDetailModel {
     orderStatus = json['status'] as String;
     orderDate = DateTime.parse(json['date_created'] as String);
     shipping = json['shipping'] != null
-        ? Shipping.fromJson(json['shipping'] as Map<String, dynamic>)
+        ? ShippingModel.fromJson(json['shipping'] as Map<String, dynamic>)
         : null;
     if (json['line_items'] != null) {
-      lineItems = <LineItems>[];
+      lineItems = <LineItemsModel>[];
       json['line_items'].forEach((element) {
-        lineItems.add(LineItems.fromJson(element as Map<String, dynamic>));
+        lineItems.add(LineItemsModel.fromJson(element as Map<String, dynamic>));
       });
       //TODO PEUT ETRE PLACER itemTotalAmount ICI
     }
@@ -50,8 +50,8 @@ class OrderDetailModel {
   }
 }
 
-class LineItems {
-  LineItems({
+class LineItemsModel {
+  LineItemsModel({
     this.productId,
     this.productName,
     this.quantity,
@@ -63,7 +63,7 @@ class LineItems {
   int quantity;
   int variationId;
   double totalAmount;
-  LineItems.fromJson(Map<String, dynamic> json) {
+  LineItemsModel.fromJson(Map<String, dynamic> json) {
     productId = json['product_id'] as int;
     productName = json['name'] as String;
     quantity = json['quantity'] as int;

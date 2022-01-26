@@ -49,7 +49,7 @@ class AuthProvider with ChangeNotifier {
       }
     } on Exception catch (e) {
       // TODO
-      print("customer_provider line 47 : $e");
+      debugPrint("customer_provider line 47 : $e");
     }
     return loginResponseModel;
   }
