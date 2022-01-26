@@ -1,5 +1,5 @@
-class WdpRules {
-  WdpRules({
+class WdpRulesModel {
+  WdpRulesModel({
     this.id,
     this.deleted,
     this.enabled,
@@ -27,19 +27,19 @@ class WdpRules {
   String type;
   String title;
   String priority;
-  WdpRulesOptions options;
-  WdpRulesAdditional additional;
+  WdpRulesOptionsModel options;
+  WdpRulesAdditionalModel additional;
   List conditions;
-  List<WdpRulesFilters> filters;
+  List<WdpRulesFiltersModel> filters;
   List limits;
-  WdpRulesProductAdjustments productAdjustments;
-  WdpRulesBulkAdjustments bulkAdjustments;
+  WdpRulesProductAdjustmentsModel productAdjustments;
+  WdpRulesBulkAdjustmentsModel bulkAdjustments;
   List<String> sortableBlocksPriority;
-  List<WdpRulesRoleDiscounts> roleDiscounts;
+  List<WdpRulesRoleDiscountsModel> roleDiscounts;
   List cartAdjustments;
-  WdpRulesGetProducts getProducts;
+  WdpRulesGetProductsModel getProducts;
 
-  WdpRules.fromJson(Map<String, dynamic> json) {
+  WdpRulesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as String;
     deleted = json['deleted'] as String;
     enabled = json['enabled'] as String;
@@ -50,13 +50,13 @@ class WdpRules {
 
     //options
     json['options'] != null
-        ? options =
-            WdpRulesOptions.fromJson(json['options'] as Map<String, dynamic>)
+        ? options = WdpRulesOptionsModel.fromJson(
+            json['options'] as Map<String, dynamic>)
         : null;
 
     //additional
     json['additional'] != null
-        ? additional = WdpRulesAdditional.fromJson(
+        ? additional = WdpRulesAdditionalModel.fromJson(
             json['additional'] as Map<String, dynamic>)
         : null;
 
@@ -65,9 +65,9 @@ class WdpRules {
 
     //filters
     if (json['filters'] != null) {
-      filters = <WdpRulesFilters>[];
+      filters = <WdpRulesFiltersModel>[];
       json['filters'].forEach((v) {
-        filters.add(WdpRulesFilters.fromJson(v as Map<String, dynamic>));
+        filters.add(WdpRulesFiltersModel.fromJson(v as Map<String, dynamic>));
       });
     }
 
@@ -76,13 +76,13 @@ class WdpRules {
 
     //product_adjustments
     json['product_adjustments'] != null
-        ? productAdjustments = WdpRulesProductAdjustments.fromJson(
+        ? productAdjustments = WdpRulesProductAdjustmentsModel.fromJson(
             json['product_adjustments'] as Map<String, dynamic>)
         : null;
 
     //bulk_adjustments
     json['bulk_adjustments'] != null
-        ? bulkAdjustments = WdpRulesBulkAdjustments.fromJson(
+        ? bulkAdjustments = WdpRulesBulkAdjustmentsModel.fromJson(
             json['bulk_adjustments'] as Map<String, dynamic>)
         : null;
 
@@ -92,10 +92,10 @@ class WdpRules {
 
     //role_discount
     if (json['role_discounts']['rows'] != null) {
-      roleDiscounts = <WdpRulesRoleDiscounts>[];
+      roleDiscounts = <WdpRulesRoleDiscountsModel>[];
       json['role_discounts']['rows'].forEach((v) {
-        roleDiscounts
-            .add(WdpRulesRoleDiscounts.fromJson(v as Map<String, dynamic>));
+        roleDiscounts.add(
+            WdpRulesRoleDiscountsModel.fromJson(v as Map<String, dynamic>));
       });
     }
 
@@ -104,29 +104,29 @@ class WdpRules {
 
     //get_products
     json['get_products'] != null
-        ? getProducts = WdpRulesGetProducts.fromJson(
+        ? getProducts = WdpRulesGetProductsModel.fromJson(
             json['get_products'] as Map<String, dynamic>)
         : null;
   }
 }
 
 // Advanced Dynamic Pricing - options
-class WdpRulesOptions {
-  WdpRulesOptions({
+class WdpRulesOptionsModel {
+  WdpRulesOptionsModel({
     this.repeat,
     this.applyTo,
   });
   String repeat;
   String applyTo;
-  WdpRulesOptions.fromJson(Map<String, dynamic> json) {
+  WdpRulesOptionsModel.fromJson(Map<String, dynamic> json) {
     repeat = json['repeat'] as String;
     applyTo = json['apply_to'] as String;
   }
 }
 
 // Advanced Dynamic Pricing - additional
-class WdpRulesAdditional {
-  WdpRulesAdditional({
+class WdpRulesAdditionalModel {
+  WdpRulesAdditionalModel({
     this.replaceName,
     this.sortableApplyMode,
     this.freeProductsReplaceName,
@@ -136,7 +136,7 @@ class WdpRulesAdditional {
   String sortableApplyMode;
   String freeProductsReplaceName;
   String conditionsRelationship;
-  WdpRulesAdditional.fromJson(Map<String, dynamic> json) {
+  WdpRulesAdditionalModel.fromJson(Map<String, dynamic> json) {
     replaceName = json['replace_name'] as String;
     sortableApplyMode = json['sortable_apply_mode'] as String;
     freeProductsReplaceName = json['free_products_replace_name'] as String;
@@ -145,8 +145,8 @@ class WdpRulesAdditional {
 }
 
 // Advanced Dynamic Pricing - filters
-class WdpRulesFilters {
-  WdpRulesFilters({
+class WdpRulesFiltersModel {
+  WdpRulesFiltersModel({
     this.qty,
     this.type,
     this.limitation,
@@ -158,7 +158,7 @@ class WdpRulesFilters {
   String limitation;
   String method;
   List<String> value;
-  WdpRulesFilters.fromJson(Map<String, dynamic> json) {
+  WdpRulesFiltersModel.fromJson(Map<String, dynamic> json) {
     qty = json['qty'] as String;
     type = json['type'] as String;
     limitation = json['limitation'] as String;
@@ -168,28 +168,28 @@ class WdpRulesFilters {
 }
 
 // Advanced Dynamic Pricing - product_adjustments
-class WdpRulesProductAdjustments {
-  WdpRulesProductAdjustments({
+class WdpRulesProductAdjustmentsModel {
+  WdpRulesProductAdjustmentsModel({
     this.split,
     this.maxDiscountSum,
     this.splitDiscountBy,
   });
-  WdpRulesProductAdjustmentsTotal total;
-  List<WdpRulesProductAdjustmentsSplit> split;
+  WdpRulesProductAdjustmentsTotalModel total;
+  List<WdpRulesProductAdjustmentsSplitModel> split;
   String maxDiscountSum;
   String splitDiscountBy;
-  WdpRulesProductAdjustments.fromJson(Map<String, dynamic> json) {
+  WdpRulesProductAdjustmentsModel.fromJson(Map<String, dynamic> json) {
     //total
     json['total'] != null
-        ? total = WdpRulesProductAdjustmentsTotal.fromJson(
+        ? total = WdpRulesProductAdjustmentsTotalModel.fromJson(
             json['total'] as Map<String, dynamic>)
         : null;
 
     //split
     if (json['split'] != null) {
-      split = <WdpRulesProductAdjustmentsSplit>[];
+      split = <WdpRulesProductAdjustmentsSplitModel>[];
       json['split'].forEach((v) {
-        split.add(WdpRulesProductAdjustmentsSplit.fromJson(
+        split.add(WdpRulesProductAdjustmentsSplitModel.fromJson(
             v as Map<String, dynamic>));
       });
     }
@@ -200,54 +200,55 @@ class WdpRulesProductAdjustments {
 }
 
 // Advanced Dynamic Pricing - product_adjustments -> total
-class WdpRulesProductAdjustmentsTotal {
-  WdpRulesProductAdjustmentsTotal({
+class WdpRulesProductAdjustmentsTotalModel {
+  WdpRulesProductAdjustmentsTotalModel({
     this.type,
     this.value,
   });
   String type;
   String value;
-  WdpRulesProductAdjustmentsTotal.fromJson(Map<String, dynamic> json) {
+  WdpRulesProductAdjustmentsTotalModel.fromJson(Map<String, dynamic> json) {
     type = json['type'] as String;
     value = json['value'] as String;
   }
 }
 
 // Advanced Dynamic Pricing - product_adjustments -> split
-class WdpRulesProductAdjustmentsSplit {
-  WdpRulesProductAdjustmentsSplit({
+class WdpRulesProductAdjustmentsSplitModel {
+  WdpRulesProductAdjustmentsSplitModel({
     this.type,
     this.value,
   });
   String type;
   String value;
-  WdpRulesProductAdjustmentsSplit.fromJson(Map<String, dynamic> json) {
+  WdpRulesProductAdjustmentsSplitModel.fromJson(Map<String, dynamic> json) {
     type = json['type'] as String;
     value = json['value'] as String;
   }
 }
 
 // Advanced Dynamic Pricing - bulk_adjustments
-class WdpRulesBulkAdjustments {
-  WdpRulesBulkAdjustments({
+class WdpRulesBulkAdjustmentsModel {
+  WdpRulesBulkAdjustmentsModel({
     this.type,
     this.tableMessage,
   });
   String type;
   String tableMessage;
-  WdpRulesBulkAdjustments.fromJson(Map<String, dynamic> json) {
+  WdpRulesBulkAdjustmentsModel.fromJson(Map<String, dynamic> json) {
     type = json['type'] as String;
     tableMessage = json['table_message'] as String;
   }
 }
 
 // Advanced Dynamic Pricing - role_discounts
-class WdpRulesRoleDiscounts {
-  WdpRulesRoleDiscounts({this.roles, this.discountType, this.discountValue});
+class WdpRulesRoleDiscountsModel {
+  WdpRulesRoleDiscountsModel(
+      {this.roles, this.discountType, this.discountValue});
   List<String> roles;
   String discountType;
   String discountValue;
-  WdpRulesRoleDiscounts.fromJson(Map<String, dynamic> json) {
+  WdpRulesRoleDiscountsModel.fromJson(Map<String, dynamic> json) {
     roles = json['roles'].cast<String>() as List<String>;
     discountType = json['discount_type'] as String;
     discountValue = json['discount_value'] as String;
@@ -255,14 +256,14 @@ class WdpRulesRoleDiscounts {
 }
 
 // Advanced Dynamic Pricing - get_products
-class WdpRulesGetProducts {
-  WdpRulesGetProducts({
+class WdpRulesGetProductsModel {
+  WdpRulesGetProductsModel({
     this.repeat,
     this.repeatSubtotal,
   });
   String repeat;
   String repeatSubtotal;
-  WdpRulesGetProducts.fromJson(Map<String, dynamic> json) {
+  WdpRulesGetProductsModel.fromJson(Map<String, dynamic> json) {
     repeat = json['repeat'] as String;
     repeatSubtotal = json['repeat_subtotal'] as String;
   }
@@ -272,21 +273,21 @@ class WdpRulesGetProducts {
  * le but est de simplicfier la matrice a en avoir juste l'id du produit et
  * les differents prix selon le rôle de l'utilisateur
  */
-class CartanaWdpRules {
-  CartanaWdpRules({this.id, this.cartanaWdpRulesRoles});
+class CartanaWdpRulesModel {
+  CartanaWdpRulesModel({this.id, this.cartanaWdpRulesRoles});
   String id;
-  List<CartanaWdpRulesRoles> cartanaWdpRulesRoles;
+  List<CartanaWdpRulesRolesModel> cartanaWdpRulesRoles;
 
-  CartanaWdpRules.fromJson(Map<String, dynamic> json) {
+  CartanaWdpRulesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as String;
   }
 }
 
-class CartanaWdpRulesRoles {
-  CartanaWdpRulesRoles({this.roles, this.discountValue});
+class CartanaWdpRulesRolesModel {
+  CartanaWdpRulesRolesModel({this.roles, this.discountValue});
   String roles;
   String discountValue;
-  CartanaWdpRulesRoles.fromJson(Map<String, dynamic> json) {
+  CartanaWdpRulesRolesModel.fromJson(Map<String, dynamic> json) {
     roles = json['roles'] as String;
     discountValue = json['discountValue'] as String;
   }

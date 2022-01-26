@@ -1,13 +1,14 @@
 class CartRequestModel {
   CartRequestModel({this.userId, this.products});
   int userId;
-  List<CartProducts> products;
+  List<CartProductsModel> products;
   CartRequestModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'] as int;
     if (json['products'] != null) {
-      products = <CartProducts>[];
+      products = <CartProductsModel>[];
       json['products'].forEach((product) {
-        products.add(CartProducts.fromJson(product as Map<String, dynamic>));
+        products
+            .add(CartProductsModel.fromJson(product as Map<String, dynamic>));
       });
     }
   }
@@ -21,8 +22,8 @@ class CartRequestModel {
   }
 }
 
-class CartProducts {
-  CartProducts({
+class CartProductsModel {
+  CartProductsModel({
     this.productId,
     this.variationId,
     this.quantity,
@@ -33,7 +34,7 @@ class CartProducts {
   int quantity;
   String productStep;
 
-  CartProducts.fromJson(Map<String, dynamic> json) {
+  CartProductsModel.fromJson(Map<String, dynamic> json) {
     productId = json['product_id'] as int;
     variationId = json['variation_id'] as int;
     quantity = json['quantity'] as int;

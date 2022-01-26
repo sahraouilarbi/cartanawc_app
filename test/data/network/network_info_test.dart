@@ -12,7 +12,7 @@ void main() {
     mockDataConnectionChecker = MockDataConnectionChecker();
     networkInfoImpl = NetworkInfoImpl(mockDataConnectionChecker);
   });
-  group(('isConnected'), () {
+  group('isConnected', () {
     test('doit retourner un appel a DataConnectionChecker.hasConnection', () {
       final tHasConnectionFuture = Future.value(true);
       when(mockDataConnectionChecker.hasConnection)

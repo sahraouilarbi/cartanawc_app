@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/domain/entities/cart_response_model.dart';
+import 'package:cartanawc_app/data/models/cart_response_model.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 class CartProduct extends StatefulWidget {
   const CartProduct({Key key, this.data}) : super(key: key);
-  final CartItem data;
+  final CartItemModel data;
 
   @override
   _CartProductState createState() => _CartProductState();

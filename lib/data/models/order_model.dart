@@ -1,4 +1,5 @@
-import 'customer_detail_model.dart';
+import 'package:cartanawc_app/data/models/billing_model.dart';
+import 'package:cartanawc_app/data/models/shipping_model.dart';
 
 class OrderModel {
   OrderModel({
@@ -22,12 +23,12 @@ class OrderModel {
   DateTime orderDateCreated;
   String orderTotal;
   int customerId;
-  Billing billing;
-  Shipping shipping;
+  BillingModel billing;
+  ShippingModel shipping;
   String paymentMethod;
   String paymentMethodTitle;
   String transactionId;
-  List<LineItems> lineItems;
+  List<LineItemsModel> lineItems;
   bool setPaid;
 
   OrderModel.fromJson(Map<String, dynamic> json) {
@@ -56,8 +57,8 @@ class OrderModel {
   }
 }
 
-class LineItems {
-  LineItems({
+class LineItemsModel {
+  LineItemsModel({
     this.productId,
     this.variationId,
     this.quantity,

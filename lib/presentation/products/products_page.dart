@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/data/api_service.dart';
-import 'package:cartanawc_app/domain/entities/product_model.dart';
+import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/presentation/common/base_page.dart';
 import 'package:cartanawc_app/model_views/providers/product_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/size_config.dart';
@@ -81,7 +81,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
     );
   }
 
-  Widget _buildList(List<Product> items, bool isLoadingMore) {
+  Widget _buildList(List<ProductModel> items, bool isLoadingMore) {
     return Column(
       children: [
         //_productFilter(),

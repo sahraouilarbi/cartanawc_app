@@ -41,5 +41,5 @@ class Utils {
 }
 
 void printDebugMessage(String message) {
-  print(message);
+  debugPrint(message);
 }

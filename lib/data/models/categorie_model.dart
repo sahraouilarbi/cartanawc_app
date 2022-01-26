@@ -13,7 +13,7 @@ class CategorieModel {
   int categorieParent;
   String categorieDisplay;
   String categorieDescription;
-  CategorieImage categorieImage;
+  CategorieImageModel categorieImage;
 
   CategorieModel.fromJson(Map<String, dynamic> json) {
     categorieId = json['id'] as int;
@@ -23,15 +23,15 @@ class CategorieModel {
     categorieDisplay = json['display'] as String;
     categorieDescription = json['description'] as String;
     categorieImage = json['image'] != null
-        ? CategorieImage.fromJson(json['image'] as Map<String, dynamic>)
+        ? CategorieImageModel.fromJson(json['image'] as Map<String, dynamic>)
         : null;
   }
 }
 
-class CategorieImage {
-  CategorieImage({this.src});
+class CategorieImageModel {
+  CategorieImageModel({this.src});
   String src;
-  CategorieImage.fromJson(Map<String, dynamic> json) {
+  CategorieImageModel.fromJson(Map<String, dynamic> json) {
     src = json['src'] as String;
   }
 }

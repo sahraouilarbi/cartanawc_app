@@ -1,13 +1,13 @@
 import 'package:cartanawc_app/data/http_service.dart';
-import 'package:cartanawc_app/domain/entities/cart_request_model.dart';
-import 'package:cartanawc_app/domain/entities/cart_response_model.dart';
-import 'package:cartanawc_app/domain/entities/categorie_model.dart';
-import 'package:cartanawc_app/domain/entities/customer_detail_model.dart';
-import 'package:cartanawc_app/domain/entities/login_model.dart';
-import 'package:cartanawc_app/domain/entities/order_detail_model.dart';
-import 'package:cartanawc_app/domain/entities/order_model.dart';
-import 'package:cartanawc_app/domain/entities/payment_method_model.dart';
-import 'package:cartanawc_app/domain/entities/product_model.dart';
+import 'package:cartanawc_app/data/models/cart_request_model.dart';
+import 'package:cartanawc_app/data/models/cart_response_model.dart';
+import 'package:cartanawc_app/data/models/categorie_model.dart';
+import 'package:cartanawc_app/data/models/customer_detail_model.dart';
+import 'package:cartanawc_app/data/models/login_model.dart';
+import 'package:cartanawc_app/data/models/order_detail_model.dart';
+import 'package:cartanawc_app/data/models/order_model.dart';
+import 'package:cartanawc_app/data/models/payment_method_model.dart';
+import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/data/api_config.dart';
 import 'package:cartanawc_app/presentation/common/utils.dart';
@@ -93,7 +93,7 @@ class APIService {
 
   //***************************************************************************
   //Produits
-  Future<List<Product>> getProducts({
+  Future<List<ProductModel>> getProducts({
     String status = 'publish',
     String strSearch,
     int pageSize,
@@ -114,7 +114,7 @@ class APIService {
       userRole = customerDetailModel.role;
     }
 
-    List<Product> products = <Product>[];
+    List<ProductModel> products = <ProductModel>[];
 
     try {
       final Map<String, dynamic> params = <String, dynamic>{};
@@ -153,11 +153,11 @@ class APIService {
       );
       if (response.statusCode == 200) {
         products = (response.data as List)
-            .map((i) => Product.fromJson(i as Map<String, dynamic>))
+            .map((i) => ProductModel.fromJson(i as Map<String, dynamic>))
             .where((element) => element.status == 'publish')
             .toList();
         if (userRole != null) {
-          for (final Product product in products) {
+          for (final ProductModel product in products) {
             switch (userRole) {
               case 'grossite':
                 product.price = product.acf.grossite;
@@ -300,15 +300,15 @@ class APIService {
     return responseModel;
   }
 
-  Future<List<PaymentGateways>> getPaymentGateways() async {
-    List<PaymentGateways> data = <PaymentGateways>[];
+  Future<List<PaymentGatewaysModel>> getPaymentGateways() async {
+    List<PaymentGatewaysModel> data = <PaymentGatewaysModel>[];
     try {
       final Response response =
           await httpService.getRequest(APIConfig().paymentGatewaysEndPoint);
       if (response.statusCode == 200) {
         data = (response.data as List)
             .map((element) =>
-                PaymentGateways.fromJson(element as Map<String, dynamic>))
+                PaymentGatewaysModel.fromJson(element as Map<String, dynamic>))
             .toList();
       }
     } on DioError catch (e) {

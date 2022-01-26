@@ -1,20 +1,22 @@
 import 'package:cartanawc_app/data/api_service.dart';
-import 'package:cartanawc_app/domain/entities/cart_request_model.dart';
-import 'package:cartanawc_app/domain/entities/cart_response_model.dart';
-import 'package:cartanawc_app/domain/entities/customer_detail_model.dart';
-import 'package:cartanawc_app/domain/entities/order_model.dart';
+import 'package:cartanawc_app/data/models/billing_model.dart';
+import 'package:cartanawc_app/data/models/cart_request_model.dart';
+import 'package:cartanawc_app/data/models/cart_response_model.dart';
+import 'package:cartanawc_app/data/models/customer_detail_model.dart';
+import 'package:cartanawc_app/data/models/order_model.dart';
+import 'package:cartanawc_app/data/models/shipping_model.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:flutter/material.dart';
 
 class CartProvider with ChangeNotifier {
   APIService _apiService;
-  List<CartItem> _cartItems;
+  List<CartItemModel> _cartItems;
   CustomerDetailModel _customerDetailModel;
   OrderModel _orderModel = OrderModel();
   bool _isOrderCreated = false;
 
   CustomerDetailModel get customerDetailModel => _customerDetailModel;
-  List<CartItem> get cartItems => _cartItems;
+  List<CartItemModel> get cartItems => _cartItems;
   double get totalRecords => _cartItems.length.toDouble();
   double get totalAmount => _cartItems != null
       ? _cartItems.map<double>((e) => e.lineSubtotal).reduce((a, b) => a + b)
@@ -26,24 +28,24 @@ class CartProvider with ChangeNotifier {
 
   CartProvider() {
     _apiService = APIService();
-    _cartItems = <CartItem>[];
+    _cartItems = <CartItemModel>[];
   }
 
   void resetStream() {
     _apiService = APIService();
-    _cartItems = <CartItem>[];
+    _cartItems = <CartItemModel>[];
   }
 
-  Future<void> addToCart(CartProducts product, Function onCallBack) async {
+  Future<void> addToCart(CartProductsModel product, Function onCallBack) async {
     final CartRequestModel requestModel = CartRequestModel();
 
-    requestModel.products = <CartProducts>[];
+    requestModel.products = <CartProductsModel>[];
 
     if (_cartItems == null) {
       await fetchCartItems();
     }
     for (final item in _cartItems) {
-      requestModel.products.add(CartProducts(
+      requestModel.products.add(CartProductsModel(
         productId: item.productId,
         quantity: item.qty,
         productStep: item.productStep,
@@ -65,7 +67,7 @@ class CartProvider with ChangeNotifier {
     requestModel.products.add(product);
     await _apiService.addToCart(requestModel).then((cartResponseModel) {
       if (cartResponseModel.data != null) {
-        _cartItems = <CartItem>[];
+        _cartItems = <CartItemModel>[];
         _cartItems.addAll(cartResponseModel.data);
       }
       onCallBack(cartResponseModel);
@@ -101,12 +103,12 @@ class CartProvider with ChangeNotifier {
 
   Future<void> updateCart(Function onCallBack) async {
     final CartRequestModel requestModel = CartRequestModel();
-    requestModel.products = <CartProducts>[];
+    requestModel.products = <CartProductsModel>[];
     if (_cartItems == null) resetStream();
 
     for (final element in _cartItems) {
       requestModel.products.add(
-        CartProducts(
+        CartProductsModel(
           productId: element.productId,
           quantity: element.qty,
           variationId: element.variationId,
@@ -116,7 +118,7 @@ class CartProvider with ChangeNotifier {
 
     await _apiService.addToCart(requestModel).then((cartResponseModel) {
       if (cartResponseModel.data != null) {
-        _cartItems = <CartItem>[];
+        _cartItems = <CartItemModel>[];
         _cartItems.addAll(cartResponseModel.data);
       }
       onCallBack(cartResponseModel);
@@ -146,8 +148,8 @@ class CartProvider with ChangeNotifier {
   }
 
   Future<void> createOrder() async {
-    _orderModel.shipping ??= Shipping();
-    _orderModel.billing ??= Billing();
+    _orderModel.shipping ??= ShippingModel();
+    _orderModel.billing ??= BillingModel();
 
     if (_customerDetailModel.shipping != null) {
       _orderModel.shipping = _customerDetailModel.shipping;
@@ -158,10 +160,10 @@ class CartProvider with ChangeNotifier {
     }
 
     if (orderModel.lineItems == null) {
-      _orderModel.lineItems = <LineItems>[];
+      _orderModel.lineItems = <LineItemsModel>[];
     }
     for (final element in _cartItems) {
-      _orderModel.lineItems.add(LineItems(
+      _orderModel.lineItems.add(LineItemsModel(
         productId: element.productId,
         quantity: element.qty,
         variationId: element.variationId,
