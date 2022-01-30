@@ -4,6 +4,7 @@ import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/progress_hud.dart';
 import 'package:cartanawc_app/presentation/common/checkpoint_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class CheckoutBasePage extends StatefulWidget {
@@ -64,7 +65,6 @@ class CheckoutBasePageState<T extends CheckoutBasePage> extends State<T> {
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
       centerTitle: true,
-      brightness: Brightness.dark,
       elevation: 0,
       automaticallyImplyLeading: showBackButton,
       title: const Text(
@@ -74,6 +74,7 @@ class CheckoutBasePageState<T extends CheckoutBasePage> extends State<T> {
         ),
       ),
       actions: const [],
+      systemOverlayStyle: SystemUiOverlayStyle.light,
     );
   }
 
