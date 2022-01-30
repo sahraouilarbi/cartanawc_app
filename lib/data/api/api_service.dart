@@ -9,21 +9,22 @@ import 'package:cartanawc_app/data/models/order_model.dart';
 import 'package:cartanawc_app/data/models/payment_method_model.dart';
 import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
-import 'package:cartanawc_app/data/api_config.dart';
+import 'package:cartanawc_app/data/api/api_endpoint.dart';
 import 'package:cartanawc_app/presentation/common/utils.dart';
 import 'package:dio/dio.dart';
 
 class APIService {
+  final APIEndPoint _apiEndPoint = APIEndPoint();
   HttpService httpService = HttpService();
 
   //***************************************************************************
   //Login
-  Future<LoginResponseModel> customerLogin(
-      String username, String password) async {
+  Future<LoginResponseModel> login(String username, String password) async {
     LoginResponseModel loginResponseModel;
+
     try {
       final Response response =
-          await httpService.postRequest(APIConfig().jwtTokenEndPoint, {
+          await httpService.postRequest(APIEndPoint.jwtAuthToken, {
         'username': username,
         'password': password,
       });
@@ -51,7 +52,7 @@ class APIService {
           userId = loginResponseModel.data.id;
         }
         final Response response =
-            await httpService.getRequest(APIConfig().customerEndPoint(userId));
+            await httpService.getRequest(_apiEndPoint.customer(userId));
         if (response.statusCode == 200) {
           customerDetailModel = CustomerDetailModel.fromJson(
               response.data as Map<String, dynamic>);
@@ -74,7 +75,7 @@ class APIService {
     List<CategorieModel> categories = <CategorieModel>[];
     try {
       final Response response = await httpService.getRequest(
-        APIConfig().categoriesEndPoint,
+        APIEndPoint.categories,
         queryParameters: {
           'hide_empty': false,
           'per_page': 100,
@@ -148,7 +149,7 @@ class APIService {
       }
 
       final Response response = await httpService.getRequest(
-        APIConfig().productsEndPoint,
+        APIEndPoint.products,
         queryParameters: params,
       );
       if (response.statusCode == 200) {
@@ -193,8 +194,8 @@ class APIService {
     }
     CartResponseModel responseModel;
     try {
-      final Response response = await httpService.postRequest(
-          APIConfig().addToCartEndPoint, model.toJson());
+      final Response response =
+          await httpService.postRequest(APIEndPoint.addToCart, model.toJson());
       if (response.statusCode == 200) {
         responseModel =
             CartResponseModel.fromJson(response.data as Map<String, dynamic>);
@@ -225,7 +226,7 @@ class APIService {
       }
 
       final Response response =
-          await httpService.getRequest(APIConfig().cartItemsEndPoint(_userId));
+          await httpService.getRequest(_apiEndPoint.cart(_userId));
       if (response.statusCode == 200) {
         responseModel =
             CartResponseModel.fromJson(response.data as Map<String, dynamic>);
@@ -247,8 +248,8 @@ class APIService {
     }
     bool isOrderCreated = false;
     try {
-      final Response response = await httpService.postRequest(
-          APIConfig().ordersEndPoint, model.toJson());
+      final Response response =
+          await httpService.postRequest(APIEndPoint.orders, model.toJson());
       if (response.statusCode == 201) {
         isOrderCreated = true;
       }
@@ -270,7 +271,7 @@ class APIService {
     List<OrderModel> data = <OrderModel>[];
     try {
       final Response response =
-          await httpService.getRequest(APIConfig().ordersEndPoint);
+          await httpService.getRequest(APIEndPoint.orders);
       if (response.statusCode == 200) {
         data = (response.data as List)
             .map((element) =>
@@ -289,7 +290,7 @@ class APIService {
     OrderDetailModel responseModel = OrderDetailModel();
     try {
       final Response response =
-          await httpService.getRequest(APIConfig().orderEndPoint(orderId));
+          await httpService.getRequest(_apiEndPoint.order(orderId));
       if (response.statusCode == 200) {
         responseModel =
             OrderDetailModel.fromJson(response.data as Map<String, dynamic>);
@@ -304,7 +305,7 @@ class APIService {
     List<PaymentGatewaysModel> data = <PaymentGatewaysModel>[];
     try {
       final Response response =
-          await httpService.getRequest(APIConfig().paymentGatewaysEndPoint);
+          await httpService.getRequest(APIEndPoint.paymentGateways);
       if (response.statusCode == 200) {
         data = (response.data as List)
             .map((element) =>

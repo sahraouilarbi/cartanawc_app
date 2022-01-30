@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/data/api_service.dart';
+import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/billing_model.dart';
 import 'package:cartanawc_app/data/models/cart_request_model.dart';
 import 'package:cartanawc_app/data/models/cart_response_model.dart';
