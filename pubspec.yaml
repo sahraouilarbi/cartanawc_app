@@ -21,13 +21,15 @@ dependencies:
   flutter_svg: ^0.19.0
   freezed: ^0.12.7
   geolocator: ^6.2.1
+  get_it: ^5.0.6
   get_version: ^0.2.2
   google_maps_flutter: ^1.2.0
   json_serializable: ^3.5.1
   overlay_support: ^1.0.5
+  pretty_dio_logger: ^1.1.1
   provider: ^5.0.0
-  shared_preferences: ^2.0.6
   rxdart: ^0.25.0
+  shared_preferences: ^2.0.6
 
 dev_dependencies:
   build_runner: ^1.10.0

@@ -36,6 +36,7 @@ class CartanaApp extends StatelessWidget {
 
         FutureProvider(
           create: (context) => GeoLocatorService().getLocation(),
+          initialData: null,
         ),
       ],
       child: OverlaySupport(

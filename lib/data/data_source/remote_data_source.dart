@@ -6,7 +6,8 @@ abstract class RemoteDataSource {
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  APIService _apiService;
+  RemoteDataSourceImpl(this._apiService);
+  final APIService _apiService;
   @override
   Future<LoginResponseModel> login(String username, String password) async {
     return await _apiService.login(username, password);

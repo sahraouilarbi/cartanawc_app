@@ -1,6 +1,10 @@
-import 'package:cartanawc_app/presentation/common/state_render/state_render.dart';
 import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
 import 'package:flutter/material.dart';
+
+abstract class FlowState {
+  StateRendererType getStateRendererType();
+  String getMessage();
+}
 
 class LoadingState extends FlowState {
   LoadingState({this.stateRendererType, this.message});
@@ -51,20 +55,22 @@ class EmptyState extends FlowState {
 }
 
 class SuccessState extends FlowState {
-  SuccessState(this.stateRendererType, this.message);
-  StateRendererType stateRendererType;
+  SuccessState(this.message);
   String message;
 
   @override
   String getMessage() => message;
 
   @override
-  StateRendererType getStateRendererType() => stateRendererType;
+  StateRendererType getStateRendererType() => StateRendererType.POPUP_SUCCESS;
 }
 
 extension FlowStateExtension on FlowState {
-  Widget getScreenWidget(BuildContext context, Widget contentScreenWidget,
-      Function retryActionFunction) {
+  Widget getScreenWidget(
+    BuildContext context,
+    Widget contentScreenWidget,
+    Function retryActionFunction,
+  ) {
     switch (runtimeType) {
       case LoadingState:
         {

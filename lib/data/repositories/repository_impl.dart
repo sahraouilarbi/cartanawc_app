@@ -7,8 +7,9 @@ import 'package:cartanawc_app/domain/repositories/repository.dart';
 import 'package:dartz/dartz.dart';
 
 class RepositoryImpl implements Repository {
-  RemoteDataSource _remoteDataSource;
-  NetworkInfo _networkInfo;
+  RepositoryImpl(this._remoteDataSource, this._networkInfo);
+  final RemoteDataSource _remoteDataSource;
+  final NetworkInfo _networkInfo;
 
   @override
   Future<Either<Failure, LoginResponseModel>> login(

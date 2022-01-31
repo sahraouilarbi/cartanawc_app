@@ -1,4 +1,6 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
+import 'package:cartanawc_app/presentation/login/login.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
@@ -43,7 +45,9 @@ class _MyAccountPageState extends State<MyAccountPage> {
             if (loginModel.data) {
               return _customerDetailsView(context);
             } else {
-              return LoginPage();
+              //return LoginPage();
+              initLoginModule();
+              return LoginView();
             }
           }
           return const Center(
