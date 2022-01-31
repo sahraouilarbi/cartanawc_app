@@ -9,15 +9,15 @@ class AppPreferences {
   }
 
   Future<String> getUserToken() async {
-    _sharedPreferences.getString('PREFS_KEY_TOKEN') ?? '';
+    return _sharedPreferences.getString('PREFS_KEY_TOKEN') ?? '';
   }
 
   Future<void> setIsUserLoggedIn() async {
     _sharedPreferences.setBool('PREFS_KEY_IS_USER_LOGGED_IN', true);
   }
 
-  Future<void> isUserLoggedIn() async {
-    _sharedPreferences.getBool('PREFS_KEY_IS_USER_LOGGED_IN') ?? false;
+  Future<bool> isUserLoggedIn() async {
+    return _sharedPreferences.getBool('PREFS_KEY_IS_USER_LOGGED_IN') ?? false;
   }
 
   Future<void> logout() async {

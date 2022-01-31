@@ -32,12 +32,13 @@ class StateRenderer extends StatelessWidget {
   Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.POPUP_LOADING_STATE:
-        return _getPopUpDialog(context, [const CircularProgressIndicator()]);
+        return _getPopUpDialog(
+            context, [const CircularProgressIndicatorWidget()]);
       case StateRendererType.POPUP_ERROR_STATE:
         return _getPopUpDialog(context, [
           _cancelIcon(),
           _getMessage(message),
-          _getRetryButton(context, 'Ok')
+          _getRetryButton(context, 'Réessayer')
         ]);
       case StateRendererType.POPUP_SUCCESS:
         return _getPopUpDialog(context, [
@@ -48,7 +49,7 @@ class StateRenderer extends StatelessWidget {
         ]);
       case StateRendererType.FULL_SCREEN_LOADING_STATE:
         return _getItemsInColumn([
-          const CircularProgressIndicator(),
+          const CircularProgressIndicatorWidget(),
           _getMessage(message),
         ]);
       case StateRendererType.FULL_SCREEN_ERROR_STATE:
@@ -142,7 +143,7 @@ class StateRenderer extends StatelessWidget {
     return const Icon(
       Icons.cancel,
       color: Colors.red,
-      size: AppSize.s30,
+      size: AppSize.s60,
     );
   }
 
@@ -150,7 +151,21 @@ class StateRenderer extends StatelessWidget {
     return const Icon(
       Icons.check_circle,
       color: Colors.green,
-      size: AppSize.s30,
+      size: AppSize.s60,
+    );
+  }
+}
+
+class CircularProgressIndicatorWidget extends StatelessWidget {
+  const CircularProgressIndicatorWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.all(AppPadding.p40),
+      child: CircularProgressIndicator(),
     );
   }
 }
