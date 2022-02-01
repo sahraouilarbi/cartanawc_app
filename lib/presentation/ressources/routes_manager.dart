@@ -22,11 +22,11 @@ class RouteGenerator {
         initLoginModule();
         return MaterialPageRoute(builder: (_) => LoginView());
       default:
-        return undefinedRoute();
+        return unDefinedRoute();
     }
   }
 
-  static Route<dynamic> undefinedRoute() {
+  static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
         appBar: AppBar(
