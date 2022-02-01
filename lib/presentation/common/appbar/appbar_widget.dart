@@ -25,7 +25,7 @@ AppBar buildAppBar(
     ),
     actions: const [
       AppBarActionShoppingIcon(),
-      AppBarActionConsumerIcon(),
+      AppBarActionLoginIcon(),
     ],
   );
 }

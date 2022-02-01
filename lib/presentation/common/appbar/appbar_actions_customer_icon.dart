@@ -4,8 +4,8 @@ import 'package:cartanawc_app/presentation/account/my_account_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AppBarActionConsumerIcon extends StatelessWidget {
-  const AppBarActionConsumerIcon({
+class AppBarActionLoginIcon extends StatelessWidget {
+  const AppBarActionLoginIcon({
     Key key,
   }) : super(key: key);
 
