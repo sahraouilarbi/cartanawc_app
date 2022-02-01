@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
 import 'package:cartanawc_app/presentation/login/login_viewmodel.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
@@ -16,14 +17,18 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final LoginViewModel _loginViewModel = instance<LoginViewModel>();
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
+
+  final TextEditingController _usernameController =
+      TextEditingController(text: 'cartana');
+  final TextEditingController _passwordController =
+      TextEditingController(text: 'cartana');
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
-  bool hidePassword = true;
-  bool isApiCallProcess = false;
-  String username;
-  String password;
+  bool _hidePassword = true;
+  //bool isApiCallProcess = false;
+  //String username;
+  //String password;
 
   void _bind() {
     _loginViewModel.start();
@@ -35,10 +40,10 @@ class _LoginViewState extends State<LoginView> {
       (token) {
         SchedulerBinding.instance.addPostFrameCallback(
           (_) {
-            // _appPreferences.setUserToken(token);
-            // _appPreferences.setIsUserLoggedIn();
+            _appPreferences.setUserToken(token.toString());
+            _appPreferences.setIsUserLoggedIn();
             resetModules();
-            Navigator.of(context).pushReplacement(Routes.homeRoute as Route);
+            Navigator.of(context).pushReplacementNamed(Routes.homeRoute);
           },
         );
       },
@@ -132,72 +137,80 @@ class _LoginViewState extends State<LoginView> {
 
   Widget formFieldUsername() {
     return StreamBuilder<bool>(
-        stream: _loginViewModel.outputIsUsernameValid,
-        builder: (context, snapshot) {
-          return TextFormField(
-            controller: _usernameController,
-            keyboardType: TextInputType.emailAddress,
-            autocorrect: false,
-            onSaved: (input) => username = input,
-            validator: (input) => !input.isNotEmpty
-                ? "Le nom d'utilisateur ne peut pas être vide"
-                : null,
-            decoration: InputDecoration(
-              hintText: "Nom d'utilisateur",
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black87,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorManager.greenAccent,
-                ),
+      stream: _loginViewModel.outputIsUsernameValid,
+      builder: (context, snapshot) {
+        return TextFormField(
+          controller: _usernameController,
+          keyboardType: TextInputType.emailAddress,
+          autocorrect: false,
+          //onSaved: (input) => username = input,
+          validator: (input) => !input.isNotEmpty
+              ? "Le nom d'utilisateur ne peut pas être vide"
+              : null,
+          decoration: InputDecoration(
+            hintText: "Nom d'utilisateur",
+            errorText: (snapshot.data ?? true)
+                ? null
+                : "Saisissez un nom d'utilisateur valide",
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.black87,
               ),
             ),
-          );
-        });
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ColorManager.greenAccent,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
 //*******************************************************************
   Widget formFieldPassword() {
     return StreamBuilder<bool>(
-        stream: _loginViewModel.outputIsPasswordValid,
-        builder: (context, snapshot) {
-          return TextFormField(
-            controller: _passwordController,
-            keyboardType: TextInputType.text,
-            onSaved: (input) => password = input,
-            validator: (input) =>
-                //TODO Password minimun
-                input.length < 5
-                    ? 'Mot de passe invalide. Doit contenir plus de 5 caractères'
-                    : null,
-            obscureText: hidePassword,
-            decoration: InputDecoration(
-              hintText: "Mot de passe",
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black87,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: ColorManager.greenAccent,
-                ),
-              ),
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    hidePassword = !hidePassword;
-                  });
-                },
-                icon: Icon(
-                    hidePassword ? Icons.visibility_off : Icons.visibility),
+      stream: _loginViewModel.outputIsPasswordValid,
+      builder: (context, snapshot) {
+        return TextFormField(
+          controller: _passwordController,
+          keyboardType: TextInputType.text,
+          //onSaved: (input) => password = input,
+          validator: (input) =>
+              //TODO Password minimun
+              input.length < 5
+                  ? 'Mot de passe invalide. Doit contenir plus de 5 caractères'
+                  : null,
+          obscureText: _hidePassword,
+          decoration: InputDecoration(
+            hintText: "Mot de passe",
+            errorText: (snapshot.data ?? true)
+                ? null
+                : "Le mot de passe ne doit pas être vide",
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.black87,
               ),
             ),
-          );
-        });
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: ColorManager.greenAccent,
+              ),
+            ),
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  _hidePassword = !_hidePassword;
+                });
+              },
+              icon:
+                  Icon(_hidePassword ? Icons.visibility_off : Icons.visibility),
+            ),
+          ),
+        );
+      },
+    );
   }
 
 //*******************************************************************
@@ -238,12 +251,12 @@ class _LoginViewState extends State<LoginView> {
   }
 
 //*******************************************************************
-  bool validateAndSave() {
+  /*bool validateAndSave() {
     final form = _globalKey.currentState;
     if (form.validate()) {
       form.save();
       return true;
     }
     return false;
-  }
+  }*/
 }

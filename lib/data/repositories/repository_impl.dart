@@ -2,6 +2,7 @@ import 'package:cartanawc_app/core/error/error_handler.dart';
 import 'package:cartanawc_app/core/error/failure.dart';
 import 'package:cartanawc_app/data/data_source/remote_data_source.dart';
 import 'package:cartanawc_app/data/models/login_model.dart';
+import 'package:cartanawc_app/data/models/login_request.dart';
 import 'package:cartanawc_app/data/network/network_info.dart';
 import 'package:cartanawc_app/domain/repositories/repository.dart';
 import 'package:dartz/dartz.dart';
@@ -13,17 +14,20 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, LoginResponseModel>> login(
-      String username, String password) async {
+      LoginRequest loginRequest) async {
     if (await _networkInfo.isConnected) {
       try {
-        final response = await _remoteDataSource.login(username, password);
+        final response = await _remoteDataSource.login(loginRequest);
+        print(response.toJson());
         if (response.statusCode == 200) {
-          return Right(LoginResponseModel.fromJson(
-              response.data as Map<String, dynamic>));
+          print('response statusCode : ${response.statusCode}');
+          return Right(LoginResponseModel.fromJson(response.data.toJson()));
         } else {
+          print('response message : ${response.message}');
           return Left(Failure(response.statusCode, response.message));
         }
       } catch (error) {
+        print('error message : ${error.toString()}');
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {

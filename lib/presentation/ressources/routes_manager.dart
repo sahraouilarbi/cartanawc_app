@@ -1,4 +1,5 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/presentation/home/home_view.dart';
 import 'package:cartanawc_app/presentation/login/login.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class RouteGenerator {
         return null;
         break;
       case Routes.homeRoute:
-        return null;
+        return MaterialPageRoute(builder: (_) => const HomePage());
         break;
       case Routes.loginRoute:
         initLoginModule();

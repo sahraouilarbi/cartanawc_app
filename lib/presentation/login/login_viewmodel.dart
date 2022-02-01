@@ -49,10 +49,8 @@ class LoginViewModel extends BaseViewModel
     (await _loginUsecase.execute(
             LoginUsecaseInput(loginObject.username, loginObject.password)))
         .fold(
-            (failure) => {
-                  inputState.add(ErrorState(
-                      StateRendererType.POPUP_ERROR_STATE, failure.message))
-                }, (data) {
+            (failure) => inputState.add(ErrorState(
+                StateRendererType.POPUP_ERROR_STATE, failure.message)), (data) {
       inputState.add(ContentState());
       isUserLoggedInSuccessfullyStreamController.add("abcdefgh");
     });

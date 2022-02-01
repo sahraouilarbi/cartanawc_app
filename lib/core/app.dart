@@ -41,7 +41,7 @@ class CartanaApp extends StatelessWidget {
       ],
       child: OverlaySupport(
         child: MaterialApp(
-          debugShowCheckedModeBanner: false,
+          //debugShowCheckedModeBanner: false,
           title: 'Cartana',
           theme: ThemeData(
             primaryColor: Colors.black,
