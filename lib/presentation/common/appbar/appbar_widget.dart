@@ -23,7 +23,7 @@ AppBar buildAppBar(
       tabs: tabs,
       hasTabs: hasTabs,
     ),
-    actions: const [
+    actions: [
       AppBarActionShoppingIcon(),
       AppBarActionLoginIcon(),
     ],

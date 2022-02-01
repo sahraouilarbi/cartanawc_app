@@ -41,6 +41,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
     return FutureBuilder(
         future: SharedService.isLoggedIn(),
         builder: (context, AsyncSnapshot<bool> loginModel) {
+          print("my_account_page");
           if (loginModel.hasData) {
             if (loginModel.data) {
               return _customerDetailsView(context);
