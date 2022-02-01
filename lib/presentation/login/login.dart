@@ -19,10 +19,8 @@ class _LoginViewState extends State<LoginView> {
   final LoginViewModel _loginViewModel = instance<LoginViewModel>();
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
-  final TextEditingController _usernameController =
-      TextEditingController(text: 'cartana');
-  final TextEditingController _passwordController =
-      TextEditingController(text: 'cartana');
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   bool _hidePassword = true;
@@ -42,6 +40,8 @@ class _LoginViewState extends State<LoginView> {
           (_) {
             _appPreferences.setUserToken(token.toString());
             _appPreferences.setIsUserLoggedIn();
+            _appPreferences.setUsername(_usernameController.text);
+            _appPreferences.setPassword(_passwordController.text);
             resetModules();
             Navigator.of(context).pushReplacementNamed(Routes.homeRoute);
           },

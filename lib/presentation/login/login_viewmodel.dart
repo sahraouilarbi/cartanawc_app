@@ -16,7 +16,7 @@ class LoginViewModel extends BaseViewModel
       StreamController<void>.broadcast();
   final StreamController isUserLoggedInSuccessfullyStreamController =
       StreamController<String>();
-  var loginObject = LoginObject('', '');
+  LoginObject loginObject = LoginObject('', '');
   final LoginUsecase _loginUsecase;
   LoginViewModel(this._loginUsecase);
 
@@ -57,14 +57,14 @@ class LoginViewModel extends BaseViewModel
   }
 
   @override
-  setUsername(String username) {
+  void setUsername(String username) {
     inputUsername.add(username);
     loginObject = loginObject.copyWith(username: username);
     _validate();
   }
 
   @override
-  setPassword(String password) {
+  void setPassword(String password) {
     inputPassword.add(password);
     loginObject = loginObject.copyWith(password: password);
     _validate();
@@ -82,7 +82,7 @@ class LoginViewModel extends BaseViewModel
   Stream<bool> get outputIsUsernameValid => _usernameStreamController.stream
       .map((username) => _isUsernameValid(username as String));
 
-  _validate() {
+  void _validate() {
     inputIsAllInputsValid.add(null);
   }
 
@@ -101,9 +101,9 @@ class LoginViewModel extends BaseViewModel
 }
 
 abstract class LoginViewModelInputs {
-  setUsername(String username);
-  setPassword(String password);
-  login();
+  void setUsername(String username);
+  void setPassword(String password);
+  void login();
   Sink get inputUsername;
   Sink get inputPassword;
   Sink inputIsAllInputsValid;
