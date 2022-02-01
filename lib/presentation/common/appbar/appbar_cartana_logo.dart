@@ -9,7 +9,10 @@ class AppBarCartanaLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(
-          left: AppPadding.p4, top: AppPadding.p4, right: AppPadding.p4),
+        left: AppPadding.p4,
+        top: AppPadding.p4,
+        right: AppPadding.p4,
+      ),
       width: AppSize.s44,
       height: AppSize.s44,
       decoration: const BoxDecoration(

@@ -1,5 +1,5 @@
 import 'package:cartanawc_app/presentation/common/appbar/appbar_actions_shopping_icon.dart';
-import 'package:cartanawc_app/presentation/common/appbar/appbar_actions_customer_icon.dart';
+import 'package:cartanawc_app/presentation/common/appbar/appbar_actions_login_icon.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_cartana_logo.dart';
 import 'package:cartanawc_app/presentation/common/white_and_green_top_bar.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
