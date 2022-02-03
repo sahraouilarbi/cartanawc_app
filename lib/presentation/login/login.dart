@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class LoginView extends StatefulWidget {
+  const LoginView({Key key}) : super(key: key);
+
   @override
   _LoginViewState createState() => _LoginViewState();
 }
@@ -81,6 +83,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _getContentWidget() {
     return SingleChildScrollView(
+      physics: const ScrollPhysics(),
       child: Container(
         color: Colors.black,
         padding: const EdgeInsets.only(

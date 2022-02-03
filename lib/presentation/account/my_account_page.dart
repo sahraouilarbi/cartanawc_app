@@ -6,7 +6,6 @@ import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/customer_detail_model.dart';
 import 'package:cartanawc_app/presentation/home/home_view.dart';
-import 'package:cartanawc_app/presentation/login/login_page.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/presentation/common/form_helper.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
@@ -41,14 +40,13 @@ class _MyAccountPageState extends State<MyAccountPage> {
     return FutureBuilder(
         future: SharedService.isLoggedIn(),
         builder: (context, AsyncSnapshot<bool> loginModel) {
-          print("my_account_page");
           if (loginModel.hasData) {
             if (loginModel.data) {
               return _customerDetailsView(context);
             } else {
               //return LoginPage();
               initLoginModule();
-              return LoginView();
+              return const LoginView();
             }
           }
           return const Center(

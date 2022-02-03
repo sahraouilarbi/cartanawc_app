@@ -4,6 +4,7 @@ import 'package:cartanawc_app/data/data_source/remote_data_source.dart';
 import 'package:cartanawc_app/data/models/login_model.dart';
 import 'package:cartanawc_app/data/models/login_request.dart';
 import 'package:cartanawc_app/data/network/network_info.dart';
+import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
 import 'package:cartanawc_app/domain/repositories/repository.dart';
 import 'package:dartz/dartz.dart';
 
@@ -12,22 +13,19 @@ class RepositoryImpl implements Repository {
   final RemoteDataSource _remoteDataSource;
   final NetworkInfo _networkInfo;
 
+  // Login repository implementation
   @override
   Future<Either<Failure, LoginResponseModel>> login(
       LoginRequest loginRequest) async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _remoteDataSource.login(loginRequest);
-        print(response.toJson());
         if (response.statusCode == 200) {
-          print('response statusCode : ${response.statusCode}');
           return Right(LoginResponseModel.fromJson(response.data.toJson()));
         } else {
-          print('response message : ${response.message}');
           return Left(Failure(response.statusCode, response.message));
         }
       } catch (error) {
-        print('error message : ${error.toString()}');
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {
@@ -35,9 +33,40 @@ class RepositoryImpl implements Repository {
     }
   }
 
+  // Forgot password repository implementation
   @override
-  Future forgotPassword() {
-    // TODO: implement forgotPassword
-    throw UnimplementedError();
+  Future<Either<Failure, String>> forgotPassword(String email) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _remoteDataSource.forgotPassword(email);
+        /*if (response.statusCode == 200) {
+          return Right();
+        } else {
+          return Left(Failure(response.statusCode ?? ResponseCode.DEFAULT,
+              response.mesage ?? ResponseMessage.DEFAULT));
+        }*/
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  // Get customer profile repository implementation
+  @override
+  Future<Either<Failure, CustomerDetailEntity>> getCustomerProfile() async {
+    if (await _networkInfo.isConnected) {
+      /*try {
+        final response = await _remoteDataSource.getCustomerProfile();
+        if (true) {
+          return Right(response);
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }*/
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
   }
 }
