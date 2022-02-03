@@ -28,6 +28,7 @@ class AppBarActionLoginIcon extends StatelessWidget {
                     ),
                   );
                 } else {
+                  initLoginModule();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
