@@ -5,6 +5,7 @@ class MyTextFormFieldWidget extends StatelessWidget {
   const MyTextFormFieldWidget({
     Key key,
     this.textEditingController,
+    this.initialValue,
     this.textInputType,
     this.hintText,
     this.labelText,
@@ -12,6 +13,7 @@ class MyTextFormFieldWidget extends StatelessWidget {
     this.suffixIcon,
   }) : super(key: key);
   final TextEditingController textEditingController;
+  final String initialValue;
   final TextInputType textInputType;
   final String hintText;
   final String labelText;
@@ -22,6 +24,7 @@ class MyTextFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: textEditingController,
+      initialValue: initialValue,
       keyboardType: textInputType,
       autocorrect: false,
       decoration: InputDecoration(

@@ -65,7 +65,7 @@ class _CustomerProfileState extends State<CustomerProfileView> {
 
   Widget _customerProfile() {
     return StreamBuilder<CustomerDetailEntity>(
-        stream: null,
+        stream: _customerProfileViewModel.outputCustomerProfileData,
         builder: (context, snapshot) {
           return SingleChildScrollView(
             physics: const ScrollPhysics(),
@@ -97,6 +97,7 @@ class _CustomerProfileState extends State<CustomerProfileView> {
                               // TextFormField Nom
                               MyTextFormFieldWidget(
                                 textEditingController: _nomController,
+                                initialValue: snapshot.data.firstName,
                                 textInputType: TextInputType.text,
                                 hintText: 'Nom de famille',
                                 labelText: 'Nom',

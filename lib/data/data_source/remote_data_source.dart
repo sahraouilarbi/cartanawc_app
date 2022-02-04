@@ -7,7 +7,7 @@ import 'package:cartanawc_app/data/models/login_request.dart';
 abstract class RemoteDataSource {
   Future<LoginResponseModel> login(LoginRequest loginRequest);
   Future<ForgotPasswordResponseModel> forgotPassword(String email);
-  Future<CustomerDetailModel> getCustomerProfile();
+  Future<CustomerDetailModel> getCustomerProfile(int userId);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -20,8 +20,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<CustomerDetailModel> getCustomerProfile() {
-    return _apiService.customerDetails();
+  Future<CustomerDetailModel> getCustomerProfile(int userId) {
+    return _apiService.getCustomerDetails(userId);
   }
 
   @override

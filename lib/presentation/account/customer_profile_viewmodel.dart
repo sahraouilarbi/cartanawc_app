@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
 import 'package:cartanawc_app/domain/usecase/customer_profile_usecase.dart';
 import 'package:cartanawc_app/presentation/base/base_viewmodel.dart';
@@ -19,12 +21,18 @@ class CustomerProfileViewModel extends BaseViewModel
     _getCustomerProfile();
   }
 
+  @override
+  void dispose() {
+    _customerProfileStreamController.close();
+    super.dispose();
+  }
+
   _getCustomerProfile() async {
     inputState.add(
       LoadingState(
           stateRendererType: StateRendererType.FULL_SCREEN_LOADING_STATE),
     );
-    /*(await _customerProfileUsecase.execute()).fold(
+    (await _customerProfileUsecase.execute(CustomerDetailEntity().id)).fold(
       (failure) {
         inputState.add(
           ErrorState(
@@ -46,15 +54,13 @@ class CustomerProfileViewModel extends BaseViewModel
           ),
         );
       },
-    );*/
+    );
   }
 
   @override
-  // TODO: implement inputCustomerProfileData
   Sink get inputCustomerProfileData => _customerProfileStreamController.sink;
 
   @override
-  // TODO: implement outputCustomerProfileData
   Stream<CustomerDetailEntity> get outputCustomerProfileData =>
       _customerProfileStreamController.stream.map((data) => data);
 }

@@ -55,16 +55,18 @@ class RepositoryImpl implements Repository {
 
   // Get customer profile repository implementation
   @override
-  Future<Either<Failure, CustomerDetailEntity>> getCustomerProfile() async {
+  Future<Either<Failure, CustomerDetailEntity>> getCustomerProfile(
+      int userId) async {
     if (await _networkInfo.isConnected) {
-      /*try {
-        final response = await _remoteDataSource.getCustomerProfile();
+      try {
+        final response = await _remoteDataSource.getCustomerProfile(userId);
+        print(response);
         if (true) {
-          return Right(response);
+          return null;
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);
-      }*/
+      }
     } else {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }

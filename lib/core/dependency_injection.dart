@@ -5,7 +5,9 @@ import 'package:cartanawc_app/data/network/dio_factory.dart';
 import 'package:cartanawc_app/data/network/network_info.dart';
 import 'package:cartanawc_app/data/repositories/repository_impl.dart';
 import 'package:cartanawc_app/domain/repositories/repository.dart';
+import 'package:cartanawc_app/domain/usecase/customer_profile_usecase.dart';
 import 'package:cartanawc_app/domain/usecase/login_usecase.dart';
+import 'package:cartanawc_app/presentation/account/customer_profile_viewmodel.dart';
 import 'package:cartanawc_app/presentation/login/login_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
@@ -51,6 +53,15 @@ void initLoginModule() {
   if (!GetIt.I.isRegistered<LoginUsecase>()) {
     instance.registerFactory<LoginUsecase>(() => LoginUsecase(instance()));
     instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+  }
+}
+
+void initCustomerProfileModule() {
+  if (!GetIt.I.isRegistered<CustomerProfileUsecase>()) {
+    instance.registerFactory<CustomerProfileUsecase>(
+        () => CustomerProfileUsecase(instance()));
+    instance.registerFactory<CustomerProfileViewModel>(
+        () => CustomerProfileViewModel(instance()));
   }
 }
 

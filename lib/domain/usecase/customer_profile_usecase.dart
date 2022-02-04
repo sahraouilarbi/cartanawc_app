@@ -4,12 +4,11 @@ import 'package:cartanawc_app/domain/repositories/repository.dart';
 import 'package:cartanawc_app/domain/usecase/base_usecase.dart';
 import 'package:dartz/dartz.dart';
 
-class CustomerProfileUsecase
-    implements BaseUsecase<void, CustomerDetailEntity> {
+class CustomerProfileUsecase implements BaseUsecase<int, CustomerDetailEntity> {
   CustomerProfileUsecase(this._repository);
   final Repository _repository;
   @override
-  Future<Either<Failure, CustomerDetailEntity>> execute(void input) async {
-    return await _repository.getCustomerProfile();
+  Future<Either<Failure, CustomerDetailEntity>> execute(int input) async {
+    return await _repository.getCustomerProfile(input);
   }
 }

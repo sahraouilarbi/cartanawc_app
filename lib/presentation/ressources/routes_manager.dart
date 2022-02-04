@@ -1,5 +1,6 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/presentation/account/customer_profile.dart';
+import 'package:cartanawc_app/presentation/account/customer_profile_edit.dart';
 import 'package:cartanawc_app/presentation/home/home_view.dart';
 import 'package:cartanawc_app/presentation/login/login.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ class Routes {
   static const String forgotPasswordRoute = '/forgotPassword';
   static const String homeRoute = '/home';
   static const String loginRoute = '/login';
+  static const String profileRoute = '/profile';
   static const String editProfileRoute = '/editProfile';
 }
 
@@ -23,8 +25,13 @@ class RouteGenerator {
       case Routes.loginRoute:
         initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginView());
-      case Routes.editProfileRoute:
+      case Routes.profileRoute:
+        initCustomerProfileModule();
         return MaterialPageRoute(builder: (_) => const CustomerProfileView());
+      case Routes.editProfileRoute:
+        return MaterialPageRoute(
+            builder: (_) => const CustomerProfileEditView());
+        break;
       default:
         return unDefinedRoute();
     }

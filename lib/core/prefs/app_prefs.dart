@@ -48,4 +48,14 @@ class AppPreferences {
   Future<void> logout() async {
     _sharedPreferences.remove('PREFS_KEY_IS_USER_LOGGED_IN');
   }
+
+  // Set user id
+  Future<void> setUserId(int userId) async {
+    _sharedPreferences.setInt('PREFS_KEY_USER_ID', userId);
+  }
+
+  //Get user id
+  Future<int> getUserId() async {
+    return _sharedPreferences.getInt('PREFS_KEY_USER_ID');
+  }
 }

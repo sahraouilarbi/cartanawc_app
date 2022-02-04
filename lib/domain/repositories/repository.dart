@@ -7,5 +7,5 @@ import 'package:dartz/dartz.dart';
 abstract class Repository {
   Future<Either<Failure, LoginResponseModel>> login(LoginRequest loginRequest);
   Future<Either<Failure, String>> forgotPassword(String email);
-  Future<Either<Failure, CustomerDetailEntity>> getCustomerProfile();
+  Future<Either<Failure, CustomerDetailEntity>> getCustomerProfile(int userId);
 }
