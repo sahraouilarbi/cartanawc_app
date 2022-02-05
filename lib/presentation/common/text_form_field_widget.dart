@@ -31,20 +31,16 @@ class MyTextFormFieldWidget extends StatelessWidget {
         hintText: hintText,
         labelText: labelText,
         errorText: errorText,
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.black87,
-          ),
+        border: const OutlineInputBorder(),
+        enabledBorder: const OutlineInputBorder(),
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorManager.greenAccent,
-          ),
+          borderSide: BorderSide(color: ColorManager.greenAccent),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorManager.red,
-          ),
+          borderSide: BorderSide(color: ColorManager.red),
         ),
         suffixIcon: suffixIcon,
       ),

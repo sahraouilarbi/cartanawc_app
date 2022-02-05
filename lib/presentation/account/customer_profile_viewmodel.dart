@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
 import 'package:cartanawc_app/domain/usecase/customer_profile_usecase.dart';
 import 'package:cartanawc_app/presentation/base/base_viewmodel.dart';

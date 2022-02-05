@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cartanawc_app/data/models/login_model.dart';
 import 'package:cartanawc_app/domain/usecase/login_usecase.dart';
 import 'package:cartanawc_app/presentation/base/base_viewmodel.dart';
 import 'package:cartanawc_app/presentation/common/freezed_data_class/freezed_data_classes.dart';
@@ -15,7 +16,7 @@ class LoginViewModel extends BaseViewModel
   final StreamController _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
   final StreamController isUserLoggedInSuccessfullyStreamController =
-      StreamController<String>();
+      StreamController<DataModel>();
   LoginObject loginObject = LoginObject('', '');
   final LoginUsecase _loginUsecase;
   LoginViewModel(this._loginUsecase);
@@ -49,10 +50,12 @@ class LoginViewModel extends BaseViewModel
     (await _loginUsecase.execute(
             LoginUsecaseInput(loginObject.username, loginObject.password)))
         .fold(
-            (failure) => inputState.add(ErrorState(
-                StateRendererType.POPUP_ERROR_STATE, failure.message)), (data) {
+            (failure) => inputState.add(
+                  ErrorState(
+                      StateRendererType.POPUP_ERROR_STATE, failure.message),
+                ), (data) {
       inputState.add(ContentState());
-      isUserLoggedInSuccessfullyStreamController.add("abcdefgh");
+      isUserLoggedInSuccessfullyStreamController.add(data.data);
     });
   }
 
