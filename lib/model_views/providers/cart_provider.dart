@@ -159,14 +159,14 @@ class CartProvider with ChangeNotifier {
       _orderModel.billing = _customerDetailModel.billing;
     }
 
-    if (orderModel.lineItems == null) {
-      _orderModel.lineItems = <LineItemsModel>[];
+    if (orderModel.line_items == null) {
+      _orderModel.line_items = <OrderLineItemsModel>[];
     }
     for (final element in _cartItems) {
-      _orderModel.lineItems.add(LineItemsModel(
-        productId: element.productId,
+      _orderModel.line_items.add(OrderLineItemsModel(
+        product_id: element.productId,
         quantity: element.qty,
-        variationId: element.variationId,
+        variation_id: element.variationId,
       ));
     }
     await _apiService.createOrder(orderModel).then((value) {

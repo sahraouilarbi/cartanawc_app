@@ -267,7 +267,7 @@ class APIService {
     final LoginResponseModel loginResponseModel =
         await SharedService.loginDetails();
     if (loginResponseModel.data != null) {
-      model.customerId = loginResponseModel.data.id;
+      model.customer_id = loginResponseModel.data.id;
     }
     bool isOrderCreated = false;
     try {
