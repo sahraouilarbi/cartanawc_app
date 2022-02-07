@@ -8,7 +8,10 @@ import 'package:provider/provider.dart';
  * Build Explorer Page from de site : www2.cartana.dz
  */
 Widget tabViewExplorer(BuildContext context) {
-  final currentPosition = Provider.of<Position>(context);
+  final Position currentPosition = Provider.of<Position>(context);
+
+  print(currentPosition);
+
   return (currentPosition != null)
       ? Stack(
           alignment: AlignmentDirectional.bottomCenter,
@@ -26,19 +29,24 @@ Widget tabViewExplorer(BuildContext context) {
               height: AppSize.s120,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 9,
+                  itemCount: 10,
                   itemBuilder: (context, index) {
                     return Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.greenAccent,
-                        borderRadius: BorderRadius.all(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(AppSize.s0_8),
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(AppSize.s5),
                         ),
                       ),
                       margin: const EdgeInsets.all(AppMargin.m5),
                       height: AppSize.s120,
                       width: AppSize.s80,
-                      child: Center(child: Text((index + 1).toString())),
+                      child: Center(
+                        child: Text(
+                          "Mag ${index + 1}",
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
                     );
                   }),
             ),
