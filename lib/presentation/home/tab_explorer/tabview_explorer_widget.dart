@@ -9,9 +9,6 @@ import 'package:provider/provider.dart';
  */
 Widget tabViewExplorer(BuildContext context) {
   final Position currentPosition = Provider.of<Position>(context);
-
-  print(currentPosition);
-
   return (currentPosition != null)
       ? Stack(
           alignment: AlignmentDirectional.bottomCenter,
