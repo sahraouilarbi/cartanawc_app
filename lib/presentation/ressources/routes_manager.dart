@@ -40,11 +40,15 @@ class RouteGenerator {
   static Route<dynamic> unDefinedRoute() {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
+        backgroundColor: Colors.black,
         appBar: AppBar(
           title: const Text('Page introuvalble'),
         ),
         body: const Center(
-          child: Text('404, Page introuvable'),
+          child: Text(
+            '404, Page introuvable',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );
