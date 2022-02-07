@@ -78,13 +78,13 @@ extension FlowStateExtension on FlowState {
             _showPopUp(
               context,
               getStateRendererType(),
-              getMessage(),
+              getMessage() ?? '',
             );
             return contentScreenWidget;
           } else {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
-              message: getMessage(),
+              message: getMessage() ?? '',
               retryActionFunction: retryActionFunction,
             );
           }
@@ -94,12 +94,16 @@ extension FlowStateExtension on FlowState {
         {
           _dismissDialog(context);
           if (getStateRendererType() == StateRendererType.POPUP_ERROR_STATE) {
-            _showPopUp(context, getStateRendererType(), getMessage());
+            _showPopUp(
+              context,
+              getStateRendererType(),
+              getMessage() ?? '',
+            );
             return contentScreenWidget;
           } else {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
-              message: getMessage(),
+              message: getMessage() ?? '',
               retryActionFunction: retryActionFunction,
             );
           }
@@ -114,7 +118,7 @@ extension FlowStateExtension on FlowState {
         {
           return StateRenderer(
             stateRendererType: getStateRendererType(),
-            message: getMessage(),
+            message: getMessage() ?? '',
             retryActionFunction: retryActionFunction,
           );
         }
@@ -124,8 +128,8 @@ extension FlowStateExtension on FlowState {
           _showPopUp(
             context,
             StateRendererType.POPUP_SUCCESS,
-            getMessage(),
-            title: 'Sucess',
+            getMessage() ?? '',
+            title: 'Success',
           );
           return contentScreenWidget;
         }
