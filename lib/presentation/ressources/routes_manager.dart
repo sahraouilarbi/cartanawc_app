@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/presentation/account/customer_profile.dart';
 import 'package:cartanawc_app/presentation/account/customer_profile_edit.dart';
-import 'package:cartanawc_app/presentation/home/home_view.dart';
+import 'package:cartanawc_app/presentation/accueil/accueil_view.dart';
 import 'package:cartanawc_app/presentation/login/login.dart';
 import 'package:flutter/material.dart';
 

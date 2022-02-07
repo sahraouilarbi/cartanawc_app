@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/presentation/home/home_view.dart';
+import 'package:cartanawc_app/presentation/accueil/accueil_view.dart';
 import 'package:flutter/material.dart';
 
 class DrawerAccueilTile extends StatelessWidget {

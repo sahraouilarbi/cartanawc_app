@@ -5,7 +5,7 @@ import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/customer_detail_model.dart';
-import 'package:cartanawc_app/presentation/home/home_view.dart';
+import 'package:cartanawc_app/presentation/accueil/accueil_view.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/presentation/common/form_helper.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';

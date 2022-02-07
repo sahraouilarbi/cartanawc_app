@@ -1,9 +1,9 @@
 import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/drawer/drawer_widget.dart';
-import 'package:cartanawc_app/presentation/home/tab_accueil/tabview_accueil_widget.dart';
-import 'package:cartanawc_app/presentation/home/tab_explorer/tabview_explorer_widget.dart';
-import 'package:cartanawc_app/presentation/home/tab_produits/tabview_wc_categories_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/tab_accueil/tabview_accueil_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/tab_explorer/tabview_explorer_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/tab_produits/tabview_wc_categories_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
