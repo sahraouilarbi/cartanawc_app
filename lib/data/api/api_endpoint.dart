@@ -36,7 +36,7 @@ class APIEndPoint {
 
   // WooCommerce One Order endpoint
   String order(int orderId) {
-    return '$orders/$orderId';
+    return '/wp-json/wc/v3/orders/$orderId';
   }
 
   // WooCommerce One Payment Gateway endpoint
