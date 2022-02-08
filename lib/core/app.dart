@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
+import 'package:cartanawc_app/_a_supprimer/auth_provider.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
 import 'package:cartanawc_app/model_views/providers/order_provider.dart';
@@ -30,14 +30,13 @@ class CartanaApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => OrderProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => AuthProvider(),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (context) => AuthProvider(),
+        // ),
 
         // ChangeNotifierProvider(
         //   create: (context) => CustomerProvider(),
         // ),
-
         FutureProvider(
           create: (context) => GeoLocatorService().getLocation(),
           initialData: null,
@@ -53,7 +52,8 @@ class CartanaApp extends StatelessWidget {
           ),
           //home: const HomePage(),
           onGenerateRoute: RouteGenerator.getRoute,
-          initialRoute: Routes.homeRoute,
+          //initialRoute: Routes.homeRoute,
+          initialRoute: Routes.tableauBordRoute,
         ),
       ),
     );
