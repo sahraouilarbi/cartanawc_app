@@ -9,7 +9,7 @@ import 'package:cartanawc_app/presentation/accueil/accueil_view.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/presentation/common/form_helper.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/drawer/drawer_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_anonymous_tile/drawer_anonymous_widget.dart';
 import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
 import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:flutter/material.dart';
@@ -145,7 +145,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                               Navigator.pop(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
+                                  builder: (context) => const AccueilPage(),
                                 ),
                               );
                             },

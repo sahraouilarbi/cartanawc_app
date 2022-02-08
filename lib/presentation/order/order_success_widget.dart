@@ -76,7 +76,7 @@ class _OrderSuccessWidgetState
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const HomePage(
+                          builder: (context) => const AccueilPage(
                             tabSelected: 0,
                           ),
                         ),

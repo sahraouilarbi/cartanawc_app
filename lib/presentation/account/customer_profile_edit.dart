@@ -5,7 +5,7 @@ import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.
 import 'package:cartanawc_app/presentation/common/text_form_field_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/drawer/drawer_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_anonymous_tile/drawer_anonymous_widget.dart';
 import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
 import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:flutter/material.dart';
@@ -39,8 +39,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
   @override
   void initState() {
-    _bind();
     super.initState();
+    _bind();
   }
 
   @override

@@ -16,10 +16,7 @@ class AppBarActionLoginIcon extends StatelessWidget {
             if (isUserLoggedIn) {
               Navigator.pushReplacementNamed(context, Routes.profileRoute);
             } else {
-              Navigator.pushReplacementNamed(
-                context,
-                Routes.loginRoute,
-              );
+              Navigator.pushReplacementNamed(context, Routes.loginRoute);
             }
           },
         );

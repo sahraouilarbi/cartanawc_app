@@ -1,8 +1,8 @@
 import 'package:cartanawc_app/presentation/accueil/accueil_view.dart';
 import 'package:flutter/material.dart';
 
-class DrawerExplorerTile extends StatelessWidget {
-  const DrawerExplorerTile({
+class DrawerProduitsTile extends StatelessWidget {
+  const DrawerProduitsTile({
     Key key,
   }) : super(key: key);
 
@@ -21,11 +21,11 @@ class DrawerExplorerTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const HomePage(tabSelected: 2),
+              builder: (context) => const AccueilPage(tabSelected: 0),
             ),
           );
         },
-        title: const Text('EXPLORER'),
+        title: const Text('PRODUITS'),
       ),
     );
   }

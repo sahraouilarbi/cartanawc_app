@@ -21,7 +21,7 @@ class DrawerAccueilTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const HomePage(tabSelected: 1),
+              builder: (context) => const AccueilPage(tabSelected: 1),
             ),
           );
         },
