@@ -1,3 +1,5 @@
+import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
+import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/drawer/drawer_anonymous_tile/drawer_anonymous_widget.dart';
@@ -5,6 +7,7 @@ import 'package:cartanawc_app/presentation/accueil/tab_accueil/tabview_accueil_w
 import 'package:cartanawc_app/presentation/accueil/tab_explorer/tabview_explorer_widget.dart';
 import 'package:cartanawc_app/presentation/accueil/tab_produits/tabview_wc_categories_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AccueilPage extends StatefulWidget {
   const AccueilPage({Key key, this.tabSelected}) : super(key: key);
@@ -24,9 +27,20 @@ class _AccueilPageState extends State<AccueilPage>
 
   TabController _tabController;
 
+  AuthProvider authProvider;
+
+  _bind() async {
+    authProvider = Provider.of<AuthProvider>(context, listen: false);
+    await authProvider.isUserLoggedIn();
+    if (authProvider.loggedInStatus == Status.loggedIn) {
+      Navigator.pushReplacementNamed(context, Routes.tableauBordRoute);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    _bind();
     _tabController = TabController(length: homePageTabs.length, vsync: this);
 
     widget.tabSelected == null

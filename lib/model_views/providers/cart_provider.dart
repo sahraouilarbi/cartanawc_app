@@ -79,9 +79,10 @@ class CartProvider with ChangeNotifier {
   }
 
   Future<void> fetchCartItems() async {
-    final bool isLoggedIn = await SharedService.isLoggedIn();
+    //final bool isLoggedIn = await SharedService.isLoggedIn();
+    final isUserLoggedIn = await _appPreferences.isUserLoggedIn();
     if (_cartItems == null) resetStream();
-    if (isLoggedIn) {
+    if (isUserLoggedIn) {
       await _apiService.getCartItem().then((cartResponseModel) {
         if (cartResponseModel.data != null) {
           _cartItems.clear();

@@ -145,8 +145,10 @@ class _CustomerProfileState extends State<CustomerProfileView> {
                       textButton(
                           onPressed: () {
                             _appPreferences.logout();
+                            //TODO Ajouter ce Future.delay au customerProfileViewModel
+                            Future.delayed(const Duration(milliseconds: 500));
                             Navigator.pushReplacementNamed(
-                                context, Routes.loginRoute);
+                                context, Routes.homeRoute);
                           },
                           text: 'Se déconnecter'),
                     ],

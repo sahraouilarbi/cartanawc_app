@@ -3,6 +3,12 @@
 Cartana Woocommerce application.
 
 # Changelog
+## 10.0.0+4
+### Améliorations
+- 
+### Bug Fixes
+- Corrections de certains bug
+
 ## 10.0.0+3
 ### Améliorations
 - 

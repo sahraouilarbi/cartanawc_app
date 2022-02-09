@@ -42,16 +42,14 @@ class CartanaApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        //debugShowCheckedModeBanner: false,
+        initialRoute: Routes.homeRoute,
+        onGenerateRoute: RouteGenerator.getRoute,
+        debugShowCheckedModeBanner: false,
         title: 'Cartana',
         theme: ThemeData(
           primaryColor: Colors.black,
           primarySwatch: Colors.blue,
         ),
-        //home: const HomePage(),
-        onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.homeRoute,
-        //initialRoute: Routes.tableauBordRoute,
       ),
     );
   }

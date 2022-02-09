@@ -46,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
             _appPreferences.setUsername(_usernameController.text);
             _appPreferences.setPassword(_passwordController.text);
             resetModules();
-            Navigator.of(context).pushReplacementNamed(Routes.homeRoute);
+            Navigator.of(context).pushReplacementNamed(Routes.tableauBordRoute);
           },
         );
       },
@@ -86,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
     return SingleChildScrollView(
       physics: const ScrollPhysics(),
       child: Container(
-        color: Colors.red,
+        color: Colors.black,
         padding: const EdgeInsets.only(
           left: AppPadding.p10,
           right: AppPadding.p10,
