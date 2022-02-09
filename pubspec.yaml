@@ -25,7 +25,6 @@ dependencies:
   get_version: ^0.2.2
   google_maps_flutter: ^1.2.0
   json_serializable: ^3.5.1
-  overlay_support: ^1.0.5
   pretty_dio_logger: ^1.1.1
   provider: ^5.0.0
   rxdart: ^0.25.0
