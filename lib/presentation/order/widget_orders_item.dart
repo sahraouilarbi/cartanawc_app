@@ -33,7 +33,7 @@ class WidgetOrderItem extends StatelessWidget {
                 ),
               ),
               Text(
-                '${orderModel.date_created}',
+                '${orderModel.dateCreated}',
                 style: const TextStyle(fontSize: 14.0),
               ),
             ],

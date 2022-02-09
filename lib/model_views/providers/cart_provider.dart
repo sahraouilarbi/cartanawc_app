@@ -7,7 +7,6 @@ import 'package:cartanawc_app/data/models/cart_response_model.dart';
 import 'package:cartanawc_app/data/models/customer_detail_model.dart';
 import 'package:cartanawc_app/data/models/order_model.dart';
 import 'package:cartanawc_app/data/models/shipping_model.dart';
-import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:flutter/material.dart';
 
 class CartProvider with ChangeNotifier {
@@ -165,14 +164,14 @@ class CartProvider with ChangeNotifier {
       _orderModel.billing = _customerDetailModel.billing;
     }
 
-    if (orderModel.line_items == null) {
-      _orderModel.line_items = <OrderLineItemsModel>[];
+    if (orderModel.lineItems == null) {
+      _orderModel.lineItems = <OrderLineItemsModel>[];
     }
     for (final element in _cartItems) {
-      _orderModel.line_items.add(OrderLineItemsModel(
-        product_id: element.productId,
+      _orderModel.lineItems.add(OrderLineItemsModel(
+        productId: element.productId,
         quantity: element.qty,
-        variation_id: element.variationId,
+        variationId: element.variationId,
       ));
     }
     await _apiService.createOrder(orderModel).then((value) {

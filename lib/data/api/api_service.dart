@@ -97,8 +97,8 @@ class APIService {
 
   //***************************************************************************
   // Categories
-  Future<List<CategorieModel>> getCategories() async {
-    List<CategorieModel> categories = <CategorieModel>[];
+  Future<List<CategoryModel>> getCategories() async {
+    List<CategoryModel> categories = <CategoryModel>[];
     try {
       final Response response = await httpService.getRequest(
         APIEndPoint.categories,
@@ -109,7 +109,7 @@ class APIService {
       );
       if (response.statusCode == 200) {
         categories = (response.data as List)
-            .map((i) => CategorieModel.fromJson(i as Map<String, dynamic>))
+            .map((i) => CategoryModel.fromJson(i as Map<String, dynamic>))
             .toList();
       }
     } on DioError catch (e) {
@@ -279,7 +279,7 @@ class APIService {
     // if (loginResponseModel.data != null) {
     //   model.customer_id = loginResponseModel.data.id;
     // }
-    model.customer_id = await _appPreferences.getUserId();
+    model.customerId = await _appPreferences.getUserId();
 
     bool isOrderCreated = false;
     try {

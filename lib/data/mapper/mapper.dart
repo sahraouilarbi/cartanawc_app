@@ -100,14 +100,14 @@ extension ShippingModelMapper on ShippingModel {
 // CartResponseModel
 extension CartResponseModelMapper on CartResponseModel {
   CartResponseEntity toDomain() {
-    final List<CartItemEntity> data_mapped =
+    final List<CartItemEntity> dataMapped =
         (data.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<CartItemEntity>()
             .toList();
 
     return CartResponseEntity(
       status: status,
-      data: data_mapped,
+      data: dataMapped,
     );
   }
 }
@@ -133,23 +133,23 @@ extension CartItemModelMapper on CartItemModel {
 }
 
 // CategorieModel
-extension CategorieModelMapper on CategorieModel {
-  CategorieEntity toDomain() {
-    return CategorieEntity(
-      categorieId,
-      categorieName,
-      categorieSlug,
-      categorieParent,
-      categorieDescription,
-      categorieImage.toDomain(),
+extension CategorieModelMapper on CategoryModel {
+  CategoryEntity toDomain() {
+    return CategoryEntity(
+      categoryId,
+      categoryName,
+      categorySlug,
+      categoryParent,
+      categoryDescription,
+      categoryImage.toDomain(),
     );
   }
 }
 
 // CategorieImageModel
-extension CategorieImageModelMapper on CategorieImageModel {
-  CategorieImageEntity toDomain() {
-    return CategorieImageEntity(
+extension CategorieImageModelMapper on CategoryImageModel {
+  CategoryImageEntity toDomain() {
+    return CategoryImageEntity(
       src: src,
     );
   }
@@ -170,77 +170,77 @@ extension CustomerModelMapper on CustomerModel {
 // OrderModel
 extension OrderModelMapper on OrderModel {
   OrderEntity toDomain() {
-    final List<OrderMetaDataEntity> meta_data_mapped =
-        (meta_data.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderMetaDataEntity> metaDataMapped =
+        (metaData.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderMetaDataEntity>()
             .toList();
-    final List<OrderLineItemsEntity> line_items_mapped =
-        (line_items.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderLineItemsEntity> lineItemsMapped =
+        (lineItems.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderLineItemsEntity>()
             .toList();
-    final List<OrderTaxLinesEntity> tax_lines_mapped =
-        (tax_lines.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderTaxLinesEntity> taxLinesMapped =
+        (taxLines.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderTaxLinesEntity>()
             .toList();
-    final List<OrderShippingLinesEntity> shipping_lines_mapped =
-        (shipping_lines.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderShippingLinesEntity> shippingLinesMapped =
+        (shippingLines.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderShippingLinesEntity>()
             .toList();
-    final List<OrderFeeLinesEntity> fee_lines_mapped =
-        (fee_lines.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderFeeLinesEntity> feeLinesMapped =
+        (feeLines.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderFeeLinesEntity>()
             .toList();
-    final List<OrderCouponLinesEntity> coupon_lines_mapped =
-        (coupon_lines.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderCouponLinesEntity> couponLinesMapped =
+        (couponLines.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderCouponLinesEntity>()
             .toList();
-    final List<OrderRefundsEntity> refunds_mapped =
+    final List<OrderRefundsEntity> refundsMapped =
         (refunds.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderRefundsEntity>()
             .toList();
     return OrderEntity(
       id: id,
-      parent_id: parent_id,
+      parentId: parentId,
       number: number,
-      order_key: order_key,
-      created_via: created_via,
+      orderKey: orderKey,
+      createdVia: createdVia,
       version: version,
       status: status,
       currency: currency,
-      date_created: date_created,
-      date_created_gmt: date_created_gmt,
-      date_modified: date_modified,
-      date_modified_gmt: date_modified_gmt,
-      discount_total: discount_total,
-      discount_tax: discount_tax,
-      shipping_total: shipping_total,
-      shipping_tax: shipping_tax,
-      cart_tax: cart_tax,
+      dateCreated: dateCreated,
+      dateCreatedGMT: dateCreatedGMT,
+      dateModified: dateModified,
+      dateModifiedGMT: dateModifiedGMT,
+      discountTotal: discountTotal,
+      discountTax: discountTax,
+      shippingTotal: shippingTotal,
+      shippingTax: shippingTax,
+      cartTax: cartTax,
       total: total,
-      total_tax: total_tax,
-      prices_include_tax: prices_include_tax,
-      customer_id: customer_id,
-      customer_ip_address: customer_ip_address,
-      customer_user_agent: customer_user_agent,
-      customer_note: customer_note,
+      totalTax: totalTax,
+      pricesIncludeTax: pricesIncludeTax,
+      customerId: customerId,
+      customerIpAddress: customerIpAddress,
+      customerUserAgent: customerUserAgent,
+      customerNote: customerNote,
       billing: billing.toDomain(),
       shipping: shipping.toDomain(),
-      payment_method: payment_method,
-      payment_method_title: payment_method_title,
-      transaction_id: transaction_id,
-      date_paid: date_paid,
-      date_paid_gmt: date_paid_gmt,
-      date_completed: date_completed,
-      date_completed_gmt: date_completed_gmt,
-      cart_hash: cart_hash,
-      meta_data: meta_data_mapped,
-      line_items: line_items_mapped,
-      tax_lines: tax_lines_mapped,
-      shipping_lines: shipping_lines_mapped,
-      fee_lines: fee_lines_mapped,
-      coupon_lines: coupon_lines_mapped,
-      refunds: refunds_mapped,
-      set_paid: set_paid,
+      paymentMethod: paymentMethod,
+      paymentMethodTitle: paymentMethodTitle,
+      transactionId: transactionId,
+      datePaid: datePaid,
+      datePaidGMT: datePaidGMT,
+      dateCompleted: dateCompleted,
+      dateCompletedGMT: dateCompletedGMT,
+      cartHash: cartHash,
+      metaData: metaDataMapped,
+      lineItems: lineItemsMapped,
+      taxLines: taxLinesMapped,
+      shippingLines: shippingLinesMapped,
+      feeLines: feeLinesMapped,
+      couponLines: couponLinesMapped,
+      refunds: refundsMapped,
+      setPaid: setPaid,
     );
   }
 }
@@ -259,29 +259,29 @@ extension OrderMetaDataModelMapper on OrderMetaDataModel {
 //OrderLineItemsModel
 extension OrderLineItemsModelMapper on OrderLineItemsModel {
   OrderLineItemsEntity toDomain() {
-    final List<OrderTaxesEntity> taxes_mapped =
+    final List<OrderTaxesEntity> taxesMapped =
         (taxes.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderTaxesEntity>()
             .toList();
 
-    final List<OrderMetaDataEntity> meta_data_mapped =
-        (meta_data.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderMetaDataEntity> metaDataMapped =
+        (metaData.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderMetaDataEntity>()
             .toList();
 
     return OrderLineItemsEntity(
       id: id,
       name: name,
-      product_id: product_id,
-      variation_id: variation_id,
+      productId: productId,
+      variationId: variationId,
       quantity: quantity,
-      tax_class: tax_class,
+      taxClass: taxClass,
       subtotal: subtotal,
-      subtotal_tax: subtotal_tax,
+      subtotalTax: subtotalTax,
       total: total,
-      total_tax: total_tax,
-      taxes: taxes_mapped,
-      meta_data: meta_data_mapped,
+      totalTax: totalTax,
+      taxes: taxesMapped,
+      metaData: metaDataMapped,
       sku: sku,
       price: price,
     );
@@ -291,20 +291,20 @@ extension OrderLineItemsModelMapper on OrderLineItemsModel {
 // OrderTaxLinesModel
 extension OrderTaxLinesModelMapper on OrderTaxLinesModel {
   OrderTaxLinesEntity toDomain() {
-    final List<OrderMetaDataEntity> meta_data_mapped =
-        (meta_data.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderMetaDataEntity> metaDataMapped =
+        (metaData.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderMetaDataEntity>()
             .toList();
 
     return OrderTaxLinesEntity(
       id: id,
-      rate_code: rate_code,
-      rate_id: rate_id,
+      rateCode: rateCode,
+      rateId: rateId,
       label: label,
       compound: compound,
-      tax_total: tax_total,
-      shipping_tax_total: shipping_tax_total,
-      meta_data: meta_data_mapped,
+      taxTotal: taxTotal,
+      shippingTaxTotal: shippingTaxTotal,
+      metaData: metaDataMapped,
     );
   }
 }
@@ -312,23 +312,23 @@ extension OrderTaxLinesModelMapper on OrderTaxLinesModel {
 // OrderShippingLinesModel
 extension OrderShippingLinesModelMapper on OrderShippingLinesModel {
   OrderShippingLinesEntity toDomain() {
-    final List<OrderTaxesEntity> taxes_mapped =
+    final List<OrderTaxesEntity> taxesMapped =
         (taxes.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderTaxesEntity>()
             .toList();
-    final List<OrderMetaDataEntity> meta_data_mapped =
-        (meta_data.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderMetaDataEntity> metaDataMapped =
+        (metaData.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderMetaDataEntity>()
             .toList();
 
     return OrderShippingLinesEntity(
       id: id,
-      method_title: method_title,
-      method_id: method_id,
+      methodTitle: methodTitle,
+      methodId: methodId,
       total: total,
-      total_tax: total_tax,
-      taxes: taxes_mapped,
-      meta_data: meta_data_mapped,
+      totalTax: totalTax,
+      taxes: taxesMapped,
+      metaData: metaDataMapped,
     );
   }
 }
@@ -336,28 +336,24 @@ extension OrderShippingLinesModelMapper on OrderShippingLinesModel {
 // OrderFeeLinesModel
 extension OrderFeeLinesModelMapper on OrderFeeLinesModel {
   OrderFeeLinesEntity toDomain() {
-    final List<OrderTaxesEntity> taxes_mapped =
+    final List<OrderTaxesEntity> taxesMapped =
         (taxes.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderTaxesEntity>()
             .toList();
-    final List<OrderMetaDataEntity> meta_data_mapped =
-        (meta_data.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderMetaDataEntity> metaDataMapped =
+        (metaData.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderMetaDataEntity>()
             .toList();
 
     return OrderFeeLinesEntity(
       id: id,
       name: name,
-      tax_class: tax_class,
-      tax_status: tax_status,
+      taxClass: taxClass,
+      taxStatus: taxStatus,
       total: total,
-      total_tax: total_tax,
-
-      //TODO List
-      taxes: taxes_mapped,
-
-      //TOD List
-      meta_data: meta_data_mapped,
+      totalTax: totalTax,
+      taxes: taxesMapped,
+      metaData: metaDataMapped,
     );
   }
 }
@@ -365,8 +361,8 @@ extension OrderFeeLinesModelMapper on OrderFeeLinesModel {
 // OrderCouponLinesModel
 extension OrderCouponLinesModelMapper on OrderCouponLinesModel {
   OrderCouponLinesEntity toDomain() {
-    final List<OrderMetaDataEntity> meta_data_mapped =
-        (meta_data.map((v) => v.toDomain()) ?? const Iterable.empty())
+    final List<OrderMetaDataEntity> metaDataMapped =
+        (metaData.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<OrderMetaDataEntity>()
             .toList();
 
@@ -374,8 +370,8 @@ extension OrderCouponLinesModelMapper on OrderCouponLinesModel {
       id: id,
       code: code,
       discount: discount,
-      discount_tax: discount_tax,
-      meta_data: meta_data_mapped,
+      discountTax: discountTax,
+      metaData: metaDataMapped,
     );
   }
 }

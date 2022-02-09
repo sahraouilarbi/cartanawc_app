@@ -33,7 +33,7 @@ class RepositoryImpl implements Repository {
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      return Left(DataSource.noInternetConnection.getFailure());
     }
   }
 
@@ -53,7 +53,7 @@ class RepositoryImpl implements Repository {
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      return Left(DataSource.noInternetConnection.getFailure());
     }
   }
 
@@ -72,7 +72,7 @@ class RepositoryImpl implements Repository {
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      return Left(DataSource.noInternetConnection.getFailure());
     }
   }
 }

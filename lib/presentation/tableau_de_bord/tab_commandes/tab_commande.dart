@@ -19,20 +19,20 @@ class _TabCommandeState extends State<TabCommande> {
     return FutureBuilder(
       future: widget._apiService.getCategories(),
       builder:
-          (BuildContext context, AsyncSnapshot<List<CategorieModel>> model) {
+          (BuildContext context, AsyncSnapshot<List<CategoryModel>> model) {
         if (model.hasData) {
-          final List<CategorieModel> categories = model.data
-              .where((category) => category.categorieParent != 0)
+          final List<CategoryModel> categories = model.data
+              .where((category) => category.categoryParent != 0)
               .toList();
           return ListView.separated(
               itemBuilder: (context, index) {
-                if (categories[index].categorieSlug != 'non-classe') {
+                if (categories[index].categorySlug != 'non-classe') {
                   return CustomExpansionTile(
                       //leading: const Icon(Icons.expand_more),
                       trailing: const Text(''),
-                      title: Text(categories[index].categorieName),
+                      title: Text(categories[index].categoryName),
                       children: [
-                        Text('${categories[index].categorieId}'),
+                        Text('${categories[index].categoryId}'),
                       ]);
                 }
                 return null;

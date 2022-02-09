@@ -61,11 +61,11 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
                             setState(() {
                               _paymentGatewaysID = value.toString();
                             });
-                            cartProvider.orderModel.payment_method =
+                            cartProvider.orderModel.paymentMethod =
                                 snapshot.data[index].id;
-                            cartProvider.orderModel.payment_method_title =
+                            cartProvider.orderModel.paymentMethodTitle =
                                 snapshot.data[index].title;
-                            cartProvider.orderModel.set_paid = false;
+                            cartProvider.orderModel.setPaid = false;
                           },
                           toggleable: true,
                           title: Text(

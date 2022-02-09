@@ -1,37 +1,37 @@
-class CategorieModel {
-  CategorieModel(
-    this.categorieId,
-    this.categorieName,
-    this.categorieSlug,
-    this.categorieParent,
-    this.categorieDescription,
-    this.categorieImage,
+class CategoryModel {
+  CategoryModel(
+    this.categoryId,
+    this.categoryName,
+    this.categorySlug,
+    this.categoryParent,
+    this.categoryDescription,
+    this.categoryImage,
   );
-  int categorieId;
-  String categorieName;
-  String categorieSlug;
-  int categorieParent;
-  String categorieDisplay;
-  String categorieDescription;
-  CategorieImageModel categorieImage;
+  int categoryId;
+  String categoryName;
+  String categorySlug;
+  int categoryParent;
+  String categoryDisplay;
+  String categoryDescription;
+  CategoryImageModel categoryImage;
 
-  CategorieModel.fromJson(Map<String, dynamic> json) {
-    categorieId = json['id'] as int;
-    categorieName = json['name'] as String;
-    categorieSlug = json['slug'] as String;
-    categorieParent = json['parent'] as int;
-    categorieDisplay = json['display'] as String;
-    categorieDescription = json['description'] as String;
-    categorieImage = json['image'] != null
-        ? CategorieImageModel.fromJson(json['image'] as Map<String, dynamic>)
+  CategoryModel.fromJson(Map<String, dynamic> json) {
+    categoryId = json['id'] as int;
+    categoryName = json['name'] as String;
+    categorySlug = json['slug'] as String;
+    categoryParent = json['parent'] as int;
+    categoryDisplay = json['display'] as String;
+    categoryDescription = json['description'] as String;
+    categoryImage = json['image'] != null
+        ? CategoryImageModel.fromJson(json['image'] as Map<String, dynamic>)
         : null;
   }
 }
 
-class CategorieImageModel {
-  CategorieImageModel({this.src});
+class CategoryImageModel {
+  CategoryImageModel({this.src});
   String src;
-  CategorieImageModel.fromJson(Map<String, dynamic> json) {
+  CategoryImageModel.fromJson(Map<String, dynamic> json) {
     src = json['src'] as String;
   }
 }

@@ -112,8 +112,9 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
       }
       PageStorage.of(context)?.writeState(context, _isExpanded);
     });
-    if (widget.onExpansionChanged != null)
+    if (widget.onExpansionChanged != null) {
       widget.onExpansionChanged(_isExpanded);
+    }
   }
 
   Widget _buildChildren(BuildContext context, Widget child) {
@@ -184,18 +185,19 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
     final bool shouldRemoveChildren = closed && !widget.maintainState;
 
     final Widget result = Offstage(
-        child: TickerMode(
-          child: Padding(
-            padding: widget.childrenPadding ?? EdgeInsets.zero,
-            child: Column(
-              crossAxisAlignment: widget.expandedCrossAxisAlignment ??
-                  CrossAxisAlignment.center,
-              children: widget.children,
-            ),
+      offstage: closed,
+      child: TickerMode(
+        enabled: !closed,
+        child: Padding(
+          padding: widget.childrenPadding ?? EdgeInsets.zero,
+          child: Column(
+            crossAxisAlignment:
+                widget.expandedCrossAxisAlignment ?? CrossAxisAlignment.center,
+            children: widget.children,
           ),
-          enabled: !closed,
         ),
-        offstage: closed);
+      ),
+    );
 
     return AnimatedBuilder(
       animation: _controller.view,

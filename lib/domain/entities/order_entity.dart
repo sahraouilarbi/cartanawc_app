@@ -4,89 +4,89 @@ import 'package:cartanawc_app/domain/entities/shipping_entity.dart';
 class OrderEntity {
   OrderEntity(
       {this.id,
-      this.parent_id,
+      this.parentId,
       this.number,
-      this.order_key,
-      this.created_via,
+      this.orderKey,
+      this.createdVia,
       this.version,
       this.status,
       this.currency,
-      this.date_created,
-      this.date_created_gmt,
-      this.date_modified,
-      this.date_modified_gmt,
-      this.discount_total,
-      this.discount_tax,
-      this.shipping_total,
-      this.shipping_tax,
-      this.cart_tax,
+      this.dateCreated,
+      this.dateCreatedGMT,
+      this.dateModified,
+      this.dateModifiedGMT,
+      this.discountTotal,
+      this.discountTax,
+      this.shippingTotal,
+      this.shippingTax,
+      this.cartTax,
       this.total,
-      this.total_tax,
-      this.prices_include_tax,
-      this.customer_id,
-      this.customer_ip_address,
-      this.customer_user_agent,
-      this.customer_note,
+      this.totalTax,
+      this.pricesIncludeTax,
+      this.customerId,
+      this.customerIpAddress,
+      this.customerUserAgent,
+      this.customerNote,
       this.billing,
       this.shipping,
-      this.payment_method,
-      this.payment_method_title,
-      this.transaction_id,
-      this.date_paid,
-      this.date_paid_gmt,
-      this.date_completed,
-      this.date_completed_gmt,
-      this.cart_hash,
-      this.meta_data,
-      this.line_items,
-      this.tax_lines,
-      this.shipping_lines,
-      this.fee_lines,
-      this.coupon_lines,
+      this.paymentMethod,
+      this.paymentMethodTitle,
+      this.transactionId,
+      this.datePaid,
+      this.datePaidGMT,
+      this.dateCompleted,
+      this.dateCompletedGMT,
+      this.cartHash,
+      this.metaData,
+      this.lineItems,
+      this.taxLines,
+      this.shippingLines,
+      this.feeLines,
+      this.couponLines,
       this.refunds,
-      this.set_paid});
+      this.setPaid});
   int id;
-  int parent_id;
+  int parentId;
   String number;
-  String order_key;
-  String created_via;
+  String orderKey;
+  String createdVia;
   String version;
   String status;
   String currency;
-  DateTime date_created;
-  DateTime date_created_gmt;
-  DateTime date_modified;
-  DateTime date_modified_gmt;
-  String discount_total;
-  String discount_tax;
-  String shipping_total;
-  String shipping_tax;
-  String cart_tax;
+  DateTime dateCreated;
+  DateTime dateCreatedGMT;
+  DateTime dateModified;
+  DateTime dateModifiedGMT;
+  String discountTotal;
+  String discountTax;
+  String shippingTotal;
+  String shippingTax;
+  String cartTax;
   String total;
-  String total_tax;
-  bool prices_include_tax;
-  int customer_id;
-  String customer_ip_address;
-  String customer_user_agent;
-  String customer_note;
+  String totalTax;
+  bool pricesIncludeTax;
+  int customerId;
+  String customerIpAddress;
+  String customerUserAgent;
+  String customerNote;
   BillingEntity billing;
   ShippingEntity shipping;
-  String payment_method;
-  String payment_method_title;
-  String transaction_id;
-  DateTime date_paid;
-  DateTime date_paid_gmt;
-  DateTime date_completed;
-  DateTime date_completed_gmt;
-  String cart_hash;
-  List<OrderMetaDataEntity> meta_data;
-  List<OrderLineItemsEntity> line_items;
-  List<OrderTaxLinesEntity> tax_lines;
-  List<OrderShippingLinesEntity> shipping_lines;
-  List<OrderFeeLinesEntity> fee_lines;
-  List<OrderCouponLinesEntity> coupon_lines;
+  String paymentMethod;
+  String paymentMethodTitle;
+  String transactionId;
+  DateTime datePaid;
+  DateTime datePaidGMT;
+  DateTime dateCompleted;
+  DateTime dateCompletedGMT;
+  String cartHash;
+  List<OrderMetaDataEntity> metaData;
+  List<OrderLineItemsEntity> lineItems;
+  List<OrderTaxLinesEntity> taxLines;
+  List<OrderShippingLinesEntity> shippingLines;
+  List<OrderFeeLinesEntity> feeLines;
+  List<OrderCouponLinesEntity> couponLines;
   List<OrderRefundsEntity> refunds;
-  bool set_paid;
+  bool setPaid;
 }
 
 class OrderMetaDataEntity {
@@ -104,32 +104,32 @@ class OrderLineItemsEntity {
   OrderLineItemsEntity({
     this.id,
     this.name,
-    this.product_id,
-    this.variation_id,
+    this.productId,
+    this.variationId,
     this.quantity,
-    this.tax_class,
+    this.taxClass,
     this.subtotal,
-    this.subtotal_tax,
+    this.subtotalTax,
     this.total,
-    this.total_tax,
+    this.totalTax,
     this.taxes,
-    this.meta_data,
+    this.metaData,
     this.sku,
     this.price,
   });
 
   int id;
   String name;
-  int product_id;
-  int variation_id;
+  int productId;
+  int variationId;
   int quantity;
-  String tax_class;
+  String taxClass;
   String subtotal;
-  String subtotal_tax;
+  String subtotalTax;
   String total;
-  String total_tax;
+  String totalTax;
   List<OrderTaxesEntity> taxes;
-  List<OrderMetaDataEntity> meta_data;
+  List<OrderMetaDataEntity> metaData;
   String sku;
   String price;
 }
@@ -137,64 +137,64 @@ class OrderLineItemsEntity {
 class OrderTaxLinesEntity {
   OrderTaxLinesEntity({
     this.id,
-    this.rate_code,
-    this.rate_id,
+    this.rateCode,
+    this.rateId,
     this.label,
     this.compound,
-    this.tax_total,
-    this.shipping_tax_total,
-    this.meta_data,
+    this.taxTotal,
+    this.shippingTaxTotal,
+    this.metaData,
   });
 
   int id;
-  String rate_code;
-  String rate_id;
+  String rateCode;
+  String rateId;
   String label;
   bool compound;
-  String tax_total;
-  String shipping_tax_total;
-  List<OrderMetaDataEntity> meta_data;
+  String taxTotal;
+  String shippingTaxTotal;
+  List<OrderMetaDataEntity> metaData;
 }
 
 class OrderShippingLinesEntity {
   OrderShippingLinesEntity({
     this.id,
-    this.method_title,
-    this.method_id,
+    this.methodTitle,
+    this.methodId,
     this.total,
-    this.total_tax,
+    this.totalTax,
     this.taxes,
-    this.meta_data,
+    this.metaData,
   });
 
   int id;
-  String method_title;
-  String method_id;
+  String methodTitle;
+  String methodId;
   String total;
-  String total_tax;
+  String totalTax;
   List<OrderTaxesEntity> taxes;
-  List<OrderMetaDataEntity> meta_data;
+  List<OrderMetaDataEntity> metaData;
 }
 
 class OrderFeeLinesEntity {
   OrderFeeLinesEntity({
     this.id,
     this.name,
-    this.tax_class,
-    this.tax_status,
+    this.taxClass,
+    this.taxStatus,
     this.total,
-    this.total_tax,
+    this.totalTax,
     this.taxes,
-    this.meta_data,
+    this.metaData,
   });
   int id;
   String name;
-  String tax_class;
-  String tax_status;
+  String taxClass;
+  String taxStatus;
   String total;
-  String total_tax;
+  String totalTax;
   List<OrderTaxesEntity> taxes;
-  List<OrderMetaDataEntity> meta_data;
+  List<OrderMetaDataEntity> metaData;
 }
 
 class OrderCouponLinesEntity {
@@ -202,14 +202,14 @@ class OrderCouponLinesEntity {
     this.id,
     this.code,
     this.discount,
-    this.discount_tax,
-    this.meta_data,
+    this.discountTax,
+    this.metaData,
   });
   int id;
   String code;
   String discount;
-  String discount_tax;
-  List<OrderMetaDataEntity> meta_data;
+  String discountTax;
+  List<OrderMetaDataEntity> metaData;
 }
 
 class OrderRefundsEntity {
@@ -226,65 +226,20 @@ class OrderRefundsEntity {
 class OrderTaxesEntity {
   OrderTaxesEntity({
     this.id,
-    this.rate_code,
-    this.rate_id,
+    this.rateCode,
+    this.rateId,
     this.label,
     this.compound,
-    this.tax_total,
-    this.shipping_tax_total,
-    this.meta_data,
+    this.taxTotal,
+    this.shippingTaxTotal,
+    this.metaData,
   });
   int id;
-  String rate_code;
-  String rate_id;
+  String rateCode;
+  String rateId;
   String label;
   bool compound;
-  String tax_total;
-  String shipping_tax_total;
-  List<OrderMetaDataEntity> meta_data;
+  String taxTotal;
+  String shippingTaxTotal;
+  List<OrderMetaDataEntity> metaData;
 }
-/*
-class OrderEntity {
-  OrderEntity({
-    this.customerId,
-    this.paymentMethod,
-    this.paymentMethodTitle,
-    this.setPaid,
-    this.transactionId,
-    this.lineItems,
-    this.orderId,
-    this.orderNumber,
-    this.orderKey,
-    this.status,
-    this.orderDateCreated,
-    this.orderTotal,
-  });
-  int orderId;
-  String orderNumber;
-  String orderKey;
-  String status;
-  DateTime orderDateCreated;
-  String orderTotal;
-  int customerId;
-  BillingEntity billing;
-  ShippingEntity shipping;
-  String paymentMethod;
-  String paymentMethodTitle;
-  String transactionId;
-  List<LineItemsEntity> lineItems;
-  bool setPaid;
-}
-
-class LineItemsEntity {
-  LineItemsEntity({
-    this.productId,
-    this.variationId,
-    this.quantity,
-    this.subtotal,
-  });
-  int productId;
-  int variationId;
-  int quantity;
-  String subtotal;
-}
-*/

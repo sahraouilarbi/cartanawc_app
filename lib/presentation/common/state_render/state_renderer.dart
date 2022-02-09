@@ -2,13 +2,13 @@ import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
 enum StateRendererType {
-  POPUP_LOADING_STATE,
-  POPUP_ERROR_STATE,
-  POPUP_SUCCESS,
-  FULL_SCREEN_LOADING_STATE,
-  FULL_SCREEN_ERROR_STATE,
-  CONTENT_SCREEN_STATE,
-  EMPTY_SCREEN_STATE
+  popupLoadingState,
+  popupErrorState,
+  popupSuccess,
+  fullScreenLoadingState,
+  fullScreenErrorState,
+  contentScreenState,
+  emptyScreenState
 }
 
 class StateRenderer extends StatelessWidget {
@@ -31,36 +31,36 @@ class StateRenderer extends StatelessWidget {
 
   Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
-      case StateRendererType.POPUP_LOADING_STATE:
+      case StateRendererType.popupLoadingState:
         return _getPopUpDialog(
             context, [const CircularProgressIndicatorWidget()]);
-      case StateRendererType.POPUP_ERROR_STATE:
+      case StateRendererType.popupErrorState:
         return _getPopUpDialog(context, [
           _cancelIcon(),
           _getMessage(message),
           _getRetryButton(context, 'Réessayer')
         ]);
-      case StateRendererType.POPUP_SUCCESS:
+      case StateRendererType.popupSuccess:
         return _getPopUpDialog(context, [
           _validIcon(),
           _getMessage(title),
           _getMessage(message),
           _getRetryButton(context, 'Ok'),
         ]);
-      case StateRendererType.FULL_SCREEN_LOADING_STATE:
+      case StateRendererType.fullScreenLoadingState:
         return _getItemsInColumn([
           const CircularProgressIndicatorWidget(),
           _getMessage(message),
         ]);
-      case StateRendererType.FULL_SCREEN_ERROR_STATE:
+      case StateRendererType.fullScreenErrorState:
         return _getItemsInColumn([
           _cancelIcon(),
           _getMessage(message),
           _getRetryButton(context, 'Réessayer'),
         ]);
-      case StateRendererType.CONTENT_SCREEN_STATE:
+      case StateRendererType.contentScreenState:
         return Container();
-      case StateRendererType.EMPTY_SCREEN_STATE:
+      case StateRendererType.emptyScreenState:
         return _getItemsInColumn([_getMessage(message)]);
       default:
         return Container();
@@ -116,8 +116,7 @@ class StateRenderer extends StatelessWidget {
           width: AppSize.s170,
           child: ElevatedButton(
             onPressed: () {
-              if (stateRendererType ==
-                  StateRendererType.FULL_SCREEN_ERROR_STATE) {
+              if (stateRendererType == StateRendererType.fullScreenErrorState) {
                 retryActionFunction.call();
               } else {
                 Navigator.of(context).pop();

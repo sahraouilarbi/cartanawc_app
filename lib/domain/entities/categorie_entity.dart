@@ -1,22 +1,22 @@
-class CategorieEntity {
-  CategorieEntity(
-    this.categorieId,
-    this.categorieName,
-    this.categorieSlug,
-    this.categorieParent,
-    this.categorieDescription,
-    this.categorieImage,
+class CategoryEntity {
+  CategoryEntity(
+    this.categoryId,
+    this.categoryName,
+    this.categorySlug,
+    this.categoryParent,
+    this.categoryDescription,
+    this.categoryImage,
   );
-  int categorieId;
-  String categorieName;
-  String categorieSlug;
-  int categorieParent;
-  String categorieDisplay;
-  String categorieDescription;
-  CategorieImageEntity categorieImage;
+  int categoryId;
+  String categoryName;
+  String categorySlug;
+  int categoryParent;
+  String categoryDisplay;
+  String categoryDescription;
+  CategoryImageEntity categoryImage;
 }
 
-class CategorieImageEntity {
-  CategorieImageEntity({this.src});
+class CategoryImageEntity {
+  CategoryImageEntity({this.src});
   String src;
 }

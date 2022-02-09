@@ -20,7 +20,7 @@ class BuildDrawerCustomerWidget extends StatelessWidget {
             decoration: const BoxDecoration(color: Colors.black),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
+              children: const [
                 CircleAvatar(
                   radius: AppSize.s20,
                   backgroundColor: Colors.white,
@@ -32,7 +32,7 @@ class BuildDrawerCustomerWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Text(
+                Text(
                   'ESPACE CLIENT',
                   style: TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
@@ -48,7 +48,6 @@ class BuildDrawerCustomerWidget extends StatelessWidget {
             ontap: () {
               Navigator.pushReplacementNamed(
                   context, Routes.tableauBordCommandeRoute);
-              print('commande');
             },
           ),
           DrawerCustomerTile(
@@ -56,7 +55,6 @@ class BuildDrawerCustomerWidget extends StatelessWidget {
             ontap: () {
               Navigator.pushReplacementNamed(
                   context, Routes.tableauBordPaiementRoute);
-              print('paiement');
             },
           ),
           DrawerCustomerTile(
@@ -64,14 +62,12 @@ class BuildDrawerCustomerWidget extends StatelessWidget {
             ontap: () {
               Navigator.pushReplacementNamed(
                   context, Routes.tableauBordHistoriqueRoute);
-              print('historique');
             },
           ),
           DrawerCustomerTile(
             title: 'PROFIL',
             ontap: () {
               Navigator.pushReplacementNamed(context, Routes.profileRoute);
-              print('profil');
             },
           ),
           DrawerCustomerTile(

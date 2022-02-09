@@ -27,7 +27,7 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  AppPreferences _appPreferences = instance<AppPreferences>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   bool isUserLoggedIn;
 
   int qty = 0;

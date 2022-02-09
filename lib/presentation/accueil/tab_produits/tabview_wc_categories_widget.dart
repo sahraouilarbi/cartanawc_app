@@ -10,27 +10,26 @@ Widget tabViewWCCategories() {
   final APIService apiService = APIService();
   return FutureBuilder(
     future: apiService.getCategories(),
-    builder: (BuildContext context, AsyncSnapshot<List<CategorieModel>> model) {
+    builder: (BuildContext context, AsyncSnapshot<List<CategoryModel>> model) {
       if (model.hasData) {
-        final List<CategorieModel> categories = model.data
-            .where((element) => element.categorieParent == 0)
-            .toList();
+        final List<CategoryModel> categories =
+            model.data.where((element) => element.categoryParent == 0).toList();
         return ListView.separated(
             itemBuilder: (context, index) {
               // Exclure la catégorie "Non-classé" de Woocommerce
-              if (categories[index].categorieSlug != 'non-classe') {
+              if (categories[index].categorySlug != 'non-classe') {
                 return ListTile(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => ProductPage(
-                            categorieId: categories[index].categorieId),
+                            categorieId: categories[index].categoryId),
                       ),
                     );
                   },
                   leading: const Icon(Icons.keyboard_arrow_right),
-                  title: Text(categories[index].categorieName),
+                  title: Text(categories[index].categoryName),
                 );
               }
               return null;

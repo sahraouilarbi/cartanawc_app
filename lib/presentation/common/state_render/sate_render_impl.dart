@@ -38,7 +38,7 @@ class ContentState extends FlowState {
 
   @override
   StateRendererType getStateRendererType() =>
-      StateRendererType.CONTENT_SCREEN_STATE;
+      StateRendererType.contentScreenState;
 }
 
 class EmptyState extends FlowState {
@@ -51,7 +51,7 @@ class EmptyState extends FlowState {
 
   @override
   StateRendererType getStateRendererType() =>
-      StateRendererType.EMPTY_SCREEN_STATE;
+      StateRendererType.emptyScreenState;
 }
 
 class SuccessState extends FlowState {
@@ -62,7 +62,7 @@ class SuccessState extends FlowState {
   String getMessage() => message;
 
   @override
-  StateRendererType getStateRendererType() => StateRendererType.POPUP_SUCCESS;
+  StateRendererType getStateRendererType() => StateRendererType.popupSuccess;
 }
 
 extension FlowStateExtension on FlowState {
@@ -74,7 +74,7 @@ extension FlowStateExtension on FlowState {
     switch (runtimeType) {
       case LoadingState:
         {
-          if (getStateRendererType() == StateRendererType.POPUP_LOADING_STATE) {
+          if (getStateRendererType() == StateRendererType.popupLoadingState) {
             _showPopUp(
               context,
               getStateRendererType(),
@@ -93,7 +93,7 @@ extension FlowStateExtension on FlowState {
       case ErrorState:
         {
           _dismissDialog(context);
-          if (getStateRendererType() == StateRendererType.POPUP_ERROR_STATE) {
+          if (getStateRendererType() == StateRendererType.popupErrorState) {
             _showPopUp(
               context,
               getStateRendererType(),
@@ -127,7 +127,7 @@ extension FlowStateExtension on FlowState {
           _dismissDialog(context);
           _showPopUp(
             context,
-            StateRendererType.POPUP_SUCCESS,
+            StateRendererType.popupSuccess,
             getMessage() ?? '',
             title: 'Success',
           );

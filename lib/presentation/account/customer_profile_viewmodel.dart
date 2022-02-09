@@ -27,14 +27,12 @@ class CustomerProfileViewModel extends BaseViewModel
 
   _getCustomerProfile() async {
     inputState.add(
-      LoadingState(
-          stateRendererType: StateRendererType.FULL_SCREEN_LOADING_STATE),
+      LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState),
     );
     (await _customerProfileUsecase.execute(CustomerDetailEntity().id)).fold(
       (failure) {
         inputState.add(
-          ErrorState(
-              StateRendererType.FULL_SCREEN_ERROR_STATE, failure.message),
+          ErrorState(StateRendererType.fullScreenErrorState, failure.message),
         );
       },
       (customerProfile) {
