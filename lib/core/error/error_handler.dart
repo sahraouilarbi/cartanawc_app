@@ -130,13 +130,14 @@ class ResponseMessage {
   static const String internalServerError = 'internal_server_error';
 
   // local response codes
-  static const String DEFAULT = 'default_error';
-  static const String connectTimeout = 'timoeout_error';
-  static const String cancel = 'default_error';
-  static const String receiveTimeout = 'timeout_error';
-  static const String sendTimeout = 'timeout_error';
-  static const String cacheError = 'cache_error';
-  static const String noInternetConnection = 'no_internet_error';
+  static const String DEFAULT = 'default_error!';
+  static const String cancel = 'default_error!';
+  static const String connectTimeout = 'timeout_error!';
+  static const String receiveTimeout = 'timeout_error!';
+  static const String sendTimeout = 'timeout_error!';
+  static const String cacheError = 'cache_error!';
+  static const String noInternetConnection =
+      'Erreur : pas de connection internet!';
 }
 
 class ApiInternalStatus {
