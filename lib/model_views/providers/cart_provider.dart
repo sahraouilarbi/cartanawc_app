@@ -1,3 +1,5 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/billing_model.dart';
 import 'package:cartanawc_app/data/models/cart_request_model.dart';
@@ -9,6 +11,7 @@ import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:flutter/material.dart';
 
 class CartProvider with ChangeNotifier {
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   APIService _apiService;
   List<CartItemModel> _cartItems;
   CustomerDetailModel _customerDetailModel;
@@ -138,7 +141,9 @@ class CartProvider with ChangeNotifier {
 
   Future fetchShippingDetails() async {
     _customerDetailModel ??= CustomerDetailModel();
-    _customerDetailModel = await _apiService.customerDetails();
+    final userId = await _appPreferences.getUserId();
+    _customerDetailModel = await _apiService
+        .getCustomerDetails(userId); //_apiService.customerDetails();
     notifyListeners();
   }
 

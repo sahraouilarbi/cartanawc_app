@@ -1,3 +1,5 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/data/http_service.dart';
 import 'package:cartanawc_app/data/models/cart_request_model.dart';
 import 'package:cartanawc_app/data/models/cart_response_model.dart';
@@ -16,6 +18,7 @@ import 'package:dio/dio.dart';
 class APIService {
   final APIEndPoint _apiEndPoint = APIEndPoint();
   HttpService httpService = HttpService();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   //***************************************************************************
   //Login
@@ -129,14 +132,20 @@ class APIService {
     String sortOrder = 'asc',
   }) async {
     CustomerDetailModel customerDetailModel;
-    String userRole = '';
+    //String userRole = '';
 
-    final bool isLoggedIn = await SharedService.isLoggedIn();
+    //final bool isLoggedIn = await SharedService.isLoggedIn();
+    // if (isLoggedIn) {
+    //   customerDetailModel = await customerDetails();
+    //   userRole = customerDetailModel.role;
+    // }
 
-    if (isLoggedIn) {
-      customerDetailModel = await customerDetails();
-      userRole = customerDetailModel.role;
-    }
+    // ***
+    final _isUserLoggedIn = await _appPreferences.isUserLoggedIn();
+    final _userId = await _appPreferences.getUserId();
+    final _customerDetailModel = await getCustomerDetails(_userId);
+    final _userRole = _customerDetailModel.role;
+    // ***
 
     List<ProductModel> products = <ProductModel>[];
 
@@ -180,20 +189,21 @@ class APIService {
             .map((i) => ProductModel.fromJson(i as Map<String, dynamic>))
             .where((element) => element.status == 'publish')
             .toList();
-        if (userRole != null) {
+        if (_userRole != null) {
           for (final ProductModel product in products) {
-            switch (userRole) {
+            switch (_userRole) {
               case 'grossite':
-                product.price = product.acf.grossite;
+                product.price = _isUserLoggedIn ? product.acf.grossite : '';
                 break;
               case 'super_gros':
-                product.price = product.acf.superGros;
+                product.price = _isUserLoggedIn ? product.acf.superGros : '';
                 break;
               case 'grand_moyenne_surface':
-                product.price = product.acf.grandeMoyenneSurface;
+                product.price =
+                    _isUserLoggedIn ? product.acf.grandeMoyenneSurface : '';
                 break;
               case 'hypermarche':
-                product.price = product.acf.hypermarche;
+                product.price = _isUserLoggedIn ? product.acf.hypermarche : '';
                 break;
               default:
                 product.price = '';
@@ -210,11 +220,11 @@ class APIService {
   //***************************************************************************
   // Add to cart
   Future<CartResponseModel> addToCart(CartRequestModel model) async {
-    final LoginResponseModel loginResponseModel =
-        await SharedService.loginDetails();
-    if (loginResponseModel.data != null) {
-      model.userId = loginResponseModel.data.id;
-    }
+    // final LoginResponseModel loginResponseModel = await SharedService.loginDetails();
+    // if (loginResponseModel.data != null) {
+    //   model.userId = loginResponseModel.data.id;
+    // }
+    model.userId = await _appPreferences.getUserId();
     CartResponseModel responseModel;
     try {
       final Response response =
@@ -240,13 +250,13 @@ class APIService {
   // Get Cart Items
   Future<CartResponseModel> getCartItem() async {
     CartResponseModel responseModel;
-    int _userId;
+    final _userId = await _appPreferences.getUserId();
     try {
-      final LoginResponseModel loginResponseModel =
-          await SharedService.loginDetails();
-      if (loginResponseModel.data != null) {
-        _userId = loginResponseModel.data.id;
-      }
+      // final LoginResponseModel loginResponseModel =
+      //     await SharedService.loginDetails();
+      // if (loginResponseModel.data != null) {
+      //   _userId = loginResponseModel.data.id;
+      // }
 
       final Response response =
           await httpService.getRequest(_apiEndPoint.cart(_userId));
@@ -264,11 +274,13 @@ class APIService {
   //***************************************************************************
   // Create Order
   Future<bool> createOrder(OrderModel model) async {
-    final LoginResponseModel loginResponseModel =
-        await SharedService.loginDetails();
-    if (loginResponseModel.data != null) {
-      model.customer_id = loginResponseModel.data.id;
-    }
+    // final LoginResponseModel loginResponseModel =
+    //     await SharedService.loginDetails();
+    // if (loginResponseModel.data != null) {
+    //   model.customer_id = loginResponseModel.data.id;
+    // }
+    model.customer_id = await _appPreferences.getUserId();
+
     bool isOrderCreated = false;
     try {
       final Response response =

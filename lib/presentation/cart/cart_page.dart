@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/checkout/verify_address.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
@@ -27,7 +28,7 @@ class _CartPageState extends State<CartPage> {
         centerTitle: true,
       ),
       body: FutureBuilder(
-          future: SharedService.isLoggedIn(),
+          future: Future.value(true), //SharedService.isLoggedIn(),
           builder: (BuildContext context, AsyncSnapshot<bool> loginModel) {
             if (loginModel.hasData) {
               if (loginModel.data) {

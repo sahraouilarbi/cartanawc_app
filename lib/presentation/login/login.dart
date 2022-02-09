@@ -55,8 +55,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void initState() {
-    _bind();
     super.initState();
+    _bind();
   }
 
   @override
@@ -86,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
     return SingleChildScrollView(
       physics: const ScrollPhysics(),
       child: Container(
-        color: Colors.black,
+        color: Colors.red,
         padding: const EdgeInsets.only(
           left: AppPadding.p10,
           right: AppPadding.p10,
@@ -107,7 +107,6 @@ class _LoginViewState extends State<LoginView> {
                   const Icon(
                     Icons.person,
                     size: AppSize.s120,
-                    color: Colors.green,
                   ),
                   const Padding(
                     padding: EdgeInsets.only(bottom: AppPadding.p20),
@@ -156,6 +155,12 @@ class _LoginViewState extends State<LoginView> {
             errorText: (snapshot.data ?? true)
                 ? null
                 : "Saisissez un nom d'utilisateur valide",
+            errorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red),
+            ),
+            focusedErrorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red),
+            ),
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.black87,
@@ -192,6 +197,12 @@ class _LoginViewState extends State<LoginView> {
             errorText: (snapshot.data ?? true)
                 ? null
                 : "Le mot de passe ne doit pas être vide",
+            errorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red),
+            ),
+            focusedErrorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red),
+            ),
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.black87,
