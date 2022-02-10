@@ -61,7 +61,7 @@ class ProductProvider with ChangeNotifier {
       strSearch: strSearch,
       tagName: tagName,
       pageNumber: pageNumber,
-      pageSize: pageSize,
+      perPage: pageSize,
       categoryId: categoryId,
       sortBy: _sortBy.value,
       sortOrder: _sortBy.setOrder,

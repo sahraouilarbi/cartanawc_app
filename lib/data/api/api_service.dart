@@ -123,7 +123,7 @@ class APIService {
   Future<List<ProductModel>> getProducts({
     String status = 'publish',
     String strSearch,
-    int pageSize,
+    int perPage,
     int pageNumber,
     String tagName,
     List<int> productsIds,
@@ -158,8 +158,8 @@ class APIService {
       if (strSearch != null) {
         params['search'] = strSearch;
       }
-      if (pageSize != null) {
-        params['per_page'] = pageSize;
+      if (perPage != null) {
+        params['per_page'] = perPage;
       }
       if (pageNumber != null) {
         params['page'] = pageNumber;

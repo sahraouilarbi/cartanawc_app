@@ -2,7 +2,9 @@ import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/presentation/account/customer_profile.dart';
 import 'package:cartanawc_app/presentation/account/customer_profile_edit.dart';
 import 'package:cartanawc_app/presentation/accueil/accueil_view.dart';
+import 'package:cartanawc_app/presentation/accueil/tab_produits/products_page.dart';
 import 'package:cartanawc_app/presentation/login/login.dart';
+import 'package:cartanawc_app/presentation/product/product_details_page.dart';
 import 'package:cartanawc_app/presentation/tableau_de_bord/tableau_de_bord_view.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +19,7 @@ class Routes {
   static const String tableauBordPaiementRoute = '/tableauBordPaiement';
   static const String tableauBordHistoriqueRoute = '/tableauBordHistorique';
   static const String produitsRoute = '/produits';
-  static const String produitRoute = '/produit';
+  static const String productDetailRoute = '/produitDetail';
 }
 
 class RouteGenerator {
@@ -60,8 +62,8 @@ class RouteGenerator {
                   tabSelected: 2,
                 ));
         break;
-      case Routes.produitRoute:
-        return MaterialPageRoute(builder: (_) => null);
+      case Routes.productDetailRoute:
+        return MaterialPageRoute(builder: (_) => ProductDetails());
         break;
       case Routes.produitsRoute:
         return MaterialPageRoute(builder: (_) => null);

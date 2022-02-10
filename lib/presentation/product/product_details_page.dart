@@ -14,6 +14,7 @@ import 'package:cartanawc_app/presentation/common/image_network_loading_progress
 import 'package:cartanawc_app/presentation/common/no_image_placeholder.dart';
 import 'package:cartanawc_app/presentation/common/row_montant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -265,10 +266,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                       child: !inProgress
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('AJOUTER AU PANIER'),
-                                SizedBox(width: AppSize.s5),
-                                Icon(Icons.add_shopping_cart)
+                              children: [
+                                const Text('AJOUTER AU PANIER'),
+                                const SizedBox(width: AppSize.s5),
+                                SvgPicture.asset(
+                                  'assets/images/shopping_cart.svg',
+                                  color: Colors.white,
+                                  fit: BoxFit.cover,
+                                ),
+                                //Icon(Icons.add_shopping_cart)
                               ],
                             )
                           : const Center(
