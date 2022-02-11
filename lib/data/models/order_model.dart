@@ -1,6 +1,89 @@
 import 'package:cartanawc_app/data/models/billing_model.dart';
+import 'package:cartanawc_app/data/models/meta_data_model.dart';
 import 'package:cartanawc_app/data/models/shipping_model.dart';
 
+class OrderModel {
+  OrderModel({
+    this.customerId,
+    this.paymentMethod,
+    this.paymentMethodTitle,
+    this.setPaid,
+    this.transactionId,
+    this.lineItems,
+    this.orderId,
+    this.orderNumber,
+    this.orderKey,
+    this.status,
+    this.orderDateCreated,
+    this.orderTotal,
+  });
+  int orderId;
+  String orderNumber;
+  String orderKey;
+  String status;
+  DateTime orderDateCreated;
+  String orderTotal;
+  int customerId;
+  BillingModel billing;
+  ShippingModel shipping;
+  String paymentMethod;
+  String paymentMethodTitle;
+  String transactionId;
+  List<OrderLineItemsModel> lineItems;
+  bool setPaid;
+
+  OrderModel.fromJson(Map<String, dynamic> json) {
+    orderId = json['id'] as int;
+    orderNumber = json['number'] as String;
+    orderKey = json['order_key'] as String;
+    status = json['status'] as String;
+    orderDateCreated = DateTime.parse(json['date_created'] as String);
+    orderTotal = json['total'] as String;
+
+    customerId = json['customer_id'] as int;
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['customer_id'] = customerId;
+    data['payment_method'] = paymentMethod;
+    data['payment_method_title'] = paymentMethodTitle;
+    data['set_paid'] = setPaid;
+    data['transaction_id'] = transactionId;
+    data['shipping'] = shipping.toJson();
+    data['billing'] = billing.toJson();
+    if (lineItems != null) {
+      data['line_items'] = lineItems.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class OrderLineItemsModel {
+  OrderLineItemsModel({
+    this.productId,
+    this.variationId,
+    this.quantity,
+    this.subtotal,
+  });
+
+  int productId;
+  int variationId;
+  int quantity;
+  String subtotal;
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['product_id'] = productId;
+    if (variationId != null) {
+      data['variation_id'] = variationId;
+    }
+    data['quantity'] = quantity;
+    return data;
+  }
+}
+
+/*
+*******************************************************************************
 class OrderModel {
   OrderModel({
     this.id,
@@ -80,7 +163,7 @@ class OrderModel {
   DateTime dateCompleted;
   DateTime dateCompletedGMT;
   String cartHash;
-  List<OrderMetaDataModel> metaData;
+  List<MetaDataModel> metaData;
   List<OrderLineItemsModel> lineItems;
   List<OrderTaxLinesModel> taxLines;
   List<OrderShippingLinesModel> shippingLines;
@@ -125,8 +208,8 @@ class OrderModel {
     cartHash = json['cart_hash'] as String;
 
     if (json['meta_data'] != null) {
-      metaData = List<OrderMetaDataModel>.from((json['meta_data'] as List)
-          .map((x) => OrderMetaDataModel.fromJson(x as Map<String, dynamic>)));
+      metaData = List<MetaDataModel>.from((json['meta_data'] as List)
+          .map((x) => MetaDataModel.fromJson(x as Map<String, dynamic>)));
     }
 
     if (json['line_items'] != null) {
@@ -160,45 +243,19 @@ class OrderModel {
       refunds = List<OrderRefundsModel>.from((json['refunds'] as List)
           .map((x) => OrderRefundsModel.fromJson(x as Map<String, dynamic>)));
     }
-
-    setPaid = json['set_paid'] as bool;
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
     data['parent_id'] = parentId;
-    data['number'] = number;
-    data['order_key'] = orderKey;
-    data['created_via'] = createdVia;
-    data['version'] = version;
     data['status'] = status;
     data['currency'] = currency;
-    data['date_created'] = dateCreated;
-    data['date_created_gmt'] = dateCreatedGMT;
-    data['date_modified'] = dateModified;
-    data['date_modified_gmt'] = dateModifiedGMT;
-    data['discount_total'] = discountTotal;
-    data['discount_tax'] = discountTax;
-    data['shipping_total'] = shippingTotal;
-    data['shipping_tax'] = shippingTax;
-    data['cart_tax'] = cartTax;
-    data['total'] = total;
-    data['total_tax'] = totalTax;
-    data['prices_include_tax'] = pricesIncludeTax;
     data['customer_id'] = customerId;
-    data['customer_ip_address'] = customerIpAddress;
-    data['customer_user_agent'] = customerUserAgent;
     data['customer_note'] = customerNote;
-    data['billing'] = billing;
-    data['shipping'] = shipping;
+    data['billing'] = billing.toJson();
+    data['shipping'] = shipping.toJson();
     data['payment_method'] = paymentMethod;
     data['payment_method_title'] = paymentMethodTitle;
     data['transaction_id'] = transactionId;
-    data['date_paid'] = datePaid;
-    data['date_paid_gmt'] = datePaidGMT;
-    data['date_completed'] = dateCompleted;
-    data['date_completed_gmt'] = dateCompletedGMT;
-    data['cart_hash'] = cartHash;
 
     if (metaData != null) {
       data['meta_data'] = metaData.map((v) => v.toJson()).toList();
@@ -209,7 +266,7 @@ class OrderModel {
     }
 
     if (taxLines != null) {
-      data['tax_lines'] = taxLines.map((v) => v.toJson()).toList();
+      //data['tax_lines'] = taxLines.map((v) => v.toJson()).toList();
     }
 
     if (shippingLines != null) {
@@ -224,35 +281,8 @@ class OrderModel {
       data['coupon_lines'] = couponLines.map((v) => v.toJson()).toList();
     }
 
-    if (refunds != null) {
-      data['refunds'] = refunds.map((v) => v.toJson()).toList();
-    }
-
     data['set_paid'] = setPaid;
 
-    return data;
-  }
-}
-
-class OrderMetaDataModel {
-  OrderMetaDataModel({
-    this.id,
-    this.key,
-    this.value,
-  });
-  int id;
-  String key;
-  String value;
-  OrderMetaDataModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'] as int;
-    key = json['key'] as String;
-    value = json['key'] as String;
-  }
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['key'] = key;
-    data['value'] = value;
     return data;
   }
 }
@@ -285,7 +315,7 @@ class OrderLineItemsModel {
   String total;
   String totalTax;
   List<OrderTaxesModel> taxes;
-  List<OrderMetaDataModel> metaData;
+  List<MetaDataModel> metaData;
   String sku;
   String price;
   OrderLineItemsModel.fromJson(Map<String, dynamic> json) {
@@ -306,8 +336,8 @@ class OrderLineItemsModel {
     }
 
     if (json['meta_data'] != null) {
-      metaData = List<OrderMetaDataModel>.from((json['meta_data'] as List)
-          .map((x) => OrderMetaDataModel.fromJson(x as Map<String, dynamic>)));
+      metaData = List<MetaDataModel>.from((json['meta_data'] as List)
+          .map((x) => MetaDataModel.fromJson(x as Map<String, dynamic>)));
     }
 
     sku = json['sku'] as String;
@@ -315,27 +345,22 @@ class OrderLineItemsModel {
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
     data['name'] = name;
     data['product_id'] = productId;
-    data['variation_id'] = variationId;
+
+    if (variationId != null) {
+      data['variation_id'] = variationId;
+    }
+
     data['quantity'] = quantity;
     data['tax_class'] = taxClass;
     data['subtotal'] = subtotal;
-    data['subtotal_tax'] = subtotalTax;
     data['total'] = total;
-    data['total_tax'] = totalTax;
-
-    if (taxes != null) {
-      data['taxes'] = taxes.map((v) => v.toJson()).toList();
-    }
 
     if (metaData != null) {
       data['meta_data'] = metaData.map((v) => v.toJson()).toList();
     }
 
-    data['sku'] = sku;
-    data['price'] = price;
     return data;
   }
 }
@@ -358,7 +383,7 @@ class OrderTaxLinesModel {
   bool compound;
   String taxTotal;
   String shippingTaxTotal;
-  List<OrderMetaDataModel> metaData;
+  List<MetaDataModel> metaData;
   OrderTaxLinesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] = id;
     rateCode = json['rate_code'] as String;
@@ -369,19 +394,12 @@ class OrderTaxLinesModel {
     shippingTaxTotal = json['shipping_tax_total'] as String;
 
     if (json['meta_data'] != null) {
-      metaData = List<OrderMetaDataModel>.from((json['meta_data'] as List)
-          .map((x) => OrderMetaDataModel.fromJson(x as Map<String, dynamic>)));
+      metaData = List<MetaDataModel>.from((json['meta_data'] as List)
+          .map((x) => MetaDataModel.fromJson(x as Map<String, dynamic>)));
     }
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['rate_code'] = rateCode;
-    data['rate_id'] = rateId;
-    data['label'] = label;
-    data['compound'] = compound;
-    data['tax_total'] = taxTotal;
-    data['shipping_tax_total'] = shippingTaxTotal;
 
     if (metaData != null) {
       data['meta_data'] = metaData.map((v) => v.toJson()).toList();
@@ -408,7 +426,7 @@ class OrderShippingLinesModel {
   String total;
   String totalTax;
   List<OrderTaxesModel> taxes;
-  List<OrderMetaDataModel> metaData;
+  List<MetaDataModel> metaData;
   OrderShippingLinesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
     methodTitle = json['method_title'] as String;
@@ -420,23 +438,20 @@ class OrderShippingLinesModel {
           .map((x) => OrderTaxesModel.fromJson(x as Map<String, dynamic>)));
     }
     if (json['meta_data'] != null) {
-      metaData = List<OrderMetaDataModel>.from((json['meta_data'] as List)
-          .map((x) => OrderMetaDataModel.fromJson(x as Map<String, dynamic>)));
+      metaData = List<MetaDataModel>.from((json['meta_data'] as List)
+          .map((x) => MetaDataModel.fromJson(x as Map<String, dynamic>)));
     }
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
     data['method_title'] = methodTitle;
     data['method_id'] = methodId;
     data['total'] = total;
-    data['total_tax'] = totalTax;
-    if (taxes != null) {
-      data['taxes'] = taxes.map((v) => v.toJson()).toList();
-    }
+
     if (metaData != null) {
       data['meta_data'] = metaData.map((v) => v.toJson()).toList();
     }
+
     return data;
   }
 }
@@ -460,7 +475,7 @@ class OrderFeeLinesModel {
   String total;
   String totalTax;
   List<OrderTaxesModel> taxes;
-  List<OrderMetaDataModel> metaData;
+  List<MetaDataModel> metaData;
   OrderFeeLinesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
     name = json['name'] as String;
@@ -474,24 +489,21 @@ class OrderFeeLinesModel {
           .map((x) => OrderTaxesModel.fromJson(x as Map<String, dynamic>)));
     }
     if (json['meta_data'] != null) {
-      metaData = List<OrderMetaDataModel>.from((json['meta_data'] as List)
-          .map((x) => OrderMetaDataModel.fromJson(x as Map<String, dynamic>)));
+      metaData = List<MetaDataModel>.from((json['meta_data'] as List)
+          .map((x) => MetaDataModel.fromJson(x as Map<String, dynamic>)));
     }
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
     data['name'] = name;
     data['tax_class'] = taxClass;
     data['tax_status'] = taxStatus;
     data['total'] = total;
-    data['total_tax'] = totalTax;
-    if (taxes != null) {
-      data['taxes'] = taxes.map((v) => v.toJson()).toList();
-    }
+
     if (metaData != null) {
       data['meta_data'] = metaData.map((v) => v.toJson()).toList();
     }
+
     return data;
   }
 }
@@ -508,7 +520,7 @@ class OrderCouponLinesModel {
   String code;
   String discount;
   String discountTax;
-  List<OrderMetaDataModel> metaData;
+  List<MetaDataModel> metaData;
 
   OrderCouponLinesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
@@ -517,20 +529,19 @@ class OrderCouponLinesModel {
     discountTax = json['discount_tax'] as String;
 
     if (json['meta_data'] != null) {
-      metaData = List<OrderMetaDataModel>.from((json['meta_data'] as List)
-          .map((x) => OrderMetaDataModel.fromJson(x as Map<String, dynamic>)));
+      metaData = List<MetaDataModel>.from((json['meta_data'] as List)
+          .map((x) => MetaDataModel.fromJson(x as Map<String, dynamic>)));
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
     data['code'] = code;
-    data['discount'] = discount;
-    data['discount_tax'] = discountTax;
+
     if (metaData != null) {
       data['meta_data'] = metaData.map((v) => v.toJson()).toList();
     }
+
     return data;
   }
 }
@@ -548,13 +559,6 @@ class OrderRefundsModel {
     id = json['id'] as int;
     reason = json['reason'] as String;
     total = json['total'] as String;
-  }
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['reason'] = reason;
-    data['total'] = total;
-    return data;
   }
 }
 
@@ -576,7 +580,7 @@ class OrderTaxesModel {
   bool compound;
   String taxTotal;
   String shippingTaxTotal;
-  List<OrderMetaDataModel> metaData;
+  List<MetaDataModel> metaData;
   OrderTaxesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] = id;
     rateCode = json['rate_code'] as String;
@@ -587,25 +591,22 @@ class OrderTaxesModel {
     shippingTaxTotal = json['shipping_tax_total'] as String;
 
     if (json['meta_data'] != null) {
-      metaData = List<OrderMetaDataModel>.from((json['meta_data'] as List)
-          .map((x) => OrderMetaDataModel.fromJson(x as Map<String, dynamic>)));
+      metaData = List<MetaDataModel>.from((json['meta_data'] as List)
+          .map((x) => MetaDataModel.fromJson(x as Map<String, dynamic>)));
     }
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['rate_code'] = rateCode;
-    data['rate_id'] = rateId;
-    data['label'] = label;
-    data['compound'] = compound;
-    data['tax_total'] = taxTotal;
-    data['shipping_tax_total'] = shippingTaxTotal;
+
     if (metaData != null) {
       data['meta_data'] = metaData.map((v) => v.toJson()).toList();
     }
+
     return data;
   }
 }
+*******************************************************************************
+*/
 /*class OrderModel {
   OrderModel({
     this.customerId,

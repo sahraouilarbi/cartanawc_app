@@ -33,7 +33,7 @@ class WidgetOrderItem extends StatelessWidget {
                 ),
               ),
               Text(
-                '${orderModel.dateCreated}',
+                '', //'${orderModel.dateCreated}',
                 style: const TextStyle(fontSize: 14.0),
               ),
             ],
@@ -50,14 +50,14 @@ class WidgetOrderItem extends StatelessWidget {
                 textColor: Colors.white,
                 backgroundColor: Colors.blueAccent,
                 onPressed: () {
-                  Navigator.push(
+                  /*Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => OrderDetailsPage(
                         orderId: orderModel.id,
                       ),
                     ),
-                  );
+                  );*/
                 },
               ),
             ],
