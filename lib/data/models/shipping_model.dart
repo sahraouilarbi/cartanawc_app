@@ -6,11 +6,9 @@ class ShippingModel {
     this.address1,
     this.address2,
     this.city,
+    this.state,
     this.postcode,
     this.country,
-    this.state,
-    this.email,
-    this.phone,
   });
   String firstName;
   String lastName;
@@ -21,8 +19,7 @@ class ShippingModel {
   String postcode;
   String country;
   String state;
-  String email;
-  String phone;
+
   ShippingModel.fromJson(Map<String, dynamic> json) {
     firstName = json['first_name'] as String;
     lastName = json['last_name'] as String;
@@ -30,11 +27,9 @@ class ShippingModel {
     address1 = json['address_1'] as String;
     address2 = json['address_2'] as String;
     city = json['city'] as String;
+    state = json['state'] as String;
     postcode = json['postcode'] as String;
     country = json['country'] as String;
-    state = json['state'] as String;
-    email = json['email'] as String;
-    phone = json['phone'] as String;
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -44,11 +39,9 @@ class ShippingModel {
     data['address_1'] = address1;
     data['address_2'] = address2;
     data['city'] = city;
+    data['state'] = state;
     data['postcode'] = postcode;
     data['country'] = country;
-    data['state'] = state;
-    data['email'] = email;
-    data['phone'] = phone;
     return data;
   }
 }
