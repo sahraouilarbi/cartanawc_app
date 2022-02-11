@@ -1,5 +1,6 @@
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MyTextButtonWidget extends StatelessWidget {
   const MyTextButtonWidget({
@@ -8,11 +9,17 @@ class MyTextButtonWidget extends StatelessWidget {
     this.backgroundColor,
     this.textButton,
     this.textColor,
+    this.hasIcon = false,
+    this.svgIconSrc,
+    this.inProgress = false,
   }) : super(key: key);
   final VoidCallback onPressed;
   final Color backgroundColor;
   final String textButton;
   final Color textColor;
+  final bool hasIcon;
+  final String svgIconSrc;
+  final bool inProgress;
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -25,14 +32,39 @@ class MyTextButtonWidget extends StatelessWidget {
           color: backgroundColor ?? Colors.black,
           borderRadius: BorderRadius.circular(AppSize.s5),
         ),
-        child: Text(
-          textButton ?? '',
-          style: TextStyle(
-            color: textColor ?? Colors.white,
-          ),
-          textAlign: TextAlign.center,
-        ),
+        child: !inProgress
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    textButton ?? '',
+                    style: TextStyle(
+                      color: textColor ?? Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  if (hasIcon) _hasSvgIcon() else const SizedBox(),
+                ],
+              )
+            : const Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                ),
+              ),
       ),
+    );
+  }
+
+  Widget _hasSvgIcon() {
+    return Row(
+      children: [
+        const SizedBox(width: AppSize.s5),
+        SvgPicture.asset(
+          svgIconSrc,
+          color: Colors.white,
+          fit: BoxFit.cover,
+        ),
+      ],
     );
   }
 }

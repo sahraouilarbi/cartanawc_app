@@ -22,6 +22,7 @@ Row rowMontant(
         child: Container(
           padding: const EdgeInsets.all(AppPadding.p10),
           decoration: BoxDecoration(
+            color: Colors.white,
             border: Border.all(),
           ),
           child: Text(
