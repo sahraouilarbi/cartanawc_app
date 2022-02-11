@@ -11,6 +11,8 @@ class MyTextFormFieldWidget extends StatelessWidget {
     this.labelText,
     this.errorText,
     this.suffixIcon,
+    this.readOnly = false,
+    this.obscureText = false,
   }) : super(key: key);
   final TextEditingController textEditingController;
   final String initialValue;
@@ -19,6 +21,8 @@ class MyTextFormFieldWidget extends StatelessWidget {
   final String labelText;
   final String errorText;
   final IconButton suffixIcon;
+  final bool readOnly;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +48,8 @@ class MyTextFormFieldWidget extends StatelessWidget {
         ),
         suffixIcon: suffixIcon,
       ),
+      readOnly: readOnly,
+      obscureText: obscureText,
     );
   }
 }
