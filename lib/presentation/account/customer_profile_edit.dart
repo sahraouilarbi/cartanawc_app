@@ -108,7 +108,6 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
                               // TextFormField Nom
                               MyTextFormFieldWidget(
                                 controller: _nomController,
-                                keyboardType: TextInputType.text,
                                 hintText: 'Nom de famille',
                                 labelText: 'Nom',
                                 errorText: (false)
@@ -121,7 +120,6 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
                               // TextFormField Prénom
                               MyTextFormFieldWidget(
                                 controller: _prenomController,
-                                keyboardType: TextInputType.text,
                                 hintText: 'Prénom',
                                 labelText: 'Préom',
                                 errorText: (false)
@@ -134,7 +132,6 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
                               // TextFormField type
                               MyTextFormFieldWidget(
                                 controller: _typeController,
-                                keyboardType: TextInputType.text,
                                 hintText: 'Type de compte',
                                 labelText: 'Type',
                                 errorText: (false)
@@ -196,7 +193,6 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
                               // TextFormField Wilaya
                               MyTextFormFieldWidget(
                                 controller: _wilayaController,
-                                keyboardType: TextInputType.text,
                                 hintText: 'Alger',
                                 labelText: 'Wilaya',
                                 errorText: (false)

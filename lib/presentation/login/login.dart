@@ -62,6 +62,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
     _loginViewModel.dispose();
     super.dispose();
   }
@@ -163,7 +165,6 @@ class _LoginViewState extends State<LoginView> {
       builder: (context, snapshot) {
         return MyTextFormFieldWidget(
           controller: _passwordController,
-          keyboardType: TextInputType.text,
           hintText: 'Mot de passe',
           labelText: 'Mot de passe',
           errorText: snapshot.data ?? true

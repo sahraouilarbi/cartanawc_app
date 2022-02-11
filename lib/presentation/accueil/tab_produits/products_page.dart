@@ -48,6 +48,13 @@ class _ProductPageState extends BasePageState<ProductPage> {
     _searchQuery.addListener(_onSearchChange);
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _searchQuery.dispose();
+    super.dispose();
+  }
+
   void _onSearchChange() {
     final productList = Provider.of<ProductProvider>(context, listen: false);
     if (_debounce?.isActive ?? false) _debounce.cancel();
