@@ -107,8 +107,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
                             children: <Widget>[
                               // TextFormField Nom
                               MyTextFormFieldWidget(
-                                textEditingController: _nomController,
-                                textInputType: TextInputType.text,
+                                controller: _nomController,
+                                keyboardType: TextInputType.text,
                                 hintText: 'Nom de famille',
                                 labelText: 'Nom',
                                 errorText: (false)
@@ -120,8 +120,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Prénom
                               MyTextFormFieldWidget(
-                                textEditingController: _prenomController,
-                                textInputType: TextInputType.text,
+                                controller: _prenomController,
+                                keyboardType: TextInputType.text,
                                 hintText: 'Prénom',
                                 labelText: 'Préom',
                                 errorText: (false)
@@ -133,8 +133,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField type
                               MyTextFormFieldWidget(
-                                textEditingController: _typeController,
-                                textInputType: TextInputType.text,
+                                controller: _typeController,
+                                keyboardType: TextInputType.text,
                                 hintText: 'Type de compte',
                                 labelText: 'Type',
                                 errorText: (false)
@@ -146,8 +146,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Email
                               MyTextFormFieldWidget(
-                                textEditingController: _emailController,
-                                textInputType: TextInputType.emailAddress,
+                                controller: _emailController,
+                                keyboardType: TextInputType.emailAddress,
                                 hintText: 'email@example.com',
                                 labelText: 'Email',
                                 errorText: (false)
@@ -159,8 +159,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Téléphone
                               MyTextFormFieldWidget(
-                                textEditingController: _telephoneController,
-                                textInputType: TextInputType.phone,
+                                controller: _telephoneController,
+                                keyboardType: TextInputType.phone,
                                 hintText: '0550 xx xx xx',
                                 labelText: 'Téléphone',
                                 errorText: (false)
@@ -172,8 +172,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Adresse
                               MyTextFormFieldWidget(
-                                textEditingController: _adresseController,
-                                textInputType: TextInputType.streetAddress,
+                                controller: _adresseController,
+                                keyboardType: TextInputType.streetAddress,
                                 hintText: 'num, rue Nom de la rue',
                                 labelText: 'Adresse',
                                 errorText: (false)
@@ -185,9 +185,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Complement d'adresse
                               MyTextFormFieldWidget(
-                                textEditingController:
-                                    _complementAdresseController,
-                                textInputType: TextInputType.streetAddress,
+                                controller: _complementAdresseController,
+                                keyboardType: TextInputType.streetAddress,
                                 hintText: "Complement d'adresse",
                                 labelText: "Complement d'adresse",
                               ),
@@ -196,8 +195,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Wilaya
                               MyTextFormFieldWidget(
-                                textEditingController: _wilayaController,
-                                textInputType: TextInputType.text,
+                                controller: _wilayaController,
+                                keyboardType: TextInputType.text,
                                 hintText: 'Alger',
                                 labelText: 'Wilaya',
                                 errorText: (false)
@@ -209,8 +208,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField CodePostal
                               MyTextFormFieldWidget(
-                                textEditingController: _codePostalController,
-                                textInputType: TextInputType.number,
+                                controller: _codePostalController,
+                                keyboardType: TextInputType.number,
                                 hintText: '16000',
                                 labelText: 'Code Postal',
                                 errorText: (false)

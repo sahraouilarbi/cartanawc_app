@@ -2,6 +2,7 @@ import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
 import 'package:cartanawc_app/presentation/account/customer_profile_viewmodel.dart';
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
 import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
 import 'package:cartanawc_app/presentation/common/text_customer_profile_view_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
@@ -130,6 +131,7 @@ class _CustomerProfileState extends State<CustomerProfileView> {
 
                       const SizedBox(height: AppSize.s10),
 
+                      /**
                       textButton(
                         onPressed: () {
                           Navigator.pushReplacementNamed(
@@ -138,6 +140,14 @@ class _CustomerProfileState extends State<CustomerProfileView> {
                         text: 'MODIFIER',
                         textColor: Colors.white,
                         backgroundColor: Colors.black,
+                      ),**/
+
+                      MyTextButtonWidget(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, Routes.editProfileRoute);
+                        },
+                        textButton: 'MODIFIER',
                       ),
 
                       const SizedBox(height: AppSize.s10),

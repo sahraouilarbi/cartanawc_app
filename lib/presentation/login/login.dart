@@ -1,9 +1,10 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
 import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/text_form_field_widget.dart';
 import 'package:cartanawc_app/presentation/login/login_viewmodel.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';
@@ -142,36 +143,14 @@ class _LoginViewState extends State<LoginView> {
     return StreamBuilder<bool>(
       stream: _loginViewModel.outputIsUsernameValid,
       builder: (context, snapshot) {
-        return TextFormField(
+        return MyTextFormFieldWidget(
           controller: _usernameController,
           keyboardType: TextInputType.emailAddress,
-          autocorrect: false,
-          //onSaved: (input) => username = input,
-          validator: (input) => !input.isNotEmpty
-              ? "Le nom d'utilisateur ne peut pas être vide"
-              : null,
-          decoration: InputDecoration(
-            hintText: "Nom d'utilisateur",
-            errorText: (snapshot.data ?? true)
-                ? null
-                : "Saisissez un nom d'utilisateur valide",
-            errorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
-            ),
-            focusedErrorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.black87,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ColorManager.greenAccent,
-              ),
-            ),
-          ),
+          hintText: "Nom d'Utilisateur",
+          labelText: "Nom d'Utilisateur",
+          errorText: snapshot.data ?? true
+              ? null
+              : "Saisissez un nom d'utilisateur valide",
         );
       },
     );
@@ -182,45 +161,23 @@ class _LoginViewState extends State<LoginView> {
     return StreamBuilder<bool>(
       stream: _loginViewModel.outputIsPasswordValid,
       builder: (context, snapshot) {
-        return TextFormField(
+        return MyTextFormFieldWidget(
           controller: _passwordController,
           keyboardType: TextInputType.text,
-          //onSaved: (input) => password = input,
-          validator: (input) =>
-              //TODO Password minimun
-              input.length < 5
-                  ? 'Mot de passe invalide. Doit contenir plus de 5 caractères'
-                  : null,
+          hintText: 'Mot de passe',
+          labelText: 'Mot de passe',
+          errorText: snapshot.data ?? true
+              ? null
+              : "Le mot de passe ne doit pas être vide",
           obscureText: _hidePassword,
-          decoration: InputDecoration(
-            hintText: "Mot de passe",
-            errorText: (snapshot.data ?? true)
-                ? null
-                : "Le mot de passe ne doit pas être vide",
-            errorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
-            ),
-            focusedErrorBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.black87,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ColorManager.greenAccent,
-              ),
-            ),
-            suffixIcon: IconButton(
-              onPressed: () {
-                setState(() {
-                  _hidePassword = !_hidePassword;
-                });
-              },
-              icon:
-                  Icon(_hidePassword ? Icons.visibility_off : Icons.visibility),
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                _hidePassword = !_hidePassword;
+              });
+            },
+            icon: Icon(
+              _hidePassword ? Icons.visibility_off : Icons.visibility,
             ),
           ),
         );
@@ -241,25 +198,15 @@ class _LoginViewState extends State<LoginView> {
     return StreamBuilder<bool>(
         stream: _loginViewModel.outputIsAllInputsValid,
         builder: (context, snapshot) {
-          return TextButton(
-            onPressed: (snapshot.data ?? false)
-                ? () {
-                    _loginViewModel.login();
-                  }
-                : null,
-            style: const ButtonStyle(),
-            child: Container(
-              padding: const EdgeInsets.all(AppPadding.p20),
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(AppSize.s5),
-              ),
-              child: const Text(
-                'SE CONNECTER',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
+          return SizedBox(
+            width: MediaQuery.of(context).size.width / 2,
+            child: MyTextButtonWidget(
+              onPressed: snapshot.data ?? false
+                  ? () {
+                      _loginViewModel.login();
+                    }
+                  : null,
+              textButton: 'SE CONNECTER',
             ),
           );
         });

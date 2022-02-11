@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class MyTextFormFieldWidget extends StatelessWidget {
   const MyTextFormFieldWidget({
     Key key,
-    this.textEditingController,
+    this.controller,
     this.initialValue,
-    this.textInputType,
+    this.keyboardType,
     this.hintText,
     this.labelText,
     this.errorText,
@@ -14,9 +14,9 @@ class MyTextFormFieldWidget extends StatelessWidget {
     this.readOnly = false,
     this.obscureText = false,
   }) : super(key: key);
-  final TextEditingController textEditingController;
+  final TextEditingController controller;
   final String initialValue;
-  final TextInputType textInputType;
+  final TextInputType keyboardType;
   final String hintText;
   final String labelText;
   final String errorText;
@@ -27,9 +27,9 @@ class MyTextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: textEditingController,
+      controller: controller,
       initialValue: initialValue,
-      keyboardType: textInputType,
+      keyboardType: keyboardType,
       autocorrect: false,
       decoration: InputDecoration(
         hintText: hintText,
