@@ -3,6 +3,13 @@
 Cartana Woocommerce application.
 
 # Changelog
+## 1.0.0+7
+### Améliorations
+- quelquels améliorations minieures
+
+### Bug Fixes
+- Corrections de certains bugs
+
 ## 1.0.0+6
 ### Améliorations
 - aucune amélioration
@@ -10,7 +17,6 @@ Cartana Woocommerce application.
 ### Bug Fixes
 - Corrections de certains bugs
 
-# Changelog
 ## 1.0.0+5
 ### Améliorations
 - aucune amélioration
