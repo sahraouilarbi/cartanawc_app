@@ -131,7 +131,7 @@ class APIService {
     String sortBy,
     String sortOrder = 'asc',
   }) async {
-    CustomerDetailModel customerDetailModel;
+    //CustomerDetailModel customerDetailModel;
     //String userRole = '';
 
     //final bool isLoggedIn = await SharedService.isLoggedIn();
