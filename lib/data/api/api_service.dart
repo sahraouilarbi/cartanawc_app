@@ -131,7 +131,7 @@ class APIService {
     String sortBy,
     String sortOrder = 'asc',
   }) async {
-    CustomerDetailModel customerDetailModel;
+    //CustomerDetailModel customerDetailModel;
     //String userRole = '';
 
     //final bool isLoggedIn = await SharedService.isLoggedIn();
@@ -141,10 +141,13 @@ class APIService {
     // }
 
     // ***
+    String _userRole = '';
     final _isUserLoggedIn = await _appPreferences.isUserLoggedIn();
-    final _userId = await _appPreferences.getUserId();
-    final _customerDetailModel = await getCustomerDetails(_userId);
-    final _userRole = _customerDetailModel.role;
+    if (_isUserLoggedIn) {
+      final _userId = await _appPreferences.getUserId();
+      final _customerDetailModel = await getCustomerDetails(_userId);
+      _userRole = _customerDetailModel.role;
+    }
     // ***
 
     List<ProductModel> products = <ProductModel>[];
@@ -251,15 +254,13 @@ class APIService {
   Future<CartResponseModel> getCartItem() async {
     CartResponseModel responseModel;
     final _userId = await _appPreferences.getUserId();
+    final Map<String, dynamic> params = {'user_id': _userId};
+    print('api_service -> getCartItem -> params : $params');
     try {
-      // final LoginResponseModel loginResponseModel =
-      //     await SharedService.loginDetails();
-      // if (loginResponseModel.data != null) {
-      //   _userId = loginResponseModel.data.id;
-      // }
-
-      final Response response =
-          await httpService.getRequest(_apiEndPoint.cart(_userId));
+      final Response response = await httpService.getRequest(
+        APIEndPoint.cart,
+        queryParameters: params,
+      );
       if (response.statusCode == 200) {
         responseModel =
             CartResponseModel.fromJson(response.data as Map<String, dynamic>);
@@ -267,26 +268,30 @@ class APIService {
     } on DioError catch (e) {
       printDebugMessage(e.response.toString());
     }
-
+    print('api_service -> getCartItems -> responseModel : $responseModel');
     return responseModel;
   }
 
   //***************************************************************************
   // Create Order
-  Future<bool> createOrder(OrderModel model) async {
-    // final LoginResponseModel loginResponseModel =
-    //     await SharedService.loginDetails();
-    // if (loginResponseModel.data != null) {
-    //   model.customer_id = loginResponseModel.data.id;
-    // }
+  Future<Map<String, dynamic>> createOrder(OrderModel model) async {
     model.customerId = await _appPreferences.getUserId();
-
+    Map<String, dynamic> myOrderCreated = <String, dynamic>{};
     bool isOrderCreated = false;
+    String orderNumber;
     try {
       final Response response =
           await httpService.postRequest(APIEndPoint.orders, model.toJson());
       if (response.statusCode == 201) {
+        final responseModel =
+            OrderModel.fromJson(response.data as Map<String, dynamic>);
+        orderNumber = responseModel.orderNumber;
         isOrderCreated = true;
+
+        myOrderCreated = {
+          'orderNumber': orderNumber,
+          'isOrderCreated': isOrderCreated,
+        };
       }
     } on DioError catch (e) {
       if (e.response.statusCode == 404) {
@@ -297,7 +302,7 @@ class APIService {
       }
     }
 
-    return isOrderCreated;
+    return myOrderCreated;
   }
 
   //***************************************************************************

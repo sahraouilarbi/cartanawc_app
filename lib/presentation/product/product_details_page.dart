@@ -5,6 +5,7 @@ import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/common/expanded_text.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
@@ -14,7 +15,6 @@ import 'package:cartanawc_app/presentation/common/image_network_loading_progress
 import 'package:cartanawc_app/presentation/common/no_image_placeholder.dart';
 import 'package:cartanawc_app/presentation/common/row_montant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -29,7 +29,7 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final AppPreferences _appPreferences = instance<AppPreferences>();
-  bool isUserLoggedIn;
+  bool isUserLoggedIn = false;
 
   int qty = 0;
   double productPrice;
@@ -43,10 +43,21 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 
   final myController = TextEditingController();
+
+  _bind() {
+    _appPreferences.isUserLoggedIn().then((value) {
+      setState(() {
+        isUserLoggedIn = value;
+      });
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _bind();
 
     authProvider = Provider.of<AuthProvider>(context, listen: false);
 
@@ -143,7 +154,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 //visible: widget.data.price != '',
                 //visible: authProvider.loggedInStatus == Status.loggedIn,
                 // TODO isUserLoggedIn
-                // visible: isUserLoggedIn,
+                visible: isUserLoggedIn,
                 child: Container(
                   color: Colors.white,
                   child: Row(
@@ -194,6 +205,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               const SizedBox(height: AppSize.s10),
               Visibility(
                 //visible: authProvider.loggedInStatus == Status.loggedIn,
+                visible: isUserLoggedIn,
                 child: Column(
                   children: [
                     //*** Stepper
@@ -222,12 +234,62 @@ class _ProductDetailsState extends State<ProductDetails> {
 
                     const SizedBox(height: AppSize.s10),
 
+                    MyTextButtonWidget(
+                      onPressed: () {
+                        if (qty == 0) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text('Ajouter une quantité > 0'),
+                            backgroundColor: ColorManager.red,
+                          ));
+                        } else if (qty > 0) {
+                          setState(() {
+                            inProgress = !inProgress;
+                          });
+
+                          Provider.of<LoaderProvider>(context, listen: false)
+                              .setLoadingStatus(status: true);
+                          final cartProvider =
+                              Provider.of<CartProvider>(context, listen: false);
+                          widget.cartProducts.productId = widget.data.id;
+                          widget.cartProducts.variationId =
+                              widget.data.variableProduct != null
+                                  ? widget.data.variableProduct.id
+                                  : 0;
+                          //TODO
+                          cartProvider.addToCart(
+                            widget.cartProducts,
+                            (val) {
+                              setState(() {
+                                inProgress = !inProgress;
+                              });
+                              final snackBar = SnackBar(
+                                content:
+                                    const Text('Produit ajoutés au panier'),
+                                backgroundColor: ColorManager.greenAccent,
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              Provider.of<LoaderProvider>(context,
+                                      listen: false)
+                                  .setLoadingStatus(status: false);
+                            },
+                          );
+                        }
+                      },
+                      backgroundColor: ColorManager.blue,
+                      textButton: 'AJOUTER AU PANIER',
+                      hasIcon: true,
+                      svgIconSrc: 'assets/images/shopping_cart.svg',
+                      inProgress: inProgress,
+                    ),
+/**
                     TextButton(
                       onPressed: () {
                         if (qty > 0) {
                           setState(() {
                             inProgress = !inProgress;
                           });
+
                           Provider.of<LoaderProvider>(context, listen: false)
                               .setLoadingStatus(status: true);
                           final cartProvider =
@@ -283,6 +345,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ),
                             ),
                     ),
+    **/
                   ],
                 ),
               ),

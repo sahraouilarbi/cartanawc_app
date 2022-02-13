@@ -70,6 +70,7 @@ class AppMargin {
 class AppDuration {
   // tm = Time in millisecond
   // ts = Time in second
-  static const int tm750 = 750;
-  static const int ts2 = 2;
+  static const int ms300 = 300;
+  static const int ms750 = 750;
+  static const int s2 = 2;
 }

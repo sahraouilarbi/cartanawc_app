@@ -1,5 +1,6 @@
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
@@ -24,32 +25,45 @@ Widget tabViewExplorer(BuildContext context) {
             ),
             SizedBox(
               height: AppSize.s120,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(AppSize.s0_8),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(AppSize.s5),
-                        ),
-                      ),
-                      margin: const EdgeInsets.all(AppMargin.m5),
-                      height: AppSize.s120,
-                      width: AppSize.s80,
-                      child: Center(
-                        child: Text(
-                          "Mag ${index + 1}",
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    );
-                  }),
+              width: double.infinity,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  magasinCosmetiqueNeabByWidget('Boutique H'),
+                  magasinCosmetiqueNeabByWidget('Glamour'),
+                  magasinCosmetiqueNeabByWidget('CHANEL'),
+                  magasinCosmetiqueNeabByWidget('Petit Coeur'),
+                  magasinCosmetiqueNeabByWidget('La Princesse'),
+                  magasinCosmetiqueNeabByWidget('Rima'),
+                  magasinCosmetiqueNeabByWidget('Coin beauté'),
+                  magasinCosmetiqueNeabByWidget('Beauty'),
+                ],
+              ),
             ),
           ],
         )
       : const Center(
           child: CircularProgressIndicator(),
         );
+}
+
+Container magasinCosmetiqueNeabByWidget(String title) {
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.black.withOpacity(AppSize.s0_8),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(AppSize.s5),
+      ),
+    ),
+    margin: const EdgeInsets.all(AppMargin.m5),
+    height: AppSize.s120,
+    width: AppSize.s80,
+    child: Center(
+      child: Text(
+        title,
+        style: const TextStyle(color: Colors.white),
+        textAlign: TextAlign.center,
+      ),
+    ),
+  );
 }

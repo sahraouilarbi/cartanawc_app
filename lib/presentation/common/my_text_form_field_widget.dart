@@ -4,28 +4,29 @@ import 'package:flutter/material.dart';
 class MyTextFormFieldWidget extends StatelessWidget {
   const MyTextFormFieldWidget({
     Key key,
-    this.textEditingController,
-    this.initialValue,
-    this.textInputType,
+    this.controller,
+    this.keyboardType = TextInputType.text,
     this.hintText,
     this.labelText,
     this.errorText,
     this.suffixIcon,
+    this.readOnly = false,
+    this.obscureText = false,
   }) : super(key: key);
-  final TextEditingController textEditingController;
-  final String initialValue;
-  final TextInputType textInputType;
+  final TextEditingController controller;
+  final TextInputType keyboardType;
   final String hintText;
   final String labelText;
   final String errorText;
   final IconButton suffixIcon;
+  final bool readOnly;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: textEditingController,
-      initialValue: initialValue,
-      keyboardType: textInputType,
+      controller: controller,
+      keyboardType: keyboardType,
       autocorrect: false,
       decoration: InputDecoration(
         hintText: hintText,
@@ -44,6 +45,8 @@ class MyTextFormFieldWidget extends StatelessWidget {
         ),
         suffixIcon: suffixIcon,
       ),
+      readOnly: readOnly,
+      obscureText: obscureText,
     );
   }
 }

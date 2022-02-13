@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/checkout/verify_address.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
@@ -6,8 +7,8 @@ import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/progress_hud.dart';
 import 'package:cartanawc_app/presentation/cart/cart_product_widget.dart';
 import 'package:cartanawc_app/presentation/common/row_montant.dart';
-import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
@@ -26,142 +27,136 @@ class _CartPageState extends State<CartPage> {
         centerTitle: true,
       ),
       body: FutureBuilder(
-          future: Future.value(true), //SharedService.isLoggedIn(),
-          builder: (BuildContext context, AsyncSnapshot<bool> loginModel) {
-            if (loginModel.hasData) {
-              if (loginModel.data) {
-                return Consumer<LoaderProvider>(
-                    builder: (context, loaderProvider, child) {
-                  return Scaffold(
-                    body: ProgressHUD(
-                      isAsyncCall: loaderProvider.isApiCallProcess,
-                      opacity: 0.3,
-                      child: SingleChildScrollView(
-                        child: _cartItemsList(),
-                      ),
+        future: Future.value(true), //SharedService.isLoggedIn(),
+        builder: (BuildContext context, AsyncSnapshot<bool> loginModel) {
+          if (loginModel.hasData) {
+            if (loginModel.data) {
+              return Consumer<LoaderProvider>(
+                  builder: (context, loaderProvider, child) {
+                return Scaffold(
+                  body: ProgressHUD(
+                    isAsyncCall: loaderProvider.isApiCallProcess,
+                    opacity: 0.3,
+                    child: SingleChildScrollView(
+                      child: _cartItemsList(),
                     ),
-                  );
-                });
-              }
+                  ),
+                );
+              });
             }
-            return const Center(child: CircularProgressIndicator());
-          }),
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
+      ),
     );
   }
 
   Widget _cartItemsList() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: const Border(bottom: BorderSide()),
-                color: ColorManager.blue,
+        // Titre de la page : 'Panier' + Icon Shopping cart
+        Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppPadding.p10,
+            horizontal: AppPadding.p30,
+          ),
+          decoration: BoxDecoration(
+            border: const Border(bottom: BorderSide()),
+            color: ColorManager.blue,
+          ),
+          child: Row(
+            children: [
+              SvgPicture.asset('assets/images/shopping_cart.svg',
+                  color: Colors.white, fit: BoxFit.cover),
+              const SizedBox(width: AppSize.s5),
+              const Text(
+                'PANIER',
+                style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
-              padding: const EdgeInsets.symmetric(
-                  vertical: AppPadding.p10, horizontal: AppPadding.p30),
+            ],
+          ),
+        ),
+
+        // contenue du panier
+        Consumer<CartProvider>(
+          builder: (context, cartModel, child) {
+            if (cartModel.cartItems != null && cartModel.cartItems.isNotEmpty) {
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: const ClampingScrollPhysics(),
+                itemCount: cartModel.cartItems.length,
+                itemBuilder: (context, index) {
+                  return CartProduct(data: cartModel.cartItems[index]);
+                },
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ),
+
+        //Button mettre à jour le panier
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p10),
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {
+                Provider.of<LoaderProvider>(context, listen: false)
+                    .setLoadingStatus(status: true);
+                final cartProvider =
+                    Provider.of<CartProvider>(context, listen: false);
+                cartProvider.updateCart((val) {
+                  Provider.of<LoaderProvider>(context, listen: false)
+                      .setLoadingStatus(status: false);
+                });
+              },
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
-                  Icon(
-                    Icons.shopping_cart,
-                    color: Colors.white,
+                  Icon(Icons.sync),
+                  SizedBox(
+                    width: AppSize.s5,
                   ),
-                  SizedBox(width: AppSize.s5),
-                  Text(
-                    'PANIER',
-                    style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
+                  Text('Mettre à jour le panier'),
                 ],
               ),
             ),
-            Consumer<CartProvider>(builder: (context, cartModel, child) {
-              if (cartModel.cartItems != null &&
-                  cartModel.cartItems.isNotEmpty) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: cartModel.cartItems.length,
-                  itemBuilder: (context, index) {
-                    return CartProduct(data: cartModel.cartItems[index]);
-                  },
-                );
-              }
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }),
-            Padding(
-              padding: const EdgeInsets.all(AppPadding.p10),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    Provider.of<LoaderProvider>(context, listen: false)
-                        .setLoadingStatus(status: true);
-                    final cartProvider =
-                        Provider.of<CartProvider>(context, listen: false);
-                    cartProvider.updateCart((val) {
-                      Provider.of<LoaderProvider>(context, listen: false)
-                          .setLoadingStatus(status: false);
-                    });
-                  },
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: const [
-                      Icon(
-                        Icons.sync,
-                      ),
-                      Text('Mettre à jour le panier'),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              width: MediaQuery.of(context).size.width,
-              height: AppSize.s150,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p30),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Divider(color: Colors.black),
-                    Consumer<CartProvider>(
-                      builder: (context, cartModel, child) {
-                        return rowMontant(
-                            textLabel: 'TOTAL',
-                            valeurMontant: cartModel.totalAmount,
-                            fontSize: 18.0);
-                      },
-                    ),
-                    const SizedBox(height: AppSize.s10),
-                    textButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => VerifyAddress(),
-                          ),
-                        );
-                      },
-                      text: 'VALIDER LA COMMANDE',
-                      textColor: Colors.white,
-                      backgroundColor: ColorManager.greenAccent,
-                    ),
-                    const SizedBox(height: AppSize.s10),
-                  ],
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
+
+        const Divider(
+          height: AppSize.s60,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(AppSize.s10),
+          child: Consumer<CartProvider>(
+            builder: (context, cartModel, child) {
+              return rowMontant(
+                  textLabel: 'TOTAL',
+                  valeurMontant: cartModel.totalAmount,
+                  fontSize: 18.0);
+            },
+          ),
+        ),
+        const SizedBox(height: AppSize.s10),
+        MyTextButtonWidget(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VerifyAddress(),
+              ),
+            );
+          },
+          backgroundColor: ColorManager.greenAccent,
+          textButton: 'VALIDER LA COMMANDE',
+        ),
+        const SizedBox(height: AppSize.s20),
       ],
     );
   }

@@ -3,7 +3,6 @@ import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/presentation/product/product_details_page.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_expansion_tile.dart';

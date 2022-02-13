@@ -1,6 +1,5 @@
 import 'package:cartanawc_app/data/models/order_model.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/order/order_details_page.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,7 @@ class WidgetOrderItem extends StatelessWidget {
                 ),
               ),
               Text(
-                '${orderModel.dateCreated}',
+                '', //'${orderModel.dateCreated}',
                 style: const TextStyle(fontSize: 14.0),
               ),
             ],
@@ -50,14 +49,14 @@ class WidgetOrderItem extends StatelessWidget {
                 textColor: Colors.white,
                 backgroundColor: Colors.blueAccent,
                 onPressed: () {
-                  Navigator.push(
+                  /*Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => OrderDetailsPage(
                         orderId: orderModel.id,
                       ),
                     ),
-                  );
+                  );*/
                 },
               ),
             ],

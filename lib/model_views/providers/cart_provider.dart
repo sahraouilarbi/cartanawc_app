@@ -16,6 +16,7 @@ class CartProvider with ChangeNotifier {
   CustomerDetailModel _customerDetailModel;
   OrderModel _orderModel = OrderModel();
   bool _isOrderCreated = false;
+  String _orderNumber;
 
   CustomerDetailModel get customerDetailModel => _customerDetailModel;
   List<CartItemModel> get cartItems => _cartItems;
@@ -28,14 +29,18 @@ class CartProvider with ChangeNotifier {
 
   bool get isOrderCreated => _isOrderCreated;
 
+  String get orderNumber => _orderNumber;
+
   CartProvider() {
     _apiService = APIService();
     _cartItems = <CartItemModel>[];
+    //fetchCartItems();
   }
 
   void resetStream() {
     _apiService = APIService();
     _cartItems = <CartItemModel>[];
+    //fetchCartItems();
   }
 
   Future<void> addToCart(CartProductsModel product, Function onCallBack) async {
@@ -168,17 +173,22 @@ class CartProvider with ChangeNotifier {
       _orderModel.lineItems = <OrderLineItemsModel>[];
     }
     for (final element in _cartItems) {
-      _orderModel.lineItems.add(OrderLineItemsModel(
-        productId: element.productId,
-        quantity: element.qty,
-        variationId: element.variationId,
-      ));
+      _orderModel.lineItems.add(
+        OrderLineItemsModel(
+          productId: element.productId,
+          quantity: element.qty,
+          variationId: element.variationId,
+        ),
+      );
     }
-    await _apiService.createOrder(orderModel).then((value) {
-      if (value) {
-        _isOrderCreated = true;
-        notifyListeners();
-      }
-    });
+    await _apiService.createOrder(orderModel).then(
+      (orderCreated) {
+        if (orderCreated['isOrderCreated'] == true) {
+          _isOrderCreated = true;
+          _orderNumber = orderCreated['orderNumber'] as String;
+          notifyListeners();
+        }
+      },
+    );
   }
 }

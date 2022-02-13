@@ -6,9 +6,9 @@ class BillingModel {
     this.address1,
     this.address2,
     this.city,
+    this.state,
     this.postcode,
     this.country,
-    this.state,
     this.email,
     this.phone,
   });
@@ -18,9 +18,9 @@ class BillingModel {
   String address1;
   String address2;
   String city;
+  String state;
   String postcode;
   String country;
-  String state;
   String email;
   String phone;
   BillingModel.fromJson(Map<String, dynamic> json) {
@@ -30,9 +30,9 @@ class BillingModel {
     address1 = json['address_1'] as String;
     address2 = json['address_2'] as String;
     city = json['city'] as String;
+    state = json['state'] as String;
     postcode = json['postcode'] as String;
     country = json['country'] as String;
-    state = json['state'] as String;
     email = json['email'] as String;
     phone = json['phone'] as String;
   }
@@ -44,9 +44,9 @@ class BillingModel {
     data['address_1'] = address1;
     data['address_2'] = address2;
     data['city'] = city;
+    data['state'] = state;
     data['postcode'] = postcode;
     data['country'] = country;
-    data['state'] = state;
     data['email'] = email;
     data['phone'] = phone;
     return data;

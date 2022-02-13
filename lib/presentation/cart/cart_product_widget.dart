@@ -21,6 +21,13 @@ class _CartProductState extends State<CartProduct> {
   double montant;
   TextEditingController myController = TextEditingController();
   @override
+  void dispose() {
+    // TODO: implement dispose
+    myController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       elevation: AppSize.s0_5,

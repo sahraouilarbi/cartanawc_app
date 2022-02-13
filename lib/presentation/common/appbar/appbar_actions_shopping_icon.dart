@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
@@ -15,8 +16,8 @@ class AppBarActionShoppingIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CartProvider>(
       builder: (context, cartModel, child) {
-        return IconButton(
-          onPressed: () {
+        return GestureDetector(
+          onTap: () {
             if (cartModel.cartItems.isEmpty) {
               final snackBar = SnackBar(
                 content: const Text('Panier vide!'),
@@ -33,40 +34,21 @@ class AppBarActionShoppingIcon extends StatelessWidget {
               );
             }
           },
-          icon: Stack(
-            children: [
-              SvgPicture.asset(
+          child: Badge(
+            position: BadgePosition.topEnd(top: AppSize.s0, end: AppSize.s0),
+            badgeContent: Text(
+              '${cartModel.cartItems.length}',
+              style: const TextStyle(color: Colors.white),
+            ),
+            toAnimate: false,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSize.s10),
+              child: SvgPicture.asset(
                 'assets/images/shopping_cart.svg',
-                color:
-                    cartModel.cartItems.isNotEmpty ? Colors.white : Colors.grey,
+                color: cartModel.cartItems.isEmpty ? Colors.grey : Colors.white,
                 fit: BoxFit.cover,
               ),
-              Visibility(
-                visible: cartModel.cartItems.isNotEmpty,
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppPadding.p2_5,
-                      horizontal: AppPadding.p5,
-                    ),
-                    decoration: const BoxDecoration(
-                      color: Colors.redAccent,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(AppSize.s20),
-                      ),
-                    ),
-                    child: Text(
-                      cartModel.cartItems.length.toString(),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 11.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         );
       },

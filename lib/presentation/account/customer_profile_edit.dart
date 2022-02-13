@@ -2,7 +2,7 @@ import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
 import 'package:cartanawc_app/presentation/account/customer_profile_edit_viewmodel.dart';
 import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
-import 'package:cartanawc_app/presentation/common/text_form_field_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/drawer/drawer_anonymous_tile/drawer_anonymous_widget.dart';
@@ -107,8 +107,7 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
                             children: <Widget>[
                               // TextFormField Nom
                               MyTextFormFieldWidget(
-                                textEditingController: _nomController,
-                                textInputType: TextInputType.text,
+                                controller: _nomController,
                                 hintText: 'Nom de famille',
                                 labelText: 'Nom',
                                 errorText: (false)
@@ -120,8 +119,7 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Prénom
                               MyTextFormFieldWidget(
-                                textEditingController: _prenomController,
-                                textInputType: TextInputType.text,
+                                controller: _prenomController,
                                 hintText: 'Prénom',
                                 labelText: 'Préom',
                                 errorText: (false)
@@ -133,8 +131,7 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField type
                               MyTextFormFieldWidget(
-                                textEditingController: _typeController,
-                                textInputType: TextInputType.text,
+                                controller: _typeController,
                                 hintText: 'Type de compte',
                                 labelText: 'Type',
                                 errorText: (false)
@@ -146,8 +143,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Email
                               MyTextFormFieldWidget(
-                                textEditingController: _emailController,
-                                textInputType: TextInputType.emailAddress,
+                                controller: _emailController,
+                                keyboardType: TextInputType.emailAddress,
                                 hintText: 'email@example.com',
                                 labelText: 'Email',
                                 errorText: (false)
@@ -159,8 +156,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Téléphone
                               MyTextFormFieldWidget(
-                                textEditingController: _telephoneController,
-                                textInputType: TextInputType.phone,
+                                controller: _telephoneController,
+                                keyboardType: TextInputType.phone,
                                 hintText: '0550 xx xx xx',
                                 labelText: 'Téléphone',
                                 errorText: (false)
@@ -172,8 +169,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Adresse
                               MyTextFormFieldWidget(
-                                textEditingController: _adresseController,
-                                textInputType: TextInputType.streetAddress,
+                                controller: _adresseController,
+                                keyboardType: TextInputType.streetAddress,
                                 hintText: 'num, rue Nom de la rue',
                                 labelText: 'Adresse',
                                 errorText: (false)
@@ -185,9 +182,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Complement d'adresse
                               MyTextFormFieldWidget(
-                                textEditingController:
-                                    _complementAdresseController,
-                                textInputType: TextInputType.streetAddress,
+                                controller: _complementAdresseController,
+                                keyboardType: TextInputType.streetAddress,
                                 hintText: "Complement d'adresse",
                                 labelText: "Complement d'adresse",
                               ),
@@ -196,8 +192,7 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField Wilaya
                               MyTextFormFieldWidget(
-                                textEditingController: _wilayaController,
-                                textInputType: TextInputType.text,
+                                controller: _wilayaController,
                                 hintText: 'Alger',
                                 labelText: 'Wilaya',
                                 errorText: (false)
@@ -209,8 +204,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
 
                               // TextFormField CodePostal
                               MyTextFormFieldWidget(
-                                textEditingController: _codePostalController,
-                                textInputType: TextInputType.number,
+                                controller: _codePostalController,
+                                keyboardType: TextInputType.number,
                                 hintText: '16000',
                                 labelText: 'Code Postal',
                                 errorText: (false)
