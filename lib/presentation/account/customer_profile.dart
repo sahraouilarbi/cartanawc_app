@@ -75,7 +75,11 @@ class _CustomerProfileState extends State<CustomerProfileView> {
                       // Customer Image profil
                       CircleAvatar(
                         radius: AppSize.s75,
-                        child: Image.network(snapshot.data.avatarUrl),
+                        child: Image.network(
+                          snapshot.data.avatarUrl ??
+                              'assets/images/no_image_placeholder',
+                          fit: BoxFit.cover,
+                        ),
                       ),
 
                       const SizedBox(height: AppSize.s20),
