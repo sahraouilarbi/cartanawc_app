@@ -34,13 +34,13 @@ class CartProvider with ChangeNotifier {
   CartProvider() {
     _apiService = APIService();
     _cartItems = <CartItemModel>[];
-    fetchCartItems();
+    //fetchCartItems();
   }
 
   void resetStream() {
     _apiService = APIService();
     _cartItems = <CartItemModel>[];
-    fetchCartItems();
+    //fetchCartItems();
   }
 
   Future<void> addToCart(CartProductsModel product, Function onCallBack) async {
