@@ -9,6 +9,9 @@ class APIEndPoint {
   // WooCommerce Categories endpoint
   static const String categories = '/wp-json/wc/v3/products/categories';
 
+  // WooCommerce cart endpoint
+  static const String cart = 'wp-json/wc/v3/cart';
+
   // WooCommerce addtocart endpoint
   static const String addToCart = '/wp-json/wc/v3/addtocart';
 
@@ -27,11 +30,6 @@ class APIEndPoint {
   // WooCommerce Customer endpoint
   String customer(int userId) {
     return '/wp-json/wc/v3/customers/$userId';
-  }
-
-  // WooCommerce Cart for current user endpoint
-  String cart(int userId) {
-    return '/wp-json/wc/v3/cart/$userId';
   }
 
   // WooCommerce One Order endpoint

@@ -1,10 +1,8 @@
 import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/checkout/checkout_base.dart';
-import 'package:cartanawc_app/presentation/accueil/accueil_view.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
-import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:cartanawc_app/presentation/tableau_de_bord/tableau_de_bord_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -69,10 +67,10 @@ class _OrderSuccessWidgetState
                     padding: const EdgeInsets.symmetric(
                         vertical: AppPadding.p25, horizontal: AppPadding.p15),
                     child: Text(
-                        //TODO Inserer numéro de Commande à ?????
-                        'Votre commande #????? a été passée, vous serez contacté par le service commercial.',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline5),
+                      'Votre commande ${orderModel.orderNumber} a été passée, vous serez contacté par le service commercial.',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
                   ),
                   MyTextButtonWidget(
                     onPressed: () {
