@@ -1,14 +1,15 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
+import 'package:cartanawc_app/presentation/login/login.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
-import 'package:cartanawc_app/data/api_service.dart';
+import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/customer_detail_model.dart';
-import 'package:cartanawc_app/presentation/home/home_view.dart';
-import 'package:cartanawc_app/presentation/login/login_page.dart';
+import 'package:cartanawc_app/presentation/accueil/accueil_view.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/presentation/common/form_helper.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/drawer/drawer_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_anonymous_tile/drawer_anonymous_widget.dart';
 import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
 import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,9 @@ class _MyAccountPageState extends State<MyAccountPage> {
             if (loginModel.data) {
               return _customerDetailsView(context);
             } else {
-              return LoginPage();
+              //return LoginPage();
+              initLoginModule();
+              return const LoginView();
             }
           }
           return const Center(
@@ -142,7 +145,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                               Navigator.pop(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
+                                  builder: (context) => const AccueilPage(),
                                 ),
                               );
                             },

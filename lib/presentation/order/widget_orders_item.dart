@@ -33,7 +33,7 @@ class WidgetOrderItem extends StatelessWidget {
                 ),
               ),
               Text(
-                '${orderModel.orderDateCreated}',
+                '${orderModel.dateCreated}',
                 style: const TextStyle(fontSize: 14.0),
               ),
             ],
@@ -54,7 +54,7 @@ class WidgetOrderItem extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => OrderDetailsPage(
-                        orderId: orderModel.orderId,
+                        orderId: orderModel.id,
                       ),
                     ),
                   );

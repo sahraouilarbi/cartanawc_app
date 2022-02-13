@@ -1,6 +1,8 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/data/models/customer_detail_model.dart';
 import 'package:cartanawc_app/data/models/login_model.dart';
-import 'package:cartanawc_app/data/api_service.dart';
+import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:flutter/material.dart';
 
 enum Status {
@@ -14,23 +16,21 @@ enum Status {
 }
 
 class AuthProvider with ChangeNotifier {
+  final APIService _apiService = instance<APIService>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
+
+  CustomerDetailModel _customerDetailModel;
+  CustomerDetailModel get customerDetailModel => _customerDetailModel;
+
   Status loggedInStatus = Status.notLoggedIn;
   Status registeredInStatus = Status.notRegistered;
 
-  //Status get loggedInStatus => _loggedInStatus;
-  // set loggedInStatus(Status value) {
-  //   _loggedInStatus = value;
-  // }
-
-  // Status get registeredInStatus => _registeredInStatus;
-  // set registeredInStatus(Status value) {
-  //   _registeredInStatus = value;
-  // }
-
-  final APIService _apiService = APIService();
-  CustomerDetailModel _customerDetailModel;
-
-  CustomerDetailModel get customerDetailModel => _customerDetailModel;
+  Future<void> isUserLoggedIn() async {
+    loggedInStatus = await _appPreferences.isUserLoggedIn()
+        ? Status.loggedIn
+        : Status.notLoggedIn;
+    notifyListeners();
+  }
 
   Future<LoginResponseModel> login(String username, String password) async {
     loggedInStatus = Status.authenticating;
@@ -39,7 +39,7 @@ class AuthProvider with ChangeNotifier {
     LoginResponseModel loginResponseModel;
 
     try {
-      loginResponseModel = await _apiService.customerLogin(username, password);
+      loginResponseModel = await _apiService.login(username, password);
       if (loginResponseModel.data.id != null) {
         loggedInStatus = Status.loggedIn;
         notifyListeners();
@@ -49,7 +49,7 @@ class AuthProvider with ChangeNotifier {
       }
     } on Exception catch (e) {
       // TODO
-      debugPrint("customer_provider line 47 : $e");
+      debugPrint("auth_provider line 47 : $e");
     }
     return loginResponseModel;
   }

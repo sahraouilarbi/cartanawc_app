@@ -13,7 +13,7 @@ class LoginResponseModel {
 
   LoginResponseModel.fromJson(Map<String, dynamic> json) {
     success = json['success'] as bool;
-    statusCode = json['statuscode'] as int;
+    statusCode = json['statusCode'] as int;
     code = json['code'] as String;
     message = json['message'] as String;
     data = json['data'] != null
@@ -24,7 +24,7 @@ class LoginResponseModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
-    data['statuscode'] = statusCode;
+    data['statusCode'] = statusCode;
     data['code'] = code;
     data['message'] = message;
     if (this.data != null) {
@@ -57,8 +57,8 @@ class DataModel {
     id = json['id'] as int;
     email = json['email'] as String;
     nicename = json['nicename'] as String;
-    firstName = json['firstname'] as String;
-    lastName = json['lastname'] as String;
+    firstName = json['firstName'] as String;
+    lastName = json['lastName'] as String;
     displayName = json['displayName'] as String;
   }
   Map<String, dynamic> toJson() {
@@ -67,8 +67,8 @@ class DataModel {
     data['id'] = id;
     data['email'] = email;
     data['nicename'] = nicename;
-    data['firstname'] = firstName;
-    data['lastname'] = lastName;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
     data['displayName'] = displayName;
     return data;
   }

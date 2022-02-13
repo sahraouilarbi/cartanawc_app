@@ -1,3 +1,5 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/data/models/cart_request_model.dart';
 import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
@@ -12,6 +14,7 @@ import 'package:cartanawc_app/presentation/common/image_network_loading_progress
 import 'package:cartanawc_app/presentation/common/no_image_placeholder.dart';
 import 'package:cartanawc_app/presentation/common/row_montant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -25,6 +28,9 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+  final AppPreferences _appPreferences = instance<AppPreferences>();
+  bool isUserLoggedIn;
+
   int qty = 0;
   double productPrice;
   double montant = 0;
@@ -135,7 +141,9 @@ class _ProductDetailsState extends State<ProductDetails> {
               // Prix
               Visibility(
                 //visible: widget.data.price != '',
-                visible: authProvider.loggedInStatus == Status.loggedIn,
+                //visible: authProvider.loggedInStatus == Status.loggedIn,
+                // TODO isUserLoggedIn
+                // visible: isUserLoggedIn,
                 child: Container(
                   color: Colors.white,
                   child: Row(
@@ -185,7 +193,7 @@ class _ProductDetailsState extends State<ProductDetails> {
 
               const SizedBox(height: AppSize.s10),
               Visibility(
-                visible: authProvider.loggedInStatus == Status.loggedIn,
+                //visible: authProvider.loggedInStatus == Status.loggedIn,
                 child: Column(
                   children: [
                     //*** Stepper
@@ -258,10 +266,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                       child: !inProgress
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('AJOUTER AU PANIER'),
-                                SizedBox(width: AppSize.s5),
-                                Icon(Icons.add_shopping_cart)
+                              children: [
+                                const Text('AJOUTER AU PANIER'),
+                                const SizedBox(width: AppSize.s5),
+                                SvgPicture.asset(
+                                  'assets/images/shopping_cart.svg',
+                                  color: Colors.white,
+                                  fit: BoxFit.cover,
+                                ),
+                                //Icon(Icons.add_shopping_cart)
                               ],
                             )
                           : const Center(

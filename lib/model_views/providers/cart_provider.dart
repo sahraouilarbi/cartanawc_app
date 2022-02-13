@@ -1,14 +1,16 @@
-import 'package:cartanawc_app/data/api_service.dart';
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/billing_model.dart';
 import 'package:cartanawc_app/data/models/cart_request_model.dart';
 import 'package:cartanawc_app/data/models/cart_response_model.dart';
 import 'package:cartanawc_app/data/models/customer_detail_model.dart';
 import 'package:cartanawc_app/data/models/order_model.dart';
 import 'package:cartanawc_app/data/models/shipping_model.dart';
-import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:flutter/material.dart';
 
 class CartProvider with ChangeNotifier {
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   APIService _apiService;
   List<CartItemModel> _cartItems;
   CustomerDetailModel _customerDetailModel;
@@ -76,9 +78,10 @@ class CartProvider with ChangeNotifier {
   }
 
   Future<void> fetchCartItems() async {
-    final bool isLoggedIn = await SharedService.isLoggedIn();
+    //final bool isLoggedIn = await SharedService.isLoggedIn();
+    final isUserLoggedIn = await _appPreferences.isUserLoggedIn();
     if (_cartItems == null) resetStream();
-    if (isLoggedIn) {
+    if (isUserLoggedIn) {
       await _apiService.getCartItem().then((cartResponseModel) {
         if (cartResponseModel.data != null) {
           _cartItems.clear();
@@ -138,7 +141,9 @@ class CartProvider with ChangeNotifier {
 
   Future fetchShippingDetails() async {
     _customerDetailModel ??= CustomerDetailModel();
-    _customerDetailModel = await _apiService.customerDetails();
+    final userId = await _appPreferences.getUserId();
+    _customerDetailModel = await _apiService
+        .getCustomerDetails(userId); //_apiService.customerDetails();
     notifyListeners();
   }
 
@@ -160,10 +165,10 @@ class CartProvider with ChangeNotifier {
     }
 
     if (orderModel.lineItems == null) {
-      _orderModel.lineItems = <LineItemsModel>[];
+      _orderModel.lineItems = <OrderLineItemsModel>[];
     }
     for (final element in _cartItems) {
-      _orderModel.lineItems.add(LineItemsModel(
+      _orderModel.lineItems.add(OrderLineItemsModel(
         productId: element.productId,
         quantity: element.qty,
         variationId: element.variationId,

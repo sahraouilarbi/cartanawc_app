@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/data/api_service.dart';
+import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +61,7 @@ class ProductProvider with ChangeNotifier {
       strSearch: strSearch,
       tagName: tagName,
       pageNumber: pageNumber,
-      pageSize: pageSize,
+      perPage: pageSize,
       categoryId: categoryId,
       sortBy: _sortBy.value,
       sortOrder: _sortBy.setOrder,

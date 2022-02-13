@@ -3,6 +3,7 @@ import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/cart/cart_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class AppBarActionShoppingIcon extends StatelessWidget {
@@ -34,10 +35,11 @@ class AppBarActionShoppingIcon extends StatelessWidget {
           },
           icon: Stack(
             children: [
-              Icon(
-                Icons.shopping_cart,
+              SvgPicture.asset(
+                'assets/images/shopping_cart.svg',
                 color:
                     cartModel.cartItems.isNotEmpty ? Colors.white : Colors.grey,
+                fit: BoxFit.cover,
               ),
               Visibility(
                 visible: cartModel.cartItems.isNotEmpty,

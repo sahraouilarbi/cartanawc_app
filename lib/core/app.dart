@@ -1,15 +1,18 @@
-import 'package:cartanawc_app/presentation/home/home_view.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
 import 'package:cartanawc_app/model_views/providers/order_provider.dart';
 import 'package:cartanawc_app/model_views/providers/product_provider.dart';
 import 'package:cartanawc_app/data/geolocator_service.dart';
+import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 class CartanaApp extends StatelessWidget {
+  factory CartanaApp() => instance;
+  const CartanaApp._internal();
+  static const CartanaApp instance = CartanaApp._internal();
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -33,20 +36,19 @@ class CartanaApp extends StatelessWidget {
         // ChangeNotifierProvider(
         //   create: (context) => CustomerProvider(),
         // ),
-
         FutureProvider(
           create: (context) => GeoLocatorService().getLocation(),
+          initialData: null,
         ),
       ],
-      child: OverlaySupport(
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Cartana',
-          theme: ThemeData(
-            primaryColor: Colors.black,
-            primarySwatch: Colors.blue,
-          ),
-          home: const HomePage(),
+      child: MaterialApp(
+        initialRoute: Routes.homeRoute,
+        onGenerateRoute: RouteGenerator.getRoute,
+        debugShowCheckedModeBanner: false,
+        title: 'Cartana',
+        theme: ThemeData(
+          primaryColor: Colors.black,
+          primarySwatch: Colors.blue,
         ),
       ),
     );

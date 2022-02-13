@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cartanawc_app/data/api_config.dart';
+import 'package:cartanawc_app/data/api/api_endpoint.dart';
 import 'package:cartanawc_app/presentation/common/utils.dart';
 import 'package:dio/dio.dart';
 
@@ -9,12 +9,11 @@ class HttpService {
   HttpService() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: APIConfig().baseUrl,
+        baseUrl: APIEndPoint().baseUrl,
         //connectTimeout: 5000,
         //receiveTimeout: 5000,
         headers: {
-          HttpHeaders.authorizationHeader:
-              'Basic ${APIConfig().consumerBasicAuth}',
+          HttpHeaders.authorizationHeader: 'Basic ${APIConsumer().basicAuth}',
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       ),

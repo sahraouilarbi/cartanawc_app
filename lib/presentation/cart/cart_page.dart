@@ -3,7 +3,6 @@ import 'package:cartanawc_app/presentation/checkout/verify_address.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
-import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:cartanawc_app/presentation/ressources/progress_hud.dart';
 import 'package:cartanawc_app/presentation/cart/cart_product_widget.dart';
 import 'package:cartanawc_app/presentation/common/row_montant.dart';
@@ -27,7 +26,7 @@ class _CartPageState extends State<CartPage> {
         centerTitle: true,
       ),
       body: FutureBuilder(
-          future: SharedService.isLoggedIn(),
+          future: Future.value(true), //SharedService.isLoggedIn(),
           builder: (BuildContext context, AsyncSnapshot<bool> loginModel) {
             if (loginModel.hasData) {
               if (loginModel.data) {

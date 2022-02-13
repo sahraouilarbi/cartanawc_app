@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "cartana_logo_bw.png",
+      "filename" : "LaunchImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "cartana_logo_bw@2x.png",
+      "filename" : "LaunchImage@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "cartana_logo_bw@3x.png",
+      "filename" : "LaunchImage@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
