@@ -5,7 +5,6 @@ import 'package:cartanawc_app/data/models/customer_detail_model.dart';
 import 'package:cartanawc_app/data/models/customer_model.dart';
 import 'package:cartanawc_app/data/models/login_model.dart';
 import 'package:cartanawc_app/data/models/meta_data_model.dart';
-import 'package:cartanawc_app/data/models/order_model.dart';
 import 'package:cartanawc_app/data/models/shipping_model.dart';
 import 'package:cartanawc_app/domain/entities/billing_entity.dart';
 import 'package:cartanawc_app/domain/entities/cart_response_entity.dart';
@@ -13,7 +12,7 @@ import 'package:cartanawc_app/domain/entities/categorie_entity.dart';
 import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
 import 'package:cartanawc_app/domain/entities/customer_entity.dart';
 import 'package:cartanawc_app/domain/entities/login_entity.dart';
-import 'package:cartanawc_app/domain/entities/order_entity.dart';
+import 'package:cartanawc_app/domain/entities/meta_data_entity.dart';
 import 'package:cartanawc_app/domain/entities/shipping_entity.dart';
 
 // LoginResponseModel
@@ -246,8 +245,8 @@ extension CustomerModelMapper on CustomerModel {
 
 // OrderMetaDataModel
 extension MetaDataModelMapper on MetaDataModel {
-  OrderMetaDataEntity toDomain() {
-    return OrderMetaDataEntity(
+  MetaDataEntity toDomain() {
+    return MetaDataEntity(
       id: id,
       key: key,
       value: value,
