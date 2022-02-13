@@ -74,6 +74,7 @@ class _OrderSuccessWidgetState
                   ),
                   MyTextButtonWidget(
                     onPressed: () {
+                      orderModel.resetStream();
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
