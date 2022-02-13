@@ -29,7 +29,7 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final AppPreferences _appPreferences = instance<AppPreferences>();
-  bool isUserLoggedIn;
+  bool isUserLoggedIn = false;
 
   int qty = 0;
   double productPrice;
@@ -43,10 +43,21 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 
   final myController = TextEditingController();
+
+  _bind() {
+    _appPreferences.isUserLoggedIn().then((value) {
+      setState(() {
+        isUserLoggedIn = value;
+      });
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _bind();
 
     authProvider = Provider.of<AuthProvider>(context, listen: false);
 
@@ -143,7 +154,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 //visible: widget.data.price != '',
                 //visible: authProvider.loggedInStatus == Status.loggedIn,
                 // TODO isUserLoggedIn
-                // visible: isUserLoggedIn,
+                visible: isUserLoggedIn,
                 child: Container(
                   color: Colors.white,
                   child: Row(
@@ -194,6 +205,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               const SizedBox(height: AppSize.s10),
               Visibility(
                 //visible: authProvider.loggedInStatus == Status.loggedIn,
+                visible: isUserLoggedIn,
                 child: Column(
                   children: [
                     //*** Stepper
@@ -224,7 +236,12 @@ class _ProductDetailsState extends State<ProductDetails> {
 
                     MyTextButtonWidget(
                       onPressed: () {
-                        if (qty > 0) {
+                        if (qty == 0) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text('Ajouter une quantité > 0'),
+                            backgroundColor: ColorManager.red,
+                          ));
+                        } else if (qty > 0) {
                           setState(() {
                             inProgress = !inProgress;
                           });
