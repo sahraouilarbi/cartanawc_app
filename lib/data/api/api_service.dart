@@ -282,7 +282,7 @@ class APIService {
       if (response.statusCode == 201) {
         final responseModel =
             OrderModel.fromJson(response.data as Map<String, dynamic>);
-        orderNumber = responseModel.number;
+        orderNumber = responseModel.orderNumber;
         isOrderCreated = true;
 
         myOrderCreated = {

@@ -184,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
 
               SharedService.setLoginDetails(ret);
 
-              Timer(const Duration(seconds: AppDuration.ts2), () {
+              Timer(const Duration(seconds: AppDuration.s2), () {
                 Navigator.of(context).popUntil((route) {
                   return _count++ == 2;
                 });
