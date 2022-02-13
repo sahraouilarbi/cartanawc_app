@@ -48,42 +48,6 @@ class _CartPageState extends State<CartPage> {
           return const Center(child: CircularProgressIndicator());
         },
       ),
-      bottomSheet: Container(
-        padding: const EdgeInsets.all(AppSize.s20),
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(AppSize.s18),
-            topRight: Radius.circular(AppSize.s18),
-          ),
-        ),
-        height: MediaQuery.of(context).size.height / 5,
-        child: Column(
-          children: [
-            Consumer<CartProvider>(
-              builder: (context, cartModel, child) {
-                return rowMontant(
-                    textLabel: 'TOTAL',
-                    valeurMontant: cartModel.totalAmount,
-                    fontSize: 18.0);
-              },
-            ),
-            const SizedBox(height: AppSize.s10),
-            MyTextButtonWidget(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => VerifyAddress(),
-                  ),
-                );
-              },
-              backgroundColor: ColorManager.greenAccent,
-              textButton: 'VALIDER LA COMMANDE',
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -164,7 +128,35 @@ class _CartPageState extends State<CartPage> {
             ),
           ),
         ),
-        SizedBox(height: MediaQuery.of(context).size.height / 5),
+
+        const Divider(
+          height: AppSize.s60,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(AppSize.s10),
+          child: Consumer<CartProvider>(
+            builder: (context, cartModel, child) {
+              return rowMontant(
+                  textLabel: 'TOTAL',
+                  valeurMontant: cartModel.totalAmount,
+                  fontSize: 18.0);
+            },
+          ),
+        ),
+        const SizedBox(height: AppSize.s10),
+        MyTextButtonWidget(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VerifyAddress(),
+              ),
+            );
+          },
+          backgroundColor: ColorManager.greenAccent,
+          textButton: 'VALIDER LA COMMANDE',
+        ),
+        const SizedBox(height: AppSize.s20),
       ],
     );
   }
