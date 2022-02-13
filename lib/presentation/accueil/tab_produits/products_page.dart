@@ -52,13 +52,14 @@ class _ProductPageState extends BasePageState<ProductPage> {
   void dispose() {
     // TODO: implement dispose
     _searchQuery.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
   void _onSearchChange() {
     final productList = Provider.of<ProductProvider>(context, listen: false);
     if (_debounce?.isActive ?? false) _debounce.cancel();
-    _debounce = Timer(const Duration(milliseconds: AppDuration.tm750), () {
+    _debounce = Timer(const Duration(milliseconds: AppDuration.ms750), () {
       productList.resetStreams();
       productList.setLoadingState(LoadMoreStatus.initial);
       productList.fetchProducts(_page,
