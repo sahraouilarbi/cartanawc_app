@@ -141,10 +141,13 @@ class APIService {
     // }
 
     // ***
+    String _userRole = '';
     final _isUserLoggedIn = await _appPreferences.isUserLoggedIn();
-    final _userId = await _appPreferences.getUserId();
-    final _customerDetailModel = await getCustomerDetails(_userId);
-    final _userRole = _customerDetailModel.role;
+    if (_isUserLoggedIn) {
+      final _userId = await _appPreferences.getUserId();
+      final _customerDetailModel = await getCustomerDetails(_userId);
+      _userRole = _customerDetailModel.role;
+    }
     // ***
 
     List<ProductModel> products = <ProductModel>[];
