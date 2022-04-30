@@ -21,6 +21,7 @@ Cartana Woocommerce application.
 - package: geolocator migrate 6.2.1->8.0.5 (30/04/2022)
 - package: provider migrate 5.0.0->6.0.2 (30/04/2022)
 - package: flutter_html migrate 2.0.0->2.2.1 (30/04/2022)
+- Création de abstract class APIService()
 
 
 ## 1.0.0+7

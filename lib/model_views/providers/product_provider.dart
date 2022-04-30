@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,8 @@ class ProductProvider with ChangeNotifier {
   }
 
   void resetStreams() {
-    _apiService = APIService();
+    //_apiService = APIServiceImpl();
+    _apiService = instance<APIService>();
     _productList = <ProductModel>[];
   }
 

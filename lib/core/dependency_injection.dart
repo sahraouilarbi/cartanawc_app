@@ -16,7 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 final instance = GetIt.instance;
 Future<void> initAppModule() async {
   // APIService
-  instance.registerLazySingleton<APIService>(() => APIService());
+  instance.registerLazySingleton<APIService>(() => APIServiceImpl());
 
   // SharedPreferences
   final sharedPrefs = await SharedPreferences.getInstance();

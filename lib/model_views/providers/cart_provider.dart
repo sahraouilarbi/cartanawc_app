@@ -32,13 +32,15 @@ class CartProvider with ChangeNotifier {
   String get orderNumber => _orderNumber;
 
   CartProvider() {
-    _apiService = APIService();
+    //_apiService = APIServiceImpl();
+    _apiService = instance<APIService>();
     _cartItems = <CartItemModel>[];
     //fetchCartItems();
   }
 
   void resetStream() {
-    _apiService = APIService();
+    //_apiService = APIServiceImpl();
+    _apiService = instance<APIService>();
     _cartItems = <CartItemModel>[];
     //fetchCartItems();
   }

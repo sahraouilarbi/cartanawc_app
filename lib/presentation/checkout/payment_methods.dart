@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/payment_method_model.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
@@ -24,7 +25,8 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
   void initState() {
     super.initState();
     currentPage = 1;
-    apiService = APIService();
+    //apiService = APIServiceImpl();
+    apiService = instance<APIService>();
     cartProvider = Provider.of<CartProvider>(context, listen: false);
     paymentGateways = apiService.getPaymentGateways();
   }

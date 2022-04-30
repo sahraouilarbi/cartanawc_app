@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/model_views/providers/product_provider.dart';
@@ -29,7 +30,8 @@ class _ProductPageState extends BasePageState<ProductPage> {
     SortBy('price', 'Price: High to low', 'desc'),
     SortBy('price', 'Price: low to High', 'asc'),
   ];
-  APIService apiService = APIService();
+  //APIService apiService = APIServiceImpl();
+  APIService apiService = instance<APIService>();
 
   @override
   void initState() {

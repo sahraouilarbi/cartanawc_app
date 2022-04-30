@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/data/models/order_detail_model.dart';
 import 'package:cartanawc_app/presentation/common/base_page.dart';
@@ -18,7 +19,8 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
   @override
   void initState() {
     super.initState();
-    apiService = APIService();
+    //apiService = APIServiceImpl();
+    apiService = instance<APIService>();
   }
 
   @override

@@ -30,7 +30,8 @@ class _MyAccountPageState extends State<MyAccountPage> {
   @override
   void initState() {
     super.initState();
-    apiService = APIService();
+    //apiService = APIServiceImpl();
+    apiService = instance<APIService>();
     authProvider = Provider.of<AuthProvider>(context, listen: false);
     fetchCustomerDetails = apiService.customerDetails();
   }
