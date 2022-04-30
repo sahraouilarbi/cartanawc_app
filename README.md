@@ -15,6 +15,13 @@ Cartana Woocommerce application.
 - package: google_maps_flutter migrate 2.0.0->2.0.9 (30/04/2022)
 - package: rxdart migrate 0.25.0->0.27.3 (30/04/2022)
 - package: shared_preferences migrate 2.0.6->2.0.7 (30/04/2022)
+- package: flutter_svg migrate 0.19.2+1->0.22.0 (30/04/2022)
+- package: flutter_html migrate 1.2.0->2.0.0 (30/04/2022)
+- package: flutter_native_splash migrate 0.3.2->1.2.3 (30/04/2022)
+- package: geolocator migrate 6.2.1->8.0.5 (30/04/2022)
+- package: provider migrate 5.0.0->6.0.2 (30/04/2022)
+- package: flutter_html migrate 2.0.0->2.2.1 (30/04/2022)
+
 
 ## 1.0.0+7
 ### Améliorations

@@ -26,26 +26,26 @@ dependencies:
   # updated -> 30/04/2022
   flutter_dotenv: ^5.0.2
   # updated -> 30/04/2022
-  flutter_html: ^1.2.0
-  #
-  flutter_native_splash: ^0.3.2
-  # updated -> 30/04/2022
-  flutter_svg: ^0.19.2+1
-  #
-  geolocator: ^6.2.1
+  flutter_html: ^2.2.1
+  ## updated 30/04/2022 ->
+  flutter_native_splash: ^1.2.3
+  ## updated -> 30/04/2022 ->
+  flutter_svg: ^0.22.0
+  # updated 30/04/2022
+  geolocator: ^8.0.5
   # updated-> 30/04/2022
   get_it: ^7.2.0
-  # updates -> 30/04/2022
+  ## updates -> 30/04/2022 ->
   google_maps_flutter: ^2.0.9
-  #
-  provider: ^5.0.0
+  # updated 30/04/2022
+  provider: ^6.0.2
   # updated 30/04/2022
   rxdart: ^0.27.3
-  # updated 30/04/2022
+  ## updated 30/04/2022 ->
   shared_preferences: ^2.0.7
 
 dev_dependencies:
-  analyzer: ^0.41.2
+  analyzer: ^0.41.1
   build_runner: ^1.10.0
   flutter_test:
     sdk: flutter
