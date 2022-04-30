@@ -1,5 +1,6 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/data/api/api_endpoint.dart';
 import 'package:cartanawc_app/data/http_service.dart';
 import 'package:cartanawc_app/data/models/cart_request_model.dart';
 import 'package:cartanawc_app/data/models/cart_response_model.dart';
@@ -10,9 +11,8 @@ import 'package:cartanawc_app/data/models/order_detail_model.dart';
 import 'package:cartanawc_app/data/models/order_model.dart';
 import 'package:cartanawc_app/data/models/payment_method_model.dart';
 import 'package:cartanawc_app/data/models/product_model.dart';
-import 'package:cartanawc_app/services/shared_service.dart';
-import 'package:cartanawc_app/data/api/api_endpoint.dart';
 import 'package:cartanawc_app/presentation/common/utils.dart';
+import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:dio/dio.dart';
 
 class APIService {
@@ -255,7 +255,6 @@ class APIService {
     CartResponseModel responseModel;
     final _userId = await _appPreferences.getUserId();
     final Map<String, dynamic> params = {'user_id': _userId};
-    print('api_service -> getCartItem -> params : $params');
     try {
       final Response response = await httpService.getRequest(
         APIEndPoint.cart,
@@ -268,7 +267,6 @@ class APIService {
     } on DioError catch (e) {
       printDebugMessage(e.response.toString());
     }
-    print('api_service -> getCartItems -> responseModel : $responseModel');
     return responseModel;
   }
 

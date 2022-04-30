@@ -44,7 +44,7 @@ class LoginViewModel extends BaseViewModel
   Sink get inputIsAllInputsValid => _isAllInputsValidStreamController.sink;
 
   @override
-  login() async {
+  Future<void> login() async {
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.popupLoadingState));
     (await _loginUsecase.execute(

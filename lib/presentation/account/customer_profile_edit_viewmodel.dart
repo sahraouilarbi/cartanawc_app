@@ -50,7 +50,7 @@ class CustomerProfileEditViewModel extends BaseViewModel
     super.dispose();
   }
 
-  updateCustomerProfile() {}
+  void updateCustomerProfile() {}
   // Inputs ******************************************************************
   @override
   void setNom(String nom) {

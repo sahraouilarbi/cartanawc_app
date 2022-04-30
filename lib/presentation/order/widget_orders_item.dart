@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/data/models/order_model.dart';
+import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
-import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:flutter/material.dart';
 
 class WidgetOrderItem extends StatelessWidget {
@@ -31,9 +31,9 @@ class WidgetOrderItem extends StatelessWidget {
                   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ),
-              Text(
+              const Text(
                 '', //'${orderModel.dateCreated}',
-                style: const TextStyle(fontSize: 14.0),
+                style: TextStyle(fontSize: 14.0),
               ),
             ],
           ),

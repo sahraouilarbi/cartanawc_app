@@ -140,7 +140,7 @@ class FormHelper {
     String title,
     String message,
     String buttonText,
-    Function onPressed,
+    Function() onPressed,
   ) {
     showDialog(
       context: context,
@@ -150,9 +150,7 @@ class FormHelper {
           content: Text(message),
           actions: [
             TextButton(
-              onPressed: () {
-                return onPressed();
-              },
+              onPressed: onPressed,
               child: Text(buttonText),
             ),
           ],
