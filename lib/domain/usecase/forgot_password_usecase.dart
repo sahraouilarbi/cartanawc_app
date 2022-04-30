@@ -8,6 +8,6 @@ class ForgotPasswordUsercase implements BaseUsecase<String, String> {
   final Repository _repository;
   @override
   Future<Either<Failure, String>> execute(String input) async {
-    return await _repository.forgotPassword(input);
+    return _repository.forgotPassword(input);
   }
 }

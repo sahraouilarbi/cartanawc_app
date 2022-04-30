@@ -6,7 +6,7 @@ enum DataSource {
   cacheError,
   cancel,
   connectTimeout,
-  DEFAULT,
+  kDEFAULT,
   forbidden,
   internalServerError,
   notFound,
@@ -14,7 +14,7 @@ enum DataSource {
   noInternetConnection,
   receiveTimeout,
   sendTimeout,
-  SUCESS,
+  kSUCCESS,
   unAuthorised,
 }
 
@@ -24,7 +24,7 @@ class ErrorHandler implements Exception {
     if (error is DioError) {
       failure = _handleError(error);
     } else {
-      failure = DataSource.DEFAULT.getFailure();
+      failure = DataSource.kDEFAULT.getFailure();
     }
   }
   Failure _dioErrorTypeResponse(int error) {
@@ -40,7 +40,7 @@ class ErrorHandler implements Exception {
       case ResponseCode.unAuthorised:
         return DataSource.unAuthorised.getFailure();
       default:
-        return DataSource.DEFAULT.getFailure();
+        return DataSource.kDEFAULT.getFailure();
     }
   }
 
@@ -57,9 +57,9 @@ class ErrorHandler implements Exception {
       case DioErrorType.response:
         return _dioErrorTypeResponse(error.response.statusCode);
       case DioErrorType.other:
-        return DataSource.DEFAULT.getFailure();
+        return DataSource.kDEFAULT.getFailure();
       default:
-        return DataSource.DEFAULT.getFailure();
+        return DataSource.kDEFAULT.getFailure();
     }
   }
 }
@@ -94,14 +94,14 @@ extension DataSourceExtension on DataSource {
       case DataSource.unAuthorised:
         return Failure(ResponseCode.unAuthorised, ResponseMessage.unAuthorised);
       default:
-        return Failure(ResponseCode.DEFAULT, ResponseMessage.DEFAULT);
+        return Failure(ResponseCode.kDEFAULT, ResponseMessage.kDEFAULT);
     }
   }
 }
 
 class ResponseCode {
   // Api status codes
-  static const int SUCCESS = 200;
+  static const int kSUCCESS = 200;
   static const int noContent = 201;
   static const int badRequest = 400;
   static const int unAuthorised = 401;
@@ -110,7 +110,7 @@ class ResponseCode {
   static const int internalServerError = 500;
 
   // local status codes
-  static const int DEFAULT = -1;
+  static const int kDEFAULT = -1;
   static const int connectTimeout = -2;
   static const int cancel = -3;
   static const int receiveTimeout = -4;
@@ -121,16 +121,16 @@ class ResponseCode {
 
 class ResponseMessage {
   // Api response codes
-  static const String SUCCESS = 'success';
+  static const String kSUCCESS = 'success';
   static const String noContent = 'no_content';
   static const String badRequest = 'bad_request_error';
   static const String unAuthorised = 'unauthorized_error';
-  static const String forbidden = 'forbiden_error';
+  static const String forbidden = 'forbidden_error';
   static const String notFound = 'not_found_error';
   static const String internalServerError = 'internal_server_error';
 
   // local response codes
-  static const String DEFAULT = 'default_error!';
+  static const String kDEFAULT = 'default_error!';
   static const String cancel = 'default_error!';
   static const String connectTimeout = 'timeout_error!';
   static const String receiveTimeout = 'timeout_error!';
@@ -141,6 +141,6 @@ class ResponseMessage {
 }
 
 class ApiInternalStatus {
-  static const int SUCCESS = 0;
+  static const int kSUCCESS = 0;
   static const int failure = 1;
 }

@@ -7,5 +7,5 @@ class Failure {
 }
 
 class DefaultFailure extends Failure {
-  DefaultFailure() : super(ResponseCode.DEFAULT, ResponseMessage.DEFAULT);
+  DefaultFailure() : super(ResponseCode.kDEFAULT, ResponseMessage.kDEFAULT);
 }

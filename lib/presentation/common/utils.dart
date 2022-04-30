@@ -6,10 +6,10 @@ class Utils {
     String title,
     String message,
     String buttonText,
-    Function onPressed, {
+    Function() onPressed, {
     bool isConfirmationDialog = false,
     String buttonText2 = '',
-    Function onPressed2,
+    Function() onPressed2,
   }) {
     showDialog(
       context: context,
@@ -19,17 +19,13 @@ class Utils {
           content: Text(message),
           actions: [
             TextButton(
-              onPressed: () {
-                return onPressed();
-              },
+              onPressed: onPressed,
               child: Text(buttonText),
             ),
             Visibility(
               visible: isConfirmationDialog,
               child: TextButton(
-                onPressed: () {
-                  return onPressed2();
-                },
+                onPressed: onPressed2,
                 child: Text(buttonText2),
               ),
             )

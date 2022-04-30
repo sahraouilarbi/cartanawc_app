@@ -49,16 +49,16 @@ class WdpRulesModel {
     priority = json['priority'] as String;
 
     //options
-    json['options'] != null
-        ? options = WdpRulesOptionsModel.fromJson(
-            json['options'] as Map<String, dynamic>)
-        : null;
+    if (json['options'] != null) {
+      options = WdpRulesOptionsModel.fromJson(
+          json['options'] as Map<String, dynamic>);
+    }
 
     //additional
-    json['additional'] != null
-        ? additional = WdpRulesAdditionalModel.fromJson(
-            json['additional'] as Map<String, dynamic>)
-        : null;
+    if (json['additional'] != null) {
+      additional = WdpRulesAdditionalModel.fromJson(
+          json['additional'] as Map<String, dynamic>);
+    }
 
     //conditions
     conditions = json['conditions'].cast() as List;
@@ -75,16 +75,16 @@ class WdpRulesModel {
     limits = json['limits'].cast() as List;
 
     //product_adjustments
-    json['product_adjustments'] != null
-        ? productAdjustments = WdpRulesProductAdjustmentsModel.fromJson(
-            json['product_adjustments'] as Map<String, dynamic>)
-        : null;
+    if (json['product_adjustments'] != null) {
+      productAdjustments = WdpRulesProductAdjustmentsModel.fromJson(
+          json['product_adjustments'] as Map<String, dynamic>);
+    }
 
     //bulk_adjustments
-    json['bulk_adjustments'] != null
-        ? bulkAdjustments = WdpRulesBulkAdjustmentsModel.fromJson(
-            json['bulk_adjustments'] as Map<String, dynamic>)
-        : null;
+    if (json['bulk_adjustments'] != null) {
+      bulkAdjustments = WdpRulesBulkAdjustmentsModel.fromJson(
+          json['bulk_adjustments'] as Map<String, dynamic>);
+    }
 
     //sortable_blocks_priority
     sortableBlocksPriority =
@@ -103,10 +103,10 @@ class WdpRulesModel {
     cartAdjustments = json['cart_adjustments'] as List;
 
     //get_products
-    json['get_products'] != null
-        ? getProducts = WdpRulesGetProductsModel.fromJson(
-            json['get_products'] as Map<String, dynamic>)
-        : null;
+    if (json['get_products'] != null) {
+      getProducts = WdpRulesGetProductsModel.fromJson(
+          json['get_products'] as Map<String, dynamic>);
+    }
   }
 }
 
@@ -180,10 +180,10 @@ class WdpRulesProductAdjustmentsModel {
   String splitDiscountBy;
   WdpRulesProductAdjustmentsModel.fromJson(Map<String, dynamic> json) {
     //total
-    json['total'] != null
-        ? total = WdpRulesProductAdjustmentsTotalModel.fromJson(
-            json['total'] as Map<String, dynamic>)
-        : null;
+    if (json['total'] != null) {
+      total = WdpRulesProductAdjustmentsTotalModel.fromJson(
+          json['total'] as Map<String, dynamic>);
+    }
 
     //split
     if (json['split'] != null) {

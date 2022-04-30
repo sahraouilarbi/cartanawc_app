@@ -1,6 +1,6 @@
+import 'package:cartanawc_app/_a_supprimer/login_page.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_cartana_logo.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/_a_supprimer/login_page.dart';
 import 'package:flutter/material.dart';
 
 class UnAuthWidget extends StatelessWidget {

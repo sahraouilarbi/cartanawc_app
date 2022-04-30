@@ -1,9 +1,9 @@
+import 'package:cartanawc_app/data/geolocator_service.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
 import 'package:cartanawc_app/model_views/providers/order_provider.dart';
 import 'package:cartanawc_app/model_views/providers/product_provider.dart';
-import 'package:cartanawc_app/data/geolocator_service.dart';
 import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

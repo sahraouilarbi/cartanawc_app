@@ -25,7 +25,7 @@ class CustomerProfileViewModel extends BaseViewModel
     super.dispose();
   }
 
-  _getCustomerProfile() async {
+  Future<void> _getCustomerProfile() async {
     inputState.add(
       LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState),
     );

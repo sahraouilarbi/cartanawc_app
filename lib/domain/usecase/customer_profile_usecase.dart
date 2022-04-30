@@ -9,6 +9,6 @@ class CustomerProfileUsecase implements BaseUsecase<int, CustomerDetailEntity> {
   final Repository _repository;
   @override
   Future<Either<Failure, CustomerDetailEntity>> execute(int input) async {
-    return await _repository.getCustomerProfile(input);
+    return _repository.getCustomerProfile(input);
   }
 }

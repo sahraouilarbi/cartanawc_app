@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -33,11 +34,12 @@ class _ExpandedTextState extends State<ExpandedText> {
               color: Colors.black,
             ),
           ),
-          Html(
-            data:
-                lireLaSuiteFlag ? widget.description : widget.shortDescription,
-            padding: EdgeInsets.symmetric(
-              vertical: getProportionateScreenHeight(5.0),
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.p10),
+            child: Html(
+              data: lireLaSuiteFlag
+                  ? widget.description
+                  : widget.shortDescription,
             ),
           ),
           Align(

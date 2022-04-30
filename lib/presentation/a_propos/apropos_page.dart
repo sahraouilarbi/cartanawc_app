@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/common/cartana_logo_widget.dart';
 import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

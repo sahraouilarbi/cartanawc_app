@@ -13,8 +13,7 @@ class LoginUsecase
   @override
   Future<Either<Failure, LoginResponseModel>> execute(
       LoginUsecaseInput input) async {
-    return await _repository
-        .login(LoginRequest(input.username, input.password));
+    return _repository.login(LoginRequest(input.username, input.password));
   }
 }
 

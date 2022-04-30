@@ -1,5 +1,6 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,17 @@ class AppBarActionLoginIcon extends StatelessWidget {
           },
         );
       },
-      icon: const Icon(Icons.person),
+      icon: const CircleAvatar(
+        radius: AppSize.s20,
+        backgroundColor: Colors.white,
+        child: CircleAvatar(
+          radius: AppSize.s17,
+          backgroundColor: Colors.black,
+          child: Icon(
+            Icons.person,
+          ),
+        ),
+      ),
     );
   }
 }
