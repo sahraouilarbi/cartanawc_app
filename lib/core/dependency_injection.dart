@@ -23,8 +23,8 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
 
   // App prefs instance
-  instance
-      .registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
+  instance.registerLazySingleton<AppPreferences>(
+      () => AppPreferencesImpl(instance()));
 
   // network info
   instance.registerLazySingleton<NetworkInfo>(
