@@ -6,6 +6,7 @@ import 'package:cartanawc_app/data/models/cart_request_model.dart';
 import 'package:cartanawc_app/data/models/cart_response_model.dart';
 import 'package:cartanawc_app/data/models/categorie_model.dart';
 import 'package:cartanawc_app/data/models/customer_detail_model.dart';
+import 'package:cartanawc_app/data/models/forgot_password_response_model.dart';
 import 'package:cartanawc_app/data/models/login_model.dart';
 import 'package:cartanawc_app/data/models/order_detail_model.dart';
 import 'package:cartanawc_app/data/models/order_model.dart';
@@ -18,6 +19,7 @@ import 'package:dio/dio.dart';
 abstract class APIService {
   Future<LoginResponseModel> login(String username, String password);
   Future<CustomerDetailModel> getCustomerDetails(int userId);
+  Future<ForgotPasswordResponseModel> forgotPassword(String email);
   Future<CustomerDetailModel> customerDetails();
   Future<List<CategoryModel>> getCategories();
   Future<List<ProductModel>> getProducts({
@@ -64,6 +66,14 @@ class APIServiceImpl implements APIService {
       printDebugMessage('APIService.loginCustomer Exception : ${e.message}');
     }
     return loginResponseModel;
+  }
+
+  //***************************************************************************
+  // ForgotPassword
+  @override
+  Future<ForgotPasswordResponseModel> forgotPassword(String email) {
+    // TODO: implement forgotPassword
+    throw UnimplementedError();
   }
 
   //***************************************************************************
