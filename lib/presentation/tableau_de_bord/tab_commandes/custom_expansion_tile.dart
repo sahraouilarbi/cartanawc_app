@@ -54,8 +54,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
       CurveTween(curve: Curves.easeOut);
   static final Animatable<double> _easeInTween =
       CurveTween(curve: Curves.easeIn);
-  static final Animatable<double> _halfTween =
-      Tween<double>(begin: 0.0, end: 0.5);
+  // static final Animatable<double> _halfTween =
+  //     Tween<double>(begin: 0.0, end: 0.5);
   static final Animatable<double> _quarterTween =
       Tween<double>(begin: 0.0, end: 0.25);
 

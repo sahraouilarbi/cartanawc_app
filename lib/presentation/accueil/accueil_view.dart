@@ -68,7 +68,6 @@ class _AccueilPageState extends State<AccueilPage>
           hasTabs: true,
         ),
         drawer: buildDrawer(context),
-        backgroundColor: Colors.black,
         body: TabBarView(
           controller: _tabController,
           children: [

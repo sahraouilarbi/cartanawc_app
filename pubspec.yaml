@@ -9,30 +9,47 @@ environment:
   sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
-  badges: ^1.2.0
+  # updated -> 30/04/2022
+  badges: ^2.0.2
   cupertino_icons: ^1.0.2
-  dartz:
-  data_connection_checker: ^0.3.4
-  dio: ^4.0.0
+  # updated -> 30/04/2022
+  dartz: ^0.10.1
+  # updated -> 30/04/2022
+  data_connection_checker:
+    git:
+      url: https://github.com/chornthorn/data_connection_checker.git
+      ref: master
+  # updated -> 30/04/2022
+  dio: ^4.0.6
   flutter:
     sdk: flutter
-  flutter_dotenv: ^5.0.0
-  flutter_html: ^0.11.1
+  # updated -> 30/04/2022
+  flutter_dotenv: ^5.0.2
+  # updated -> 30/04/2022
+  flutter_html: ^1.2.0
+  #
   flutter_native_splash: ^0.3.2
-  flutter_svg: ^0.19.0
-  freezed: ^0.12.7
+  # updated -> 30/04/2022
+  flutter_svg: ^0.19.2+1
+  #
   geolocator: ^6.2.1
-  get_it: ^5.0.6
-  google_maps_flutter: ^2.0.0
+  # updated-> 30/04/2022
+  get_it: ^7.2.0
+  # updates -> 30/04/2022
+  google_maps_flutter: ^2.0.9
+  #
   provider: ^5.0.0
-  rxdart: ^0.25.0
-  shared_preferences: ^2.0.6
+  # updated 30/04/2022
+  rxdart: ^0.27.3
+  # updated 30/04/2022
+  shared_preferences: ^2.0.7
 
 dev_dependencies:
   analyzer: ^0.41.2
   build_runner: ^1.10.0
   flutter_test:
     sdk: flutter
+  freezed: ^0.12.7
   json_serializable: ^3.5.1
   lint: ^1.0.0
   pretty_dio_logger: ^1.1.1
