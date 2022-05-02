@@ -1,4 +1,3 @@
-import 'package:cartanawc_app/data/models/variable_product_model.dart';
 import 'package:cartanawc_app/domain/entities/variable_product_entity.dart';
 
 class ProductEntity {
@@ -35,7 +34,7 @@ class ProductEntity {
   String stockStatus;
   List<ImageProductEntity> images;
   List<CategoriesEntity> categories;
-  List<AttributesModel> attributes;
+  List<AttributesEntity> attributes;
   List<int> relatedIds;
   VariableProductEntity variableProduct;
   List<ProductMetaDataEntity> productMetaData;
@@ -59,13 +58,6 @@ class CategoriesEntity {
   CategoriesEntity({this.id, this.name});
   int id;
   String name;
-}
-
-class AttributesEntity {
-  AttributesEntity({this.id, this.name, this.options});
-  int id;
-  String name;
-  List<String> options;
 }
 
 class ProductMetaDataEntity {

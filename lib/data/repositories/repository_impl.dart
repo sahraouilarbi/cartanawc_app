@@ -10,8 +10,10 @@ import 'package:cartanawc_app/domain/entities/cart_request_entity.dart';
 import 'package:cartanawc_app/domain/entities/cart_response_entity.dart';
 import 'package:cartanawc_app/domain/entities/categorie_entity.dart';
 import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
+import 'package:cartanawc_app/domain/entities/forgot_password_response_entity.dart';
 import 'package:cartanawc_app/domain/entities/order_detail_entity.dart';
 import 'package:cartanawc_app/domain/entities/order_entity.dart';
+import 'package:cartanawc_app/domain/entities/payment_method_entity.dart';
 import 'package:cartanawc_app/domain/entities/product_entity.dart';
 import 'package:cartanawc_app/domain/repositories/repository.dart';
 import 'package:dartz/dartz.dart';
@@ -29,14 +31,14 @@ class RepositoryImpl implements Repository {
       LoginRequest loginRequest) async {
     if (await _networkInfo.isConnected) {
       try {
-        final response = await _remoteDataSource.login(loginRequest);
-        if (response.statusCode == 200) {
-          return Right(response);
+        final _response = await _remoteDataSource.login(loginRequest);
+        if (_response.statusCode == 200) {
+          return Right(_response);
         } else {
-          return Left(Failure(response.statusCode, response.message));
+          return Left(Failure(_response.statusCode, _response.message));
         }
-      } catch (error) {
-        return Left(ErrorHandler.handle(error).failure);
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
       }
     } else {
       return Left(DataSource.noInternetConnection.getFailure());
@@ -45,9 +47,18 @@ class RepositoryImpl implements Repository {
 
   // Forgot password repository implementation
   @override
-  Future<Either<Failure, String>> forgotPassword(String email) async {
-    //TODO: implement forgotPassword
-    throw UnimplementedError();
+  Future<Either<Failure, ForgotPasswordResponseEntity>> forgotPassword(
+      String email) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.forgotPassword(email);
+        return Right(_response.toDomain());
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
   }
 
   // Get customer profile repository implementation
@@ -57,12 +68,12 @@ class RepositoryImpl implements Repository {
     final userID = await _appPreferences.getUserId();
     if (await _networkInfo.isConnected) {
       try {
-        final response = await _remoteDataSource.getCustomerProfile(userID);
+        final _response = await _remoteDataSource.getCustomerProfile(userID);
         if (true) {
-          return Right(response.toDomain());
+          return Right(_response.toDomain());
         }
-      } catch (error) {
-        return Left(ErrorHandler.handle(error).failure);
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
       }
     } else {
       return Left(DataSource.noInternetConnection.getFailure());
@@ -71,33 +82,78 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, CartResponseEntity>> addToCart(
-      CartRequestEntity cart) {
-    // TODO: implement addToCart
-    throw UnimplementedError();
+      CartRequestEntity _cart) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.addToCart(_cart);
+        return Right(_response.toDomain());
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, Map<String, dynamic>>> createOrder(OrderEntity order) {
-    // TODO: implement createOrder
-    throw UnimplementedError();
+  Future<Either<Failure, Map<String, dynamic>>> createOrder(
+      OrderEntity _order) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.createOrder(_order);
+        return Right(_response.toDomain());
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, CartResponseEntity>> getCartItems(int customerId) {
-    // TODO: implement getCartItems
-    throw UnimplementedError();
+  Future<Either<Failure, CartResponseEntity>> getCartItems(
+      int customerId) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.getCartItem();
+        return Right(_response.toDomain());
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, List<CategoryEntity>>> getCategories() {
-    // TODO: implement getCategories
-    throw UnimplementedError();
+  Future<Either<Failure, List<CategoryEntity>>> getCategories() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.getCategories();
+        final List<CategoryEntity> _categories =
+            List.from(_response.map((e) => e.toDomain() as CategoriesEntity));
+        return Right(_categories);
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
   }
 
   @override
-  Future<Either<Failure, OrderDetailEntity>> getOrderDetails(int orderId) {
-    // TODO: implement getOrderDetails
-    throw UnimplementedError();
+  Future<Either<Failure, OrderDetailEntity>> getOrderDetails(
+      int orderId) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.getOrderDetails(orderId);
+        return Right(_response.toDomain());
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
   }
 
   @override
@@ -110,9 +166,19 @@ class RepositoryImpl implements Repository {
       String sortOrder = 'desc',
       String sortBy = 'date',
       String status = 'any',
-      int product}) {
-    // TODO: implement getOrders
-    throw UnimplementedError();
+      int product}) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.getOrders();
+        final List<OrderEntity> _orderEntity =
+            List.from(_response.map((e) => e.toDomain()));
+        return Right(_orderEntity);
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
   }
 
   @override
@@ -127,8 +193,43 @@ class RepositoryImpl implements Repository {
     String categoryId,
     String sortBy,
     String sortOrder = 'asc',
-  }) {
-    // TODO: implement getProducts
-    throw UnimplementedError();
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.getProducts(
+          status: status,
+          strSearch: strSearch,
+          perPage: perPage,
+          pageNumber: pageNumber,
+          tagName: tagName,
+          productsIds: productsIds,
+          categoryId: categoryId,
+          sortBy: sortBy,
+          sortOrder: sortOrder,
+        );
+        final List<ProductEntity> _products =
+            List.from(_response.map((e) => e.toDomain()));
+        return Right(_products);
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PaymentGatewaysEntity>>>
+      getPaymentGateways() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.getPaymentGateways();
+        return Right(_response.toDomain());
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
   }
 }
