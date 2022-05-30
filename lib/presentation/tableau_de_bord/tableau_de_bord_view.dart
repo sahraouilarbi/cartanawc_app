@@ -43,8 +43,13 @@ class _TableauBordState extends State<TableauBord>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar(
-          context,
+        // appBar: buildAppBar(
+        //   context,
+        //   tabController: _tabController,
+        //   tabs: tableauBordTabs,
+        //   hasTabs: true,
+        // ),
+        appBar: CustomAppBar(
           tabController: _tabController,
           tabs: tableauBordTabs,
           hasTabs: true,

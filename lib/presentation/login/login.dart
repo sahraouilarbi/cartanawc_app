@@ -71,7 +71,8 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context, isLoginPage: true),
+      //appBar: buildAppBar(context, isLoginPage: true),
+      appBar: const CustomAppBar(isLoginPage: true),
       body: StreamBuilder<FlowState>(
         stream: _loginViewModel.outputState,
         builder: (context, snapshot) {

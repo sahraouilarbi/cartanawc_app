@@ -43,7 +43,8 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _uiSetup(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context, isLoginPage: true),
+      //appBar: buildAppBar(context, isLoginPage: true),
+      appBar: const CustomAppBar(isLoginPage: true),
       body: SingleChildScrollView(
         child: Container(
           color: Colors.black,

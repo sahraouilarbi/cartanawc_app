@@ -18,7 +18,8 @@ class BasePageState<T extends BasePage> extends State<T> {
   Widget build(BuildContext context) {
     return Consumer<LoaderProvider>(builder: (context, loaderProvider, child) {
       return Scaffold(
-        appBar: buildAppBar(context),
+        //appBar: buildAppBar(context),
+        appBar: const CustomAppBar(),
         body: ProgressHUD(
           isAsyncCall: isApiCallProcess,
           opacity: AppSize.s0_3,

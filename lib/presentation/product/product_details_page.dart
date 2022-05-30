@@ -97,7 +97,8 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context),
+      //appBar: buildAppBar(context),
+      appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         child: Container(
           color: const Color(0xFFF3F3F3),

@@ -61,8 +61,9 @@ class _AccueilPageState extends State<AccueilPage>
 
     return SafeArea(
       child: Scaffold(
-        appBar: buildAppBar(
-          context,
+        //appBar: buildAppBar(
+        appBar: CustomAppBar(
+          //context,
           tabController: _tabController,
           tabs: homePageTabs,
           hasTabs: true,

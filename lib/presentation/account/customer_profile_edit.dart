@@ -61,7 +61,8 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context, isUserProfilePage: true),
+      //appBar: buildAppBar(context, isUserProfilePage: true),
+      appBar: const CustomAppBar(isUserProfilePage: true),
       drawer: buildDrawer(context),
       body: StreamBuilder<FlowState>(
           stream: _customerProfileEditViewModel.outputState,

@@ -59,8 +59,9 @@ class _MyAccountPageState extends State<MyAccountPage> {
 
   Widget _customerDetailsView(BuildContext context) {
     return Scaffold(
+      //appBar: buildAppBar(context, isUserProfilePage: true),
+      appBar: const CustomAppBar(isUserProfilePage: true),
       drawer: buildDrawer(context),
-      appBar: buildAppBar(context, isUserProfilePage: true),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: Container(
