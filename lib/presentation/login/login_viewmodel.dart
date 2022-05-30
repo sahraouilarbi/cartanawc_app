@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:cartanawc_app/data/models/login_model.dart';
 import 'package:cartanawc_app/domain/usecase/login_usecase.dart';
 import 'package:cartanawc_app/presentation/base/base_viewmodel.dart';
 import 'package:cartanawc_app/presentation/common/freezed_data_class/freezed_data_classes.dart';
 import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
 import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
+
+import '/data/models/models.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
@@ -16,7 +17,7 @@ class LoginViewModel extends BaseViewModel
   final StreamController _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
   final StreamController isUserLoggedInSuccessfullyStreamController =
-      StreamController<DataModel>();
+      StreamController<LoginResponseDataModel>();
   LoginObject loginObject = LoginObject('', '');
   final LoginUsecase _loginUsecase;
   LoginViewModel(this._loginUsecase);

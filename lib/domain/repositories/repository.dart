@@ -1,16 +1,9 @@
 import 'package:cartanawc_app/core/error/failure.dart';
-import 'package:cartanawc_app/data/models/login_model.dart';
 import 'package:cartanawc_app/data/models/login_request.dart';
-import 'package:cartanawc_app/domain/entities/cart_request_entity.dart';
-import 'package:cartanawc_app/domain/entities/cart_response_entity.dart';
-import 'package:cartanawc_app/domain/entities/categorie_entity.dart';
-import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
-import 'package:cartanawc_app/domain/entities/forgot_password_response_entity.dart';
-import 'package:cartanawc_app/domain/entities/order_detail_entity.dart';
-import 'package:cartanawc_app/domain/entities/order_entity.dart';
-import 'package:cartanawc_app/domain/entities/payment_method_entity.dart';
-import 'package:cartanawc_app/domain/entities/product_entity.dart';
 import 'package:dartz/dartz.dart';
+
+import '/data/models/models.dart';
+import '/domain/entities/entities.dart';
 
 abstract class Repository {
   // Login

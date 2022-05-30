@@ -1,5 +1,4 @@
-import 'meta_data_model.dart';
-import 'product_variations_model.dart';
+import '/data/models/models.dart';
 
 class ProductModel {
   int id;

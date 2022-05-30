@@ -1,5 +1,4 @@
-import 'package:cartanawc_app/domain/entities/billing_entity.dart';
-import 'package:cartanawc_app/domain/entities/shipping_entity.dart';
+import '/domain/entities/entities.dart';
 
 class CustomerDetailEntity {
   CustomerDetailEntity({

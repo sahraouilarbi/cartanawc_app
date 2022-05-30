@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/data/models/shipping_model.dart';
+import '/data/models/models.dart';
 
 class OrderDetailModel {
   OrderDetailModel({

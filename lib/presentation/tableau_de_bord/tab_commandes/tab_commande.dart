@@ -1,10 +1,10 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/presentation/product/product_details_page.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
+import '/data/models/models.dart';
 import 'custom_expansion_tile.dart';
 
 class TabCommande extends StatefulWidget {
@@ -24,10 +24,11 @@ class _TabCommandeState extends State<TabCommande> {
           AsyncSnapshot<List<ProductModel>> _productSnapshot) {
         if (_productSnapshot.hasData) {
           var seen = Set<String>();
-          final List<CategoriesModel> uniqueCategory = _productSnapshot.data
+          final List<ProductCategoriesModel> uniqueCategory = _productSnapshot
+              .data
               .map((e) => e.categories[1])
               .where((element) => seen.add(element.name))
-              .cast<CategoriesModel>()
+              .cast<ProductCategoriesModel>()
               .toList()
                 ..sort((a, b) => a.name.compareTo(b.name));
 

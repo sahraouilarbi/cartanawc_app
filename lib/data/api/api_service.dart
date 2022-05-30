@@ -2,19 +2,11 @@ import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/data/api/api_endpoint.dart';
 import 'package:cartanawc_app/data/http_service.dart';
-import 'package:cartanawc_app/data/models/cart_request_model.dart';
-import 'package:cartanawc_app/data/models/cart_response_model.dart';
-import 'package:cartanawc_app/data/models/categorie_model.dart';
-import 'package:cartanawc_app/data/models/customer_detail_model.dart';
-import 'package:cartanawc_app/data/models/forgot_password_response_model.dart';
-import 'package:cartanawc_app/data/models/login_model.dart';
-import 'package:cartanawc_app/data/models/order_detail_model.dart';
-import 'package:cartanawc_app/data/models/order_model.dart';
-import 'package:cartanawc_app/data/models/payment_method_model.dart';
-import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/presentation/common/utils.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:dio/dio.dart';
+
+import '/data/models/models.dart';
 
 abstract class APIService {
   Future<LoginResponseModel> login(String username, String password);

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/model_views/providers/product_provider.dart';
 import 'package:cartanawc_app/presentation/accueil/tab_produits/product_card_widget.dart';
 import 'package:cartanawc_app/presentation/common/base_page.dart';
@@ -10,6 +9,8 @@ import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '/data/models/models.dart';
 
 class ProductPage extends BasePage {
   const ProductPage({Key key, this.categorieId}) : super(key: key);

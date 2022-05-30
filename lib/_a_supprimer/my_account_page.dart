@@ -1,6 +1,5 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/data/models/customer_detail_model.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/presentation/accueil/accueil_view.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
@@ -14,6 +13,8 @@ import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '/data/models/models.dart';
 
 class MyAccountPage extends StatefulWidget {
   const MyAccountPage({Key key}) : super(key: key);

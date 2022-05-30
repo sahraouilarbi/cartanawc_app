@@ -1,15 +1,7 @@
 import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/data/models/cart_request_model.dart';
-import 'package:cartanawc_app/data/models/cart_response_model.dart';
-import 'package:cartanawc_app/data/models/categorie_model.dart';
-import 'package:cartanawc_app/data/models/customer_detail_model.dart';
-import 'package:cartanawc_app/data/models/forgot_password_response_model.dart';
-import 'package:cartanawc_app/data/models/login_model.dart';
 import 'package:cartanawc_app/data/models/login_request.dart';
-import 'package:cartanawc_app/data/models/order_detail_model.dart';
-import 'package:cartanawc_app/data/models/order_model.dart';
-import 'package:cartanawc_app/data/models/payment_method_model.dart';
-import 'package:cartanawc_app/data/models/product_model.dart';
+
+import '/data/models/models.dart';
 
 abstract class RemoteDataSource {
   Future<LoginResponseModel> login(LoginRequest loginRequest);

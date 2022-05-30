@@ -1,7 +1,5 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/data/models/cart_request_model.dart';
-import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
@@ -16,6 +14,8 @@ import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '/data/models/models.dart';
 
 class ProductDetails extends StatefulWidget {
   ProductDetails({Key key, this.data}) : super(key: key);
@@ -67,19 +67,19 @@ class _ProductDetailsState extends State<ProductDetails> {
         : productPrice = 0;
 
     // Récuperer la valeur step du produit des metadata
-    productStep = int.parse(widget.data.productMetaData
+    productStep = int.parse(widget.data.metaData
         .where((element) => element.key == '_wcmmq_s_product_step')
         .first
         .value);
 
     // Récuperer la valeur minStep du produit des metadata
-    productMinQty = int.parse(widget.data.productMetaData
+    productMinQty = int.parse(widget.data.metaData
         .where((element) => element.key == '_wcmmq_s_min_quantity')
         .first
         .value);
 
     // Récuperer la valeur MaxStep du produit des metadata
-    productMaxQty = int.parse(widget.data.productMetaData
+    productMaxQty = int.parse(widget.data.metaData
         .where((element) => element.key == '_wcmmq_s_max_quantity')
         .first
         .value);
@@ -252,8 +252,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                               Provider.of<CartProvider>(context, listen: false);
                           widget.cartProducts.productId = widget.data.id;
                           widget.cartProducts.variationId =
-                              widget.data.variableProduct != null
-                                  ? widget.data.variableProduct.id
+                              widget.data.variations != null
+                                  ? widget.data.variations.id
                                   : 0;
                           //TODO
                           cartProvider.addToCart(

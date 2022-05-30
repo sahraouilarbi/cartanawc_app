@@ -1,8 +1,9 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/data/models/categorie_model.dart';
 import 'package:cartanawc_app/presentation/accueil/tab_produits/products_page.dart';
 import 'package:flutter/material.dart';
+
+import '/data/models/models.dart';
 
 /*
  * Build Woocommerce Categories List

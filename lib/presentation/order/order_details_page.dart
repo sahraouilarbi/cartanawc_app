@@ -1,11 +1,12 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/data/models/order_detail_model.dart';
 import 'package:cartanawc_app/presentation/common/base_page.dart';
 import 'package:cartanawc_app/presentation/common/checkpoint_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
+
+import '/data/models/models.dart';
 
 class OrderDetailsPage extends BasePage {
   const OrderDetailsPage({Key key, this.orderId}) : super(key: key);

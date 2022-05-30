@@ -1,6 +1,4 @@
-import 'package:cartanawc_app/domain/entities/product_variations_entity.dart';
-
-import 'meta_data_entity.dart';
+import '/domain/entities/entities.dart';
 
 class ProductEntity {
   ProductEntity({

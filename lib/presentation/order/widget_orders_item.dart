@@ -1,8 +1,9 @@
-import 'package:cartanawc_app/data/models/order_model.dart';
 import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
+
+import '/data/models/models.dart';
 
 class WidgetOrderItem extends StatelessWidget {
   const WidgetOrderItem({Key key, this.orderModel}) : super(key: key);

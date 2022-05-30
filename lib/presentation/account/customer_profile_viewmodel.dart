@@ -1,9 +1,10 @@
-import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
 import 'package:cartanawc_app/domain/usecase/customer_profile_usecase.dart';
 import 'package:cartanawc_app/presentation/base/base_viewmodel.dart';
 import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
 import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
 import 'package:rxdart/rxdart.dart';
+
+import '/domain/entities/entities.dart';
 
 class CustomerProfileViewModel extends BaseViewModel
     with CustomerProfileViewModelInputs, CustomerProfileViewModelOutputs {

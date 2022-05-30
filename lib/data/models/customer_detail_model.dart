@@ -1,5 +1,4 @@
-import 'package:cartanawc_app/data/models/billing_model.dart';
-import 'package:cartanawc_app/data/models/shipping_model.dart';
+import 'models.dart';
 
 class CustomerDetailModel {
   int id;
