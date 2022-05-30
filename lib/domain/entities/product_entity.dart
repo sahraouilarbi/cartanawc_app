@@ -1,4 +1,6 @@
-import 'package:cartanawc_app/domain/entities/variable_product_entity.dart';
+import 'package:cartanawc_app/domain/entities/product_variations_entity.dart';
+
+import 'meta_data_entity.dart';
 
 class ProductEntity {
   ProductEntity({
@@ -17,8 +19,8 @@ class ProductEntity {
     this.categories,
     this.attributes,
     this.relatedIds,
-    this.variableProduct,
-    this.productMetaData,
+    this.variations,
+    this.metaData,
     this.acf,
   });
   int id;
@@ -34,10 +36,10 @@ class ProductEntity {
   String stockStatus;
   List<ImageProductEntity> images;
   List<CategoriesEntity> categories;
-  List<AttributesEntity> attributes;
+  List<ProductAttributesEntity> attributes;
   List<int> relatedIds;
-  VariableProductEntity variableProduct;
-  List<ProductMetaDataEntity> productMetaData;
+  ProductVariationsEntity variations;
+  List<MetaDataEntity> metaData;
   ACFEntity acf;
 }
 
@@ -60,16 +62,16 @@ class CategoriesEntity {
   String name;
 }
 
-class ProductMetaDataEntity {
-  ProductMetaDataEntity({
-    this.id,
-    this.key,
-    this.value,
-  });
-  int id;
-  String key;
-  String value;
-}
+// class MetaDataEntity {
+//   MetaDataEntity({
+//     this.id,
+//     this.key,
+//     this.value,
+//   });
+//   int id;
+//   String key;
+//   String value;
+// }
 
 class ACFEntity {
   ACFEntity({
@@ -84,4 +86,15 @@ class ACFEntity {
   String superGros;
   String grandeMoyenneSurface;
   String hypermarche;
+}
+
+class ProductAttributesEntity {
+  int id;
+  String name;
+  List<dynamic> options;
+  ProductAttributesEntity({
+    this.id,
+    this.name,
+    this.options,
+  });
 }

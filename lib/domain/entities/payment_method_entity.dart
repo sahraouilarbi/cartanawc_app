@@ -62,7 +62,7 @@ class SettingEntity {
   String value;
   String settingDefault;
   String tip;
-  Placeholder placeholder;
+  PaymentGatewaysEntityPlaceholder placeholder;
   SettingsOptionsEntity options;
 }
 
@@ -108,12 +108,12 @@ class PointDeVenteEntity {
   String localPickup;
 }
 
-enum Placeholder { empty, optionnel, youYourEmailCom }
+enum PaymentGatewaysEntityPlaceholder { empty, optionnel, youYourEmailCom }
 
 final placeholderValues = EnumValuesEntity({
-  "": Placeholder.empty,
-  "Optionnel": Placeholder.optionnel,
-  "you@youremail.com": Placeholder.youYourEmailCom
+  "": PaymentGatewaysEntityPlaceholder.empty,
+  "Optionnel": PaymentGatewaysEntityPlaceholder.optionnel,
+  "you@youremail.com": PaymentGatewaysEntityPlaceholder.youYourEmailCom
 });
 
 class EnumValuesEntity<T> {

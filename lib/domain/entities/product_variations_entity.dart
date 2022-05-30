@@ -1,5 +1,5 @@
-class VariableProductEntity {
-  VariableProductEntity({
+class ProductVariationsEntity {
+  ProductVariationsEntity({
     this.id,
     this.sku,
     this.price,
@@ -12,11 +12,11 @@ class VariableProductEntity {
   String price;
   String regularPrice;
   String salePrice;
-  List<AttributesEntity> attributes;
+  List<ProductVariationsAttributesEntity> attributes;
 }
 
-class AttributesEntity {
-  AttributesEntity({
+class ProductVariationsAttributesEntity {
+  ProductVariationsAttributesEntity({
     this.id,
     this.name,
     this.option,
