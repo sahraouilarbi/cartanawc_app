@@ -1,6 +1,6 @@
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
-import 'package:cartanawc_app/presentation/cart/cart_product_widget.dart';
+import 'package:cartanawc_app/presentation/cart/view/cart_product_widget.dart';
 import 'package:cartanawc_app/presentation/checkout/verify_address.dart';
 import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
 import 'package:cartanawc_app/presentation/common/row_montant.dart';

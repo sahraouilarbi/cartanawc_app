@@ -1,5 +1,4 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/presentation/account/customer_profile_edit_viewmodel.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/drawer/drawer_anonymous_tile/drawer_anonymous_widget.dart';
 import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
@@ -10,6 +9,7 @@ import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
 import '/domain/entities/entities.dart';
+import 'customer_profile_edit_viewmodel.dart';
 
 class CustomerProfileEditView extends StatefulWidget {
   const CustomerProfileEditView({Key key}) : super(key: key);

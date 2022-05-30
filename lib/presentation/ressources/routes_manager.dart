@@ -1,11 +1,7 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/presentation/account/customer_profile.dart';
-import 'package:cartanawc_app/presentation/account/customer_profile_edit.dart';
-import 'package:cartanawc_app/presentation/accueil/accueil_view.dart';
-import 'package:cartanawc_app/presentation/login/login.dart';
-import 'package:cartanawc_app/presentation/product/product_details_page.dart';
-import 'package:cartanawc_app/presentation/tableau_de_bord/tableau_de_bord_view.dart';
 import 'package:flutter/material.dart';
+
+import '/presentation/pages.dart';
 
 class Routes {
   static const String forgotPasswordRoute = '/forgotPassword';

@@ -1,5 +1,6 @@
-import 'package:cartanawc_app/presentation/a_propos/apropos_page.dart';
 import 'package:flutter/material.dart';
+
+import '/presentation/pages.dart';
 
 class DrawerAProposTile extends StatelessWidget {
   const DrawerAProposTile({

@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
-import 'package:cartanawc_app/presentation/accueil/tab_accueil/tabview_accueil_widget.dart';
-import 'package:cartanawc_app/presentation/accueil/tab_explorer/tabview_explorer_widget.dart';
-import 'package:cartanawc_app/presentation/accueil/tab_produits/tabview_wc_categories_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/tabview_accueil_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_explorer/tabview_explorer_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_produits/tabview_wc_categories_widget.dart';
 import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/drawer/drawer_anonymous_tile/drawer_anonymous_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';

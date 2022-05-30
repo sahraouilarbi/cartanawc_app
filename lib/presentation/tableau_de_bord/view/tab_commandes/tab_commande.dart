@@ -1,6 +1,6 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/presentation/product/product_details_page.dart';
+import 'package:cartanawc_app/presentation/product/view/product_details_page.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 

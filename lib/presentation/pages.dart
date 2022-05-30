@@ -1,0 +1,9 @@
+export 'a_propos/a_propos.dart';
+export 'accueil/accueil.dart';
+export 'cart/cart.dart';
+export 'customer_profile/customer_profile.dart';
+export 'customer_profile_edit/customer_profile_edit.dart';
+export 'login/login.dart';
+export 'order/order.dart';
+export 'product/product_details.dart';
+export 'tableau_de_bord/tableau_de_bord.dart';
