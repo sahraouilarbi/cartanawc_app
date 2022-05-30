@@ -1,12 +1,4 @@
 class CategoryModel {
-  CategoryModel(
-    this.categoryId,
-    this.categoryName,
-    this.categorySlug,
-    this.categoryParent,
-    this.categoryDescription,
-    this.categoryImage,
-  );
   int categoryId;
   String categoryName;
   String categorySlug;
@@ -15,23 +7,38 @@ class CategoryModel {
   String categoryDescription;
   CategoryImageModel categoryImage;
 
-  CategoryModel.fromJson(Map<String, dynamic> json) {
-    categoryId = json['id'] as int;
-    categoryName = json['name'] as String;
-    categorySlug = json['slug'] as String;
-    categoryParent = json['parent'] as int;
-    categoryDisplay = json['display'] as String;
-    categoryDescription = json['description'] as String;
-    categoryImage = json['image'] != null
-        ? CategoryImageModel.fromJson(json['image'] as Map<String, dynamic>)
-        : null;
-  }
+  CategoryModel({
+    this.categoryId,
+    this.categoryName,
+    this.categorySlug,
+    this.categoryParent,
+    this.categoryDisplay,
+    this.categoryDescription,
+    this.categoryImage,
+  });
+
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
+        categoryId: json['id'] != null ? json['id'] as int : null,
+        categoryName: json['name'] != null ? json['name'] as String : null,
+        categorySlug: json['slug'] != null ? json['slug'] as String : null,
+        categoryParent: json['parent'] != null ? json['parent'] as int : null,
+        categoryDisplay:
+            json['display'] != null ? json['display'] as String : null,
+        categoryDescription:
+            json['description'] != null ? json['description'] as String : null,
+        categoryImage: json['image'] != null
+            ? CategoryImageModel.fromJson(json['image'] as Map<String, dynamic>)
+            : null,
+      );
 }
 
 class CategoryImageModel {
-  CategoryImageModel({this.src});
   String src;
-  CategoryImageModel.fromJson(Map<String, dynamic> json) {
-    src = json['src'] as String;
-  }
+
+  CategoryImageModel({this.src});
+
+  factory CategoryImageModel.fromJson(Map<String, dynamic> json) =>
+      CategoryImageModel(
+        src: json['src'] != null ? json['src'] as String : null,
+      );
 }

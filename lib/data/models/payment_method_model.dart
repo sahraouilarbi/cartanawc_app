@@ -128,7 +128,7 @@ class SettingModel {
   String value;
   String settingDefault;
   String tip;
-  Placeholder placeholder;
+  PaymentGatewaysModelPlaceholder placeholder;
   SettingsOptionsModel options;
 
   factory SettingModel.fromJson(Map<String, dynamic> json) => SettingModel(
@@ -207,11 +207,11 @@ class SettingsOptionsModel {
 }
 
 class ForfaitModel {
+  String flatRate;
+
   ForfaitModel({
     this.flatRate,
   });
-
-  String flatRate;
 
   factory ForfaitModel.fromJson(Map<String, dynamic> json) => ForfaitModel(
         flatRate: json["flat_rate"] as String,
@@ -260,12 +260,12 @@ class PointDeVenteModel {
       };
 }
 
-enum Placeholder { empty, optionnel, youYourEmailCom }
+enum PaymentGatewaysModelPlaceholder { empty, optionnel, youYourEmailCom }
 
 final placeholderValues = EnumValuesModel({
-  "": Placeholder.empty,
-  "Optionnel": Placeholder.optionnel,
-  "you@youremail.com": Placeholder.youYourEmailCom
+  "": PaymentGatewaysModelPlaceholder.empty,
+  "Optionnel": PaymentGatewaysModelPlaceholder.optionnel,
+  "you@youremail.com": PaymentGatewaysModelPlaceholder.youYourEmailCom
 });
 
 class EnumValuesModel<T> {

@@ -15,6 +15,8 @@ class OrderModel {
     this.status,
     this.orderDateCreated,
     this.orderTotal,
+    this.billing,
+    this.shipping,
   });
   int orderId;
   String orderNumber;

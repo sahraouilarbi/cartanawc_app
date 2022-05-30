@@ -1,20 +1,22 @@
 class CartResponseModel {
+  bool status;
+  List<CartItemModel> data;
+  int userId;
+
   CartResponseModel({
     this.status,
     this.data,
   });
-  bool status;
-  List<CartItemModel> data;
-  int userId;
-  CartResponseModel.fromJson(Map<String, dynamic> json) {
-    status = json['status'] as bool;
-    if (json['data'] != null) {
-      data = <CartItemModel>[];
-      json['data'].forEach((item) {
-        data.add(CartItemModel.fromJson(item as Map<String, dynamic>));
-      });
-    }
-  }
+
+  factory CartResponseModel.fromJson(Map<String, dynamic> json) =>
+      CartResponseModel(
+        status: json['status'] != null ? json['status'] as bool : null,
+        data: json['data'] != null
+            ? List<CartItemModel>.from((json['data'] as List<dynamic>)
+                .map((e) => CartItemModel.fromJson(e as Map<String, dynamic>)))
+            : <CartItemModel>[],
+      );
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
@@ -26,6 +28,19 @@ class CartResponseModel {
 }
 
 class CartItemModel {
+  int productId;
+  String productName;
+  String productRegularPrice;
+  String productSalePrice;
+  String thumbnail;
+  int qty;
+  String productStep;
+  double lineSubtotal;
+  double lineTotal;
+  int variationId;
+  String attribute;
+  String attributeValue;
+
   CartItemModel({
     this.productId,
     this.productName,
@@ -40,35 +55,29 @@ class CartItemModel {
     this.attribute,
     this.attributeValue,
   });
-
-  int productId;
-  String productName;
-  String productRegularPrice;
-  String productSalePrice;
-  String thumbnail;
-  int qty;
-  String productStep;
-  double lineSubtotal;
-  double lineTotal;
-  int variationId;
-  String attribute;
-  String attributeValue;
-
   CartItemModel.fromJson(Map<String, dynamic> json) {
-    productId = json['product_id'] as int;
-    productName = json['product_name'] as String;
-    productRegularPrice = json['product_regular_price'] as String;
-    productSalePrice = json['product_sale_price'] as String;
-    thumbnail = json['thumbnail'] as String;
-    qty = json['qty'] as int;
-    productStep = json['product_step'] as String;
+    productId = json['product_id'] != null ? json['product_id'] as int : null;
+    productName =
+        json['product_name'] != null ? json['product_name'] as String : null;
+    productRegularPrice = json['product_regular_price'] != null
+        ? json['product_regular_price'] as String
+        : null;
+    productSalePrice = json['product_sale_price'] != null
+        ? json['product_sale_price'] as String
+        : null;
+    thumbnail = json['thumbnail'] != null ? json['thumbnail'] as String : null;
+    qty = json['qty'] != null ? json['qty'] as int : null;
+    productStep =
+        json['product_step'] != null ? json['product_step'] as String : null;
     lineSubtotal = json['line_subtotal'] != null
         ? double.parse(json['line_subtotal'].toString())
         : 0.0;
     lineTotal = json['line_total'] != null
         ? double.parse(json['line_total'].toString())
         : 0.0;
-    variationId = json['variation_id'] as int;
+    variationId =
+        json['variation_id'] != null ? json['variation_id'] as int : null;
+
     if (json['attribute'] != null) {
       attribute = (json['attribute'].toString() != "[]")
           ? Map<String, dynamic>.from(json['attribute'] as Map<String, dynamic>)

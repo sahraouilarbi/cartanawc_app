@@ -23,19 +23,23 @@ class BillingModel {
   String country;
   String email;
   String phone;
-  BillingModel.fromJson(Map<String, dynamic> json) {
-    firstName = json['first_name'] as String;
-    lastName = json['last_name'] as String;
-    company = json['company'] as String;
-    address1 = json['address_1'] as String;
-    address2 = json['address_2'] as String;
-    city = json['city'] as String;
-    state = json['state'] as String;
-    postcode = json['postcode'] as String;
-    country = json['country'] as String;
-    email = json['email'] as String;
-    phone = json['phone'] as String;
-  }
+  factory BillingModel.fromJson(Map<String, dynamic> json) => BillingModel(
+        firstName:
+            json['first_name'] != null ? json['first_name'] as String : null,
+        lastName:
+            json['last_name'] != null ? json['last_name'] as String : null,
+        company: json['company'] != null ? json['company'] as String : null,
+        address1:
+            json['address_1'] != null ? json['address_1'] as String : null,
+        address2:
+            json['address_2'] != null ? json['address_2'] as String : null,
+        city: json['city'] != null ? json['city'] as String : null,
+        state: json['state'] != null ? json['state'] as String : null,
+        postcode: json['postcode'] != null ? json['postcode'] as String : null,
+        country: json['country'] != null ? json['country'] as String : null,
+        email: json['email'] != null ? json['email'] as String : null,
+        phone: json['phone'] != null ? json['phone'] as String : null,
+      );
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['first_name'] = firstName;
