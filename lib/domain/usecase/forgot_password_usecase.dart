@@ -6,8 +6,10 @@ import 'package:dartz/dartz.dart';
 class ForgotPasswordUsercase implements BaseUsecase<String, String> {
   ForgotPasswordUsercase(this._repository);
   final Repository _repository;
+
   @override
-  Future<Either<Failure, String>> execute(String input) async {
-    return _repository.forgotPassword(input);
+  Future<Either<Failure, String>> execute(String input) {
+    // TODO: implement execute
+    throw UnimplementedError();
   }
 }
