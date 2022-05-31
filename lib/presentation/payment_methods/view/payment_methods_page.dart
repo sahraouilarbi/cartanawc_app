@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
-import 'package:cartanawc_app/presentation/checkout/checkout_base.dart';
+import 'package:cartanawc_app/presentation/base/base_checkout.dart';
 import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
 import 'package:cartanawc_app/presentation/order/view/order_success_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';

@@ -1,5 +1,6 @@
-import 'package:cartanawc_app/presentation/accueil/view/accueil_page.dart';
 import 'package:flutter/material.dart';
+
+import '/presentation/pages.dart';
 
 class DrawerExplorerTile extends StatelessWidget {
   const DrawerExplorerTile({

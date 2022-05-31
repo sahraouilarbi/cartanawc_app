@@ -1,10 +1,10 @@
 import 'package:cartanawc_app/presentation/common/image_network_loading_progress.dart';
 import 'package:cartanawc_app/presentation/common/no_image_placeholder.dart';
-import 'package:cartanawc_app/presentation/product/view/product_details_page.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
 import '/data/models/models.dart';
+import '/presentation/pages.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({Key key, this.data}) : super(key: key);
