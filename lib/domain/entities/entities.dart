@@ -1,10 +1,9 @@
 export 'billing_entity.dart';
 export 'cart_request_entity.dart';
 export 'cart_response_entity.dart';
-export 'categorie_entity.dart';
+export 'category_entity.dart';
 export 'customer_detail_entity.dart';
 export 'customer_entity.dart';
-export 'drawer_entity.dart';
 export 'forgot_password_response_entity.dart';
 export 'login_entity.dart';
 export 'meta_data_entity.dart';

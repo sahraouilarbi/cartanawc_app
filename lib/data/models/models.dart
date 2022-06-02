@@ -1,7 +1,7 @@
 export 'billing_model.dart';
 export 'cart_request_model.dart';
 export 'cart_response_model.dart';
-export 'categorie_model.dart';
+export 'category_model.dart';
 export 'customer_detail_model.dart';
 export 'customer_model.dart';
 export 'forgot_password_response_model.dart';

@@ -40,9 +40,9 @@ extension OrderLineItemsModelMapper on OrderLineItemsModel {
 // OrderDetailModel - toDomain()
 extension OrderDetailModelMappser on OrderDetailModel {
   OrderDetailEntity toDomain() {
-    final List<LineItemsEntity> lineItemsMapped =
+    final List<OrderDetailsLineItemsEntity> lineItemsMapped =
         (lineItems.map((v) => v.toDomain()) ?? const Iterable.empty())
-            .cast<LineItemsEntity>()
+            .cast<OrderDetailsLineItemsEntity>()
             .toList();
     return OrderDetailEntity(
       orderId: orderId,
@@ -60,9 +60,9 @@ extension OrderDetailModelMappser on OrderDetailModel {
 }
 
 // LineItemsModel - toDomain()
-extension LineItemsModelMapper on LineItemsModel {
-  LineItemsEntity toDomain() {
-    return LineItemsEntity(
+extension LineItemsModelMapper on OrderDetailLineItemsModel {
+  OrderDetailsLineItemsEntity toDomain() {
+    return OrderDetailsLineItemsEntity(
       productId: productId,
       productName: productName,
       quantity: quantity,

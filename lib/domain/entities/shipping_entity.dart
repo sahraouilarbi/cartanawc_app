@@ -9,8 +9,6 @@ class ShippingEntity {
     this.postcode,
     this.country,
     this.state,
-    this.email,
-    this.phone,
   });
   String firstName;
   String lastName;
@@ -21,6 +19,4 @@ class ShippingEntity {
   String postcode;
   String country;
   String state;
-  String email;
-  String phone;
 }

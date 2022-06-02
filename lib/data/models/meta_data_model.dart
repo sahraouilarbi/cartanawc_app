@@ -16,9 +16,9 @@ class MetaDataModel {
       );
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['key'] = key;
-    data['value'] = value;
-    return data;
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data['key'] = key;
+    _data['value'] = value;
+    return _data;
   }
 }

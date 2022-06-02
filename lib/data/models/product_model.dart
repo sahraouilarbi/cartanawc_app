@@ -153,23 +153,6 @@ class ProductAttributesModel {
       );
 }
 
-// class ProductMetaDataModel {
-//   ProductMetaDataModel({
-//     this.id,
-//     this.key,
-//     this.value,
-//   });
-//   int id;
-//   String key;
-//   String value;
-//   factory ProductMetaDataModel.fromJson(Map<String, dynamic> json) =>
-//       ProductMetaDataModel(
-//         id: json['id'] != null ? json['id'] as int : null,
-//         key: json['key'] != null ? json['key'] as String : null,
-//         value: json['value'] != null ? json['value'] as String : null,
-//       );
-// }
-
 class ProductACFModel {
   ProductACFModel({
     this.contenance,

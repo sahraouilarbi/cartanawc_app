@@ -5,13 +5,13 @@ import 'mappers.dart';
 // ProductModel
 extension ProductModelMapper on ProductModel {
   ProductEntity toDomain() {
-    final List<ImageProductEntity> _imagesMapped =
+    final List<ProductImageEntity> _imagesMapped =
         (images.map((v) => v.toDomain()) ?? const Iterable.empty())
-            .cast<ImageProductEntity>()
+            .cast<ProductImageEntity>()
             .toList();
-    final List<CategoriesEntity> _categoriesMapped =
+    final List<ProductCategoryEntity> _categoriesMapped =
         (categories.map((v) => v.toDomain()) ?? const Iterable.empty())
-            .cast<CategoriesEntity>()
+            .cast<ProductCategoryEntity>()
             .toList();
     final List<ProductAttributesEntity> _attributesMapped =
         (attributes.map((v) => v.toDomain()) ?? const Iterable.empty())
@@ -50,8 +50,8 @@ extension ProductModelMapper on ProductModel {
 
 // ImageProductModel
 extension ProductImageModelMapper on ProductImageModel {
-  ImageProductEntity toDomain() {
-    return ImageProductEntity(
+  ProductImageEntity toDomain() {
+    return ProductImageEntity(
       src: src,
       woocommerceThumbnail: woocommerceThumbnail,
       woocommerceSingle: woocommerceSingle,
@@ -62,8 +62,8 @@ extension ProductImageModelMapper on ProductImageModel {
 
 // CategoriesModel
 extension ProductCategoriesModelMapper on ProductCategoriesModel {
-  CategoriesEntity toDomain() {
-    return CategoriesEntity(
+  ProductCategoryEntity toDomain() {
+    return ProductCategoryEntity(
       id: id,
       name: name,
     );
@@ -101,8 +101,8 @@ extension VariableProductModelMapper on ProductVariationsModel {
 
 // ACFModel
 extension ACFModelMapper on ProductACFModel {
-  ACFEntity toDomain() {
-    return ACFEntity(
+  ProductACFEntity toDomain() {
+    return ProductACFEntity(
       contenance: contenance,
       grossite: grossite,
       superGros: superGros,

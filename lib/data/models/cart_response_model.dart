@@ -94,18 +94,18 @@ class CartItemModel {
     }
   }
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['product_id'] = productId;
-    data['product_name'] = productName;
-    data['product_regular_price'] = productRegularPrice;
-    data['product_sale_price'] = productSalePrice;
-    data['thumbnail'] = thumbnail;
-    data['qty'] = qty;
-    data['product_step'] = productStep;
-    data['line_subtotal'] = lineSubtotal;
-    data['line_total'] = lineTotal;
-    data['variation_id'] = variationId;
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data['product_id'] = productId;
+    _data['product_name'] = productName;
+    _data['product_regular_price'] = productRegularPrice;
+    _data['product_sale_price'] = productSalePrice;
+    _data['thumbnail'] = thumbnail;
+    _data['qty'] = qty;
+    _data['product_step'] = productStep;
+    _data['line_subtotal'] = lineSubtotal;
+    _data['line_total'] = lineTotal;
+    _data['variation_id'] = variationId;
 
-    return data;
+    return _data;
   }
 }

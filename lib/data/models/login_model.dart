@@ -27,15 +27,15 @@ class LoginResponseModel {
       );
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    data['statusCode'] = statusCode;
-    data['code'] = code;
-    data['message'] = message;
-    if (this.data != null) {
-      data['data'] = this.data.toJson();
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data['success'] = success;
+    _data['statusCode'] = statusCode;
+    _data['code'] = code;
+    _data['message'] = message;
+    if (data != null) {
+      _data['data'] = data.toJson();
     }
-    return data;
+    return _data;
   }
 }
 
@@ -70,14 +70,14 @@ class LoginResponseDataModel {
             json['displayName'] != null ? json['displayName'] as String : null,
       );
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['token'] = token;
-    data['id'] = id;
-    data['email'] = email;
-    data['nicename'] = nicename;
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
-    data['displayName'] = displayName;
-    return data;
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data['token'] = token;
+    _data['id'] = id;
+    _data['email'] = email;
+    _data['nicename'] = nicename;
+    _data['firstName'] = firstName;
+    _data['lastName'] = lastName;
+    _data['displayName'] = displayName;
+    return _data;
   }
 }

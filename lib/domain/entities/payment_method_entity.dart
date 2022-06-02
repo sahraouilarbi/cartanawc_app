@@ -20,30 +20,30 @@ class PaymentGatewaysEntity {
   String methodTitle;
   String methodDescription;
   List<String> methodSupports;
-  Map<String, SettingEntity> settings;
-  LinksEntity links;
+  Map<String, PaymentGatewaysSettingEntity> settings;
+  PaymentGatewaysLinksEntity links;
 }
 
-class LinksEntity {
-  LinksEntity({
+class PaymentGatewaysLinksEntity {
+  PaymentGatewaysLinksEntity({
     this.self,
     this.collection,
   });
 
-  List<CollectionEntity> self;
-  List<CollectionEntity> collection;
+  List<PaymentGatewaysCollectionEntity> self;
+  List<PaymentGatewaysCollectionEntity> collection;
 }
 
-class CollectionEntity {
-  CollectionEntity({
+class PaymentGatewaysCollectionEntity {
+  PaymentGatewaysCollectionEntity({
     this.href,
   });
 
   String href;
 }
 
-class SettingEntity {
-  SettingEntity({
+class PaymentGatewaysSettingEntity {
+  PaymentGatewaysSettingEntity({
     this.id,
     this.label,
     this.description,
@@ -63,11 +63,11 @@ class SettingEntity {
   String settingDefault;
   String tip;
   PaymentGatewaysEntityPlaceholder placeholder;
-  SettingsOptionsEntity options;
+  PaymentGatewaysSettingsOptionsEntity options;
 }
 
-class SettingsOptionsEntity {
-  SettingsOptionsEntity({
+class PaymentGatewaysSettingsOptionsEntity {
+  PaymentGatewaysSettingsOptionsEntity({
     this.forfait,
     this.livraisonGratuite,
     this.pointDeVente,
@@ -75,23 +75,23 @@ class SettingsOptionsEntity {
     this.authorization,
   });
 
-  ForfaitEntity forfait;
-  LivraisonGratuiteEntity livraisonGratuite;
-  PointDeVenteEntity pointDeVente;
+  PaymentGatewaysForfaitEntity forfait;
+  PaymentGatewaysLivraisonGratuiteEntity livraisonGratuite;
+  PaymentGatewaysPointDeVenteEntity pointDeVente;
   String sale;
   String authorization;
 }
 
-class ForfaitEntity {
-  ForfaitEntity({
+class PaymentGatewaysForfaitEntity {
+  PaymentGatewaysForfaitEntity({
     this.flatRate,
   });
 
   String flatRate;
 }
 
-class LivraisonGratuiteEntity {
-  LivraisonGratuiteEntity({
+class PaymentGatewaysLivraisonGratuiteEntity {
+  PaymentGatewaysLivraisonGratuiteEntity({
     this.freeShipping,
     this.freeShipping1,
   });
@@ -100,8 +100,8 @@ class LivraisonGratuiteEntity {
   String freeShipping1;
 }
 
-class PointDeVenteEntity {
-  PointDeVenteEntity({
+class PaymentGatewaysPointDeVenteEntity {
+  PaymentGatewaysPointDeVenteEntity({
     this.localPickup,
   });
 
@@ -110,15 +110,15 @@ class PointDeVenteEntity {
 
 enum PaymentGatewaysEntityPlaceholder { empty, optionnel, youYourEmailCom }
 
-final placeholderValues = EnumValuesEntity({
+final placeholderValues = PaymentGatewaysEnumValuesEntity({
   "": PaymentGatewaysEntityPlaceholder.empty,
   "Optionnel": PaymentGatewaysEntityPlaceholder.optionnel,
   "you@youremail.com": PaymentGatewaysEntityPlaceholder.youYourEmailCom
 });
 
-class EnumValuesEntity<T> {
+class PaymentGatewaysEnumValuesEntity<T> {
   Map<String, T> map;
   Map<T, String> reverseMap;
 
-  EnumValuesEntity(this.map);
+  PaymentGatewaysEnumValuesEntity(this.map);
 }

@@ -21,12 +21,12 @@ extension PaymentGatewaysMapper on PaymentGatewaysModel {
 }
 
 extension LinksModelMapper on LinksModel {
-  LinksEntity toDomain() {
-    final List<CollectionEntity> _selfMapped =
-        List<CollectionEntity>.from(self.map((e) => e));
-    final List<CollectionEntity> _collectionMapped =
-        List<CollectionEntity>.from(self.map((e) => e));
-    return LinksEntity(
+  PaymentGatewaysLinksEntity toDomain() {
+    final List<PaymentGatewaysCollectionEntity> _selfMapped =
+        List<PaymentGatewaysCollectionEntity>.from(self.map((e) => e));
+    final List<PaymentGatewaysCollectionEntity> _collectionMapped =
+        List<PaymentGatewaysCollectionEntity>.from(self.map((e) => e));
+    return PaymentGatewaysLinksEntity(
       self: _selfMapped,
       collection: _collectionMapped,
     );
@@ -34,8 +34,8 @@ extension LinksModelMapper on LinksModel {
 }
 
 extension SettingModelMapped on SettingModel {
-  SettingEntity toDomain() {
-    return SettingEntity(
+  PaymentGatewaysSettingEntity toDomain() {
+    return PaymentGatewaysSettingEntity(
       id: id,
       label: label,
       description: description,
@@ -50,8 +50,8 @@ extension SettingModelMapped on SettingModel {
 }
 
 extension SettingsOptionsModelMapper on SettingsOptionsModel {
-  SettingsOptionsEntity toDomain() {
-    return SettingsOptionsEntity(
+  PaymentGatewaysSettingsOptionsEntity toDomain() {
+    return PaymentGatewaysSettingsOptionsEntity(
       forfait: forfait.toDomain(),
       livraisonGratuite: livraisonGratuite.toDomain(),
       pointDeVente: pointDeVente.toDomain(),
@@ -62,16 +62,16 @@ extension SettingsOptionsModelMapper on SettingsOptionsModel {
 }
 
 extension ForfaitModelMapper on ForfaitModel {
-  ForfaitEntity toDomain() {
-    return ForfaitEntity(
+  PaymentGatewaysForfaitEntity toDomain() {
+    return PaymentGatewaysForfaitEntity(
       flatRate: flatRate,
     );
   }
 }
 
 extension LivraisonGratuiteModelMapper on LivraisonGratuiteModel {
-  LivraisonGratuiteEntity toDomain() {
-    return LivraisonGratuiteEntity(
+  PaymentGatewaysLivraisonGratuiteEntity toDomain() {
+    return PaymentGatewaysLivraisonGratuiteEntity(
       freeShipping: freeShipping,
       freeShipping1: freeShipping1,
     );
@@ -80,8 +80,8 @@ extension LivraisonGratuiteModelMapper on LivraisonGratuiteModel {
 
 // Point de vente
 extension PointDeVenteModelMapper on PointDeVenteModel {
-  PointDeVenteEntity toDomain() {
-    return PointDeVenteEntity(
+  PaymentGatewaysPointDeVenteEntity toDomain() {
+    return PaymentGatewaysPointDeVenteEntity(
       localPickup: localPickup,
     );
   }

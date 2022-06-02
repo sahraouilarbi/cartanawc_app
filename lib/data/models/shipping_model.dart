@@ -36,16 +36,16 @@ class ShippingModel {
         country: json['country'] != null ? json['country'] as String : null,
       );
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['first_name'] = firstName;
-    data['last_name'] = lastName;
-    data['company'] = company;
-    data['address_1'] = address1;
-    data['address_2'] = address2;
-    data['city'] = city;
-    data['state'] = state;
-    data['postcode'] = postcode;
-    data['country'] = country;
-    return data;
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data['first_name'] = firstName;
+    _data['last_name'] = lastName;
+    _data['company'] = company;
+    _data['address_1'] = address1;
+    _data['address_2'] = address2;
+    _data['city'] = city;
+    _data['state'] = state;
+    _data['postcode'] = postcode;
+    _data['country'] = country;
+    return _data;
   }
 }

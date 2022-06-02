@@ -3,8 +3,8 @@ class ForgotPasswordResponseModel {
   String email;
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['email'] = email;
-    return data;
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data['email'] = email;
+    return _data;
   }
 }

@@ -19,14 +19,14 @@ class OrderDetailEntity {
   String orderStatus;
   DateTime orderDate;
   ShippingEntity shipping;
-  List<LineItemsEntity> lineItems;
+  List<OrderDetailsLineItemsEntity> lineItems;
   double totalAmount;
   double shippingTotal;
   double itemTotalAmount;
 }
 
-class LineItemsEntity {
-  LineItemsEntity({
+class OrderDetailsLineItemsEntity {
+  OrderDetailsLineItemsEntity({
     this.productId,
     this.productName,
     this.quantity,

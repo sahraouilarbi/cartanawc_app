@@ -32,17 +32,17 @@ class ProductEntity {
   String regularPrice;
   String salePrice;
   String stockStatus;
-  List<ImageProductEntity> images;
-  List<CategoriesEntity> categories;
+  List<ProductImageEntity> images;
+  List<ProductCategoryEntity> categories;
   List<ProductAttributesEntity> attributes;
   List<int> relatedIds;
   ProductVariationsEntity variations;
   List<MetaDataEntity> metaData;
-  ACFEntity acf;
+  ProductACFEntity acf;
 }
 
-class ImageProductEntity {
-  ImageProductEntity({
+class ProductImageEntity {
+  ProductImageEntity({
     this.src,
     this.woocommerceThumbnail,
     this.woocommerceSingle,
@@ -54,25 +54,14 @@ class ImageProductEntity {
   String woocommerceGalleryThumbnail;
 }
 
-class CategoriesEntity {
-  CategoriesEntity({this.id, this.name});
+class ProductCategoryEntity {
+  ProductCategoryEntity({this.id, this.name});
   int id;
   String name;
 }
 
-// class MetaDataEntity {
-//   MetaDataEntity({
-//     this.id,
-//     this.key,
-//     this.value,
-//   });
-//   int id;
-//   String key;
-//   String value;
-// }
-
-class ACFEntity {
-  ACFEntity({
+class ProductACFEntity {
+  ProductACFEntity({
     this.contenance,
     this.grossite,
     this.superGros,
