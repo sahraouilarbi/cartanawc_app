@@ -27,9 +27,9 @@ class AccueilPage extends StatefulWidget {
 class _AccueilPageState extends State<AccueilPage>
     with SingleTickerProviderStateMixin {
   static const List<Tab> homePageTabs = <Tab>[
-    Tab(text: 'Produits'),
-    Tab(text: 'Accueil'),
-    Tab(text: 'Explorer'),
+    Tab(text: 'PRODUITS'),
+    Tab(text: 'ACCUEIL'),
+    Tab(text: 'EXPLORER'),
   ];
   int firstComing = 0;
 
