@@ -42,7 +42,8 @@ class CartanaApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        initialRoute: Routes.homeRoute,
+        //initialRoute: 'Routes.homeRoute',
+        initialRoute: '/',
         onGenerateRoute: RouteGenerator.getRoute,
         debugShowCheckedModeBanner: false,
         title: 'Cartana',
