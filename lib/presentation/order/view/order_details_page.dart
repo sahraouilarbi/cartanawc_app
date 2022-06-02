@@ -102,7 +102,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
         });
   }
 
-  Widget _productItems(LineItemsModel product) {
+  Widget _productItems(OrderDetailLineItemsModel product) {
     return ListTile(
       dense: true,
       contentPadding: const EdgeInsets.all(AppPadding.p2),
