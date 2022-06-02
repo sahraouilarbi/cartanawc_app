@@ -12,7 +12,7 @@ abstract class APIService {
   Future<LoginResponseModel> login(String username, String password);
   Future<CustomerDetailModel> getCustomerDetails(int userId);
   Future<ForgotPasswordResponseModel> forgotPassword(String email);
-  Future<CustomerDetailModel> customerDetails();
+  //Future<CustomerDetailModel> customerDetails();
   Future<List<CategoryModel>> getCategories();
   Future<List<ProductModel>> getProducts({
     String status = 'publish',
@@ -94,35 +94,35 @@ class APIServiceImpl implements APIService {
   //***************************************************************************
   // Customer Details
   // TODO A SUPRIMMER SI gerCustomerDetails() fonctionne !!
-  @override
-  Future<CustomerDetailModel> customerDetails() async {
-    CustomerDetailModel customerDetailModel;
-    try {
-      final bool isLoggedIn = await SharedService.isLoggedIn();
-      if (isLoggedIn) {
-        int userId;
-        final LoginResponseModel loginResponseModel =
-            await SharedService.loginDetails();
-        if (loginResponseModel.data != null) {
-          userId = loginResponseModel.data.id;
-        }
-        final Response response =
-            await httpService.getRequest(_apiEndPoint.customer(userId));
-        if (response.statusCode == 200) {
-          customerDetailModel = CustomerDetailModel.fromJson(
-              response.data as Map<String, dynamic>);
-        }
-      }
-    } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        printDebugMessage(e.response.statusCode.toString());
-      } else {
-        printDebugMessage(e.message.toString());
-        printDebugMessage(e.error.toString());
-      }
-    }
-    return customerDetailModel;
-  }
+  // @override
+  // Future<CustomerDetailModel> customerDetails() async {
+  //   CustomerDetailModel customerDetailModel;
+  //   try {
+  //     final bool isLoggedIn = await SharedService.isLoggedIn();
+  //     if (isLoggedIn) {
+  //       int userId;
+  //       final LoginResponseModel loginResponseModel =
+  //           await SharedService.loginDetails();
+  //       if (loginResponseModel.data != null) {
+  //         userId = loginResponseModel.data.id;
+  //       }
+  //       final Response response =
+  //           await httpService.getRequest(_apiEndPoint.customer(userId));
+  //       if (response.statusCode == 200) {
+  //         customerDetailModel = CustomerDetailModel.fromJson(
+  //             response.data as Map<String, dynamic>);
+  //       }
+  //     }
+  //   } on DioError catch (e) {
+  //     if (e.response.statusCode == 404) {
+  //       printDebugMessage(e.response.statusCode.toString());
+  //     } else {
+  //       printDebugMessage(e.message.toString());
+  //       printDebugMessage(e.error.toString());
+  //     }
+  //   }
+  //   return customerDetailModel;
+  // }
 
   //***************************************************************************
   // Categories

@@ -118,29 +118,3 @@ class _TabCommandeState extends State<TabCommande> {
     );
   }
 }
-
-/**
-    return ListView.separated(
-    itemBuilder: (context, index) {
-    final List<ProductModel> _productsInCategory = _productSnapshot
-    .data
-    .where((element) =>
-    element.categories[1].id == _categoriesModel[index].id)
-    .toList();
-    print(_productsInCategory.length);
-    return CustomExpansionTile(
-    title: Text(_categoriesModel[index].name),
-    children: [
-    ListView.separated(
-    itemBuilder: (context, j) {
-    return Text(_productsInCategory[j].name);
-    },
-    separatorBuilder: (context, j) => const Divider(),
-    itemCount: _productsInCategory.length,
-    ),
-    ],
-    );
-    },
-    separatorBuilder: (context, index) => const Divider(),
-    itemCount: _categoriesModel.length);
- */
