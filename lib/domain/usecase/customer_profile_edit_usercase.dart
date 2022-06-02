@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 
 class CustomerProfileEditUsecase implements BaseUsecase {
   @override
-  Future<Either<Failure, dynamic>> execute(input) {
+  Future<Either<Failure, dynamic>> execute(void input) {
     // TODO: implement execute
     throw UnimplementedError();
   }
