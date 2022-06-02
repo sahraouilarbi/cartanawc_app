@@ -15,8 +15,10 @@ abstract class AppPreferences {
 }
 
 class AppPreferencesImpl implements AppPreferences {
-  AppPreferencesImpl(this._sharedPreferences);
   final SharedPreferences _sharedPreferences;
+
+  AppPreferencesImpl(this._sharedPreferences);
+
   static const String prefsKeyUsername = 'PREFS_KEY_USERNAME';
   static const String prefsKeyPassword = 'PREFS_KEY_PASSWORD';
   static const String prefsKeyToken = 'PREFS_KEY_TOKEN';
