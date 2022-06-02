@@ -4,8 +4,9 @@ import 'package:cartanawc_app/domain/usecase/base_usecase.dart';
 import 'package:dartz/dartz.dart';
 
 class ForgotPasswordUsercase implements BaseUsecase<String, String> {
-  ForgotPasswordUsercase(this._repository);
   final Repository _repository;
+
+  ForgotPasswordUsercase(this._repository);
 
   @override
   Future<Either<Failure, String>> execute(String input) {
