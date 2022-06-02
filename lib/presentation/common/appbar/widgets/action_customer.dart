@@ -1,11 +1,10 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';
 import 'package:flutter/material.dart';
 
-class AppBarActionLoginIcon extends StatelessWidget {
-  AppBarActionLoginIcon({Key key}) : super(key: key);
+class AppBarActionCustomerIcon extends StatelessWidget {
+  AppBarActionCustomerIcon({Key key}) : super(key: key);
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
   @override
@@ -15,22 +14,19 @@ class AppBarActionLoginIcon extends StatelessWidget {
         _appPreferences.isUserLoggedIn().then(
           (isUserLoggedIn) {
             if (isUserLoggedIn) {
-              Navigator.pushReplacementNamed(context, Routes.profileRoute);
+              Navigator.pushNamed(context, '/customerProfile');
             } else {
-              Navigator.pushReplacementNamed(context, Routes.loginRoute);
+              Navigator.pushNamed(context, '/login');
             }
           },
         );
       },
       icon: const CircleAvatar(
         radius: AppSize.s20,
-        backgroundColor: Colors.white,
-        child: CircleAvatar(
-          radius: AppSize.s17,
-          backgroundColor: Colors.black,
-          child: Icon(
-            Icons.person,
-          ),
+        backgroundColor: Colors.transparent,
+        child: Icon(
+          Icons.person,
+          color: Colors.white,
         ),
       ),
     );

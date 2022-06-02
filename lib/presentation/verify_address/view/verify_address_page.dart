@@ -10,12 +10,21 @@ import 'package:provider/provider.dart';
 import '/data/models/models.dart';
 import '/presentation/pages.dart';
 
-class VerifyAddress extends CheckoutBasePage {
+class VerifyAddressPage extends CheckoutBasePage {
+  static const String routeName = '/verifyAddress';
+
+  static Route route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => VerifyAddressPage(),
+    );
+  }
+
   @override
   _VerifyAddressState createState() => _VerifyAddressState();
 }
 
-class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
+class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
   final TextEditingController _shippingFirstNameTextEditingController =
       TextEditingController();
   final TextEditingController _shippingLastNameTextEditingController =
@@ -235,7 +244,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PaymentMethods(),
+                      builder: (context) => PaymentMethodsPage(),
                     ),
                   );
                 },

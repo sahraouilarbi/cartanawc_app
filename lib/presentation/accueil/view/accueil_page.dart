@@ -2,16 +2,24 @@ import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/tabview_accueil_widget.dart';
 import 'package:cartanawc_app/presentation/accueil/view/tab_explorer/tabview_explorer_widget.dart';
 import 'package:cartanawc_app/presentation/accueil/view/tab_produits/tabview_wc_categories_widget.dart';
-import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/drawer/drawer_anonymous_tile/drawer_anonymous_widget.dart';
-import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_anonymous_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AccueilPage extends StatefulWidget {
   const AccueilPage({Key key, this.tabSelected}) : super(key: key);
+
+  static const String routeName = '/';
+  static Route route({int tabSelected}) {
+    return MaterialPageRoute(
+        settings: const RouteSettings(name: routeName),
+        builder: (context) => AccueilPage(tabSelected: tabSelected));
+  }
+
   final int tabSelected;
+
   @override
   _AccueilPageState createState() => _AccueilPageState();
 }
@@ -33,7 +41,8 @@ class _AccueilPageState extends State<AccueilPage>
     authProvider = Provider.of<AuthProvider>(context, listen: false);
     await authProvider.isUserLoggedIn();
     if (authProvider.loggedInStatus == Status.loggedIn) {
-      Navigator.pushReplacementNamed(context, Routes.tableauBordRoute);
+      //Navigator.pushReplacementNamed(context, Routes.tableauBordRoute);
+      Navigator.pushNamed(context, '/tableauBord');
     }
   }
 
@@ -68,7 +77,7 @@ class _AccueilPageState extends State<AccueilPage>
           tabs: homePageTabs,
           hasTabs: true,
         ),
-        drawer: buildDrawer(context),
+        drawer: const DrawerForAnonymous(),
         body: TabBarView(
           controller: _tabController,
           children: [

@@ -11,6 +11,16 @@ import '/presentation/pages.dart';
 class OrderDetailsPage extends BasePage {
   const OrderDetailsPage({Key key, this.orderId}) : super(key: key);
   final int orderId;
+
+  static const String routeName = '/orderDetails';
+
+  static Route route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const OrderDetailsPage(),
+    );
+  }
+
   @override
   _OrderDetailsPageState createState() => _OrderDetailsPageState();
 }

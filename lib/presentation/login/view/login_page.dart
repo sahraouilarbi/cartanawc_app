@@ -1,25 +1,33 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
 import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
-import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
 import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'login_viewmodel.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({Key key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key key}) : super(key: key);
+
+  static const String routeName = '/login';
+
+  static Route route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const LoginPage(),
+    );
+  }
 
   @override
-  _LoginViewState createState() => _LoginViewState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginPageState extends State<LoginPage> {
   final LoginViewModel _loginViewModel = instance<LoginViewModel>();
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
@@ -48,7 +56,7 @@ class _LoginViewState extends State<LoginView> {
             _appPreferences.setUsername(_usernameController.text);
             _appPreferences.setPassword(_passwordController.text);
             resetModules();
-            Navigator.of(context).pushReplacementNamed(Routes.tableauBordRoute);
+            Navigator.pushNamed(context, '/tableauBord');
           },
         );
       },
@@ -72,8 +80,8 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: buildAppBar(context, isLoginPage: true),
       appBar: const CustomAppBar(isLoginPage: true),
+      backgroundColor: Colors.black,
       body: StreamBuilder<FlowState>(
         stream: _loginViewModel.outputState,
         builder: (context, snapshot) {
@@ -90,17 +98,15 @@ class _LoginViewState extends State<LoginView> {
   Widget _getContentWidget() {
     return SingleChildScrollView(
       physics: const ScrollPhysics(),
-      child: Container(
-        color: Colors.black,
+      child: Padding(
         padding: const EdgeInsets.only(
           left: AppPadding.p10,
           right: AppPadding.p10,
           bottom: AppPadding.p10,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            pageHeaderStack(pageHeader: 'MON ESPACE'),
+          children: <Widget>[
+            const SectionHeader(sectionTitle: 'MON ESPACE'),
             Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppPadding.p20,
@@ -113,14 +119,13 @@ class _LoginViewState extends State<LoginView> {
                     Icons.person,
                     size: AppSize.s120,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: AppPadding.p20),
-                    child: Text(
-                      'Bienvenue',
-                      style: TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.bold),
-                    ),
+                  const SizedBox(height: AppSize.s10),
+                  const Text(
+                    'Bienvenue',
+                    style:
+                        TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                   ),
+                  const SizedBox(height: AppSize.s30),
                   Form(
                     key: _globalKey,
                     child: Column(

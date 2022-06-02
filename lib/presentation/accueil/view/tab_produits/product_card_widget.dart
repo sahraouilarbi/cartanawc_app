@@ -17,7 +17,7 @@ class ProductTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => ProductDetails(data: data),
+            builder: (BuildContext context) => ProductDetailsPage(data: data),
           ),
         );
       },
@@ -32,7 +32,7 @@ class ProductTile extends StatelessWidget {
                 loadingBuilder: imageNetworkLoadingProgress,
               ),
             )
-          : noImagePlaceHolder(),
+          : const NoImagePlaceholder(),
       title: Text(data.name),
       trailing: Text(data.price != null && data.price != ''
           ? '${data.price.replaceAll('.', ',')} DA'

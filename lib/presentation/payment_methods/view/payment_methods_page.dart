@@ -11,12 +11,21 @@ import 'package:provider/provider.dart';
 
 import '/data/models/models.dart';
 
-class PaymentMethods extends CheckoutBasePage {
+class PaymentMethodsPage extends CheckoutBasePage {
+  static const String routeName = '/paymentMethods';
+
+  static Route route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => PaymentMethodsPage(),
+    );
+  }
+
   @override
   _PaymentMethodsState createState() => _PaymentMethodsState();
 }
 
-class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethods> {
+class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethodsPage> {
   APIService apiService;
   Future<List<PaymentGatewaysModel>> paymentGateways;
   String _paymentGatewaysID = '';

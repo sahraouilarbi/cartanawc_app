@@ -71,7 +71,7 @@ class _TabCommandeState extends State<TabCommande> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                ProductDetails(
+                                                ProductDetailsPage(
                                                     data:
                                                         _productsInCategory[j]),
                                           ),

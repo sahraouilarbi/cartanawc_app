@@ -1,21 +1,32 @@
-import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/drawer/drawer_customer/drawer_customer_widget.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'tab_commandes/tab_commande.dart';
 import 'tab_historique/tab_historique.dart';
 import 'tab_paiement/tab_paiement.dart';
 
-class TableauBord extends StatefulWidget {
-  const TableauBord({Key key, this.tabSelected}) : super(key: key);
+class TableauBordPage extends StatefulWidget {
+  const TableauBordPage({Key key, this.tabSelected}) : super(key: key);
 
   final int tabSelected;
 
+  static const String routeName = '/tableauBord';
+
+  static Route route({int tabSelected}) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => TableauBordPage(
+        tabSelected: tabSelected,
+      ),
+    );
+  }
+
   @override
-  _TableauBordState createState() => _TableauBordState();
+  _TableauBordPageState createState() => _TableauBordPageState();
 }
 
-class _TableauBordState extends State<TableauBord>
+class _TableauBordPageState extends State<TableauBordPage>
     with SingleTickerProviderStateMixin {
   static const List<Tab> tableauBordTabs = <Tab>[
     Tab(text: 'COMMANDES'),
@@ -56,7 +67,7 @@ class _TableauBordState extends State<TableauBord>
           hasTabs: true,
         ),
         // Build Drawer
-        drawer: BuildDrawerCustomerWidget(),
+        drawer: DrawerForAuthenticatedUser(),
         body: TabBarView(
           controller: _tabController,
           children: [

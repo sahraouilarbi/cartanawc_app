@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cartanawc_app/presentation/common/cartana_logo_widget.dart';
-import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AProposPage extends StatefulWidget {
   const AProposPage({Key key}) : super(key: key);
+
+  static const String routeName = '/aPropos';
+
+  static Route route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const AProposPage(),
+    );
+  }
 
   @override
   _AProposPageState createState() => _AProposPageState();
@@ -30,7 +39,7 @@ class _AProposPageState extends State<AProposPage> {
               color: Colors.black,
               child: Column(
                 children: [
-                  pageHeaderStack(pageHeader: 'A Propos'),
+                  const SectionHeader(sectionTitle: 'A Propos'),
                   Container(
                     color: Colors.white,
                     padding: const EdgeInsets.all(AppPadding.p20),
@@ -38,8 +47,8 @@ class _AProposPageState extends State<AProposPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         const SizedBox(height: AppSize.s30),
-                        SizedBox(
-                            height: AppSize.s100, child: buildCartanaLogo()),
+                        const SizedBox(
+                            height: AppSize.s100, child: CartanaLogo()),
                         const SizedBox(height: AppSize.s30),
                         buildContainer('Notre Histoire'),
                         const SizedBox(height: AppSize.s5),
@@ -76,7 +85,7 @@ class _AProposPageState extends State<AProposPage> {
                     color: Colors.black,
                     child: Column(
                       children: [
-                        pageHeaderStack(pageHeader: 'SUIVER NOUS'),
+                        const SectionHeader(sectionTitle: 'SUIVER NOUS'),
                         const SizedBox(height: AppSize.s10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

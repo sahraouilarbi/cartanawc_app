@@ -3,72 +3,45 @@ import 'package:flutter/material.dart';
 
 import '/presentation/pages.dart';
 
-class Routes {
-  static const String forgotPasswordRoute = '/forgotPassword';
-  static const String homeRoute = '/home';
-  static const String loginRoute = '/login';
-  static const String profileRoute = '/profile';
-  static const String editProfileRoute = '/editProfile';
-  static const String tableauBordRoute = '/tableauBord';
-  static const String tableauBordCommandeRoute = '/tableauBordCommande';
-  static const String tableauBordPaiementRoute = '/tableauBordPaiement';
-  static const String tableauBordHistoriqueRoute = '/tableauBordHistorique';
-  static const String produitsRoute = '/produits';
-  static const String productDetailRoute = '/produitDetail';
-}
-
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      case Routes.forgotPasswordRoute:
-        return null;
-        break;
-      case Routes.homeRoute:
-        return MaterialPageRoute(builder: (_) => const AccueilPage());
-        break;
-      case Routes.loginRoute:
+      case AProposPage.routeName:
+        return AProposPage.route();
+      case AccueilPage.routeName:
+        return AccueilPage.route(
+          tabSelected: routeSettings.arguments as int,
+        );
+      case CartPage.routeName:
+        return CartPage.route();
+      case CustomerProfilePage.routeName:
+        return CustomerProfilePage.route();
+      case CustomerProfileEditPage.routeName:
+        return CustomerProfileEditPage.route();
+      case LoginPage.routeName:
         initLoginModule();
-        return MaterialPageRoute(builder: (_) => const LoginView());
-      case Routes.profileRoute:
-        initCustomerProfileModule();
-        return MaterialPageRoute(builder: (_) => const CustomerProfileView());
-      case Routes.editProfileRoute:
-        return MaterialPageRoute(
-            builder: (_) => const CustomerProfileEditView());
-        break;
-      case Routes.tableauBordRoute:
-        return MaterialPageRoute(builder: (_) => const TableauBord());
-        break;
-      case Routes.tableauBordCommandeRoute:
-        return MaterialPageRoute(
-            builder: (_) => const TableauBord(
-                  tabSelected: 0,
-                ));
-        break;
-      case Routes.tableauBordPaiementRoute:
-        return MaterialPageRoute(
-            builder: (_) => const TableauBord(
-                  tabSelected: 1,
-                ));
-        break;
-      case Routes.tableauBordHistoriqueRoute:
-        return MaterialPageRoute(
-            builder: (_) => const TableauBord(
-                  tabSelected: 2,
-                ));
-        break;
-      case Routes.productDetailRoute:
-        return MaterialPageRoute(builder: (_) => ProductDetails());
-        break;
-      case Routes.produitsRoute:
-        return MaterialPageRoute(builder: (_) => null);
-        break;
+        return LoginPage.route();
+      case OrdersPage.routeName:
+        return OrdersPage.route();
+      case OrderDetailsPage.routeName:
+        return OrderDetailsPage.route();
+      case PaymentMethodsPage.routeName:
+        return PaymentMethodsPage.route();
+      case ProductDetailsPage.routeName:
+        return ProductDetailsPage.route();
+      case TableauBordPage.routeName:
+        return TableauBordPage.route(
+          tabSelected: routeSettings.arguments as int,
+        );
+      case VerifyAddressPage.routeName:
+        return VerifyAddressPage.route();
+
       default:
-        return unDefinedRoute();
+        return undefinedRoute();
     }
   }
 
-  static Route<dynamic> unDefinedRoute() {
+  static Route<dynamic> undefinedRoute() {
     return MaterialPageRoute(
       builder: (context) => Scaffold(
         backgroundColor: Colors.black,

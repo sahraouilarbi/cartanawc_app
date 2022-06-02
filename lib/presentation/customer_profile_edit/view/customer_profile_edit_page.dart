@@ -1,8 +1,8 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/drawer/drawer_anonymous_tile/drawer_anonymous_widget.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
 import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
-import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
 import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
 import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
@@ -11,14 +11,23 @@ import 'package:flutter/material.dart';
 import '/domain/entities/entities.dart';
 import 'customer_profile_edit_viewmodel.dart';
 
-class CustomerProfileEditView extends StatefulWidget {
-  const CustomerProfileEditView({Key key}) : super(key: key);
+class CustomerProfileEditPage extends StatefulWidget {
+  const CustomerProfileEditPage({Key key}) : super(key: key);
+
+  static const String routeName = '/customerProfileEdit';
+
+  static Route route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const CustomerProfileEditPage(),
+    );
+  }
 
   @override
   _CustomerProfileEditState createState() => _CustomerProfileEditState();
 }
 
-class _CustomerProfileEditState extends State<CustomerProfileEditView> {
+class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
   final CustomerProfileEditViewModel _customerProfileEditViewModel =
       instance<CustomerProfileEditViewModel>();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
@@ -63,7 +72,7 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
     return Scaffold(
       //appBar: buildAppBar(context, isUserProfilePage: true),
       appBar: const CustomAppBar(isUserProfilePage: true),
-      drawer: buildDrawer(context),
+      drawer: DrawerForAuthenticatedUser(),
       body: StreamBuilder<FlowState>(
           stream: _customerProfileEditViewModel.outputState,
           builder: (context, snapshot) {
@@ -88,7 +97,7 @@ class _CustomerProfileEditState extends State<CustomerProfileEditView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  pageHeaderStack(pageHeader: 'PROFIL'),
+                  const SectionHeader(sectionTitle: 'PROFIL'),
                   Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: AppPadding.p20, vertical: AppPadding.p40),

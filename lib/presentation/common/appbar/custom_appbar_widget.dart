@@ -1,6 +1,6 @@
-import 'package:cartanawc_app/presentation/common/appbar/appbar_actions_login_icon.dart';
-import 'package:cartanawc_app/presentation/common/appbar/appbar_actions_shopping_icon.dart';
-import 'package:cartanawc_app/presentation/common/appbar/appbar_cartana_logo.dart';
+import 'package:cartanawc_app/presentation/common/appbar/widgets/action_customer.dart';
+import 'package:cartanawc_app/presentation/common/appbar/widgets/action_shopping.dart';
+import 'package:cartanawc_app/presentation/common/appbar/widgets/cartana_logo.dart';
 import 'package:cartanawc_app/presentation/common/white_and_green_top_bar.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
@@ -36,13 +36,15 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       actions: [
         const AppBarActionShoppingIcon(),
-        AppBarActionLoginIcon(),
+        AppBarActionCustomerIcon(),
       ],
     );
   }
 
   @override
-  Size get preferredSize => hasTabs ? const Size.fromHeight(110) : Size.zero;
+  Size get preferredSize => hasTabs
+      ? const Size.fromHeight(AppSize.s110)
+      : const Size.fromHeight(AppSize.s62);
 }
 
 AppBar buildAppBar(
@@ -65,7 +67,7 @@ AppBar buildAppBar(
     ),
     actions: [
       const AppBarActionShoppingIcon(),
-      AppBarActionLoginIcon(),
+      AppBarActionCustomerIcon(),
     ],
   );
 }

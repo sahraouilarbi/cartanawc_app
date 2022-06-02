@@ -10,6 +10,15 @@ import 'widget_orders_item.dart';
 class OrdersPage extends StatefulWidget {
   const OrdersPage({Key key}) : super(key: key);
 
+  static const String routeName = '/orders';
+
+  static Route route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const OrdersPage(),
+    );
+  }
+
   @override
   _OrdersPageState createState() => _OrdersPageState();
 }

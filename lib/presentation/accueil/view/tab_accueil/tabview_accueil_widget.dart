@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/presentation/common/page_header_stack_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +14,9 @@ Widget tabViewAccueil() {
       child: Column(
         children: [
           buildStackPartenaire(),
-          pageHeaderStack(pageHeader: 'NOUVEAUTES'),
+          const SectionHeader(sectionTitle: 'NOUVEAUTES'),
           buildStackNouveautes(),
-          pageHeaderStack(pageHeader: 'ESPACE PROFESSIONNEL'),
+          const SectionHeader(sectionTitle: 'ESPACE PROFESSIONNEL'),
           buildStackEspaceProfessionnel(
             src: 'assets/images/salon_coiffure_institut_beaute_bg.jpg',
             headerText: 'SALON DE COIFFURE\nINSTITUT DE BEAUTE',
@@ -38,7 +38,7 @@ Widget tabViewAccueil() {
             badgeText: 'COMMANDER',
             badgeBgColor: ColorManager.blue,
           ),
-          pageHeaderStack(pageHeader: 'DEVENIR DISTRIBUTEUR'),
+          const SectionHeader(sectionTitle: 'DEVENIR DISTRIBUTEUR'),
           buildStackDevenirDistributeur(),
         ],
       ),

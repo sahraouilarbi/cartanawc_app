@@ -13,8 +13,8 @@ class AppBarCartanaLogo extends StatelessWidget {
         top: AppPadding.p4,
         right: AppPadding.p4,
       ),
-      width: AppSize.s44,
-      height: AppSize.s44,
+      width: AppSize.s48,
+      height: AppSize.s48,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -22,7 +22,7 @@ class AppBarCartanaLogo extends StatelessWidget {
           topRight: Radius.circular(AppSize.s5),
         ),
       ),
-      child: buildCartanaLogo(),
+      child: const CartanaLogo(),
     );
   }
 }

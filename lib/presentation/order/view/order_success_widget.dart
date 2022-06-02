@@ -80,7 +80,7 @@ class _OrderSuccessWidgetState
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              const TableauBord(tabSelected: 0),
+                              const TableauBordPage(tabSelected: 0),
                         ),
                         ModalRoute.withName('/tableauBordCommande'),
                       );

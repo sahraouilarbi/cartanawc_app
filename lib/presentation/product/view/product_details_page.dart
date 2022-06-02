@@ -3,7 +3,7 @@ import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
 import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
-import 'package:cartanawc_app/presentation/common/appbar/appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/expanded_text.dart';
 import 'package:cartanawc_app/presentation/common/image_network_loading_progress.dart';
 import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
@@ -17,17 +17,26 @@ import 'package:provider/provider.dart';
 
 import '/data/models/models.dart';
 
-class ProductDetails extends StatefulWidget {
-  ProductDetails({Key key, this.data}) : super(key: key);
+class ProductDetailsPage extends StatefulWidget {
+  ProductDetailsPage({Key key, this.data}) : super(key: key);
   final ProductModel data;
 
   final CartProductsModel cartProducts = CartProductsModel();
 
+  static const String routeName = '/productDetails';
+
+  static Route route() {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => ProductDetailsPage(),
+    );
+  }
+
   @override
-  _ProductDetailsState createState() => _ProductDetailsState();
+  _ProductDetailsPageState createState() => _ProductDetailsPageState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _ProductDetailsPageState extends State<ProductDetailsPage> {
   final AppPreferences _appPreferences = instance<AppPreferences>();
   bool isUserLoggedIn = false;
 
@@ -135,7 +144,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ),
                       )
                     else
-                      noImagePlaceHolder(),
+                      const NoImagePlaceholder(),
                     Visibility(
                       visible: widget.data.description != '',
                       child: ExpandedText(
