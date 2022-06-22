@@ -9,6 +9,7 @@ class RouteGenerator {
       case AProposPage.routeName:
         return AProposPage.route();
       case AccueilPage.routeName:
+        initGetCategoriesModule();
         return AccueilPage.route(
           tabSelected: routeSettings.arguments as int,
         );

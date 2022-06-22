@@ -1,7 +1,7 @@
 import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
 import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/tabview_accueil_widget.dart';
 import 'package:cartanawc_app/presentation/accueil/view/tab_explorer/tabview_explorer_widget.dart';
-import 'package:cartanawc_app/presentation/accueil/view/tab_produits/tabview_wc_categories_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_produits/tabview_categories_page.dart';
 import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
 import 'package:cartanawc_app/presentation/common/drawer/drawer_for_anonymous_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/size_config.dart';
@@ -41,7 +41,6 @@ class _AccueilPageState extends State<AccueilPage>
     authProvider = Provider.of<AuthProvider>(context, listen: false);
     await authProvider.isUserLoggedIn();
     if (authProvider.loggedInStatus == Status.loggedIn) {
-      //Navigator.pushReplacementNamed(context, Routes.tableauBordRoute);
       Navigator.pushNamed(context, '/tableauBord');
     }
   }
@@ -70,9 +69,7 @@ class _AccueilPageState extends State<AccueilPage>
 
     return SafeArea(
       child: Scaffold(
-        //appBar: buildAppBar(
         appBar: CustomAppBar(
-          //context,
           tabController: _tabController,
           tabs: homePageTabs,
           hasTabs: true,
@@ -80,13 +77,15 @@ class _AccueilPageState extends State<AccueilPage>
         drawer: const DrawerForAnonymous(),
         body: TabBarView(
           controller: _tabController,
-          children: [
+          children: const [
             // Afficher le tabView WooCommerce 'WC' Categories
-            tabViewWCCategories(),
+            TabCategories(),
+
             //Afficher le tabView Accueil
-            tabViewAccueil(),
+            TabAccueil(),
+
             //Afficher le tabView Explorer
-            tabViewExplorer(context),
+            TabExplorer(),
           ],
         ),
       ),

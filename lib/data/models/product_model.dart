@@ -106,17 +106,19 @@ class ProductImageModel {
 
   factory ProductImageModel.fromJson(Map<String, dynamic> json) =>
       ProductImageModel(
-        src: json['src'] != null ? json['src'] as String : null,
+        src: json['src'] != null
+            ? json['src'] as String
+            : "assets/images/no_image_placeholder.png",
         woocommerceThumbnail: json['woocommerce_thumbnail'] != null
             ? json['woocommerce_thumbnail'] as String
-            : null,
+            : "assets/images/no_image_placeholder.png",
         woocommerceSingle: json['woocommerce_single'] != null
             ? json['woocommerce_single'] as String
-            : null,
+            : "assets/images/no_image_placeholder.png",
         woocommerceGalleryThumbnail:
             json['woocommerce_gallery_thumbnail'] != null
                 ? json['woocommerce_gallery_thumbnail'] as String
-                : null,
+                : "assets/images/no_image_placeholder.png",
       );
 }
 

@@ -3,7 +3,6 @@ import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/data/api/api_endpoint.dart';
 import 'package:cartanawc_app/data/http_service.dart';
 import 'package:cartanawc_app/presentation/common/utils.dart';
-import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:dio/dio.dart';
 
 import '/data/models/models.dart';

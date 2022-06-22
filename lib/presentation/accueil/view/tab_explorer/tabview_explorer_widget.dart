@@ -7,43 +7,53 @@ import 'package:provider/provider.dart';
 /*
  * Build Explorer Page from de site : www2.cartana.dz
  */
-Widget tabViewExplorer(BuildContext context) {
-  final Position currentPosition = Provider.of<Position>(context);
-  return (currentPosition != null)
-      ? Stack(
-          alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: LatLng(
-                  currentPosition.latitude,
-                  currentPosition.longitude,
+class TabExplorer extends StatelessWidget {
+  const TabExplorer({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final Position currentPosition = Provider.of<Position>(context);
+
+    return (currentPosition != null)
+        ? Stack(
+            alignment: AlignmentDirectional.bottomCenter,
+            children: [
+              GoogleMap(
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(
+                    currentPosition.latitude,
+                    currentPosition.longitude,
+                  ),
+                  zoom: AppSize.s16,
                 ),
-                zoom: AppSize.s16,
               ),
-            ),
-            SizedBox(
-              height: AppSize.s120,
-              width: double.infinity,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  magasinCosmetiqueNeabByWidget('Boutique H'),
-                  magasinCosmetiqueNeabByWidget('Glamour'),
-                  magasinCosmetiqueNeabByWidget('CHANEL'),
-                  magasinCosmetiqueNeabByWidget('Petit Coeur'),
-                  magasinCosmetiqueNeabByWidget('La Princesse'),
-                  magasinCosmetiqueNeabByWidget('Rima'),
-                  magasinCosmetiqueNeabByWidget('Coin beauté'),
-                  magasinCosmetiqueNeabByWidget('Beauty'),
-                ],
+              SizedBox(
+                height: AppSize.s120,
+                width: double.infinity,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    magasinCosmetiqueNeabByWidget('Boutique H'),
+                    magasinCosmetiqueNeabByWidget('Glamour'),
+                    magasinCosmetiqueNeabByWidget('CHANEL'),
+                    magasinCosmetiqueNeabByWidget('Petit Coeur'),
+                    magasinCosmetiqueNeabByWidget('La Princesse'),
+                    magasinCosmetiqueNeabByWidget('Rima'),
+                    magasinCosmetiqueNeabByWidget('Coin beauté'),
+                    magasinCosmetiqueNeabByWidget('Beauty'),
+                  ],
+                ),
               ),
-            ),
-          ],
-        )
-      : const Center(
-          child: CircularProgressIndicator(),
-        );
+            ],
+          )
+        : const Center(
+            child: CircularProgressIndicator(),
+          );
+  }
+}
+
+Widget tabViewExplorer(BuildContext context) {
+  return null;
 }
 
 Container magasinCosmetiqueNeabByWidget(String title) {

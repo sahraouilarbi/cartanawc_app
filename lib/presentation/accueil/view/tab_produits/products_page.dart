@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/data/api/api_service.dart';
+//import 'package:cartanawc_app/core/dependency_injection.dart';
+//import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:cartanawc_app/model_views/providers/product_provider.dart';
-import 'package:cartanawc_app/presentation/accueil/view/tab_produits/product_card_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_produits/widgets/product_card_widget.dart';
 import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +13,8 @@ import '/data/models/models.dart';
 import '/presentation/pages.dart';
 
 class ProductPage extends BasePage {
-  const ProductPage({Key key, this.categorieId}) : super(key: key);
-  final int categorieId;
+  const ProductPage({Key key, this.categoryId}) : super(key: key);
+  final int categoryId;
 
   @override
   _ProductPageState createState() => _ProductPageState();
@@ -32,7 +32,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
     SortBy('price', 'Price: low to High', 'asc'),
   ];
   //APIService apiService = APIServiceImpl();
-  APIService apiService = instance<APIService>();
+  //APIService apiService = instance<APIService>();
 
   @override
   void initState() {
@@ -40,13 +40,13 @@ class _ProductPageState extends BasePageState<ProductPage> {
     final productList = Provider.of<ProductProvider>(context, listen: false);
     productList.resetStreams();
     productList.setLoadingState(LoadMoreStatus.initial);
-    productList.fetchProducts(_page, categoryId: widget.categorieId.toString());
+    productList.fetchProducts(_page, categoryId: widget.categoryId.toString());
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         productList.setLoadingState(LoadMoreStatus.loading);
         productList.fetchProducts(++_page,
-            categoryId: widget.categorieId.toString());
+            categoryId: widget.categoryId.toString());
       }
     });
     _searchQuery.addListener(_onSearchChange);
@@ -67,7 +67,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
       productList.resetStreams();
       productList.setLoadingState(LoadMoreStatus.initial);
       productList.fetchProducts(_page,
-          categoryId: widget.categorieId.toString(),
+          categoryId: widget.categoryId.toString(),
           strSearch: _searchQuery.text);
     });
   }
@@ -159,7 +159,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
                 productList.resetStreams();
                 productList.setSortOrder(sortBy);
                 productList.fetchProducts(_page,
-                    categoryId: widget.categorieId.toString());
+                    categoryId: widget.categoryId.toString());
               },
               itemBuilder: (BuildContext context) {
                 return _sortByOptions.map(

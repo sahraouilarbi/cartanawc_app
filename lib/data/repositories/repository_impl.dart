@@ -123,8 +123,8 @@ class RepositoryImpl implements Repository {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.getCategories();
-        final List<CategoryEntity> _categories = List.from(
-            _response.map((e) => e.toDomain() as ProductCategoryEntity));
+        final List<CategoryEntity> _categories =
+            List<CategoryEntity>.from(_response.map((e) => e.toDomain()));
         return Right(_categories);
       } catch (_error) {
         return Left(ErrorHandler.handle(_error).failure);

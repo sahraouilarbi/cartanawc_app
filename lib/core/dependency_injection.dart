@@ -5,8 +5,10 @@ import 'package:cartanawc_app/data/network/dio_factory.dart';
 import 'package:cartanawc_app/data/network/network_info.dart';
 import 'package:cartanawc_app/data/repositories/repository_impl.dart';
 import 'package:cartanawc_app/domain/repositories/repository.dart';
+import 'package:cartanawc_app/domain/usecase/categories_usecase.dart';
 import 'package:cartanawc_app/domain/usecase/customer_profile_usecase.dart';
 import 'package:cartanawc_app/domain/usecase/login_usecase.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_produits/tabview_categories_viewmodel.dart';
 import 'package:cartanawc_app/presentation/customer_profile/view/customer_profile_viewmodel.dart';
 import 'package:cartanawc_app/presentation/login/view/login_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
@@ -65,8 +67,19 @@ void initCustomerProfileModule() {
   }
 }
 
+void initGetCategoriesModule() {
+  if (!GetIt.I.isRegistered<CategoriesUsecase>()) {
+    instance.registerFactory<CategoriesUsecase>(
+        () => CategoriesUsecase(instance()));
+    instance.registerFactory<TabCategoriesViewModel>(
+        () => TabCategoriesViewModel(instance()));
+  }
+}
+
 void resetModules() {
   instance.reset(dispose: false);
   initAppModule();
   initLoginModule();
+  initGetCategoriesModule();
+  initCustomerProfileModule();
 }

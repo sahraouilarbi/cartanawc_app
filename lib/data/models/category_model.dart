@@ -28,7 +28,7 @@ class CategoryModel {
             json['description'] != null ? json['description'] as String : null,
         categoryImage: json['image'] != null
             ? CategoryImageModel.fromJson(json['image'] as Map<String, dynamic>)
-            : null,
+            : CategoryImageModel.fromJson({"image": ''}),
       );
 }
 
@@ -39,6 +39,6 @@ class CategoryImageModel {
 
   factory CategoryImageModel.fromJson(Map<String, dynamic> json) =>
       CategoryImageModel(
-        src: json['src'] != null ? json['src'] as String : null,
+        src: json['src'] != null ? json['src'] as String : '',
       );
 }
