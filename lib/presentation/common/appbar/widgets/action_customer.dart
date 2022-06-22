@@ -1,7 +1,8 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
+
+import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
+import '/presentation/ressources/appsize_manager.dart';
 
 class AppBarActionCustomerIcon extends StatelessWidget {
   AppBarActionCustomerIcon({Key key}) : super(key: key);
@@ -21,12 +22,18 @@ class AppBarActionCustomerIcon extends StatelessWidget {
           },
         );
       },
-      icon: const CircleAvatar(
-        radius: AppSize.s20,
-        backgroundColor: Colors.transparent,
-        child: Icon(
-          Icons.person,
-          color: Colors.white,
+      icon: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.white),
+          shape: BoxShape.circle,
+        ),
+        child: const CircleAvatar(
+          radius: AppSize.s20,
+          backgroundColor: Colors.transparent,
+          child: Icon(
+            Icons.person,
+            color: Colors.white,
+          ),
         ),
       ),
     );
