@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/data/models/shipping_model.dart';
+import '/data/models/models.dart';
 
 class OrderDetailModel {
   OrderDetailModel({
@@ -19,7 +19,7 @@ class OrderDetailModel {
   String orderStatus;
   DateTime orderDate;
   ShippingModel shipping;
-  List<LineItemsModel> lineItems;
+  List<OrderDetailLineItemsModel> lineItems;
   double totalAmount;
   double shippingTotal;
   double itemTotalAmount;
@@ -46,9 +46,10 @@ class OrderDetailModel {
 
     //lineItems = line_items
     if (json['line_items'] != null) {
-      lineItems = <LineItemsModel>[];
+      lineItems = <OrderDetailLineItemsModel>[];
       json['line_items'].forEach((element) {
-        lineItems.add(LineItemsModel.fromJson(element as Map<String, dynamic>));
+        lineItems.add(OrderDetailLineItemsModel.fromJson(
+            element as Map<String, dynamic>));
       });
       //TODO PEUT ETRE PLACER itemTotalAmount ICI
     }
@@ -68,8 +69,8 @@ class OrderDetailModel {
   }
 }
 
-class LineItemsModel {
-  LineItemsModel({
+class OrderDetailLineItemsModel {
+  OrderDetailLineItemsModel({
     this.productId,
     this.productName,
     this.quantity,
@@ -81,7 +82,7 @@ class LineItemsModel {
   int quantity;
   int variationId;
   double totalAmount;
-  LineItemsModel.fromJson(Map<String, dynamic> json) {
+  OrderDetailLineItemsModel.fromJson(Map<String, dynamic> json) {
     //productId = product_id
     productId = json['product_id'] as int;
 

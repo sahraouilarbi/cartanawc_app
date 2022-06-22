@@ -1,21 +1,17 @@
 import 'package:cartanawc_app/core/error/failure.dart';
-import 'package:cartanawc_app/data/models/login_model.dart';
 import 'package:cartanawc_app/data/models/login_request.dart';
-import 'package:cartanawc_app/domain/entities/cart_request_entity.dart';
-import 'package:cartanawc_app/domain/entities/cart_response_entity.dart';
-import 'package:cartanawc_app/domain/entities/categorie_entity.dart';
-import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
-import 'package:cartanawc_app/domain/entities/order_detail_entity.dart';
-import 'package:cartanawc_app/domain/entities/order_entity.dart';
-import 'package:cartanawc_app/domain/entities/product_entity.dart';
 import 'package:dartz/dartz.dart';
+
+import '/data/models/models.dart';
+import '/domain/entities/entities.dart';
 
 abstract class Repository {
   // Login
   Future<Either<Failure, LoginResponseModel>> login(LoginRequest loginRequest);
 
   // Forgot Password
-  Future<Either<Failure, String>> forgotPassword(String email);
+  Future<Either<Failure, ForgotPasswordResponseEntity>> forgotPassword(
+      String email);
 
   // Get Customer Profile
   Future<Either<Failure, CustomerDetailEntity>> getCustomerProfile(
@@ -63,4 +59,7 @@ abstract class Repository {
 
   // Get OrderDetails
   Future<Either<Failure, OrderDetailEntity>> getOrderDetails(int orderId);
+
+  // Get Payment Gateways
+  Future<Either<Failure, List<PaymentGatewaysEntity>>> getPaymentGateways();
 }

@@ -5,10 +5,12 @@ import 'package:cartanawc_app/data/network/dio_factory.dart';
 import 'package:cartanawc_app/data/network/network_info.dart';
 import 'package:cartanawc_app/data/repositories/repository_impl.dart';
 import 'package:cartanawc_app/domain/repositories/repository.dart';
+import 'package:cartanawc_app/domain/usecase/categories_usecase.dart';
 import 'package:cartanawc_app/domain/usecase/customer_profile_usecase.dart';
 import 'package:cartanawc_app/domain/usecase/login_usecase.dart';
-import 'package:cartanawc_app/presentation/account/customer_profile_viewmodel.dart';
-import 'package:cartanawc_app/presentation/login/login_viewmodel.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_produits/tabview_categories_viewmodel.dart';
+import 'package:cartanawc_app/presentation/customer_profile/view/customer_profile_viewmodel.dart';
+import 'package:cartanawc_app/presentation/login/view/login_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,15 +18,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 final instance = GetIt.instance;
 Future<void> initAppModule() async {
   // APIService
-  instance.registerLazySingleton<APIService>(() => APIService());
+  instance.registerLazySingleton<APIService>(() => APIServiceImpl());
 
   // SharedPreferences
   final sharedPrefs = await SharedPreferences.getInstance();
   instance.registerLazySingleton<SharedPreferences>(() => sharedPrefs);
 
   // App prefs instance
-  instance
-      .registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
+  instance.registerLazySingleton<AppPreferences>(
+      () => AppPreferencesImpl(instance()));
 
   // network info
   instance.registerLazySingleton<NetworkInfo>(
@@ -65,8 +67,19 @@ void initCustomerProfileModule() {
   }
 }
 
+void initGetCategoriesModule() {
+  if (!GetIt.I.isRegistered<CategoriesUsecase>()) {
+    instance.registerFactory<CategoriesUsecase>(
+        () => CategoriesUsecase(instance()));
+    instance.registerFactory<TabCategoriesViewModel>(
+        () => TabCategoriesViewModel(instance()));
+  }
+}
+
 void resetModules() {
   instance.reset(dispose: false);
   initAppModule();
   initLoginModule();
+  initGetCategoriesModule();
+  initCustomerProfileModule();
 }

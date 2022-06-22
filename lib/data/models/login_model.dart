@@ -1,41 +1,46 @@
 class LoginResponseModel {
+  bool success;
+  int statusCode;
+  String code;
+  String message;
+  LoginResponseDataModel data;
+
   LoginResponseModel({
     this.success,
     this.statusCode,
     this.code,
     this.message,
+    this.data,
   });
-  bool success;
-  int statusCode;
-  String code;
-  String message;
-  DataModel data;
 
-  LoginResponseModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'] as bool;
-    statusCode = json['statusCode'] as int;
-    code = json['code'] as String;
-    message = json['message'] as String;
-    data = json['data'] != null
-        ? DataModel.fromJson(json['data'] as Map<String, dynamic>)
-        : null;
-  }
+  factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
+      LoginResponseModel(
+        success: json['success'] != null ? json['success'] as bool : null,
+        statusCode:
+            json['statusCode'] != null ? json['statusCode'] as int : null,
+        code: json['code'] != null ? json['code'] as String : null,
+        message: json['message'] != null ? json['message'] as String : null,
+        data: json['data'] != null
+            ? LoginResponseDataModel.fromJson(
+                json['data'] as Map<String, dynamic>)
+            : null,
+      );
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    data['statusCode'] = statusCode;
-    data['code'] = code;
-    data['message'] = message;
-    if (this.data != null) {
-      data['data'] = this.data.toJson();
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data['success'] = success;
+    _data['statusCode'] = statusCode;
+    _data['code'] = code;
+    _data['message'] = message;
+    if (data != null) {
+      _data['data'] = data.toJson();
     }
-    return data;
+    return _data;
   }
 }
 
-class DataModel {
-  DataModel({
+class LoginResponseDataModel {
+  LoginResponseDataModel({
     this.token,
     this.id,
     this.email,
@@ -52,24 +57,27 @@ class DataModel {
   String lastName;
   String displayName;
 
-  DataModel.fromJson(Map<String, dynamic> json) {
-    token = json['token'] as String;
-    id = json['id'] as int;
-    email = json['email'] as String;
-    nicename = json['nicename'] as String;
-    firstName = json['firstName'] as String;
-    lastName = json['lastName'] as String;
-    displayName = json['displayName'] as String;
-  }
+  factory LoginResponseDataModel.fromJson(Map<String, dynamic> json) =>
+      LoginResponseDataModel(
+        token: json['token'] != null ? json['token'] as String : null,
+        id: json['id'] != null ? json['id'] as int : null,
+        email: json['email'] != null ? json['email'] as String : null,
+        nicename: json['nicename'] != null ? json['nicename'] as String : null,
+        firstName:
+            json['firstName'] != null ? json['firstName'] as String : null,
+        lastName: json['lastName'] != null ? json['lastName'] as String : null,
+        displayName:
+            json['displayName'] != null ? json['displayName'] as String : null,
+      );
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['token'] = token;
-    data['id'] = id;
-    data['email'] = email;
-    data['nicename'] = nicename;
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
-    data['displayName'] = displayName;
-    return data;
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data['token'] = token;
+    _data['id'] = id;
+    _data['email'] = email;
+    _data['nicename'] = nicename;
+    _data['firstName'] = firstName;
+    _data['lastName'] = lastName;
+    _data['displayName'] = displayName;
+    return _data;
   }
 }

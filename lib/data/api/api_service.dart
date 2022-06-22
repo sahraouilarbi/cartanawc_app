@@ -2,26 +2,44 @@ import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:cartanawc_app/data/api/api_endpoint.dart';
 import 'package:cartanawc_app/data/http_service.dart';
-import 'package:cartanawc_app/data/models/cart_request_model.dart';
-import 'package:cartanawc_app/data/models/cart_response_model.dart';
-import 'package:cartanawc_app/data/models/categorie_model.dart';
-import 'package:cartanawc_app/data/models/customer_detail_model.dart';
-import 'package:cartanawc_app/data/models/login_model.dart';
-import 'package:cartanawc_app/data/models/order_detail_model.dart';
-import 'package:cartanawc_app/data/models/order_model.dart';
-import 'package:cartanawc_app/data/models/payment_method_model.dart';
-import 'package:cartanawc_app/data/models/product_model.dart';
 import 'package:cartanawc_app/presentation/common/utils.dart';
-import 'package:cartanawc_app/services/shared_service.dart';
 import 'package:dio/dio.dart';
 
-class APIService {
+import '/data/models/models.dart';
+
+abstract class APIService {
+  Future<LoginResponseModel> login(String username, String password);
+  Future<CustomerDetailModel> getCustomerDetails(int userId);
+  Future<ForgotPasswordResponseModel> forgotPassword(String email);
+  //Future<CustomerDetailModel> customerDetails();
+  Future<List<CategoryModel>> getCategories();
+  Future<List<ProductModel>> getProducts({
+    String status = 'publish',
+    String strSearch,
+    int perPage,
+    int pageNumber,
+    String tagName,
+    List<int> productsIds,
+    String categoryId,
+    String sortBy,
+    String sortOrder = 'asc',
+  });
+  Future<CartResponseModel> addToCart(CartRequestModel model);
+  Future<CartResponseModel> getCartItem();
+  Future<Map<String, dynamic>> createOrder(OrderModel model);
+  Future<List<OrderModel>> getOrders();
+  Future<OrderDetailModel> getOrderDetails(int orderId);
+  Future<List<PaymentGatewaysModel>> getPaymentGateways();
+}
+
+class APIServiceImpl implements APIService {
   final APIEndPoint _apiEndPoint = APIEndPoint();
   HttpService httpService = HttpService();
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
   //***************************************************************************
   //Login
+  @override
   Future<LoginResponseModel> login(String username, String password) async {
     LoginResponseModel loginResponseModel;
 
@@ -42,7 +60,16 @@ class APIService {
   }
 
   //***************************************************************************
+  // ForgotPassword
+  @override
+  Future<ForgotPasswordResponseModel> forgotPassword(String email) {
+    // TODO: implement forgotPassword
+    throw UnimplementedError();
+  }
+
+  //***************************************************************************
   // Get Customer Details
+  @override
   Future<CustomerDetailModel> getCustomerDetails(int userId) async {
     CustomerDetailModel customerDetailModel;
     try {
@@ -66,37 +93,39 @@ class APIService {
   //***************************************************************************
   // Customer Details
   // TODO A SUPRIMMER SI gerCustomerDetails() fonctionne !!
-  Future<CustomerDetailModel> customerDetails() async {
-    CustomerDetailModel customerDetailModel;
-    try {
-      final bool isLoggedIn = await SharedService.isLoggedIn();
-      if (isLoggedIn) {
-        int userId;
-        final LoginResponseModel loginResponseModel =
-            await SharedService.loginDetails();
-        if (loginResponseModel.data != null) {
-          userId = loginResponseModel.data.id;
-        }
-        final Response response =
-            await httpService.getRequest(_apiEndPoint.customer(userId));
-        if (response.statusCode == 200) {
-          customerDetailModel = CustomerDetailModel.fromJson(
-              response.data as Map<String, dynamic>);
-        }
-      }
-    } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        printDebugMessage(e.response.statusCode.toString());
-      } else {
-        printDebugMessage(e.message.toString());
-        printDebugMessage(e.error.toString());
-      }
-    }
-    return customerDetailModel;
-  }
+  // @override
+  // Future<CustomerDetailModel> customerDetails() async {
+  //   CustomerDetailModel customerDetailModel;
+  //   try {
+  //     final bool isLoggedIn = await SharedService.isLoggedIn();
+  //     if (isLoggedIn) {
+  //       int userId;
+  //       final LoginResponseModel loginResponseModel =
+  //           await SharedService.loginDetails();
+  //       if (loginResponseModel.data != null) {
+  //         userId = loginResponseModel.data.id;
+  //       }
+  //       final Response response =
+  //           await httpService.getRequest(_apiEndPoint.customer(userId));
+  //       if (response.statusCode == 200) {
+  //         customerDetailModel = CustomerDetailModel.fromJson(
+  //             response.data as Map<String, dynamic>);
+  //       }
+  //     }
+  //   } on DioError catch (e) {
+  //     if (e.response.statusCode == 404) {
+  //       printDebugMessage(e.response.statusCode.toString());
+  //     } else {
+  //       printDebugMessage(e.message.toString());
+  //       printDebugMessage(e.error.toString());
+  //     }
+  //   }
+  //   return customerDetailModel;
+  // }
 
   //***************************************************************************
   // Categories
+  @override
   Future<List<CategoryModel>> getCategories() async {
     List<CategoryModel> categories = <CategoryModel>[];
     try {
@@ -120,6 +149,7 @@ class APIService {
 
   //***************************************************************************
   //Produits
+  @override
   Future<List<ProductModel>> getProducts({
     String status = 'publish',
     String strSearch,
@@ -222,6 +252,7 @@ class APIService {
 
   //***************************************************************************
   // Add to cart
+  @override
   Future<CartResponseModel> addToCart(CartRequestModel model) async {
     // final LoginResponseModel loginResponseModel = await SharedService.loginDetails();
     // if (loginResponseModel.data != null) {
@@ -251,6 +282,7 @@ class APIService {
 
   //***************************************************************************
   // Get Cart Items
+  @override
   Future<CartResponseModel> getCartItem() async {
     CartResponseModel responseModel;
     final _userId = await _appPreferences.getUserId();
@@ -272,6 +304,7 @@ class APIService {
 
   //***************************************************************************
   // Create Order
+  @override
   Future<Map<String, dynamic>> createOrder(OrderModel model) async {
     model.customerId = await _appPreferences.getUserId();
     Map<String, dynamic> myOrderCreated = <String, dynamic>{};
@@ -305,6 +338,7 @@ class APIService {
 
   //***************************************************************************
   // Get Orders
+  @override
   Future<List<OrderModel>> getOrders() async {
     List<OrderModel> data = <OrderModel>[];
     try {
@@ -324,6 +358,7 @@ class APIService {
 
   //***************************************************************************
   // Get Orders Details
+  @override
   Future<OrderDetailModel> getOrderDetails(int orderId) async {
     OrderDetailModel responseModel = OrderDetailModel();
     try {
@@ -339,6 +374,7 @@ class APIService {
     return responseModel;
   }
 
+  @override
   Future<List<PaymentGatewaysModel>> getPaymentGateways() async {
     List<PaymentGatewaysModel> data = <PaymentGatewaysModel>[];
     try {

@@ -1,5 +1,4 @@
-import 'package:cartanawc_app/data/models/variable_product_model.dart';
-import 'package:cartanawc_app/domain/entities/variable_product_entity.dart';
+import '/domain/entities/entities.dart';
 
 class ProductEntity {
   ProductEntity({
@@ -18,8 +17,8 @@ class ProductEntity {
     this.categories,
     this.attributes,
     this.relatedIds,
-    this.variableProduct,
-    this.productMetaData,
+    this.variations,
+    this.metaData,
     this.acf,
   });
   int id;
@@ -33,17 +32,17 @@ class ProductEntity {
   String regularPrice;
   String salePrice;
   String stockStatus;
-  List<ImageProductEntity> images;
-  List<CategoriesEntity> categories;
-  List<AttributesModel> attributes;
+  List<ProductImageEntity> images;
+  List<ProductCategoryEntity> categories;
+  List<ProductAttributesEntity> attributes;
   List<int> relatedIds;
-  VariableProductEntity variableProduct;
-  List<ProductMetaDataEntity> productMetaData;
-  ACFEntity acf;
+  ProductVariationsEntity variations;
+  List<MetaDataEntity> metaData;
+  ProductACFEntity acf;
 }
 
-class ImageProductEntity {
-  ImageProductEntity({
+class ProductImageEntity {
+  ProductImageEntity({
     this.src,
     this.woocommerceThumbnail,
     this.woocommerceSingle,
@@ -55,32 +54,14 @@ class ImageProductEntity {
   String woocommerceGalleryThumbnail;
 }
 
-class CategoriesEntity {
-  CategoriesEntity({this.id, this.name});
+class ProductCategoryEntity {
+  ProductCategoryEntity({this.id, this.name});
   int id;
   String name;
 }
 
-class AttributesEntity {
-  AttributesEntity({this.id, this.name, this.options});
-  int id;
-  String name;
-  List<String> options;
-}
-
-class ProductMetaDataEntity {
-  ProductMetaDataEntity({
-    this.id,
-    this.key,
-    this.value,
-  });
-  int id;
-  String key;
-  String value;
-}
-
-class ACFEntity {
-  ACFEntity({
+class ProductACFEntity {
+  ProductACFEntity({
     this.contenance,
     this.grossite,
     this.superGros,
@@ -92,4 +73,15 @@ class ACFEntity {
   String superGros;
   String grandeMoyenneSurface;
   String hypermarche;
+}
+
+class ProductAttributesEntity {
+  int id;
+  String name;
+  List<dynamic> options;
+  ProductAttributesEntity({
+    this.id,
+    this.name,
+    this.options,
+  });
 }
