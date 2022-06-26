@@ -29,7 +29,7 @@ class TableauBordPage extends StatefulWidget {
 class _TableauBordPageState extends State<TableauBordPage>
     with SingleTickerProviderStateMixin {
   static const List<Tab> tableauBordTabs = <Tab>[
-    Tab(text: 'COMMANDES'),
+    Tab(text: 'COMMANDER'),
     Tab(text: 'PAIEMENT'),
     Tab(text: 'HISTORIQUE'),
   ];
@@ -55,18 +55,11 @@ class _TableauBordPageState extends State<TableauBordPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: buildAppBar(
-        //   context,
-        //   tabController: _tabController,
-        //   tabs: tableauBordTabs,
-        //   hasTabs: true,
-        // ),
         appBar: CustomAppBar(
           tabController: _tabController,
           tabs: tableauBordTabs,
           hasTabs: true,
         ),
-        // Build Drawer
         drawer: DrawerForAuthenticatedUser(),
         body: TabBarView(
           controller: _tabController,
