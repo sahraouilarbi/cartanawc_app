@@ -145,10 +145,11 @@ class _CartPageState extends State<CartPage> {
           padding: const EdgeInsets.all(AppSize.s10),
           child: Consumer<CartProvider>(
             builder: (context, cartModel, child) {
-              return rowMontant(
-                  textLabel: 'TOTAL',
-                  valeurMontant: cartModel.totalAmount,
-                  fontSize: 18.0);
+              return MontantWidget(
+                label: 'TOTAL',
+                value: cartModel.totalAmount,
+                fontSize: 18.0,
+              );
             },
           ),
         ),

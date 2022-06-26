@@ -18,7 +18,7 @@ class DrawerForAuthenticatedUser extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(context, '/tableauBord', arguments: 0);
         },
-        title: 'COMMANDE',
+        title: 'COMMANDER',
         backgroundColor: Colors.white,
       ),
       DrawerContent(

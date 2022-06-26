@@ -14,6 +14,7 @@ extension ShippingModelMapper on ShippingModel {
       state: state,
       postcode: postcode,
       country: country,
+      phone: phone,
     );
   }
 }
@@ -31,6 +32,7 @@ extension ShippingEntityMapper on ShippingEntity {
       state: state,
       postcode: postcode,
       country: country,
+      phone: phone,
     );
   }
 }

@@ -137,8 +137,9 @@ class _CartProductState extends State<CartProduct> {
             ],
           ),
           const SizedBox(height: AppSize.s10),
-          rowMontant(
-              textLabel: 'MONTANT', valeurMontant: widget.data.lineSubtotal),
+          MontantWidget(
+            value: widget.data.lineSubtotal,
+          ),
           const SizedBox(height: AppSize.s10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -9,6 +9,7 @@ class ShippingModel {
     this.state,
     this.postcode,
     this.country,
+    this.phone,
   });
   String firstName;
   String lastName;
@@ -19,6 +20,7 @@ class ShippingModel {
   String postcode;
   String country;
   String state;
+  String phone;
 
   factory ShippingModel.fromJson(Map<String, dynamic> json) => ShippingModel(
         firstName:
@@ -34,6 +36,7 @@ class ShippingModel {
         state: json['state'] != null ? json['state'] as String : null,
         postcode: json['postcode'] != null ? json['postcode'] as String : null,
         country: json['country'] != null ? json['country'] as String : null,
+        phone: json['phone'] != null ? json['phone'] as String : null,
       );
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
@@ -46,6 +49,7 @@ class ShippingModel {
     _data['state'] = state;
     _data['postcode'] = postcode;
     _data['country'] = country;
+    _data['phone'] = phone;
     return _data;
   }
 }
