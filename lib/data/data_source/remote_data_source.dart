@@ -1,5 +1,5 @@
-import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/data/models/login_request.dart';
+import '/data/api/api_service.dart';
+import '/data/models/login_request.dart';
 
 import '/data/models/models.dart';
 

@@ -1,5 +1,6 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
+
+import '/presentation/ressources/appsize_manager.dart';
 
 Widget textButton({
   VoidCallback onPressed,
@@ -18,11 +19,11 @@ Widget textButton({
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(text),
+              Text(text.toUpperCase()),
               const SizedBox(width: AppSize.s5),
               iconRight
             ],
           )
-        : Text(text),
+        : Text(text.toUpperCase()),
   );
 }

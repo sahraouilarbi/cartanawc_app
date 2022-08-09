@@ -1,15 +1,16 @@
-import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
-import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
-import 'package:cartanawc_app/presentation/cart/view/cart_product_widget.dart';
-import 'package:cartanawc_app/presentation/verify_address/view/verify_address_page.dart';
-import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
-import 'package:cartanawc_app/presentation/common/row_montant.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/progress_hud.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+
+import '/presentation/cart/view/cart_product_widget.dart';
+import '/presentation/common/my_text_buttom_widget.dart';
+import '/presentation/common/row_montant.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
+import '/presentation/ressources/progress_hud.dart';
+import '/presentation/verify_address/view/verify_address_page.dart';
+import '/providers/cart_provider.dart';
+import '/providers/loader_provider.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key key}) : super(key: key);

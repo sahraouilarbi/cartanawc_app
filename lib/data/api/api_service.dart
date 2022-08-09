@@ -1,11 +1,12 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/data/api/api_endpoint.dart';
-import 'package:cartanawc_app/data/http_service.dart';
-import 'package:cartanawc_app/presentation/common/utils.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
+import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
+import '/data/api/api_endpoint.dart';
+import '/data/http_service.dart';
 import '/data/models/models.dart';
+import '/presentation/common/utils.dart';
 
 abstract class APIService {
   Future<LoginResponseModel> login(String username, String password);
@@ -83,8 +84,8 @@ class APIServiceImpl implements APIService {
       if (e.response.statusCode == 404) {
         printDebugMessage(e.response.statusCode.toString());
       } else {
-        printDebugMessage(e.message.toString());
-        printDebugMessage(e.error.toString());
+        debugPrint(e.message.toString());
+        debugPrint(e.error.toString());
       }
     }
     return customerDetailModel;
@@ -161,16 +162,6 @@ class APIServiceImpl implements APIService {
     String sortBy,
     String sortOrder = 'asc',
   }) async {
-    //CustomerDetailModel customerDetailModel;
-    //String userRole = '';
-
-    //final bool isLoggedIn = await SharedService.isLoggedIn();
-    // if (isLoggedIn) {
-    //   customerDetailModel = await customerDetails();
-    //   userRole = customerDetailModel.role;
-    // }
-
-    // ***
     String _userRole = '';
     final _isUserLoggedIn = await _appPreferences.isUserLoggedIn();
     if (_isUserLoggedIn) {
@@ -178,7 +169,6 @@ class APIServiceImpl implements APIService {
       final _customerDetailModel = await getCustomerDetails(_userId);
       _userRole = _customerDetailModel.role;
     }
-    // ***
 
     List<ProductModel> products = <ProductModel>[];
 
@@ -220,7 +210,6 @@ class APIServiceImpl implements APIService {
       if (response.statusCode == 200) {
         products = (response.data as List)
             .map((i) => ProductModel.fromJson(i as Map<String, dynamic>))
-            .where((element) => element.status == 'publish')
             .toList();
         if (_userRole != null) {
           for (final ProductModel product in products) {
@@ -246,6 +235,8 @@ class APIServiceImpl implements APIService {
       }
     } on DioError catch (e) {
       printDebugMessage('APIService.getProducts Exception : ${e.response}');
+    } catch (e) {
+      rethrow;
     }
     return products;
   }

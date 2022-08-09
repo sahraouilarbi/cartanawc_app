@@ -1,8 +1,12 @@
 import 'dart:async';
 
-import 'package:cartanawc_app/domain/usecase/customer_profile_edit_usercase.dart';
-import 'package:cartanawc_app/presentation/base/base_viewmodel.dart';
-import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
+import 'package:rxdart/rxdart.dart';
+
+import '/domain/entities/entities.dart';
+import '/domain/usecase/customer_profile_edit_usecase.dart';
+import '/presentation/base/base_viewmodel.dart';
+import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_renderer.dart';
 
 class CustomerProfileEditViewModel extends BaseViewModel
     with
@@ -27,13 +31,16 @@ class CustomerProfileEditViewModel extends BaseViewModel
   final StreamController _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
 
+  final _customerProfileEditStreamController =
+      BehaviorSubject<CustomerDetailEntity>();
+
   final CustomerProfileEditUsecase _customerProfileEditUsecase;
 
   CustomerProfileEditViewModel(this._customerProfileEditUsecase);
 
   @override
   void start() {
-    inputState.add(ContentState());
+    updateCustomerProfile();
   }
 
   @override
@@ -47,10 +54,24 @@ class CustomerProfileEditViewModel extends BaseViewModel
     _wilayaStreamController.close();
     _codePostalStreamController.close();
     _isAllInputsValidStreamController.close();
+    _customerProfileEditStreamController.close();
     super.dispose();
   }
 
-  void updateCustomerProfile() {}
+  Future<void> updateCustomerProfile() async {
+    inputState.add(
+      LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState),
+    );
+    (await _customerProfileEditUsecase.execute(CustomerDetailEntity().id)).fold(
+        (failure) {
+      inputState.add(
+        ErrorState(StateRendererType.fullScreenErrorState, failure.message),
+      );
+    }, (customerProfile) {
+      inputState.add(ContentState());
+    });
+  }
+
   // Inputs ******************************************************************
   @override
   void setNom(String nom) {
@@ -222,6 +243,14 @@ class CustomerProfileEditViewModel extends BaseViewModel
         _isCodePostalValid(codePostal);
      */
   }
+
+  @override
+  Sink get inputCustomerProfileEditData =>
+      _customerProfileEditStreamController.sink;
+
+  @override
+  Stream<CustomerDetailEntity> get outputCustomerProfileEditData =>
+      _customerProfileEditStreamController.stream.map((data) => data);
 }
 
 abstract class CustomerProfileEditViewModelInputs {
@@ -243,6 +272,7 @@ abstract class CustomerProfileEditViewModelInputs {
   Sink get inputWilaya;
   Sink get inputCodePostal;
   Sink get inputIsAllInputsValid;
+  Sink get inputCustomerProfileEditData;
 }
 
 abstract class CustomerProfileEditViewModelOutputs {
@@ -255,4 +285,5 @@ abstract class CustomerProfileEditViewModelOutputs {
   Stream<bool> get outputIsWilayaValid;
   Stream<bool> get outputIsCodePostalValid;
   Stream<bool> get outputIsAllInputsValid;
+  Stream<CustomerDetailEntity> get outputCustomerProfileEditData;
 }

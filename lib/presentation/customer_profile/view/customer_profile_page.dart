@@ -1,16 +1,16 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
-import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
-import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
-import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
-import 'package:cartanawc_app/presentation/common/text_customer_profile_view_widget.dart';
-import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
+import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
 import '/domain/entities/entities.dart';
+import '/presentation/common/appbar/custom_appbar_widget.dart';
+import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
+import '/presentation/common/my_text_buttom_widget.dart';
+import '/presentation/common/section_header_widget.dart';
+import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/text_customer_profile_view_widget.dart';
+import '/presentation/common/textbuttom_widget.dart';
+import '/presentation/ressources/appsize_manager.dart';
 import 'customer_profile_viewmodel.dart';
 
 class CustomerProfilePage extends StatefulWidget {
@@ -86,8 +86,7 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                       CircleAvatar(
                         radius: AppSize.s75,
                         child: Image.network(
-                          snapshot.data.avatarUrl ??
-                              'assets/images/no_image_placeholder',
+                          snapshot.data.avatarUrl,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -156,27 +155,22 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                         backgroundColor: Colors.black,
                       ),**/
 
-                      MyTextButtonWidget(
+                      //MyTextButtonWidget(
+                      textButton(
                         onPressed: () {
-                          // Navigator.pushReplacementNamed(
-                          //     context, Routes.editProfileRoute);
                           Navigator.pushNamed(context, '/customerProfileEdit');
                         },
-                        textButton: 'MODIFIER',
+                        text: 'MODIFIER',
                       ),
 
                       const SizedBox(height: AppSize.s10),
 
-                      textButton(
+                      MyTextButtonWidget(
                           onPressed: () {
                             _appPreferences.logout();
-                            //TODO Ajouter ce Future.delay au customerProfileViewModel
-                            Future.delayed(const Duration(milliseconds: 500));
-                            // Navigator.pushReplacementNamed(
-                            //     context, Routes.homeRoute);
                             Navigator.pushNamed(context, '/');
                           },
-                          text: 'Se déconnecter'),
+                          textButton: 'Se déconnecter'),
                     ],
                   ),
                 ),

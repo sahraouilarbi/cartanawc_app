@@ -1,15 +1,15 @@
-import 'package:cartanawc_app/core/error/error_handler.dart';
-import 'package:cartanawc_app/core/error/failure.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/data/data_source/remote_data_source.dart';
-import 'package:cartanawc_app/data/models/login_request.dart';
-import 'package:cartanawc_app/data/network/network_info.dart';
-import 'package:cartanawc_app/domain/repositories/repository.dart';
 import 'package:dartz/dartz.dart';
 
+import '/core/error/error_handler.dart';
+import '/core/error/failure.dart';
+import '/core/prefs/app_prefs.dart';
+import '/data/data_source/remote_data_source.dart';
 import '/data/mapper/mappers.dart';
+import '/data/models/login_request.dart';
 import '/data/models/models.dart';
+import '/data/network/network_info.dart';
 import '/domain/entities/entities.dart';
+import '/domain/repositories/repository.dart';
 
 class RepositoryImpl implements Repository {
   RepositoryImpl(
@@ -179,7 +179,7 @@ class RepositoryImpl implements Repository {
     String customerRole, {
     String status = 'publish',
     String strSearch,
-    int perPage,
+    int perPage = 100,
     int pageNumber,
     String tagName,
     List<int> productsIds,

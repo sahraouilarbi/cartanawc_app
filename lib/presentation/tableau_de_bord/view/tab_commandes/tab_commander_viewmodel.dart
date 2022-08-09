@@ -1,17 +1,22 @@
-import 'package:rxdart/subjects.dart';
+import 'package:rxdart/rxdart.dart';
 
+import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
 import '/domain/entities/entities.dart';
-import '/domain/usecase/products_usecase.dart';
+import '/domain/usecase/commander_usecase.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';
 import '/presentation/common/state_render/state_renderer.dart';
 import '/presentation/pages.dart';
 
-class ProductsViewModel extends BaseViewModel
-    with ProductsViewModelInput, ProductsViewModelOutput {
-  final ProductsUsecase productsUsecase;
-  ProductsViewModel(this.productsUsecase, this.categoryId);
-  final int categoryId;
+class TabCommanderViewModel extends BaseViewModel
+    with TabCommanderViewModelInputs, TabCommanderViewModelOutputs {
+  final CommanderUsecase commanderUsecase;
+  final AppPreferences _appPreferences = instance<AppPreferences>();
+  TabCommanderViewModel(this.commanderUsecase);
+
   final _productsStreamController = BehaviorSubject<List<ProductEntity>>();
+
+  String _userRole;
   @override
   void start() {
     _loadData();
@@ -28,12 +33,14 @@ class ProductsViewModel extends BaseViewModel
         stateRendererType: StateRendererType.fullScreenLoadingState,
       ),
     );
-    (await productsUsecase.execute(categoryId)).fold((failure) {
+    _userRole = await _appPreferences.getUserRole();
+    (await commanderUsecase.execute(_userRole)).fold((failure) {
       inputState.add(
           ErrorState(StateRendererType.fullScreenErrorState, failure.message));
-    }, (products) {
+    }, (products) async {
       inputState.add(ContentState());
-      inputProducts.add(products);
+      final List<ProductEntity> _products = products;
+      inputProducts.add(_products);
     });
   }
 
@@ -45,10 +52,10 @@ class ProductsViewModel extends BaseViewModel
       _productsStreamController.stream.map((e) => e);
 }
 
-abstract class ProductsViewModelInput {
+abstract class TabCommanderViewModelInputs {
   Sink get inputProducts;
 }
 
-abstract class ProductsViewModelOutput {
+abstract class TabCommanderViewModelOutputs {
   Stream<List<ProductEntity>> get outputProducts;
 }

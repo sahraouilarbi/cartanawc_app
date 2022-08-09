@@ -1,7 +1,8 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/size_config.dart';
 
 class ExpandedText extends StatefulWidget {
   const ExpandedText({

@@ -1,11 +1,12 @@
 import 'dart:io';
 
-import 'package:cartanawc_app/presentation/common/cartana_logo_widget.dart';
-import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '/presentation/common/cartana_logo_widget.dart';
+import '/presentation/common/section_header_widget.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
 
 class AProposPage extends StatefulWidget {
   const AProposPage({Key key}) : super(key: key);

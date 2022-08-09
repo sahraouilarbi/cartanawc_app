@@ -1,14 +1,14 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
-import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
-import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
-import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
+import '/presentation/common/appbar/custom_appbar_widget.dart';
+import '/presentation/common/my_text_buttom_widget.dart';
+import '/presentation/common/my_text_form_field_widget.dart';
+import '/presentation/common/section_header_widget.dart';
+import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/ressources/appsize_manager.dart';
 import 'login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
@@ -36,9 +36,6 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   bool _hidePassword = true;
-  //bool isApiCallProcess = false;
-  //String username;
-  //String password;
 
   void _bind() {
     _loginViewModel.start();

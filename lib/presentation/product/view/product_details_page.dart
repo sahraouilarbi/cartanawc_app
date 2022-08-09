@@ -4,29 +4,31 @@ import 'package:provider/provider.dart';
 import '/core/dependency_injection.dart';
 import '/core/prefs/app_prefs.dart';
 import '/data/models/models.dart';
-import '/model_views/providers/auth_provider.dart';
-import '/model_views/providers/cart_provider.dart';
-import '/model_views/providers/loader_provider.dart';
+import '/domain/entities/entities.dart';
 import '/presentation/common/appbar/custom_appbar_widget.dart';
 import '/presentation/common/my_text_buttom_widget.dart';
 import '/presentation/common/row_montant.dart';
 import '/presentation/common/stepper_widget.dart';
 import '/presentation/ressources/appsize_manager.dart';
 import '/presentation/ressources/color_manager.dart';
+import '/providers/auth_provider.dart';
+import '/providers/cart_provider.dart';
+import '/providers/loader_provider.dart';
 import 'widgets.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  ProductDetailsPage({Key key, this.data}) : super(key: key);
-  final ProductModel data;
+  ProductDetailsPage({Key key, @required this.data}) : super(key: key);
+  //final ProductModel data;
+  final ProductEntity data;
 
   final CartProductsModel cartProducts = CartProductsModel();
 
   static const String routeName = '/productDetails';
 
-  static Route route() {
+  static Route route({ProductEntity data}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => ProductDetailsPage(),
+      builder: (context) => ProductDetailsPage(data: data),
     );
   }
 
@@ -240,11 +242,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           final cartProvider =
                               Provider.of<CartProvider>(context, listen: false);
                           widget.cartProducts.productId = widget.data.id;
-                          widget.cartProducts.variationId =
-                              widget.data.variations != null
-                                  ? widget.data.variations.id
-                                  : 0;
-                          //TODO
+                          // TODO revoir variations
+                          // widget.cartProducts.variationId =
+                          //     widget.data.variations != null
+                          //         ? widget.data.variations.id
+                          //         : 0;
+                          // TODO
                           cartProvider.addToCart(
                             widget.cartProducts,
                             (val) {

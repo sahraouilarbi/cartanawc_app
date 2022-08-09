@@ -19,4 +19,22 @@ class CustomerDetailEntity {
   BillingEntity billing;
   ShippingEntity shipping;
   String avatarUrl;
+
+  @override
+  String toString() {
+    final String customerDetailEntity = """
+id: $id,
+email: $email,
+firstName: $firstName,
+lastName: $lastName,
+role: $role,
+-------------------
+BILLING:\n ${billing.toString()},
+-------------------
+SHIPPING:\n ${shipping.toString()},
+-------------------
+avatarUrl: $avatarUrl,
+""";
+    return customerDetailEntity;
+  }
 }

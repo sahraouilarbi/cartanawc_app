@@ -1,5 +1,6 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
+
+import '/presentation/ressources/appsize_manager.dart';
 
 class NoImagePlaceholder extends StatelessWidget {
   const NoImagePlaceholder({Key key}) : super(key: key);

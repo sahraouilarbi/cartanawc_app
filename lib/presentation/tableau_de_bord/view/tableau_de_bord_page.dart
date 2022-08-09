@@ -1,8 +1,8 @@
-import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
-
 import 'package:flutter/material.dart';
-import 'tab_commandes/tab_commande.dart';
+
+import '/presentation/common/appbar/custom_appbar_widget.dart';
+import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
+import 'tab_commandes/tab_commander.dart';
 import 'tab_historique/tab_historique.dart';
 import 'tab_paiement/tab_paiement.dart';
 
@@ -64,7 +64,7 @@ class _TableauBordPageState extends State<TableauBordPage>
         body: TabBarView(
           controller: _tabController,
           children: [
-            TabCommande(),
+            const TabCommander(),
             tabPaiement(),
             tabHistorique(),
           ],

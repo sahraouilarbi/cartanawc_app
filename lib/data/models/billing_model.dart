@@ -55,4 +55,22 @@ class BillingModel {
     _data['phone'] = phone;
     return _data;
   }
+
+  @override
+  String toString() {
+    final String billingModel = """
+firstName: $firstName,
+lastName: $lastName,
+company: $company,
+address1: $address1,
+address2: $address2,
+city: $city,
+state: $state,
+postcode: $postcode,
+country: $country,
+email: $email,
+phone: $phone
+""";
+    return billingModel;
+  }
 }

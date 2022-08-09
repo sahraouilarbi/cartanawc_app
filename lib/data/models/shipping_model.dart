@@ -52,4 +52,21 @@ class ShippingModel {
     _data['phone'] = phone;
     return _data;
   }
+
+  @override
+  String toString() {
+    final String shippingModel = """
+firstName: $firstName,
+lastName: $lastName,
+company: $company,
+address1: $address1,
+address2: $address2,
+city: $city,
+state: $state,
+postcode: $postcode,
+country: $country,
+phone: $phone
+""";
+    return shippingModel;
+  }
 }

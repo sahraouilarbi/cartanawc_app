@@ -12,6 +12,8 @@ abstract class AppPreferences {
   Future<void> logout();
   Future<void> setUserId(int userId);
   Future<int> getUserId();
+  Future<void> setUserRole(String userRole);
+  Future<String> getUserRole();
 }
 
 class AppPreferencesImpl implements AppPreferences {
@@ -24,6 +26,7 @@ class AppPreferencesImpl implements AppPreferences {
   static const String prefsKeyToken = 'PREFS_KEY_TOKEN';
   static const String prefsKeyIsUserLoggedIn = 'PREFS_KEY_IS_USER_LOGGED_IN';
   static const String prefsKeyUserID = 'PREFS_KEY_USER_ID';
+  static const String prefsKeyUserRole = 'PREFS_KEY_USER_ROLE';
 
   // Save Username
   @override
@@ -89,5 +92,17 @@ class AppPreferencesImpl implements AppPreferences {
   @override
   Future<int> getUserId() async {
     return _sharedPreferences.getInt(prefsKeyUserID);
+  }
+
+  // Set UserRole
+  @override
+  Future<void> setUserRole(String userRole) async {
+    _sharedPreferences.setString(prefsKeyUserRole, userRole);
+  }
+
+  // Get UserRole
+  @override
+  Future<String> getUserRole() async {
+    return _sharedPreferences.getString(prefsKeyUserRole);
   }
 }

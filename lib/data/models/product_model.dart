@@ -16,7 +16,7 @@ class ProductModel {
   List<ProductCategoriesModel> categories;
   List<ProductAttributesModel> attributes;
   List<int> relatedIds;
-  ProductVariationsModel variations;
+  List<dynamic> variations;
   List<MetaDataModel> metaData;
   ProductACFModel acf;
 
@@ -62,25 +62,29 @@ class ProductModel {
         stockStatus: json['stock_status'] != null
             ? json['stock_status'] as String
             : null,
-        relatedIds: json['related_ids'] != null
-            ? List<int>.from(
-                (json['related_ids'] as List<dynamic>).map((e) => e))
-            : <int>[],
-        categories: json['categories'] != null
-            ? List<ProductCategoriesModel>.from(
-                (json['categories'] as List<dynamic>).map((e) =>
-                    ProductCategoriesModel.fromJson(e as Map<String, dynamic>)))
-            : <ProductCategoriesModel>[],
         images: json['images'] != null
             ? List<ProductImageModel>.from((json['images'] as List<dynamic>)
                 .map((e) =>
                     ProductImageModel.fromJson(e as Map<String, dynamic>)))
             : <ProductImageModel>[],
-        attributes: json['attributes'] != null
+        categories: json['categories'] != null
+            ? List<ProductCategoriesModel>.from(
+                (json['categories'] as List<dynamic>).map((e) =>
+                    ProductCategoriesModel.fromJson(e as Map<String, dynamic>)))
+            : <ProductCategoriesModel>[],
+        attributes: json['attributes'] != null || json['attributes'].length == 0
             ? List<ProductAttributesModel>.from(
                 (json['attributes'] as List<dynamic>).map((e) =>
                     ProductAttributesModel.fromJson(e as Map<String, dynamic>)))
             : <ProductAttributesModel>[],
+        relatedIds: json['related_ids'] != null
+            ? List<int>.from(
+                (json['related_ids'] as List<dynamic>).map((e) => e))
+            : <int>[],
+        variations: json['variations'] != null
+            ? List<dynamic>.from(
+                (json['variations'] as List<dynamic>).map((e) => e))
+            : <dynamic>[],
         metaData: json['meta_data'] != null
             ? List<MetaDataModel>.from((json['meta_data'] as List<dynamic>)
                 .map((e) => MetaDataModel.fromJson(e as Map<String, dynamic>)))
@@ -89,6 +93,29 @@ class ProductModel {
             ? ProductACFModel.fromJson(json['acf'] as Map<String, dynamic>)
             : null,
       );
+
+  @override
+  String toString() {
+    return """
+ProductModel :
+    id: ${id.toString()}
+    name:$name
+    description: $description
+    shortDescription: $shortDescription
+    type: $type
+    status: $status
+    sku: $sku
+    price: $price
+    regularPrice: $regularPrice
+    salePrice: $salePrice
+    stockStatus: $stockStatus
+    relatedIds: ${relatedIds.toString()}
+    categories: ${categories.toString()}
+    images: ${images.toString()}
+    metaData:${metaData.toString()}
+    acf: ${acf.toString()}
+    """;
+  }
 }
 
 class ProductImageModel {
@@ -120,6 +147,16 @@ class ProductImageModel {
                 ? json['woocommerce_gallery_thumbnail'] as String
                 : "assets/images/no_image_placeholder.png",
       );
+  @override
+  String toString() {
+    return """
+ProductImageModel:
+ src: $src
+  woocommerceThumbnail: $woocommerceThumbnail
+  woocommerceSingle: $woocommerceSingle
+  woocommerceGalleryThumbnail: $woocommerceGalleryThumbnail
+""";
+  }
 }
 
 class ProductCategoriesModel {
@@ -144,14 +181,15 @@ class ProductAttributesModel {
   ProductAttributesModel({this.id, this.name, this.options});
   int id;
   String name;
-  List<String> options;
+  List<dynamic> options;
   factory ProductAttributesModel.fromJson(Map<String, dynamic> json) =>
       ProductAttributesModel(
         id: json['id'] != null ? json['id'] as int : null,
         name: json['name'] != null ? json['name'] as String : null,
         options: json['option'] != null
-            ? List<String>.from((json['option'] as List<dynamic>).map((e) => e))
-            : <String>[],
+            ? List<dynamic>.from(
+                (json['option'] as List<dynamic>).map((e) => e))
+            : <dynamic>[],
       );
 }
 

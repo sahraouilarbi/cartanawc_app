@@ -1,13 +1,13 @@
-import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
-import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
-import 'package:cartanawc_app/presentation/common/row_montant.dart';
-import 'package:cartanawc_app/presentation/common/utils.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/data/models/models.dart';
+import '/presentation/common/row_montant.dart';
+import '/presentation/common/utils.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
+import '/providers/cart_provider.dart';
+import '/providers/loader_provider.dart';
 
 class CartProduct extends StatefulWidget {
   const CartProduct({Key key, this.data}) : super(key: key);

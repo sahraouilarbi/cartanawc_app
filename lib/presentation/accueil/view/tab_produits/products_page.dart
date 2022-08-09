@@ -1,16 +1,14 @@
 import 'dart:async';
 
-//import 'package:cartanawc_app/core/dependency_injection.dart';
-//import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/model_views/providers/product_provider.dart';
-import 'package:cartanawc_app/presentation/accueil/view/tab_produits/widgets/product_card_widget.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/data/models/models.dart';
+import '/domain/entities/entities.dart';
 import '/presentation/pages.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/size_config.dart';
+import '/providers/product_provider.dart';
+import 'widgets/product_card_widget.dart';
 
 class ProductPage extends BasePage {
   const ProductPage({Key key, this.categoryId}) : super(key: key);
@@ -63,13 +61,18 @@ class _ProductPageState extends BasePageState<ProductPage> {
   void _onSearchChange() {
     final productList = Provider.of<ProductProvider>(context, listen: false);
     if (_debounce?.isActive ?? false) _debounce.cancel();
-    _debounce = Timer(const Duration(milliseconds: AppDuration.ms750), () {
-      productList.resetStreams();
-      productList.setLoadingState(LoadMoreStatus.initial);
-      productList.fetchProducts(_page,
+    _debounce = Timer(
+      const Duration(milliseconds: AppDuration.ms750),
+      () {
+        productList.resetStreams();
+        productList.setLoadingState(LoadMoreStatus.initial);
+        productList.fetchProducts(
+          _page,
           categoryId: widget.categoryId.toString(),
-          strSearch: _searchQuery.text);
-    });
+          strSearch: _searchQuery.text,
+        );
+      },
+    );
   }
 
   @override
@@ -79,12 +82,12 @@ class _ProductPageState extends BasePageState<ProductPage> {
 
   Widget _productList() {
     return Consumer<ProductProvider>(
-      builder: (BuildContext context, productsModel, child) {
-        if (productsModel.allProducts != null &&
-            productsModel.allProducts.isNotEmpty &&
-            productsModel.getLoadMoreStatus() != LoadMoreStatus.initial) {
-          return _buildList(productsModel.allProducts,
-              productsModel.getLoadMoreStatus() == LoadMoreStatus.loading);
+      builder: (BuildContext context, productsEntity, child) {
+        if (productsEntity.allProducts != null &&
+            productsEntity.allProducts.isNotEmpty &&
+            productsEntity.getLoadMoreStatus() != LoadMoreStatus.initial) {
+          return _buildList(productsEntity.allProducts,
+              productsEntity.getLoadMoreStatus() == LoadMoreStatus.loading);
         }
         return const Center(
           child: CircularProgressIndicator(),
@@ -93,7 +96,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
     );
   }
 
-  Widget _buildList(List<ProductModel> items, bool isLoadingMore) {
+  Widget _buildList(List<ProductEntity> items, bool isLoadingMore) {
     return Column(
       children: [
         //_productFilter(),
@@ -128,7 +131,11 @@ class _ProductPageState extends BasePageState<ProductPage> {
     return Container(
       height: getProportionateScreenHeight(51.0),
       margin: const EdgeInsets.fromLTRB(
-          AppMargin.m10, AppMargin.m10, AppMargin.m10, AppMargin.m5),
+        AppMargin.m10,
+        AppMargin.m10,
+        AppMargin.m10,
+        AppMargin.m5,
+      ),
       child: Row(
         children: [
           Flexible(

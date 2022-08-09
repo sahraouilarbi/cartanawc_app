@@ -1,5 +1,6 @@
-import 'package:cartanawc_app/core/error/failure.dart';
 import 'package:dio/dio.dart';
+
+import '/core/error/failure.dart';
 
 enum DataSource {
   badRequest,

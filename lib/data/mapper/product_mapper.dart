@@ -1,5 +1,5 @@
-import '../../domain/entities/entities.dart';
-import '../models/models.dart';
+import '/data/models/models.dart';
+import '/domain/entities/entities.dart';
 import 'mappers.dart';
 
 // ProductModel
@@ -21,6 +21,10 @@ extension ProductModelMapper on ProductModel {
         (relatedIds.map((v) => v) ?? const Iterable.empty())
             .cast<int>()
             .toList();
+    final List<dynamic> _variationsMapped =
+        (variations.map((v) => v) ?? const Iterable.empty())
+            .cast<dynamic>()
+            .toList();
     final List<MetaDataEntity> _metaDataMapped =
         (metaData.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<MetaDataEntity>()
@@ -41,7 +45,7 @@ extension ProductModelMapper on ProductModel {
       categories: _categoriesMapped,
       attributes: _attributesMapped,
       relatedIds: _relatedIdsMapped,
-      variations: variations.toDomain(),
+      variations: _variationsMapped,
       metaData: _metaDataMapped,
       acf: acf.toDomain(),
     );
@@ -83,24 +87,25 @@ extension ProductVariationsAttributesModelMapper
 }
 
 // VariableProductModel
-extension VariableProductModelMapper on ProductVariationsModel {
+extension ProductVariationsModelMapper on ProductVariationsModel {
   ProductVariationsEntity toDomain() {
-    final List<ProductVariationsAttributesEntity> _attributesMapped =
-        (attributes.map((e) => e.toDomain()) ?? const Iterable.empty())
-            .cast<ProductVariationsAttributesEntity>()
-            .toList();
+    // final List<ProductVariationsAttributesEntity> _attributesMapped =
+    //     (attributes.map((e) => e.toDomain()) ?? const Iterable.empty())
+    //         .cast<ProductVariationsAttributesEntity>()
+    //         .toList();
     return ProductVariationsEntity(
-        id: id,
-        sku: sku,
-        price: price,
-        regularPrice: regularPrice,
-        salePrice: salePrice,
-        attributes: _attributesMapped);
+        // id: id,
+        // sku: sku,
+        // price: price,
+        // regularPrice: regularPrice,
+        // salePrice: salePrice
+        //attributes: _attributesMapped
+        );
   }
 }
 
 // ACFModel
-extension ACFModelMapper on ProductACFModel {
+extension ProductACFModelMapper on ProductACFModel {
   ProductACFEntity toDomain() {
     return ProductACFEntity(
       contenance: contenance,

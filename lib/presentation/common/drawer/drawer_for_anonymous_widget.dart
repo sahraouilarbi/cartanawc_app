@@ -1,7 +1,7 @@
-import 'package:cartanawc_app/presentation/common/drawer/widgets/drawer_customer_tile.dart';
 import 'package:flutter/material.dart';
 
-import '../white_and_green_top_bar.dart';
+import '/presentation/common/drawer/widgets/drawer_customer_tile.dart';
+import '/presentation/common/white_and_green_top_bar.dart';
 import 'models/drawer_model.dart';
 
 class DrawerForAnonymous extends StatelessWidget {

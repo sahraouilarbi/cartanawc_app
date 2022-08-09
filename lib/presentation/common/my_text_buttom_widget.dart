@@ -1,6 +1,7 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '/presentation/ressources/appsize_manager.dart';
 
 class MyTextButtonWidget extends StatelessWidget {
   const MyTextButtonWidget({
@@ -37,7 +38,7 @@ class MyTextButtonWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    textButton ?? '',
+                    textButton.toUpperCase() ?? '',
                     style: TextStyle(
                       color: textColor ?? Colors.white,
                     ),

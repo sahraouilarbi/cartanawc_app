@@ -1,5 +1,6 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
+
+import '/presentation/ressources/appsize_manager.dart';
 
 class TextCustomerProfileViewWidget extends StatelessWidget {
   const TextCustomerProfileViewWidget(

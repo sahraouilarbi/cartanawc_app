@@ -36,7 +36,7 @@ class ProductEntity {
   List<ProductCategoryEntity> categories;
   List<ProductAttributesEntity> attributes;
   List<int> relatedIds;
-  ProductVariationsEntity variations;
+  List<dynamic> variations;
   List<MetaDataEntity> metaData;
   ProductACFEntity acf;
 }

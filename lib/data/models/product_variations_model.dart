@@ -14,20 +14,23 @@ class ProductVariationsModel {
   String salePrice;
   List<ProductVariationsAttributesModel> attributes;
 
-  ProductVariationsModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'] as int;
-    sku = json['sku'] as String;
-    price = json['price'] as String;
-    regularPrice = json['regular_price'] as String;
-    salePrice = json['sale_price'] as String;
-    if (json['attributes'] != null) {
-      attributes = <ProductVariationsAttributesModel>[];
-      json['attributes'].forEach((element) {
-        attributes.add(ProductVariationsAttributesModel.fromJson(
-            element as Map<String, dynamic>));
-      });
-    }
-  }
+  factory ProductVariationsModel.fromJson(Map<String, dynamic> json) =>
+      ProductVariationsModel(
+        id: json['id'] != null ? json['id'] as int : null,
+        sku: json['sku'] != null ? json['sku'] as String : null,
+        price: json['price'] != null ? json['price'] as String : null,
+        regularPrice: json['regular_price'] as String,
+        salePrice: json['sale_price'] as String,
+        attributes: json['attributes'] != null
+            ? List<ProductVariationsAttributesModel>.from(
+                (json['attributes'] as List<dynamic>).map(
+                  (e) => ProductVariationsAttributesModel.fromJson(
+                    e as Map<String, dynamic>,
+                  ),
+                ),
+              )
+            : <ProductVariationsAttributesModel>[],
+      );
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;

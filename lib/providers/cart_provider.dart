@@ -1,8 +1,8 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:flutter/material.dart';
 
+import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
+import '/data/api/api_service.dart';
 import '/data/models/models.dart';
 
 class CartProvider with ChangeNotifier {

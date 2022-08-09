@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:rxdart/subjects.dart';
 
-import '/domain/entities/category_entity.dart';
+import '/domain/entities/entities.dart';
 import '/domain/usecase/categories_usecase.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';
 import '/presentation/common/state_render/state_renderer.dart';

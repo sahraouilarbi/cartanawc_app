@@ -1,25 +1,25 @@
-import 'package:cartanawc_app/presentation/common/image_network_loading_progress.dart';
-import 'package:cartanawc_app/presentation/common/no_image_placeholder.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
-import '/data/models/models.dart';
-import '/presentation/pages.dart';
+import '/domain/entities/entities.dart';
+import '/presentation/common/image_network_loading_progress.dart';
+import '/presentation/common/no_image_placeholder.dart';
+import '/presentation/ressources/appsize_manager.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({Key key, this.data}) : super(key: key);
-  final ProductModel data;
+  final ProductEntity data;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => ProductDetailsPage(data: data),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (BuildContext context) => ProductDetailsPage(data: data),
+        //   ),
+        // );
+        Navigator.pushNamed(context, '/productDetails', arguments: data);
       },
       leading: data.images[0].woocommerceGalleryThumbnail != null
           ? Container(
@@ -34,9 +34,11 @@ class ProductTile extends StatelessWidget {
             )
           : const NoImagePlaceholder(),
       title: Text(data.name),
-      trailing: Text(data.price != null && data.price != ''
-          ? '${data.price.replaceAll('.', ',')} DA'
-          : ''),
+      trailing: Text(
+        data.price != null && data.price != ''
+            ? '${data.price.replaceAll('.', ',')} DA'
+            : '',
+      ),
     );
   }
 }

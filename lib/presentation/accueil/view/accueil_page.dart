@@ -1,12 +1,14 @@
-import 'package:cartanawc_app/model_views/providers/auth_provider.dart';
-import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/tabview_accueil_widget.dart';
-import 'package:cartanawc_app/presentation/accueil/view/tab_explorer/tabview_explorer_widget.dart';
-import 'package:cartanawc_app/presentation/accueil/view/tab_produits/tabview_categories_page.dart';
-import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/drawer/drawer_for_anonymous_widget.dart';
-import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '/core/dependency_injection.dart';
+import '/presentation/accueil/view/tab_accueil/tabview_accueil_widget.dart';
+import '/presentation/accueil/view/tab_explorer/tabview_explorer_widget.dart';
+import '/presentation/accueil/view/tab_produits/tabview_categories_page.dart';
+import '/presentation/common/appbar/custom_appbar_widget.dart';
+import '/presentation/common/drawer/drawer_for_anonymous_widget.dart';
+import '/presentation/ressources/size_config.dart';
+import '/providers/auth_provider.dart';
 
 class AccueilPage extends StatefulWidget {
   const AccueilPage({Key key, this.tabSelected}) : super(key: key);
@@ -41,6 +43,7 @@ class _AccueilPageState extends State<AccueilPage>
     authProvider = Provider.of<AuthProvider>(context, listen: false);
     await authProvider.isUserLoggedIn();
     if (authProvider.loggedInStatus == Status.loggedIn) {
+      resetModules();
       Navigator.pushNamed(context, '/tableauBord');
     }
   }

@@ -1,10 +1,10 @@
-import 'package:cartanawc_app/model_views/providers/order_provider.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/data/models/models.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/size_config.dart';
+import '/providers/order_provider.dart';
 import 'widget_orders_item.dart';
 
 class OrdersPage extends StatefulWidget {

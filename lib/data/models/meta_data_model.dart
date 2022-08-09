@@ -21,4 +21,14 @@ class MetaDataModel {
     _data['value'] = value;
     return _data;
   }
+
+  @override
+  String toString() {
+    return """
+    MetaData:
+      id: $id
+      key: $key
+      value: $value
+    """;
+  }
 }

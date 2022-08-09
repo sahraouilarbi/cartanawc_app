@@ -1,12 +1,11 @@
 import 'dart:async';
 
-import 'package:cartanawc_app/domain/usecase/login_usecase.dart';
-import 'package:cartanawc_app/presentation/base/base_viewmodel.dart';
-import 'package:cartanawc_app/presentation/common/freezed_data_class/freezed_data_classes.dart';
-import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
-import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
-
 import '/data/models/models.dart';
+import '/domain/usecase/login_usecase.dart';
+import '/presentation/base/base_viewmodel.dart';
+import '/presentation/common/freezed_data_class/freezed_data_classes.dart';
+import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_renderer.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {

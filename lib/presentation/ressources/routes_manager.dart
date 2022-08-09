@@ -1,6 +1,7 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
 import 'package:flutter/material.dart';
 
+import '/core/dependency_injection.dart';
+import '/domain/entities/entities.dart';
 import '/presentation/pages.dart';
 
 class RouteGenerator {
@@ -10,9 +11,7 @@ class RouteGenerator {
         return AProposPage.route();
       case AccueilPage.routeName:
         initGetCategoriesModule();
-        return AccueilPage.route(
-          tabSelected: routeSettings.arguments as int,
-        );
+        return AccueilPage.route(tabSelected: routeSettings.arguments as int);
       case CartPage.routeName:
         return CartPage.route();
       case CustomerProfilePage.routeName:
@@ -29,14 +28,14 @@ class RouteGenerator {
       case PaymentMethodsPage.routeName:
         return PaymentMethodsPage.route();
       case ProductDetailsPage.routeName:
-        return ProductDetailsPage.route();
+        return ProductDetailsPage.route(
+            data: routeSettings.arguments as ProductEntity);
       case TableauBordPage.routeName:
+        initTabCommanderModule();
         return TableauBordPage.route(
-          tabSelected: routeSettings.arguments as int,
-        );
+            tabSelected: routeSettings.arguments as int);
       case VerifyAddressPage.routeName:
         return VerifyAddressPage.route();
-
       default:
         return undefinedRoute();
     }

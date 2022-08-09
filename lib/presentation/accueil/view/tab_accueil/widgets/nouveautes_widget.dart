@@ -1,7 +1,7 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
 import 'background_image_with_overlay_widget.dart';
 import 'badge_widget.dart';
 

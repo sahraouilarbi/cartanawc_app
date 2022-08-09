@@ -1,5 +1,5 @@
-import '../../domain/entities/entities.dart';
-import '../models/models.dart';
+import '/data/models/models.dart';
+import '/domain/entities/entities.dart';
 
 // MetaDataModel
 extension MetaDataModelMapper on MetaDataModel {

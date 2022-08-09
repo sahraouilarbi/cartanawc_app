@@ -1,9 +1,10 @@
-import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
-import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/progress_hud.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '/presentation/common/appbar/custom_appbar_widget.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/progress_hud.dart';
+import '/providers/loader_provider.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({Key key}) : super(key: key);

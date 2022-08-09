@@ -1,7 +1,7 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '/presentation/ressources/appsize_manager.dart';
 import 'background_image_with_overlay_widget.dart';
 
 class Partenaire extends StatelessWidget {
