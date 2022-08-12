@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '/presentation/cart/view/cart_product_widget.dart';
+import '/presentation/common/appbar/custom_appbar_widget.dart';
+import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
 import '/presentation/common/my_text_buttom_widget.dart';
+import '/presentation/common/page_sub_header.dart';
 import '/presentation/common/row_montant.dart';
 import '/presentation/ressources/appsize_manager.dart';
 import '/presentation/ressources/color_manager.dart';
-import '/presentation/ressources/progress_hud.dart';
 import '/presentation/verify_address/view/verify_address_page.dart';
 import '/providers/cart_provider.dart';
 import '/providers/loader_provider.dart';
@@ -32,10 +33,12 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Panier'),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Panier'),
+      //   centerTitle: true,
+      // ),
+      appBar: const CustomAppBar(),
+      drawer: DrawerForAuthenticatedUser(),
       body: FutureBuilder(
         future: Future.value(true), //SharedService.isLoggedIn(),
         builder: (BuildContext context, AsyncSnapshot<bool> loginModel) {
@@ -44,11 +47,18 @@ class _CartPageState extends State<CartPage> {
               return Consumer<LoaderProvider>(
                   builder: (context, loaderProvider, child) {
                 return Scaffold(
-                  body: ProgressHUD(
-                    isAsyncCall: loaderProvider.isApiCallProcess,
-                    opacity: 0.3,
-                    child: SingleChildScrollView(
-                      child: _cartItemsList(),
+                  body: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        PageSubHeaderWidget(
+                          title: 'PANIER',
+                          svgUrl: 'assets/images/shopping_cart.svg',
+                          textColor: Colors.white,
+                          backgroundColor: ColorManager.blue,
+                          hasBackReturn: true,
+                        ),
+                        _cartItemsList(),
+                      ],
                     ),
                   ),
                 );
@@ -64,32 +74,6 @@ class _CartPageState extends State<CartPage> {
   Widget _cartItemsList() {
     return Column(
       children: [
-        // Titre de la page : 'Panier' + Icon Shopping cart
-        Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: AppPadding.p10,
-            horizontal: AppPadding.p30,
-          ),
-          decoration: BoxDecoration(
-            border: const Border(bottom: BorderSide()),
-            color: ColorManager.blue,
-          ),
-          child: Row(
-            children: [
-              SvgPicture.asset('assets/images/shopping_cart.svg',
-                  color: Colors.white, fit: BoxFit.cover),
-              const SizedBox(width: AppSize.s5),
-              const Text(
-                'PANIER',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ),
-            ],
-          ),
-        ),
-
         // contenue du panier
         Consumer<CartProvider>(
           builder: (context, cartModel, child) {
