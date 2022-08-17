@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '/core/extensions.dart';
 import '/domain/entities/entities.dart';
 import '/presentation/common/image_network_loading_progress.dart';
 import '/presentation/common/no_image_placeholder.dart';
 import '/presentation/ressources/appsize_manager.dart';
 
 class ProductTile extends StatelessWidget {
-  const ProductTile({Key key, this.data}) : super(key: key);
+  const ProductTile({Key? key, required this.data}) : super(key: key);
   final ProductEntity data;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (BuildContext context) => ProductDetailsPage(data: data),
-        //   ),
-        // );
         Navigator.pushNamed(context, '/productDetails', arguments: data);
       },
       leading: data.images[0].woocommerceGalleryThumbnail != null
@@ -35,9 +30,9 @@ class ProductTile extends StatelessWidget {
           : const NoImagePlaceholder(),
       title: Text(data.name),
       trailing: Text(
-        data.price != null && data.price != ''
+        data.price != null && data.price != kEMPTY
             ? '${data.price.replaceAll('.', ',')} DA'
-            : '',
+            : kEMPTY,
       ),
     );
   }

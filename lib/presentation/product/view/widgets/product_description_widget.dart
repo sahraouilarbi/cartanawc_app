@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '/core/extensions.dart';
 import '/presentation/common/expanded_text.dart';
 import '/presentation/common/image_network_loading_progress.dart';
 import '/presentation/common/no_image_placeholder.dart';
@@ -8,10 +9,10 @@ import '/presentation/ressources/size_config.dart';
 
 class ProductDescriptionWidget extends StatelessWidget {
   const ProductDescriptionWidget({
-    Key key,
-    @required this.productImageUrl,
-    @required this.productDescription,
-    @required this.productShortDescription,
+    Key? key,
+    required this.productImageUrl,
+    required this.productDescription,
+    required this.productShortDescription,
   }) : super(key: key);
 
   final String productImageUrl;
@@ -36,11 +37,11 @@ class ProductDescriptionWidget extends StatelessWidget {
           else
             const NoImagePlaceholder(),
           Visibility(
-            visible: productDescription != '',
+            visible: productDescription != kEMPTY,
             child: ExpandedText(
               labelHeader: 'Détails du produit',
-              description: productDescription ?? '',
-              shortDescription: productShortDescription ?? '',
+              description: productDescription,
+              shortDescription: productShortDescription,
             ),
           ),
         ],

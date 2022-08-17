@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import '/presentation/ressources/appsize_manager.dart';
 
 Widget textButton({
-  VoidCallback onPressed,
-  String text,
-  Icon iconRight,
-  Color textColor,
-  Color backgroundColor,
+  VoidCallback? onPressed,
+  required String text,
+  Icon? iconRight,
+  Color? textColor,
+  Color? backgroundColor,
 }) {
   return TextButton(
     style: TextButton.styleFrom(

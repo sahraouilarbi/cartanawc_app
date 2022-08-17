@@ -14,7 +14,7 @@ import '/presentation/ressources/appsize_manager.dart';
 import 'customer_profile_viewmodel.dart';
 
 class CustomerProfilePage extends StatefulWidget {
-  const CustomerProfilePage({Key key}) : super(key: key);
+  const CustomerProfilePage({Key? key}) : super(key: key);
 
   static const String routeName = '/customerProfile';
 
@@ -53,11 +53,13 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
       body: StreamBuilder<FlowState>(
           stream: _customerProfileViewModel.outputState,
           builder: (context, snapshot) {
-            return snapshot.data.getScreenWidget(context, _customerProfile(),
-                    () {
-                  _customerProfileViewModel.start();
-                }) ??
-                Container();
+            return snapshot.data!.getScreenWidget(
+              context,
+              _customerProfile(),
+              () {
+                _customerProfileViewModel.start();
+              },
+            );
           }),
     );
   }
@@ -86,7 +88,7 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                       CircleAvatar(
                         radius: AppSize.s75,
                         child: Image.network(
-                          snapshot.data.avatarUrl,
+                          snapshot.data!.avatarUrl!,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -99,28 +101,28 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                           TextCustomerProfileViewWidget(
                             labelText: 'Nom',
                             insideFieldText:
-                                '${snapshot.data.firstName} ${snapshot.data.lastName}',
+                                '${snapshot.data!.firstName} ${snapshot.data!.lastName}',
                           ),
                           const SizedBox(height: AppSize.s10),
 
                           // Type
                           TextCustomerProfileViewWidget(
                             labelText: 'Type',
-                            insideFieldText: snapshot.data.role,
+                            insideFieldText: snapshot.data!.role!,
                           ),
                           const SizedBox(height: AppSize.s10),
 
                           // Tél
                           TextCustomerProfileViewWidget(
                             labelText: 'Tél',
-                            insideFieldText: snapshot.data.billing.phone,
+                            insideFieldText: snapshot.data!.billing!.phone,
                           ),
                           const SizedBox(height: AppSize.s10),
 
                           // Email
                           TextCustomerProfileViewWidget(
                             labelText: 'Email',
-                            insideFieldText: snapshot.data.email,
+                            insideFieldText: snapshot.data!.email!,
                           ),
                           const SizedBox(height: AppSize.s10),
 
@@ -128,7 +130,7 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                           TextCustomerProfileViewWidget(
                             labelText: 'Adresse',
                             insideFieldText:
-                                "${snapshot.data.billing.address1}, ${snapshot.data.billing.city}",
+                                "${snapshot.data!.billing!.address1}, ${snapshot.data!.billing!.city}",
                           ),
 
                           const SizedBox(height: AppSize.s10),

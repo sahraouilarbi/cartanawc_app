@@ -7,13 +7,13 @@ import 'tab_historique/tab_historique.dart';
 import 'tab_paiement/tab_paiement.dart';
 
 class TableauBordPage extends StatefulWidget {
-  const TableauBordPage({Key key, this.tabSelected}) : super(key: key);
+  const TableauBordPage({Key? key, this.tabSelected}) : super(key: key);
 
-  final int tabSelected;
+  final int? tabSelected;
 
   static const String routeName = '/tableauBord';
 
-  static Route route({int tabSelected}) {
+  static Route route({int? tabSelected}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (context) => TableauBordPage(
@@ -33,7 +33,7 @@ class _TableauBordPageState extends State<TableauBordPage>
     Tab(text: 'PAIEMENT'),
     Tab(text: 'HISTORIQUE'),
   ];
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -42,13 +42,13 @@ class _TableauBordPageState extends State<TableauBordPage>
     _tabController = TabController(length: tableauBordTabs.length, vsync: this);
 
     widget.tabSelected == null
-        ? _tabController.index = 0
-        : _tabController.index = widget.tabSelected;
+        ? _tabController!.index = 0
+        : _tabController!.index = widget.tabSelected!;
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 

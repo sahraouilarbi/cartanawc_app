@@ -16,7 +16,7 @@ class TabCommanderViewModel extends BaseViewModel
 
   final _productsStreamController = BehaviorSubject<List<ProductEntity>>();
 
-  String _userRole;
+  late String _userRole;
   @override
   void start() {
     _loadData();

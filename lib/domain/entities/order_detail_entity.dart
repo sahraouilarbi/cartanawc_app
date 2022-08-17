@@ -2,16 +2,16 @@ import '/domain/entities/entities.dart';
 
 class OrderDetailEntity {
   OrderDetailEntity({
-    this.orderId,
-    this.orderNumber,
-    this.paymentMethod,
-    this.orderStatus,
-    this.orderDate,
-    this.shipping,
-    this.lineItems,
-    this.totalAmount,
-    this.shippingTotal,
-    this.itemTotalAmount,
+    required this.orderId,
+    required this.orderNumber,
+    required this.paymentMethod,
+    required this.orderStatus,
+    required this.orderDate,
+    required this.shipping,
+    required this.lineItems,
+    required this.totalAmount,
+    required this.shippingTotal,
+    required this.itemTotalAmount,
   });
   int orderId;
   String orderNumber;
@@ -27,11 +27,11 @@ class OrderDetailEntity {
 
 class OrderDetailsLineItemsEntity {
   OrderDetailsLineItemsEntity({
-    this.productId,
-    this.productName,
-    this.quantity,
-    this.variationId,
-    this.totalAmount,
+    required this.productId,
+    required this.productName,
+    required this.quantity,
+    required this.variationId,
+    required this.totalAmount,
   });
   int productId;
   String productName;

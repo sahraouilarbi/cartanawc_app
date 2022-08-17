@@ -26,16 +26,16 @@ class PaymentGatewaysModel {
     this.links,
   });
 
-  String id;
-  String title;
-  String description;
-  int order;
-  bool enabled;
-  String methodTitle;
-  String methodDescription;
-  List<String> methodSupports;
-  Map<String, SettingModel> settings;
-  LinksModel links;
+  String? id;
+  String? title;
+  String? description;
+  int? order;
+  bool? enabled;
+  String? methodTitle;
+  String? methodDescription;
+  List<String>? methodSupports;
+  Map<String, SettingModel>? settings;
+  LinksModel? links;
 
   factory PaymentGatewaysModel.fromJson(Map<String, dynamic> json) =>
       PaymentGatewaysModel(
@@ -62,10 +62,10 @@ class PaymentGatewaysModel {
         "enabled": enabled,
         "method_title": methodTitle,
         "method_description": methodDescription,
-        "method_supports": List<dynamic>.from(methodSupports.map((x) => x)),
-        "settings": Map.from(settings)
+        "method_supports": List<dynamic>.from(methodSupports!.map((x) => x)),
+        "settings": Map.from(settings!)
             .map((k, v) => MapEntry<String, dynamic>(k as String, v.toJson())),
-        "_links": links.toJson(),
+        "_links": links!.toJson(),
       };
 }
 
@@ -75,8 +75,8 @@ class LinksModel {
     this.collection,
   });
 
-  List<CollectionModel> self;
-  List<CollectionModel> collection;
+  List<CollectionModel>? self;
+  List<CollectionModel>? collection;
 
   factory LinksModel.fromJson(Map<String, dynamic> json) => LinksModel(
         self: List<CollectionModel>.from((json["self"] as List)
@@ -86,8 +86,8 @@ class LinksModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "self": List<dynamic>.from(self.map((x) => x.toJson())),
-        "collection": List<dynamic>.from(collection.map((x) => x.toJson())),
+        "self": List<dynamic>.from(self!.map((x) => x.toJson())),
+        "collection": List<dynamic>.from(collection!.map((x) => x.toJson())),
       };
 }
 
@@ -96,7 +96,7 @@ class CollectionModel {
     this.href,
   });
 
-  String href;
+  String? href;
 
   factory CollectionModel.fromJson(Map<String, dynamic> json) =>
       CollectionModel(
@@ -121,15 +121,15 @@ class SettingModel {
     this.options,
   });
 
-  String id;
-  String label;
-  String description;
-  String type;
-  String value;
-  String settingDefault;
-  String tip;
-  PaymentGatewaysModelPlaceholder placeholder;
-  SettingsOptionsModel options;
+  String? id;
+  String? label;
+  String? description;
+  String? type;
+  String? value;
+  String? settingDefault;
+  String? tip;
+  PaymentGatewaysModelPlaceholder? placeholder;
+  SettingsOptionsModel? options;
 
   factory SettingModel.fromJson(Map<String, dynamic> json) => SettingModel(
         id: json["id"] as String,
@@ -168,11 +168,11 @@ class SettingsOptionsModel {
     this.authorization,
   });
 
-  ForfaitModel forfait;
-  LivraisonGratuiteModel livraisonGratuite;
-  PointDeVenteModel pointDeVente;
-  String sale;
-  String authorization;
+  ForfaitModel? forfait;
+  LivraisonGratuiteModel? livraisonGratuite;
+  PointDeVenteModel? pointDeVente;
+  String? sale;
+  String? authorization;
 
   factory SettingsOptionsModel.fromJson(Map<String, dynamic> json) =>
       SettingsOptionsModel(
@@ -199,15 +199,15 @@ class SettingsOptionsModel {
         "Point de vente": pointDeVente?.toJson(),
 
         //"sale": sale == null ? null : sale,
-        "sale": sale == null ?? sale,
+        "sale": sale,
 
         //"authorization": authorization == null ? null : authorization,
-        "authorization": authorization == null ?? authorization,
+        "authorization": authorization,
       };
 }
 
 class ForfaitModel {
-  String flatRate;
+  String? flatRate;
 
   ForfaitModel({
     this.flatRate,
@@ -228,8 +228,8 @@ class LivraisonGratuiteModel {
     this.freeShipping1,
   });
 
-  String freeShipping;
-  String freeShipping1;
+  String? freeShipping;
+  String? freeShipping1;
 
   factory LivraisonGratuiteModel.fromJson(Map<String, dynamic> json) =>
       LivraisonGratuiteModel(
@@ -248,7 +248,7 @@ class PointDeVenteModel {
     this.localPickup,
   });
 
-  String localPickup;
+  String? localPickup;
 
   factory PointDeVenteModel.fromJson(Map<String, dynamic> json) =>
       PointDeVenteModel(
@@ -270,7 +270,7 @@ final placeholderValues = EnumValuesModel({
 
 class EnumValuesModel<T> {
   Map<String, T> map;
-  Map<T, String> reverseMap;
+  Map<T, String>? reverseMap;
 
   EnumValuesModel(this.map);
 

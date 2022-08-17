@@ -47,13 +47,13 @@ class APIEndPoint {
 
   // Base URL
   String get baseUrl {
-    return dotenv.env['SITE_URL'];
+    return dotenv.env['SITE_URL']!;
   }
 }
 
 class APIConsumer {
-  final String consumerKey = dotenv.env['CONSUMER_KEY'];
-  final String consumerSecret = dotenv.env['CONSUMER_SECRET'];
+  final String consumerKey = dotenv.env['CONSUMER_KEY']!;
+  final String consumerSecret = dotenv.env['CONSUMER_SECRET']!;
   String get basicAuth {
     return base64Encode(utf8.encode('$consumerKey:$consumerSecret'));
   }

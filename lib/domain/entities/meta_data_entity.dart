@@ -1,8 +1,8 @@
 class MetaDataEntity {
   MetaDataEntity({
-    this.id,
-    this.key,
-    this.value,
+    required this.id,
+    required this.key,
+    required this.value,
   });
   int id;
   String key;

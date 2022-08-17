@@ -1,24 +1,25 @@
+import '/core/extensions.dart';
 import '/data/models/models.dart';
 
 class ProductModel {
-  int id;
-  String name;
-  String description;
-  String shortDescription;
-  String type;
-  String status;
-  String sku;
-  String price;
-  String regularPrice;
-  String salePrice;
-  String stockStatus;
-  List<ProductImageModel> images;
-  List<ProductCategoriesModel> categories;
-  List<ProductAttributesModel> attributes;
-  List<int> relatedIds;
-  List<dynamic> variations;
-  List<MetaDataModel> metaData;
-  ProductACFModel acf;
+  int? id;
+  String? name;
+  String? description;
+  String? shortDescription;
+  String? type;
+  String? status;
+  String? sku;
+  String? price;
+  String? regularPrice;
+  String? salePrice;
+  String? stockStatus;
+  List<ProductImageModel>? images;
+  List<ProductCategoriesModel>? categories;
+  List<ProductAttributesModel>? attributes;
+  List<int>? relatedIds;
+  List<dynamic>? variations;
+  List<MetaDataModel>? metaData;
+  ProductACFModel? acf;
 
   ProductModel({
     this.id,
@@ -56,7 +57,7 @@ class ProductModel {
         regularPrice: json['regular_price'] != null
             ? json['regular_price'] as String
             : null,
-        salePrice: json['sale_price'] != ''
+        salePrice: json['sale_price'] != kEMPTY
             ? json['sale_price'] as String
             : json['regular_price'] as String,
         stockStatus: json['stock_status'] != null
@@ -119,10 +120,10 @@ ProductModel :
 }
 
 class ProductImageModel {
-  String src;
-  String woocommerceThumbnail;
-  String woocommerceSingle;
-  String woocommerceGalleryThumbnail;
+  String? src;
+  String? woocommerceThumbnail;
+  String? woocommerceSingle;
+  String? woocommerceGalleryThumbnail;
 
   ProductImageModel({
     this.src,
@@ -161,8 +162,8 @@ ProductImageModel:
 
 class ProductCategoriesModel {
   ProductCategoriesModel({this.id, this.name});
-  int id;
-  String name;
+  int? id;
+  String? name;
   factory ProductCategoriesModel.fromJson(Map<String, dynamic> json) =>
       ProductCategoriesModel(
         id: json['id'] != null ? json['id'] as int : null,
@@ -179,9 +180,9 @@ class ProductCategoriesModel {
 
 class ProductAttributesModel {
   ProductAttributesModel({this.id, this.name, this.options});
-  int id;
-  String name;
-  List<dynamic> options;
+  int? id;
+  String? name;
+  List<dynamic>? options;
   factory ProductAttributesModel.fromJson(Map<String, dynamic> json) =>
       ProductAttributesModel(
         id: json['id'] != null ? json['id'] as int : null,
@@ -201,11 +202,11 @@ class ProductACFModel {
     this.grandeMoyenneSurface,
     this.hypermarche,
   });
-  String contenance;
-  String grossite;
-  String superGros;
-  String grandeMoyenneSurface;
-  String hypermarche;
+  String? contenance;
+  String? grossite;
+  String? superGros;
+  String? grandeMoyenneSurface;
+  String? hypermarche;
 
   factory ProductACFModel.fromJson(Map<String, dynamic> json) =>
       ProductACFModel(

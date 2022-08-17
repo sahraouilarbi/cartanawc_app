@@ -5,8 +5,8 @@ import '/data/api/api_service.dart';
 import '/data/models/models.dart';
 
 class OrderProvider with ChangeNotifier {
-  APIService _apiService;
-  List<OrderModel> _orderList;
+  late APIService _apiService;
+  late List<OrderModel> _orderList;
   List<OrderModel> get allOrders => _orderList;
   double get totalRecords => _orderList.length.toDouble();
   OrderProvider() {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '/core/extensions.dart';
+
 class ColorManager {
   final String hashTag = '#';
   static Color primary = Colors.black;
@@ -15,7 +17,7 @@ class ColorManager {
 
 extension HexColor on Color {
   static Color fromHex(String hexColorString) {
-    String _hexColorString = hexColorString.replaceAll('#', '');
+    String _hexColorString = hexColorString.replaceAll('#', kEMPTY);
     if (_hexColorString.length == 6) {
       _hexColorString = 'FF$_hexColorString';
     }

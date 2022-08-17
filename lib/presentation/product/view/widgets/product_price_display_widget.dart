@@ -4,7 +4,7 @@ import '/presentation/ressources/appsize_manager.dart';
 
 class ProductPriceDisplayWidget extends StatelessWidget {
   const ProductPriceDisplayWidget(
-      {Key key, @required this.productPrice, @required this.isUserLoggedIn})
+      {Key? key, required this.productPrice, required this.isUserLoggedIn})
       : super(key: key);
   final String productPrice;
   final bool isUserLoggedIn;

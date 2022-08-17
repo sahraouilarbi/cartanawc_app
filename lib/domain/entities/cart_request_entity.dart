@@ -1,15 +1,15 @@
 class CartRequestEntity {
-  CartRequestEntity({this.userId, this.products});
+  CartRequestEntity({required this.userId, required this.products});
   int userId;
   List<CartProductsEntity> products;
 }
 
 class CartProductsEntity {
   CartProductsEntity({
-    this.productId,
-    this.variationId,
-    this.quantity,
-    this.productStep,
+    required this.productId,
+    required this.variationId,
+    required this.quantity,
+    required this.productStep,
   });
   int productId;
   int variationId = 0;

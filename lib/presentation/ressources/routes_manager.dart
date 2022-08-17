@@ -5,6 +5,7 @@ import '/domain/entities/entities.dart';
 import '/presentation/pages.dart';
 
 class RouteGenerator {
+  final _fake = '';
   static Route<dynamic> getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case AProposPage.routeName:
@@ -24,7 +25,7 @@ class RouteGenerator {
       case OrdersPage.routeName:
         return OrdersPage.route();
       case OrderDetailsPage.routeName:
-        return OrderDetailsPage.route();
+        return OrderDetailsPage.route(orderId: routeSettings.arguments as int);
       case PaymentMethodsPage.routeName:
         return PaymentMethodsPage.route();
       case ProductDetailsPage.routeName:

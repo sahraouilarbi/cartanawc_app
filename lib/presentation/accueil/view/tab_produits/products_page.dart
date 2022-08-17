@@ -11,7 +11,7 @@ import '/providers/product_provider.dart';
 import 'widgets/product_card_widget.dart';
 
 class ProductPage extends BasePage {
-  const ProductPage({Key key, this.categoryId}) : super(key: key);
+  const ProductPage({Key? key, required this.categoryId}) : super(key: key);
   final int categoryId;
 
   @override
@@ -22,7 +22,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
   int _page = 1;
   final ScrollController _scrollController = ScrollController();
   final _searchQuery = TextEditingController();
-  Timer _debounce;
+  Timer? _debounce;
   final _sortByOptions = [
     SortBy('popularity', 'Popularity', 'asc'),
     SortBy('modified', 'Modified', 'asc'),
@@ -60,7 +60,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
 
   void _onSearchChange() {
     final productList = Provider.of<ProductProvider>(context, listen: false);
-    if (_debounce?.isActive ?? false) _debounce.cancel();
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(
       const Duration(milliseconds: AppDuration.ms750),
       () {

@@ -8,7 +8,7 @@ import '/presentation/ressources/color_manager.dart';
 import 'models/drawer_model.dart';
 
 class DrawerForAuthenticatedUser extends StatelessWidget {
-  DrawerForAuthenticatedUser({Key key}) : super(key: key);
+  DrawerForAuthenticatedUser({Key? key}) : super(key: key);
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
   @override

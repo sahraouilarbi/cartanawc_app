@@ -6,7 +6,7 @@ import '/data/api/api_endpoint.dart';
 import '/presentation/common/utils.dart';
 
 class HttpService {
-  Dio _dio;
+  Dio _dio = Dio();
   HttpService() {
     _dio = Dio(
       BaseOptions(
@@ -23,7 +23,7 @@ class HttpService {
   }
   Future<Response> getRequest(
     String endPoint, {
-    Map<String, dynamic> queryParameters,
+    Map<String, dynamic>? queryParameters,
   }) async {
     Response response;
     try {

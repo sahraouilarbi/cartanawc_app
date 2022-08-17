@@ -9,7 +9,7 @@ import '/presentation/ressources/appsize_manager.dart';
  * Build Explorer Page from de site : www2.cartana.dz
  */
 class TabExplorer extends StatelessWidget {
-  const TabExplorer({Key key}) : super(key: key);
+  const TabExplorer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +51,6 @@ class TabExplorer extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
   }
-}
-
-Widget tabViewExplorer(BuildContext context) {
-  return null;
 }
 
 Container magasinCosmetiqueNeabByWidget(String title) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '/core/extensions.dart';
 import '/presentation/common/state_render/state_renderer.dart';
 
 abstract class FlowState {
@@ -8,12 +9,12 @@ abstract class FlowState {
 }
 
 class LoadingState extends FlowState {
-  LoadingState({this.stateRendererType, this.message});
+  LoadingState({required this.stateRendererType, this.message});
   StateRendererType stateRendererType;
-  String message;
+  String? message;
 
   @override
-  String getMessage() => message;
+  String getMessage() => message ?? kEMPTY;
 
   @override
   StateRendererType getStateRendererType() => stateRendererType;
@@ -35,7 +36,7 @@ class ContentState extends FlowState {
   ContentState();
 
   @override
-  String getMessage() => '';
+  String getMessage() => kEMPTY;
 
   @override
   StateRendererType getStateRendererType() =>
@@ -79,18 +80,17 @@ extension FlowStateExtension on FlowState {
             _showPopUp(
               context,
               getStateRendererType(),
-              getMessage() ?? '',
+              getMessage(),
             );
             return contentScreenWidget;
           } else {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
-              message: getMessage() ?? '',
+              message: getMessage(),
               retryActionFunction: retryActionFunction,
             );
           }
         }
-        break;
       case ErrorState:
         {
           _dismissDialog(context);
@@ -98,18 +98,17 @@ extension FlowStateExtension on FlowState {
             _showPopUp(
               context,
               getStateRendererType(),
-              getMessage() ?? '',
+              getMessage(),
             );
             return contentScreenWidget;
           } else {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
-              message: getMessage() ?? '',
+              message: getMessage(),
               retryActionFunction: retryActionFunction,
             );
           }
         }
-        break;
       case ContentState:
         {
           _dismissDialog(context);
@@ -119,7 +118,7 @@ extension FlowStateExtension on FlowState {
         {
           return StateRenderer(
             stateRendererType: getStateRendererType(),
-            message: getMessage() ?? '',
+            message: getMessage(),
             retryActionFunction: retryActionFunction,
           );
         }
@@ -129,7 +128,7 @@ extension FlowStateExtension on FlowState {
           _showPopUp(
             context,
             StateRendererType.popupSuccess,
-            getMessage() ?? '',
+            getMessage(),
             title: 'Success',
           );
           return contentScreenWidget;
@@ -148,12 +147,12 @@ extension FlowStateExtension on FlowState {
   }
 
   bool _isThereCurrentDialogShowing(BuildContext context) =>
-      ModalRoute.of(context).isCurrent != true;
+      ModalRoute.of(context)!.isCurrent != true;
 
   void _showPopUp(
       BuildContext context, StateRendererType stateRendererType, String message,
-      {String title = ''}) {
-    WidgetsBinding.instance.addPostFrameCallback(
+      {String title = kEMPTY}) {
+    WidgetsBinding.instance!.addPostFrameCallback(
       (_) => showDialog(
         context: context,
         builder: (BuildContext context) => StateRenderer(

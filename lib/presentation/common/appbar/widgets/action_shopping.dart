@@ -10,7 +10,7 @@ import '/providers/cart_provider.dart';
 
 class AppBarActionShoppingIcon extends StatelessWidget {
   const AppBarActionShoppingIcon({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

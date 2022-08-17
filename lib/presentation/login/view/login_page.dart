@@ -12,7 +12,7 @@ import '/presentation/ressources/appsize_manager.dart';
 import 'login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   static const String routeName = '/login';
 
@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
         () => _loginViewModel.setPassword(_passwordController.text));
     _loginViewModel.isUserLoggedInSuccessfullyStreamController.stream.listen(
       (dataEntity) {
-        SchedulerBinding.instance.addPostFrameCallback(
+        SchedulerBinding.instance!.addPostFrameCallback(
           (_) {
             _appPreferences.setUserToken(dataEntity.token.toString());
             _appPreferences.setUserId(dataEntity.id as int);
@@ -82,11 +82,13 @@ class _LoginPageState extends State<LoginPage> {
       body: StreamBuilder<FlowState>(
         stream: _loginViewModel.outputState,
         builder: (context, snapshot) {
-          return snapshot.data.getScreenWidget(context, _getContentWidget(),
-                  () {
-                _loginViewModel.login();
-              }) ??
-              _getContentWidget();
+          return snapshot.data!.getScreenWidget(
+            context,
+            _getContentWidget(),
+            () {
+              _loginViewModel.login();
+            },
+          );
         },
       ),
     );

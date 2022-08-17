@@ -4,7 +4,7 @@ import '/presentation/common/cartana_logo_widget.dart';
 import '/presentation/ressources/appsize_manager.dart';
 
 class AppBarCartanaLogo extends StatelessWidget {
-  const AppBarCartanaLogo({Key key}) : super(key: key);
+  const AppBarCartanaLogo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

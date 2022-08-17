@@ -9,15 +9,15 @@ abstract class RemoteDataSource {
   Future<CustomerDetailModel> getCustomerProfile(int userId);
   Future<List<CategoryModel>> getCategories();
   Future<List<ProductModel>> getProducts({
-    String status = 'publish',
-    String strSearch,
-    int perPage,
-    int pageNumber,
-    String tagName,
-    List<int> productsIds,
-    String categoryId,
-    String sortBy,
-    String sortOrder = 'asc',
+    String? status = 'publish',
+    String? strSearch,
+    int? perPage,
+    int? pageNumber,
+    String? tagName,
+    List<int>? productsIds,
+    String? categoryId,
+    String? sortBy,
+    String? sortOrder = 'asc',
   });
   Future<CartResponseModel> addToCart(CartRequestModel model);
   Future<CartResponseModel> getCartItem();
@@ -82,15 +82,15 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<ProductModel>> getProducts(
-      {String status = 'publish',
-      String strSearch,
-      int perPage,
-      int pageNumber,
-      String tagName,
-      List<int> productsIds,
-      String categoryId,
-      String sortBy,
-      String sortOrder = 'asc'}) {
+      {String? status = 'publish',
+      String? strSearch,
+      int? perPage,
+      int? pageNumber,
+      String? tagName,
+      List<int>? productsIds,
+      String? categoryId,
+      String? sortBy,
+      String? sortOrder = 'asc'}) {
     return _apiService.getProducts(
       status: status,
       strSearch: strSearch,

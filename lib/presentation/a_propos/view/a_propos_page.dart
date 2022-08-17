@@ -9,7 +9,7 @@ import '/presentation/ressources/appsize_manager.dart';
 import '/presentation/ressources/color_manager.dart';
 
 class AProposPage extends StatefulWidget {
-  const AProposPage({Key key}) : super(key: key);
+  const AProposPage({Key? key}) : super(key: key);
 
   static const String routeName = '/aPropos';
 
@@ -163,7 +163,7 @@ class _AProposPageState extends State<AProposPage> {
     );
   }
 
-  Widget buildSocialMediaLink({String asset}) {
+  Widget buildSocialMediaLink({required String asset}) {
     return InkWell(
       onTap: () {
         if (Platform.isAndroid) {}

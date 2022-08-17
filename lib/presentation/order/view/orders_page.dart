@@ -8,7 +8,7 @@ import '/providers/order_provider.dart';
 import 'widget_orders_item.dart';
 
 class OrdersPage extends StatefulWidget {
-  const OrdersPage({Key key}) : super(key: key);
+  const OrdersPage({Key? key}) : super(key: key);
 
   static const String routeName = '/orders';
 

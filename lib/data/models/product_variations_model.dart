@@ -7,12 +7,12 @@ class ProductVariationsModel {
     this.salePrice,
     this.attributes,
   });
-  int id;
-  String sku;
-  String price;
-  String regularPrice;
-  String salePrice;
-  List<ProductVariationsAttributesModel> attributes;
+  int? id;
+  String? sku;
+  String? price;
+  String? regularPrice;
+  String? salePrice;
+  List<ProductVariationsAttributesModel>? attributes;
 
   factory ProductVariationsModel.fromJson(Map<String, dynamic> json) =>
       ProductVariationsModel(
@@ -40,7 +40,7 @@ class ProductVariationsModel {
     data['sale_price'] = salePrice;
     if (attributes != null) {
       data['attributes'] =
-          attributes.map((element) => element.toJson()).toList();
+          attributes!.map((element) => element.toJson()).toList();
     }
     return data;
   }
@@ -52,9 +52,9 @@ class ProductVariationsAttributesModel {
     this.name,
     this.option,
   });
-  int id;
-  String name;
-  String option;
+  int? id;
+  String? name;
+  String? option;
   factory ProductVariationsAttributesModel.fromJson(
           Map<String, dynamic> json) =>
       ProductVariationsAttributesModel(

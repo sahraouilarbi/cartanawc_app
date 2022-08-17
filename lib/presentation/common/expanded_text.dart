@@ -6,10 +6,10 @@ import '/presentation/ressources/size_config.dart';
 
 class ExpandedText extends StatefulWidget {
   const ExpandedText({
-    Key key,
-    @required this.labelHeader,
-    @required this.description,
-    @required this.shortDescription,
+    Key? key,
+    required this.labelHeader,
+    required this.description,
+    required this.shortDescription,
   }) : super(key: key);
 
   final String labelHeader;

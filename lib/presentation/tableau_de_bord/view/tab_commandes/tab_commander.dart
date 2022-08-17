@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/core/dependency_injection.dart';
+import '/core/extensions.dart';
 import '/domain/entities/entities.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';
 import '/presentation/ressources/appsize_manager.dart';
@@ -8,7 +9,7 @@ import 'custom_expansion_tile.dart';
 import 'tab_commander_viewmodel.dart';
 
 class TabCommander extends StatefulWidget {
-  const TabCommander({Key key}) : super(key: key);
+  const TabCommander({Key? key}) : super(key: key);
 
   @override
   _TabCommanderState createState() => _TabCommanderState();
@@ -39,14 +40,13 @@ class _TabCommanderState extends State<TabCommander> {
     return StreamBuilder<FlowState>(
       stream: _tabCommanderViewModel.outputState,
       builder: (context, snapshot) {
-        return snapshot.data.getScreenWidget(
-              context,
-              _getContentWidget(),
-              () {
-                _tabCommanderViewModel.start();
-              },
-            ) ??
-            Container();
+        return snapshot.data!.getScreenWidget(
+          context,
+          _getContentWidget(),
+          () {
+            _tabCommanderViewModel.start();
+          },
+        );
       },
     );
   }
@@ -60,10 +60,8 @@ class _TabCommanderState extends State<TabCommander> {
             return const Center(
               child: Text('Pase de données'),
             );
-            break;
           case ConnectionState.waiting:
             return const Center(child: CircularProgressIndicator());
-            break;
           case ConnectionState.active:
           case ConnectionState.done:
             if (snapshot.hasData) {
@@ -81,7 +79,7 @@ class _TabCommanderState extends State<TabCommander> {
   CustomScrollView _displayCategories(
       AsyncSnapshot<List<ProductEntity>> snapshot) {
     var seen = Set<String>();
-    final List<ProductCategoryEntity> uniqueCategory = snapshot.data
+    final List<ProductCategoryEntity> uniqueCategory = snapshot.data!
         .map((e) => e.categories[1])
         .where((element) => seen.add(element.name))
         .cast<ProductCategoryEntity>()
@@ -93,7 +91,7 @@ class _TabCommanderState extends State<TabCommander> {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-              final List<ProductEntity> _productsInCategory = snapshot.data
+              final List<ProductEntity> _productsInCategory = snapshot.data!
                   .where((element) =>
                       element.categories[1].id == uniqueCategory[index].id)
                   .toList()
@@ -101,7 +99,7 @@ class _TabCommanderState extends State<TabCommander> {
 
               return CustomExpansionTile(
                 title: Text(uniqueCategory[index].name.toString()),
-                trailing: const Text(''),
+                trailing: const Text(kEMPTY),
                 children: [
                   CustomScrollView(
                     shrinkWrap: true,
@@ -140,7 +138,7 @@ class _TabCommanderState extends State<TabCommander> {
                                 ),
                                 title: Text(_productsInCategory[j].name),
                                 subtitle: Text(
-                                  _productsInCategory[j].sku ?? '',
+                                  _productsInCategory[j].sku,
                                   style: const TextStyle(color: Colors.grey),
                                 ),
                                 trailing:

@@ -6,8 +6,8 @@ class BackgroundImageWithOverlay extends StatelessWidget {
   final String src;
   final double overlayOpacity;
   const BackgroundImageWithOverlay({
-    Key key,
-    this.src,
+    Key? key,
+    required this.src,
     this.overlayOpacity = AppSize.s0_3,
   }) : super(key: key);
 

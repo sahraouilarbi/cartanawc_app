@@ -6,14 +6,14 @@ import 'badge_widget.dart';
 
 class EspaceProfessionnel extends StatelessWidget {
   const EspaceProfessionnel({
-    Key key,
-    @required this.src,
-    @required this.headerText,
-    @required this.paragraphText,
-    @required this.paragraphBgGradientColorStart,
-    @required this.paragraphBgGradientColorEnd,
-    @required this.badgeText,
-    @required this.badgeBgColor,
+    Key? key,
+    required this.src,
+    required this.headerText,
+    required this.paragraphText,
+    required this.paragraphBgGradientColorStart,
+    required this.paragraphBgGradientColorEnd,
+    required this.badgeText,
+    required this.badgeBgColor,
   }) : super(key: key);
   final String src;
   final String headerText;

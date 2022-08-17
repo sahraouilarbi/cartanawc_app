@@ -4,7 +4,7 @@ import '/presentation/ressources/appsize_manager.dart';
 import 'background_image_with_overlay_widget.dart';
 
 class DevenirDistributeur extends StatelessWidget {
-  const DevenirDistributeur({Key key}) : super(key: key);
+  const DevenirDistributeur({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

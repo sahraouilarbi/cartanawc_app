@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '/core/extensions.dart';
 import '/core/prefs/app_prefs.dart';
 import '/data/api/api_endpoint.dart';
 
@@ -11,7 +12,7 @@ class DioFactory {
   Future<Dio> getDio() async {
     final Dio dio = Dio();
     const int _timeOut = 60 * 1000;
-    final String token = await _appPreferences.getUserToken() != ''
+    final String token = await _appPreferences.getUserToken() != kEMPTY
         ? await _appPreferences.getUserToken()
         : APIConsumer().basicAuth;
     final Map<String, String> headers = {

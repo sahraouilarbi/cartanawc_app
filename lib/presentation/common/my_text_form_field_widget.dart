@@ -4,7 +4,7 @@ import '/presentation/ressources/color_manager.dart';
 
 class MyTextFormFieldWidget extends StatelessWidget {
   const MyTextFormFieldWidget({
-    Key key,
+    Key? key,
     this.controller,
     this.keyboardType = TextInputType.text,
     this.hintText,
@@ -14,12 +14,12 @@ class MyTextFormFieldWidget extends StatelessWidget {
     this.readOnly = false,
     this.obscureText = false,
   }) : super(key: key);
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType keyboardType;
-  final String hintText;
-  final String labelText;
-  final String errorText;
-  final IconButton suffixIcon;
+  final String? hintText;
+  final String? labelText;
+  final String? errorText;
+  final IconButton? suffixIcon;
   final bool readOnly;
   final bool obscureText;
 

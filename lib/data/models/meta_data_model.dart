@@ -1,7 +1,7 @@
 class MetaDataModel {
-  int id;
-  String key;
-  String value;
+  int? id;
+  String? key;
+  String? value;
 
   MetaDataModel({
     this.id,

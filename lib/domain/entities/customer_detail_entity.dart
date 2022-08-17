@@ -11,14 +11,14 @@ class CustomerDetailEntity {
     this.shipping,
     this.avatarUrl,
   });
-  int id;
-  String email;
-  String firstName;
-  String lastName;
-  String role;
-  BillingEntity billing;
-  ShippingEntity shipping;
-  String avatarUrl;
+  int? id;
+  String? email;
+  String? firstName;
+  String? lastName;
+  String? role;
+  BillingEntity? billing;
+  ShippingEntity? shipping;
+  String? avatarUrl;
 
   @override
   String toString() {

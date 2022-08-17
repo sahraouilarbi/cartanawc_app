@@ -1,9 +1,9 @@
 class LoginResponseModel {
-  bool success;
-  int statusCode;
-  String code;
-  String message;
-  LoginResponseDataModel data;
+  bool? success;
+  int? statusCode;
+  String? code;
+  String? message;
+  LoginResponseDataModel? data;
 
   LoginResponseModel({
     this.success,
@@ -33,7 +33,7 @@ class LoginResponseModel {
     _data['code'] = code;
     _data['message'] = message;
     if (data != null) {
-      _data['data'] = data.toJson();
+      _data['data'] = data!.toJson();
     }
     return _data;
   }
@@ -49,13 +49,13 @@ class LoginResponseDataModel {
     this.lastName,
     this.displayName,
   });
-  String token;
-  int id;
-  String email;
-  String nicename;
-  String firstName;
-  String lastName;
-  String displayName;
+  String? token;
+  int? id;
+  String? email;
+  String? nicename;
+  String? firstName;
+  String? lastName;
+  String? displayName;
 
   factory LoginResponseDataModel.fromJson(Map<String, dynamic> json) =>
       LoginResponseDataModel(

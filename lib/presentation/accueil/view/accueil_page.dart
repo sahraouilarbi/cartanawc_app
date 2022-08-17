@@ -11,16 +11,16 @@ import '/presentation/ressources/size_config.dart';
 import '/providers/auth_provider.dart';
 
 class AccueilPage extends StatefulWidget {
-  const AccueilPage({Key key, this.tabSelected}) : super(key: key);
+  const AccueilPage({Key? key, this.tabSelected}) : super(key: key);
 
   static const String routeName = '/';
-  static Route route({int tabSelected}) {
+  static Route route({int? tabSelected}) {
     return MaterialPageRoute(
         settings: const RouteSettings(name: routeName),
         builder: (context) => AccueilPage(tabSelected: tabSelected));
   }
 
-  final int tabSelected;
+  final int? tabSelected;
 
   @override
   _AccueilPageState createState() => _AccueilPageState();
@@ -35,9 +35,9 @@ class _AccueilPageState extends State<AccueilPage>
   ];
   int firstComing = 0;
 
-  TabController _tabController;
+  TabController? _tabController;
 
-  AuthProvider authProvider;
+  late AuthProvider authProvider;
 
   Future<void> _bind() async {
     authProvider = Provider.of<AuthProvider>(context, listen: false);
@@ -55,13 +55,13 @@ class _AccueilPageState extends State<AccueilPage>
     _tabController = TabController(length: homePageTabs.length, vsync: this);
 
     widget.tabSelected == null
-        ? _tabController.index = 1
-        : _tabController.index = widget.tabSelected;
+        ? _tabController!.index = 1
+        : _tabController!.index = widget.tabSelected!;
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 

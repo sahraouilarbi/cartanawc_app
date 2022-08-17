@@ -1,11 +1,11 @@
 class ProductVariationsEntity {
   ProductVariationsEntity({
-    this.id,
-    this.sku,
-    this.price,
-    this.regularPrice,
-    this.salePrice,
-    this.attributes,
+    required this.id,
+    required this.sku,
+    required this.price,
+    required this.regularPrice,
+    required this.salePrice,
+    required this.attributes,
   });
   int id;
   String sku;
@@ -17,9 +17,9 @@ class ProductVariationsEntity {
 
 class ProductVariationsAttributesEntity {
   ProductVariationsAttributesEntity({
-    this.id,
-    this.name,
-    this.option,
+    required this.id,
+    required this.name,
+    required this.option,
   });
   int id;
   String name;

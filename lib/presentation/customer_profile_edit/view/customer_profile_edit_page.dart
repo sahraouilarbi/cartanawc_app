@@ -12,7 +12,7 @@ import '/presentation/ressources/appsize_manager.dart';
 import 'customer_profile_edit_viewmodel.dart';
 
 class CustomerProfileEditPage extends StatefulWidget {
-  const CustomerProfileEditPage({Key key}) : super(key: key);
+  const CustomerProfileEditPage({Key? key}) : super(key: key);
 
   static const String routeName = '/customerProfileEdit';
 
@@ -76,11 +76,13 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
       body: StreamBuilder<FlowState>(
           stream: _customerProfileEditViewModel.outputState,
           builder: (context, snapshot) {
-            return snapshot.data
-                    .getScreenWidget(context, _customerProfileEdit(), () {
-                  _customerProfileEditViewModel.start();
-                }) ??
-                Container();
+            return snapshot.data!.getScreenWidget(
+              context,
+              _customerProfileEdit(),
+              () {
+                _customerProfileEditViewModel.start();
+              },
+            );
           }),
     );
   }
@@ -108,7 +110,7 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
                         // Customer Image profil
                         CircleAvatar(
                           radius: AppSize.s75,
-                          child: Image.network(snapshot.data.avatarUrl),
+                          child: Image.network(snapshot.data!.avatarUrl!),
                         ),
 
                         const SizedBox(height: AppSize.s20),

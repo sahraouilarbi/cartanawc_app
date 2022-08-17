@@ -15,14 +15,14 @@ enum StateRendererType {
 class StateRenderer extends StatelessWidget {
   final StateRendererType stateRendererType;
   final String message;
-  final String title;
+  final String? title;
   final Function retryActionFunction;
   const StateRenderer({
-    Key key,
-    this.stateRendererType,
-    this.message,
+    Key? key,
+    required this.stateRendererType,
+    required this.message,
     this.title,
-    this.retryActionFunction,
+    required this.retryActionFunction,
   }) : super(key: key);
 
   @override
@@ -44,7 +44,7 @@ class StateRenderer extends StatelessWidget {
       case StateRendererType.popupSuccess:
         return _getPopUpDialog(context, [
           _validIcon(),
-          _getMessage(title),
+          _getMessage(title!),
           _getMessage(message),
           _getRetryButton(context, 'Ok'),
         ]);
@@ -158,7 +158,7 @@ class StateRenderer extends StatelessWidget {
 
 class CircularProgressIndicatorWidget extends StatelessWidget {
   const CircularProgressIndicatorWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

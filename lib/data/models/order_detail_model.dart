@@ -13,16 +13,16 @@ class OrderDetailModel {
     this.shippingTotal,
     this.itemTotalAmount,
   });
-  int orderId;
-  String orderNumber;
-  String paymentMethod;
-  String orderStatus;
-  DateTime orderDate;
-  ShippingModel shipping;
-  List<OrderDetailLineItemsModel> lineItems;
-  double totalAmount;
-  double shippingTotal;
-  double itemTotalAmount;
+  int? orderId;
+  String? orderNumber;
+  String? paymentMethod;
+  String? orderStatus;
+  DateTime? orderDate;
+  ShippingModel? shipping;
+  List<OrderDetailLineItemsModel>? lineItems;
+  double? totalAmount;
+  double? shippingTotal;
+  double? itemTotalAmount;
   OrderDetailModel.fromJson(Map<String, dynamic> json) {
     // orderId = id
     orderId = json['id'] as int;
@@ -48,7 +48,7 @@ class OrderDetailModel {
     if (json['line_items'] != null) {
       lineItems = <OrderDetailLineItemsModel>[];
       json['line_items'].forEach((element) {
-        lineItems.add(OrderDetailLineItemsModel.fromJson(
+        lineItems!.add(OrderDetailLineItemsModel.fromJson(
             element as Map<String, dynamic>));
       });
       //TODO PEUT ETRE PLACER itemTotalAmount ICI
@@ -62,8 +62,8 @@ class OrderDetailModel {
 
     //TODO A VERIFIER
     itemTotalAmount = lineItems != null
-        ? lineItems
-            .map<double>((e) => e.totalAmount)
+        ? lineItems!
+            .map<double>((e) => e.totalAmount!)
             .reduce((value, element) => value + element)
         : 0;
   }
@@ -77,11 +77,11 @@ class OrderDetailLineItemsModel {
     this.variationId,
     this.totalAmount,
   });
-  int productId;
-  String productName;
-  int quantity;
-  int variationId;
-  double totalAmount;
+  int? productId;
+  String? productName;
+  int? quantity;
+  int? variationId;
+  double? totalAmount;
   OrderDetailLineItemsModel.fromJson(Map<String, dynamic> json) {
     //productId = product_id
     productId = json['product_id'] as int;

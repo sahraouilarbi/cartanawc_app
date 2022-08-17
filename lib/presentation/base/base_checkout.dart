@@ -80,7 +80,7 @@ class CheckoutBasePageState<T extends CheckoutBasePage> extends State<T> {
   }
 
   Widget pageUI() {
-    return null;
+    return const SizedBox();
   }
 
   @override

@@ -7,18 +7,18 @@ import '/data/models/models.dart';
 
 class CartProvider with ChangeNotifier {
   final AppPreferences _appPreferences = instance<AppPreferences>();
-  APIService _apiService;
-  List<CartItemModel> _cartItems;
-  CustomerDetailModel _customerDetailModel;
+  late APIService _apiService;
+  late List<CartItemModel>? _cartItems;
+  late CustomerDetailModel? _customerDetailModel;
   OrderModel _orderModel = OrderModel();
   bool _isOrderCreated = false;
-  String _orderNumber;
+  late String _orderNumber;
 
-  CustomerDetailModel get customerDetailModel => _customerDetailModel;
-  List<CartItemModel> get cartItems => _cartItems;
-  double get totalRecords => _cartItems.length.toDouble();
+  CustomerDetailModel get customerDetailModel => _customerDetailModel!;
+  List<CartItemModel> get cartItems => _cartItems!;
+  double get totalRecords => _cartItems!.length.toDouble();
   double get totalAmount => _cartItems != null
-      ? _cartItems.map<double>((e) => e.lineSubtotal).reduce((a, b) => a + b)
+      ? _cartItems!.map<double>((e) => e.lineSubtotal!).reduce((a, b) => a + b)
       : 0;
 
   OrderModel get orderModel => _orderModel;
@@ -49,8 +49,8 @@ class CartProvider with ChangeNotifier {
     if (_cartItems == null) {
       await fetchCartItems();
     }
-    for (final item in _cartItems) {
-      requestModel.products.add(CartProductsModel(
+    for (final item in _cartItems!) {
+      requestModel.products!.add(CartProductsModel(
         productId: item.productId,
         quantity: item.qty,
         productStep: item.productStep,
@@ -58,22 +58,22 @@ class CartProvider with ChangeNotifier {
       ));
     }
 
-    final isProductExist = requestModel.products.firstWhere(
+    final CartProductsModel isProductExist = requestModel.products!.firstWhere(
       (item) =>
           item.productId == product.productId &&
           item.variationId == product.variationId,
-      orElse: () => null,
+      //orElse: () => null,
     );
 
     if (isProductExist != null) {
-      requestModel.products.remove(isProductExist);
+      requestModel.products!.remove(isProductExist);
     }
 
-    requestModel.products.add(product);
+    requestModel.products!.add(product);
     await _apiService.addToCart(requestModel).then((cartResponseModel) {
       if (cartResponseModel.data != null) {
         _cartItems = <CartItemModel>[];
-        _cartItems.addAll(cartResponseModel.data);
+        _cartItems!.addAll(cartResponseModel.data!);
       }
       onCallBack(cartResponseModel);
       notifyListeners();
@@ -87,8 +87,8 @@ class CartProvider with ChangeNotifier {
     if (isUserLoggedIn) {
       await _apiService.getCartItem().then((cartResponseModel) {
         if (cartResponseModel.data != null) {
-          _cartItems.clear();
-          _cartItems.addAll(cartResponseModel.data);
+          _cartItems!.clear();
+          _cartItems!.addAll(cartResponseModel.data!);
         }
         notifyListeners();
       });
@@ -96,11 +96,11 @@ class CartProvider with ChangeNotifier {
   }
 
   void updateQty(int productId, int qty, {int variationId = 0}) {
-    final isProductExist = _cartItems.firstWhere(
-        (element) =>
-            element.productId == productId &&
-            element.variationId == variationId,
-        orElse: () => null);
+    final isProductExist = _cartItems!.firstWhere(
+      (element) =>
+          element.productId == productId && element.variationId == variationId,
+      //orElse: () => null,
+    );
     if (isProductExist != null) {
       isProductExist.qty = qty;
     }
@@ -112,8 +112,8 @@ class CartProvider with ChangeNotifier {
     requestModel.products = <CartProductsModel>[];
     if (_cartItems == null) resetStream();
 
-    for (final element in _cartItems) {
-      requestModel.products.add(
+    for (final element in _cartItems!) {
+      requestModel.products!.add(
         CartProductsModel(
           productId: element.productId,
           quantity: element.qty,
@@ -125,7 +125,7 @@ class CartProvider with ChangeNotifier {
     await _apiService.addToCart(requestModel).then((cartResponseModel) {
       if (cartResponseModel.data != null) {
         _cartItems = <CartItemModel>[];
-        _cartItems.addAll(cartResponseModel.data);
+        _cartItems!.addAll(cartResponseModel.data!);
       }
       onCallBack(cartResponseModel);
       notifyListeners();
@@ -133,11 +133,12 @@ class CartProvider with ChangeNotifier {
   }
 
   void removeItem(int productId) {
-    final isProductExist = _cartItems.firstWhere(
-        (element) => element.productId == productId,
-        orElse: () => null);
+    final isProductExist = _cartItems!.firstWhere(
+      (element) => element.productId == productId,
+      //orElse: () => null,
+    );
     if (isProductExist != null) {
-      _cartItems.remove(isProductExist);
+      _cartItems!.remove(isProductExist);
     }
     notifyListeners();
   }
@@ -145,8 +146,7 @@ class CartProvider with ChangeNotifier {
   Future fetchShippingDetails() async {
     _customerDetailModel ??= CustomerDetailModel();
     final userId = await _appPreferences.getUserId();
-    _customerDetailModel = await _apiService
-        .getCustomerDetails(userId); //_apiService.customerDetails();
+    _customerDetailModel = await _apiService.getCustomerDetails(userId);
     notifyListeners();
   }
 
@@ -159,19 +159,19 @@ class CartProvider with ChangeNotifier {
     _orderModel.shipping ??= ShippingModel();
     _orderModel.billing ??= BillingModel();
 
-    if (_customerDetailModel.shipping != null) {
-      _orderModel.shipping = _customerDetailModel.shipping;
+    if (_customerDetailModel!.shipping != null) {
+      _orderModel.shipping = _customerDetailModel!.shipping;
     }
 
-    if (_customerDetailModel.billing != null) {
-      _orderModel.billing = _customerDetailModel.billing;
+    if (_customerDetailModel!.billing != null) {
+      _orderModel.billing = _customerDetailModel!.billing;
     }
 
     if (orderModel.lineItems == null) {
       _orderModel.lineItems = <OrderLineItemsModel>[];
     }
-    for (final element in _cartItems) {
-      _orderModel.lineItems.add(
+    for (final element in _cartItems!) {
+      _orderModel.lineItems!.add(
         OrderLineItemsModel(
           productId: element.productId,
           quantity: element.qty,

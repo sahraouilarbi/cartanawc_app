@@ -8,10 +8,10 @@ class BadgeWidget extends StatelessWidget {
   final Color backgroundColor;
   final bool left;
   const BadgeWidget({
-    Key key,
-    @required this.alignment,
-    @required this.text,
-    @required this.backgroundColor,
+    Key? key,
+    required this.alignment,
+    required this.text,
+    required this.backgroundColor,
     this.left = false,
   }) : super(key: key);
 

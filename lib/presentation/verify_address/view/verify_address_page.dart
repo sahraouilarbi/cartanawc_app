@@ -108,7 +108,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
                     fit: FlexFit.tight,
                     child: MyTextFormFieldWidget(
                       controller: _shippingFirstNameTextEditingController
-                        ..text = model.shipping.firstName,
+                        ..text = model.shipping!.firstName!,
                       labelText: 'Nom',
                       readOnly: true,
                     ),
@@ -121,7 +121,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
                     fit: FlexFit.tight,
                     child: MyTextFormFieldWidget(
                       controller: _shippingLastNameTextEditingController
-                        ..text = model.shipping.lastName,
+                        ..text = model.shipping!.lastName!,
                       labelText: 'Prénom',
                       readOnly: true,
                     ),
@@ -131,14 +131,14 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
               const SizedBox(height: AppSize.s20),
               MyTextFormFieldWidget(
                 controller: _shippingAddress1TextEditingController
-                  ..text = model.shipping.address1,
+                  ..text = model.shipping!.address1!,
                 labelText: 'Adresse',
                 readOnly: true,
               ),
               const SizedBox(height: AppSize.s20),
               MyTextFormFieldWidget(
                 controller: _shippingAddress2TextEditingController
-                  ..text = model.shipping.address2,
+                  ..text = model.shipping!.address2!,
                 labelText: "Complement d'adresse",
                 readOnly: true,
               ),
@@ -149,7 +149,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
                     fit: FlexFit.tight,
                     child: MyTextFormFieldWidget(
                       controller: _shippingCityEditingController
-                        ..text = model.shipping.city,
+                        ..text = model.shipping!.city!,
                       labelText: 'Wilaya',
                       readOnly: true,
                     ),
@@ -159,7 +159,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
                     fit: FlexFit.tight,
                     child: MyTextFormFieldWidget(
                       controller: _shippingPostcodeTextEditingController
-                        ..text = model.shipping.postcode,
+                        ..text = model.shipping!.postcode!,
                       labelText: 'Code postal',
                       readOnly: true,
                     ),
@@ -179,7 +179,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
                     fit: FlexFit.tight,
                     child: MyTextFormFieldWidget(
                       controller: _billingFirstNameTextEditingController
-                        ..text = model.billing.firstName,
+                        ..text = model.billing!.firstName!,
                       labelText: 'Nom',
                       readOnly: true,
                     ),
@@ -193,7 +193,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
                     //child: FormHelper.fieldLabel('Prénom:'),
                     child: MyTextFormFieldWidget(
                       controller: _billingLastNameTextEditingController
-                        ..text = model.billing.lastName,
+                        ..text = model.billing!.lastName!,
                       labelText: 'Prénom',
                       readOnly: true,
                     ),
@@ -203,14 +203,14 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
               const SizedBox(height: AppSize.s20),
               MyTextFormFieldWidget(
                 controller: _billingAddress1TextEditingController
-                  ..text = model.billing.address1,
+                  ..text = model.billing!.address1!,
                 labelText: 'Adresse',
                 readOnly: true,
               ),
               const SizedBox(height: AppSize.s20),
               MyTextFormFieldWidget(
                 controller: _billingAddress2TextEditingController
-                  ..text = model.billing.address2,
+                  ..text = model.billing!.address2!,
                 labelText: "Complement d'adresse",
                 readOnly: true,
               ),
@@ -221,7 +221,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
                     fit: FlexFit.tight,
                     child: MyTextFormFieldWidget(
                       controller: _billingCityEditingController
-                        ..text = model.billing.city,
+                        ..text = model.billing!.city!,
                       labelText: 'Wilaya',
                       readOnly: true,
                     ),
@@ -231,7 +231,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
                     fit: FlexFit.tight,
                     child: MyTextFormFieldWidget(
                       controller: _billingPostcodeTextEditingController
-                        ..text = model.billing.postcode,
+                        ..text = model.billing!.postcode!,
                       labelText: 'Code postal',
                       readOnly: true,
                     ),

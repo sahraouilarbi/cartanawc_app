@@ -9,7 +9,7 @@ import '/presentation/ressources/color_manager.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({
-    Key key,
+    Key? key,
     this.hasTabs = false,
     this.tabController,
     this.tabs,
@@ -18,8 +18,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   }) : super(key: key);
 
   final bool hasTabs;
-  final TabController tabController;
-  final List<Tab> tabs;
+  final TabController? tabController;
+  final List<Tab>? tabs;
   final bool isLoginPage;
   final bool isUserProfilePage;
 
@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.black,
       bottom: buildBottomAppBar(
         tabController: tabController,
-        tabs: tabs,
+        tabs: tabs!,
         hasTabs: hasTabs,
       ),
       actions: [
@@ -48,35 +48,35 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       : const Size.fromHeight(AppSize.s62);
 }
 
-AppBar buildAppBar(
-  BuildContext context, {
-  bool hasTabs = false,
-  TabController tabController,
-  List<Tab> tabs,
-  bool isLoginPage = false,
-  bool isUserProfilePage = false,
-}) {
-  return AppBar(
-    elevation: 0,
-    title: const AppBarCartanaLogo(),
-    centerTitle: true,
-    backgroundColor: Colors.black,
-    bottom: buildBottomAppBar(
-      tabController: tabController,
-      tabs: tabs,
-      hasTabs: hasTabs,
-    ),
-    actions: [
-      const AppBarActionShoppingIcon(),
-      AppBarActionCustomerIcon(),
-    ],
-  );
-}
+// AppBar buildAppBar(
+//   BuildContext context, {
+//   bool hasTabs = false,
+//   TabController tabController,
+//   List<Tab> tabs,
+//   bool isLoginPage = false,
+//   bool isUserProfilePage = false,
+// }) {
+//   return AppBar(
+//     elevation: 0,
+//     title: const AppBarCartanaLogo(),
+//     centerTitle: true,
+//     backgroundColor: Colors.black,
+//     bottom: buildBottomAppBar(
+//       tabController: tabController,
+//       tabs: tabs,
+//       hasTabs: hasTabs,
+//     ),
+//     actions: [
+//       const AppBarActionShoppingIcon(),
+//       AppBarActionCustomerIcon(),
+//     ],
+//   );
+// }
 
 PreferredSize buildBottomAppBar({
   bool hasTabs = false,
-  TabController tabController,
-  List<Tab> tabs,
+  TabController? tabController,
+  required List<Tab> tabs,
 }) {
   return PreferredSize(
     preferredSize: hasTabs ? const Size.fromHeight(AppSize.s50) : Size.zero,

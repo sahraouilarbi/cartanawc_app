@@ -10,7 +10,7 @@ import '/providers/cart_provider.dart';
 import '/providers/loader_provider.dart';
 
 class CartProduct extends StatefulWidget {
-  const CartProduct({Key key, this.data}) : super(key: key);
+  const CartProduct({Key? key, required this.data}) : super(key: key);
   final CartItemModel data;
 
   @override
@@ -18,8 +18,8 @@ class CartProduct extends StatefulWidget {
 }
 
 class _CartProductState extends State<CartProduct> {
-  int qty;
-  double montant;
+  int? qty;
+  double? montant;
   TextEditingController myController = TextEditingController();
   @override
   void dispose() {
@@ -29,7 +29,6 @@ class _CartProductState extends State<CartProduct> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.data.toString());
     return Card(
       elevation: AppSize.s1,
       margin: const EdgeInsets.symmetric(
@@ -71,7 +70,7 @@ class _CartProductState extends State<CartProduct> {
             ),
             const SizedBox(height: AppSize.s10),
             MontantWidget(
-              value: widget.data.lineSubtotal,
+              value: widget.data.lineSubtotal!,
             ),
             const SizedBox(height: AppSize.s10),
             buttonSupprimer(context),
@@ -110,7 +109,7 @@ class _CartProductState extends State<CartProduct> {
             decoration:
                 BoxDecoration(color: Colors.white, border: Border.all()),
             child: Text(
-              widget.data.qty < 10
+              widget.data.qty! < 10
                   //? '0${widget.data.qty / int.parse(widget.data.productStep)}'
                   //: '${widget.data.qty / int.parse(widget.data.step)}',
                   ? '0${widget.data.qty}'
@@ -141,7 +140,7 @@ class _CartProductState extends State<CartProduct> {
             Provider.of<LoaderProvider>(context, listen: false)
                 .setLoadingStatus(status: true);
             Provider.of<CartProvider>(context, listen: false)
-                .removeItem(widget.data.productId);
+                .removeItem(widget.data.productId!);
             Provider.of<LoaderProvider>(context, listen: false)
                 .setLoadingStatus(status: false);
             Navigator.of(context).pop();
@@ -175,7 +174,7 @@ class _CartProductState extends State<CartProduct> {
       decoration: BoxDecoration(border: Border.all()),
       alignment: Alignment.center,
       child: Image.network(
-        widget.data.thumbnail,
+        widget.data.thumbnail!,
         fit: BoxFit.cover,
       ),
     );
@@ -190,7 +189,7 @@ class _CartProductState extends State<CartProduct> {
       ),
       child: Text(
         widget.data.variationId == 0
-            ? widget.data.productName
+            ? widget.data.productName!
             : '${widget.data.productName} ${widget.data.attributeValue} ${widget.data.attribute})',
         style: const TextStyle(
           color: Colors.black,

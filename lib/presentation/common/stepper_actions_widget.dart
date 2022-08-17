@@ -4,9 +4,9 @@ import '/presentation/ressources/appsize_manager.dart';
 
 class StepperActionsWidget extends StatelessWidget {
   const StepperActionsWidget({
-    Key key,
-    @required this.iconSign,
-    @required this.onPressed,
+    Key? key,
+    required this.iconSign,
+    required this.onPressed,
   }) : super(key: key);
   final IconData iconSign;
   final Function() onPressed;

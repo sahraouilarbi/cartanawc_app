@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/core/dependency_injection.dart';
+import '/core/extensions.dart';
 import '/core/prefs/app_prefs.dart';
 import '/data/models/models.dart';
 import '/domain/entities/entities.dart';
@@ -17,7 +18,7 @@ import '/providers/loader_provider.dart';
 import 'widgets.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  ProductDetailsPage({Key key, @required this.data}) : super(key: key);
+  ProductDetailsPage({Key? key, required this.data}) : super(key: key);
   //final ProductModel data;
   final ProductEntity data;
 
@@ -25,7 +26,7 @@ class ProductDetailsPage extends StatefulWidget {
 
   static const String routeName = '/productDetails';
 
-  static Route route({ProductEntity data}) {
+  static Route route({required ProductEntity data}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (context) => ProductDetailsPage(data: data),
@@ -40,11 +41,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   final AppPreferences _appPreferences = instance<AppPreferences>();
   bool isUserLoggedIn = false;
 
-  int qty;
-  double productPrice;
-  double montant;
-  int productStep, productMinQty, productMaxQty;
-  AuthProvider authProvider;
+  late int qty;
+  late double productPrice;
+  late double montant;
+  late int productStep, productMinQty, productMaxQty;
+  late AuthProvider authProvider;
   bool inProgress = false;
 
   void calculMontant() {
@@ -70,7 +71,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     // Récuperer le prix
-    widget.data.price != null && widget.data.price != ''
+    widget.data.price != null && widget.data.price != kEMPTY
         ? productPrice = double.parse(widget.data.price)
         : productPrice = 0;
 

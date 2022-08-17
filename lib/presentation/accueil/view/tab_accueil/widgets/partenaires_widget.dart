@@ -5,7 +5,7 @@ import '/presentation/ressources/appsize_manager.dart';
 import 'background_image_with_overlay_widget.dart';
 
 class Partenaire extends StatelessWidget {
-  const Partenaire({Key key}) : super(key: key);
+  const Partenaire({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

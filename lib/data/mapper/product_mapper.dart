@@ -1,131 +1,134 @@
+import '/core/extensions.dart';
 import '/data/models/models.dart';
 import '/domain/entities/entities.dart';
 import 'mappers.dart';
 
 // ProductModel
-extension ProductModelMapper on ProductModel {
+extension ProductModelMapper on ProductModel? {
   ProductEntity toDomain() {
     final List<ProductImageEntity> _imagesMapped =
-        (images.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.images?.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<ProductImageEntity>()
             .toList();
     final List<ProductCategoryEntity> _categoriesMapped =
-        (categories.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.categories?.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<ProductCategoryEntity>()
             .toList();
     final List<ProductAttributesEntity> _attributesMapped =
-        (attributes.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.attributes?.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<ProductAttributesEntity>()
             .toList();
     final List<int> _relatedIdsMapped =
-        (relatedIds.map((v) => v) ?? const Iterable.empty())
+        (this?.relatedIds?.map((v) => v) ?? const Iterable.empty())
             .cast<int>()
             .toList();
     final List<dynamic> _variationsMapped =
-        (variations.map((v) => v) ?? const Iterable.empty())
+        (this?.variations?.map((v) => v) ?? const Iterable.empty())
             .cast<dynamic>()
             .toList();
     final List<MetaDataEntity> _metaDataMapped =
-        (metaData.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.metaData?.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<MetaDataEntity>()
             .toList();
     return ProductEntity(
-      id: id,
-      name: name,
-      description: description,
-      shortDescription: shortDescription,
-      type: type,
-      status: status,
-      sku: sku,
-      price: price,
-      regularPrice: regularPrice,
-      salePrice: salePrice,
-      stockStatus: stockStatus,
+      id: this?.id?.orZero() ?? kZERO,
+      name: this?.name?.orEmpty() ?? kEMPTY,
+      description: this?.description?.orEmpty() ?? kEMPTY,
+      shortDescription: this?.shortDescription?.orEmpty() ?? kEMPTY,
+      type: this?.type?.orEmpty() ?? kEMPTY,
+      status: this?.status?.orEmpty() ?? kEMPTY,
+      sku: this?.sku?.orEmpty() ?? kEMPTY,
+      price: this?.price?.orEmpty() ?? kEMPTY,
+      regularPrice: this?.regularPrice?.orEmpty() ?? kEMPTY,
+      salePrice: this?.salePrice?.orEmpty() ?? kEMPTY,
+      stockStatus: this?.stockStatus?.orEmpty() ?? kEMPTY,
       images: _imagesMapped,
       categories: _categoriesMapped,
       attributes: _attributesMapped,
       relatedIds: _relatedIdsMapped,
       variations: _variationsMapped,
       metaData: _metaDataMapped,
-      acf: acf.toDomain(),
+      acf: this!.acf.toDomain(),
     );
   }
 }
 
 // ImageProductModel
-extension ProductImageModelMapper on ProductImageModel {
+extension ProductImageModelMapper on ProductImageModel? {
   ProductImageEntity toDomain() {
     return ProductImageEntity(
-      src: src,
-      woocommerceThumbnail: woocommerceThumbnail,
-      woocommerceSingle: woocommerceSingle,
-      woocommerceGalleryThumbnail: woocommerceGalleryThumbnail,
+      src: this?.src?.orEmpty() ?? kEMPTY,
+      woocommerceThumbnail: this?.woocommerceThumbnail?.orEmpty() ?? kEMPTY,
+      woocommerceSingle: this?.woocommerceSingle?.orEmpty() ?? kEMPTY,
+      woocommerceGalleryThumbnail:
+          this?.woocommerceGalleryThumbnail?.orEmpty() ?? kEMPTY,
     );
   }
 }
 
 // CategoriesModel
-extension ProductCategoriesModelMapper on ProductCategoriesModel {
+extension ProductCategoriesModelMapper on ProductCategoriesModel? {
   ProductCategoryEntity toDomain() {
     return ProductCategoryEntity(
-      id: id,
-      name: name,
+      id: this?.id.orZero() ?? kZERO,
+      name: this?.name?.orEmpty() ?? kEMPTY,
     );
   }
 }
 
 // AttributesModel
 extension ProductVariationsAttributesModelMapper
-    on ProductVariationsAttributesModel {
+    on ProductVariationsAttributesModel? {
   ProductVariationsAttributesEntity toDomain() {
     return ProductVariationsAttributesEntity(
-      id: id,
-      name: name,
-      option: option,
+      id: this?.id?.orZero() ?? kZERO,
+      name: this?.name?.orEmpty() ?? kEMPTY,
+      option: this?.option?.orEmpty() ?? kEMPTY,
     );
   }
 }
 
+// TODO A COMMENTER EN CAS DE BLOCKAGE
 // VariableProductModel
-extension ProductVariationsModelMapper on ProductVariationsModel {
+extension ProductVariationsModelMapper on ProductVariationsModel? {
   ProductVariationsEntity toDomain() {
-    // final List<ProductVariationsAttributesEntity> _attributesMapped =
-    //     (attributes.map((e) => e.toDomain()) ?? const Iterable.empty())
-    //         .cast<ProductVariationsAttributesEntity>()
-    //         .toList();
+    final List<ProductVariationsAttributesEntity> _attributesMapped =
+        (this?.attributes?.map((e) => e.toDomain()) ?? const Iterable.empty())
+            .cast<ProductVariationsAttributesEntity>()
+            .toList();
     return ProductVariationsEntity(
-        // id: id,
-        // sku: sku,
-        // price: price,
-        // regularPrice: regularPrice,
-        // salePrice: salePrice
-        //attributes: _attributesMapped
-        );
+      id: this?.id?.orZero() ?? kZERO,
+      sku: this?.sku?.orEmpty() ?? kEMPTY,
+      price: this?.price?.orEmpty() ?? kEMPTY,
+      regularPrice: this?.regularPrice?.orEmpty() ?? kEMPTY,
+      salePrice: this?.salePrice?.orEmpty() ?? kEMPTY,
+      attributes: _attributesMapped,
+    );
   }
 }
 
 // ACFModel
-extension ProductACFModelMapper on ProductACFModel {
+extension ProductACFModelMapper on ProductACFModel? {
   ProductACFEntity toDomain() {
     return ProductACFEntity(
-      contenance: contenance,
-      grossite: grossite,
-      superGros: superGros,
-      grandeMoyenneSurface: grandeMoyenneSurface,
-      hypermarche: hypermarche,
+      contenance: this?.contenance?.orEmpty() ?? kEMPTY,
+      grossite: this?.grossite?.orEmpty() ?? kEMPTY,
+      superGros: this?.superGros?.orEmpty() ?? kEMPTY,
+      grandeMoyenneSurface: this?.grandeMoyenneSurface?.orEmpty() ?? kEMPTY,
+      hypermarche: this?.hypermarche?.orEmpty() ?? kEMPTY,
     );
   }
 }
 
-extension ProductAttributesModelMapper on ProductAttributesModel {
+extension ProductAttributesModelMapper on ProductAttributesModel? {
   ProductAttributesEntity toDomain() {
     final List<String> _optionsMapped =
-        (options.map((v) => v) ?? const Iterable.empty())
+        (this?.options?.map((v) => v) ?? const Iterable.empty())
             .cast<String>()
             .toList();
     return ProductAttributesEntity(
-      id: id,
-      name: name,
+      id: this?.id?.orZero() ?? kZERO,
+      name: this?.name?.orEmpty() ?? kEMPTY,
       options: _optionsMapped,
     );
   }

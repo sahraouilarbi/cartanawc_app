@@ -12,17 +12,17 @@ class BillingModel {
     this.email,
     this.phone,
   });
-  String firstName;
-  String lastName;
-  String company;
-  String address1;
-  String address2;
-  String city;
-  String state;
-  String postcode;
-  String country;
-  String email;
-  String phone;
+  String? firstName;
+  String? lastName;
+  String? company;
+  String? address1;
+  String? address2;
+  String? city;
+  String? state;
+  String? postcode;
+  String? country;
+  String? email;
+  String? phone;
   factory BillingModel.fromJson(Map<String, dynamic> json) => BillingModel(
         firstName:
             json['first_name'] != null ? json['first_name'] as String : null,

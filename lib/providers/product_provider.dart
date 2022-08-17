@@ -18,9 +18,9 @@ enum LoadMoreStatus {
 }
 
 class ProductProvider with ChangeNotifier {
-  Repository _repository;
-  List<ProductEntity> _productList;
-  SortBy _sortBy;
+  late Repository _repository;
+  late List<ProductEntity> _productList;
+  late SortBy _sortBy;
   int pageSize = 10;
 
   List<ProductEntity> get allProducts => _productList;
@@ -52,12 +52,12 @@ class ProductProvider with ChangeNotifier {
   }
 
   Future fetchProducts(
-    int pageNumber, {
-    String strSearch,
-    String tagName,
-    String categoryId,
-    String sortBy,
-    String sortOrder,
+    int? pageNumber, {
+    String? strSearch,
+    String? tagName,
+    String? categoryId,
+    String? sortBy,
+    String? sortOrder,
   }) async {
     final List<ProductEntity> itemEntity = <ProductEntity>[];
     // itemEntity = await _repository.getProducts(

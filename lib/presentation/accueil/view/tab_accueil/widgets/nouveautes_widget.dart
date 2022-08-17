@@ -6,7 +6,7 @@ import 'background_image_with_overlay_widget.dart';
 import 'badge_widget.dart';
 
 class Nouveautes extends StatelessWidget {
-  const Nouveautes({Key key}) : super(key: key);
+  const Nouveautes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

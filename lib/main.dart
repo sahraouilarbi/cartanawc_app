@@ -9,7 +9,7 @@ import '/core/dependency_injection.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env');
+  await dotenv.load();
   //HttpOverrides.global = MyHttpOverrides();
   await initAppModule();
   runApp(CartanaApp());

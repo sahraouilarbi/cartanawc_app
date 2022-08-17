@@ -1,14 +1,14 @@
 import 'models.dart';
 
 class CustomerDetailModel {
-  int id;
-  String email;
-  String firstName;
-  String lastName;
-  String role;
-  BillingModel billing;
-  ShippingModel shipping;
-  String avatarUrl;
+  int? id;
+  String? email;
+  String? firstName;
+  String? lastName;
+  String? role;
+  BillingModel? billing;
+  ShippingModel? shipping;
+  String? avatarUrl;
 
   CustomerDetailModel({
     this.id,

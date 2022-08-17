@@ -12,7 +12,7 @@ import 'widgets/partenaires_widget.dart';
  * Build Page Accueil from de site : www2.cartana.dz
  */
 class TabAccueil extends StatelessWidget {
-  const TabAccueil({Key key}) : super(key: key);
+  const TabAccueil({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

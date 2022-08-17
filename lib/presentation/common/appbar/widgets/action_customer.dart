@@ -5,7 +5,7 @@ import '/core/prefs/app_prefs.dart';
 import '/presentation/ressources/appsize_manager.dart';
 
 class AppBarActionCustomerIcon extends StatelessWidget {
-  AppBarActionCustomerIcon({Key key}) : super(key: key);
+  AppBarActionCustomerIcon({Key? key}) : super(key: key);
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
   @override

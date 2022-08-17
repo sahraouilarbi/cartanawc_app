@@ -4,9 +4,9 @@ import '/presentation/ressources/appsize_manager.dart';
 
 class MontantWidget extends StatelessWidget {
   const MontantWidget(
-      {Key key,
+      {Key? key,
       this.label = 'MONTANT',
-      @required this.value,
+      required this.value,
       this.fontSize = 15.0})
       : super(key: key);
   final String label;

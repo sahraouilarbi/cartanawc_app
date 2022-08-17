@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import '/core/extensions.dart';
 import '/data/models/models.dart';
 import '/domain/usecase/login_usecase.dart';
 import '/presentation/base/base_viewmodel.dart';
@@ -17,7 +18,7 @@ class LoginViewModel extends BaseViewModel
       StreamController<void>.broadcast();
   final StreamController isUserLoggedInSuccessfullyStreamController =
       StreamController<LoginResponseDataModel>();
-  LoginObject loginObject = LoginObject('', '');
+  LoginObject loginObject = LoginObject(kEMPTY, kEMPTY);
   final LoginUsecase _loginUsecase;
   LoginViewModel(this._loginUsecase);
 
@@ -109,7 +110,7 @@ abstract class LoginViewModelInputs {
   void login();
   Sink get inputUsername;
   Sink get inputPassword;
-  Sink inputIsAllInputsValid;
+  Sink get inputIsAllInputsValid;
 }
 
 abstract class LoginViewModelOutputs {

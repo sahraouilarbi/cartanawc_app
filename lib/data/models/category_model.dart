@@ -1,11 +1,11 @@
 class CategoryModel {
-  int categoryId;
-  String categoryName;
-  String categorySlug;
-  int categoryParent;
-  String categoryDisplay;
-  String categoryDescription;
-  CategoryImageModel categoryImage;
+  int? categoryId;
+  String? categoryName;
+  String? categorySlug;
+  int? categoryParent;
+  String? categoryDisplay;
+  String? categoryDescription;
+  CategoryImageModel? categoryImage;
 
   CategoryModel({
     this.categoryId,
@@ -33,7 +33,7 @@ class CategoryModel {
 }
 
 class CategoryImageModel {
-  String src;
+  String? src;
 
   CategoryImageModel({this.src});
 

@@ -1,10 +1,10 @@
 class LoginResponseEntity {
   LoginResponseEntity({
-    this.success,
-    this.statusCode,
-    this.code,
-    this.message,
-    this.data,
+    required this.success,
+    required this.statusCode,
+    required this.code,
+    required this.message,
+    required this.data,
   });
   bool success;
   int statusCode;
@@ -15,13 +15,13 @@ class LoginResponseEntity {
 
 class DataEntity {
   DataEntity({
-    this.token,
-    this.id,
-    this.email,
-    this.nicename,
-    this.firstName,
-    this.lastName,
-    this.displayName,
+    required this.token,
+    required this.id,
+    required this.email,
+    required this.nicename,
+    required this.firstName,
+    required this.lastName,
+    required this.displayName,
   });
   String token;
   int id;

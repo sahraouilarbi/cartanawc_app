@@ -28,7 +28,7 @@ class RepositoryImpl implements Repository {
         if (_response.statusCode == 200) {
           return Right(_response);
         } else {
-          return Left(Failure(_response.statusCode, _response.message));
+          return Left(Failure(_response.statusCode!, _response.message!));
         }
       } catch (_error) {
         return Left(ErrorHandler.handle(_error).failure);
@@ -153,13 +153,13 @@ class RepositoryImpl implements Repository {
   Future<Either<Failure, List<OrderEntity>>> getOrders(int customerID,
       {int pageNumber = 1,
       int perPage = 10,
-      String search,
-      String after,
-      String before,
-      String sortOrder = 'desc',
-      String sortBy = 'date',
-      String status = 'any',
-      int product}) async {
+      String? search,
+      String? after,
+      String? before,
+      String? sortOrder = 'desc',
+      String? sortBy = 'date',
+      String? status = 'any',
+      int? product}) async {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.getOrders();
@@ -177,15 +177,15 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, List<ProductEntity>>> getProducts(
     String customerRole, {
-    String status = 'publish',
-    String strSearch,
-    int perPage = 100,
-    int pageNumber,
-    String tagName,
-    List<int> productsIds,
-    String categoryId,
-    String sortBy,
-    String sortOrder = 'asc',
+    String? status = 'publish',
+    String? strSearch,
+    int? perPage = 100,
+    int? pageNumber,
+    String? tagName,
+    List<int>? productsIds,
+    String? categoryId,
+    String? sortBy,
+    String? sortOrder = 'asc',
   }) async {
     if (await _networkInfo.isConnected) {
       try {

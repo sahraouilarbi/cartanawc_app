@@ -7,7 +7,7 @@ import '/presentation/ressources/progress_hud.dart';
 import '/providers/loader_provider.dart';
 
 class BasePage extends StatefulWidget {
-  const BasePage({Key key}) : super(key: key);
+  const BasePage({Key? key}) : super(key: key);
 
   @override
   BasePageState createState() => BasePageState();
@@ -32,6 +32,6 @@ class BasePageState<T extends BasePage> extends State<T> {
   }
 
   Widget pageUI() {
-    return null;
+    return const SizedBox();
   }
 }

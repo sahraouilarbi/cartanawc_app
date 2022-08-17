@@ -62,8 +62,8 @@ class CustomerProfileEditViewModel extends BaseViewModel
     inputState.add(
       LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState),
     );
-    (await _customerProfileEditUsecase.execute(CustomerDetailEntity().id)).fold(
-        (failure) {
+    (await _customerProfileEditUsecase.execute(CustomerDetailEntity().id!))
+        .fold((failure) {
       inputState.add(
         ErrorState(StateRendererType.fullScreenErrorState, failure.message),
       );

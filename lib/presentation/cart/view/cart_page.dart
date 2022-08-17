@@ -14,7 +14,7 @@ import '/providers/cart_provider.dart';
 import '/providers/loader_provider.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({Key key}) : super(key: key);
+  const CartPage({Key? key}) : super(key: key);
 
   static const String routeName = '/cart';
 
@@ -43,7 +43,7 @@ class _CartPageState extends State<CartPage> {
         future: Future.value(true), //SharedService.isLoggedIn(),
         builder: (BuildContext context, AsyncSnapshot<bool> loginModel) {
           if (loginModel.hasData) {
-            if (loginModel.data) {
+            if (loginModel.data!) {
               return Consumer<LoaderProvider>(
                   builder: (context, loaderProvider, child) {
                 return Scaffold(

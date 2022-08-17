@@ -1,15 +1,15 @@
 class ShippingEntity {
   ShippingEntity({
-    this.firstName,
-    this.lastName,
-    this.company,
-    this.address1,
-    this.address2,
-    this.city,
-    this.postcode,
-    this.country,
-    this.state,
-    this.phone,
+    required this.firstName,
+    required this.lastName,
+    required this.company,
+    required this.address1,
+    required this.address2,
+    required this.city,
+    required this.postcode,
+    required this.country,
+    required this.state,
+    required this.phone,
   });
   String firstName;
   String lastName;

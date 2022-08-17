@@ -1,5 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '/core/extensions.dart';
+
 abstract class AppPreferences {
   Future<void> setUsername(String username);
   Future<String> getUsername();
@@ -37,7 +39,7 @@ class AppPreferencesImpl implements AppPreferences {
   // Get Username
   @override
   Future<String> getUsername() async {
-    return _sharedPreferences.getString(prefsKeyUsername) ?? '';
+    return _sharedPreferences.getString(prefsKeyUsername) ?? kEMPTY;
   }
 
   // Save Password
@@ -49,7 +51,7 @@ class AppPreferencesImpl implements AppPreferences {
   // Get Password
   @override
   Future<String> getPassword() async {
-    return _sharedPreferences.getString(prefsKeyPassword) ?? '';
+    return _sharedPreferences.getString(prefsKeyPassword) ?? kEMPTY;
   }
 
   // Save Token
@@ -61,7 +63,7 @@ class AppPreferencesImpl implements AppPreferences {
   // Get Token
   @override
   Future<String> getUserToken() async {
-    return _sharedPreferences.getString(prefsKeyToken) ?? '';
+    return _sharedPreferences.getString(prefsKeyToken) ?? kEMPTY;
   }
 
   // Set IsUserLoggedIn to true
@@ -91,7 +93,7 @@ class AppPreferencesImpl implements AppPreferences {
   //Get user id
   @override
   Future<int> getUserId() async {
-    return _sharedPreferences.getInt(prefsKeyUserID);
+    return _sharedPreferences.getInt(prefsKeyUserID) ?? kZERO;
   }
 
   // Set UserRole
@@ -103,6 +105,6 @@ class AppPreferencesImpl implements AppPreferences {
   // Get UserRole
   @override
   Future<String> getUserRole() async {
-    return _sharedPreferences.getString(prefsKeyUserRole);
+    return _sharedPreferences.getString(prefsKeyUserRole) ?? kEMPTY;
   }
 }

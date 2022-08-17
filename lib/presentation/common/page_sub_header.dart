@@ -5,15 +5,15 @@ import '/presentation/ressources/appsize_manager.dart';
 
 class PageSubHeaderWidget extends StatelessWidget {
   const PageSubHeaderWidget({
-    Key key,
-    @required this.title,
+    Key? key,
+    required this.title,
     this.svgUrl,
-    this.hasBackReturn,
-    @required this.textColor,
-    @required this.backgroundColor,
+    required this.hasBackReturn,
+    required this.textColor,
+    required this.backgroundColor,
   }) : super(key: key);
   final String title;
-  final String svgUrl;
+  final String? svgUrl;
   final bool hasBackReturn;
   final Color textColor;
   final Color backgroundColor;
@@ -35,7 +35,7 @@ class PageSubHeaderWidget extends StatelessWidget {
             children: [
               if (svgUrl != null)
                 SvgPicture.asset(
-                  svgUrl,
+                  svgUrl!,
                   color: textColor,
                   fit: BoxFit.cover,
                 ),

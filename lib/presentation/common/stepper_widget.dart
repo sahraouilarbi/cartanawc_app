@@ -5,11 +5,11 @@ import 'stepper_actions_widget.dart';
 
 class StepperWidget extends StatelessWidget {
   const StepperWidget({
-    Key key,
-    @required this.qtyStepController,
-    @required this.stepActionRemove,
-    @required this.stepActionAdd,
-    @required this.stepActionOnSubmitedValue,
+    Key? key,
+    required this.qtyStepController,
+    required this.stepActionRemove,
+    required this.stepActionAdd,
+    required this.stepActionOnSubmitedValue,
   }) : super(key: key);
   final TextEditingController qtyStepController;
   final Function() stepActionRemove;

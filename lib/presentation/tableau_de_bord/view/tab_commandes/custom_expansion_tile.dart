@@ -4,9 +4,9 @@ const Duration _kExpand = Duration(milliseconds: 200);
 
 class CustomExpansionTile extends StatefulWidget {
   const CustomExpansionTile({
-    Key key,
+    Key? key,
     this.leading,
-    this.title,
+    required this.title,
     this.subtitle,
     this.backgroundColor,
     this.onExpansionChanged,
@@ -28,21 +28,21 @@ class CustomExpansionTile extends StatefulWidget {
         ),
         super(key: key);
 
-  final Widget leading;
+  final Widget? leading;
 
   final Widget title;
-  final Widget subtitle;
-  final ValueChanged<bool> onExpansionChanged;
+  final Widget? subtitle;
+  final ValueChanged<bool>? onExpansionChanged;
   final List<Widget> children;
-  final Color backgroundColor;
-  final Color collapsedBackgroundColor;
-  final Widget trailing;
+  final Color? backgroundColor;
+  final Color? collapsedBackgroundColor;
+  final Widget? trailing;
   final bool initiallyExpanded;
   final bool maintainState;
-  final EdgeInsetsGeometry tilePadding;
-  final Alignment expandedAlignment;
-  final CrossAxisAlignment expandedCrossAxisAlignment;
-  final EdgeInsetsGeometry childrenPadding;
+  final EdgeInsetsGeometry? tilePadding;
+  final Alignment? expandedAlignment;
+  final CrossAxisAlignment? expandedCrossAxisAlignment;
+  final EdgeInsetsGeometry? childrenPadding;
 
   @override
   _CustomExpansionTileState createState() => _CustomExpansionTileState();
@@ -64,13 +64,13 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
   final ColorTween _iconColorTween = ColorTween();
   final ColorTween _backgroundColorTween = ColorTween();
 
-  AnimationController _controller;
-  Animation<double> _iconTurns;
-  Animation<double> _heightFactor;
-  Animation<Color> _borderColor;
-  Animation<Color> _headerColor;
-  Animation<Color> _iconColor;
-  Animation<Color> _backgroundColor;
+  late AnimationController _controller;
+  late Animation<double> _iconTurns;
+  late Animation<double> _heightFactor;
+  late Animation<Color?> _borderColor;
+  late Animation<Color?> _headerColor;
+  late Animation<Color?> _iconColor;
+  late Animation<Color?> _backgroundColor;
 
   bool _isExpanded = false;
 
@@ -113,11 +113,11 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
       PageStorage.of(context)?.writeState(context, _isExpanded);
     });
     if (widget.onExpansionChanged != null) {
-      widget.onExpansionChanged(_isExpanded);
+      widget.onExpansionChanged?.call(_isExpanded);
     }
   }
 
-  Widget _buildChildren(BuildContext context, Widget child) {
+  Widget _buildChildren(BuildContext context, Widget? child) {
     final Color borderSideColor = _borderColor.value ?? Colors.transparent;
 
     return Container(
@@ -168,7 +168,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
     final ThemeData theme = Theme.of(context);
     _borderColorTween.end = theme.dividerColor;
     _headerColorTween
-      ..begin = theme.textTheme.subtitle1.color
+      ..begin = theme.textTheme.subtitle1!.color
       ..end = theme.colorScheme.secondary;
     _iconColorTween
       ..begin = theme.unselectedWidgetColor

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 import '/core/dependency_injection.dart';
+import '/core/extensions.dart';
 import '/core/prefs/app_prefs.dart';
 import '/data/api/api_endpoint.dart';
 import '/data/http_service.dart';
@@ -15,15 +16,15 @@ abstract class APIService {
   //Future<CustomerDetailModel> customerDetails();
   Future<List<CategoryModel>> getCategories();
   Future<List<ProductModel>> getProducts({
-    String status = 'publish',
-    String strSearch,
-    int perPage,
-    int pageNumber,
-    String tagName,
-    List<int> productsIds,
-    String categoryId,
-    String sortBy,
-    String sortOrder = 'asc',
+    String? status = 'publish',
+    String? strSearch,
+    int? perPage,
+    int? pageNumber,
+    String? tagName,
+    List<int>? productsIds,
+    String? categoryId,
+    String? sortBy,
+    String? sortOrder = 'asc',
   });
   Future<CartResponseModel> addToCart(CartRequestModel model);
   Future<CartResponseModel> getCartItem();
@@ -42,7 +43,7 @@ class APIServiceImpl implements APIService {
   //Login
   @override
   Future<LoginResponseModel> login(String username, String password) async {
-    LoginResponseModel loginResponseModel;
+    late LoginResponseModel loginResponseModel;
 
     try {
       final Response response =
@@ -72,7 +73,7 @@ class APIServiceImpl implements APIService {
   // Get Customer Details
   @override
   Future<CustomerDetailModel> getCustomerDetails(int userId) async {
-    CustomerDetailModel customerDetailModel;
+    late CustomerDetailModel customerDetailModel;
     try {
       final Response response =
           await httpService.getRequest(_apiEndPoint.customer(userId));
@@ -81,8 +82,8 @@ class APIServiceImpl implements APIService {
             CustomerDetailModel.fromJson(response.data as Map<String, dynamic>);
       }
     } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        printDebugMessage(e.response.statusCode.toString());
+      if (e.response!.statusCode == 404) {
+        printDebugMessage(e.response!.statusCode.toString());
       } else {
         debugPrint(e.message.toString());
         debugPrint(e.error.toString());
@@ -152,22 +153,22 @@ class APIServiceImpl implements APIService {
   //Produits
   @override
   Future<List<ProductModel>> getProducts({
-    String status = 'publish',
-    String strSearch,
-    int perPage,
-    int pageNumber,
-    String tagName,
-    List<int> productsIds,
-    String categoryId,
-    String sortBy,
-    String sortOrder = 'asc',
+    String? status = 'publish',
+    String? strSearch,
+    int? perPage,
+    int? pageNumber,
+    String? tagName,
+    List<int>? productsIds,
+    String? categoryId,
+    String? sortBy,
+    String? sortOrder = 'asc',
   }) async {
-    String _userRole = '';
+    String _userRole = kEMPTY;
     final _isUserLoggedIn = await _appPreferences.isUserLoggedIn();
     if (_isUserLoggedIn) {
       final _userId = await _appPreferences.getUserId();
       final _customerDetailModel = await getCustomerDetails(_userId);
-      _userRole = _customerDetailModel.role;
+      _userRole = _customerDetailModel.role!;
     }
 
     List<ProductModel> products = <ProductModel>[];
@@ -215,20 +216,24 @@ class APIServiceImpl implements APIService {
           for (final ProductModel product in products) {
             switch (_userRole) {
               case 'grossite':
-                product.price = _isUserLoggedIn ? product.acf.grossite : '';
+                product.price =
+                    _isUserLoggedIn ? product.acf!.grossite : kEMPTY;
                 break;
               case 'super_gros':
-                product.price = _isUserLoggedIn ? product.acf.superGros : '';
+                product.price =
+                    _isUserLoggedIn ? product.acf!.superGros : kEMPTY;
                 break;
               case 'grand_moyenne_surface':
-                product.price =
-                    _isUserLoggedIn ? product.acf.grandeMoyenneSurface : '';
+                product.price = _isUserLoggedIn
+                    ? product.acf!.grandeMoyenneSurface
+                    : kEMPTY;
                 break;
               case 'hypermarche':
-                product.price = _isUserLoggedIn ? product.acf.hypermarche : '';
+                product.price =
+                    _isUserLoggedIn ? product.acf!.hypermarche : kEMPTY;
                 break;
               default:
-                product.price = '';
+                product.price = kEMPTY;
             }
           }
         }
@@ -250,7 +255,7 @@ class APIServiceImpl implements APIService {
     //   model.userId = loginResponseModel.data.id;
     // }
     model.userId = await _appPreferences.getUserId();
-    CartResponseModel responseModel;
+    late CartResponseModel responseModel;
     try {
       final Response response =
           await httpService.postRequest(APIEndPoint.addToCart, model.toJson());
@@ -259,9 +264,9 @@ class APIServiceImpl implements APIService {
             CartResponseModel.fromJson(response.data as Map<String, dynamic>);
       }
     } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
+      if (e.response!.statusCode == 404) {
         printDebugMessage(
-            'APIService.addToCart Exception (response.statusCode): ${e.response.statusCode}');
+            'APIService.addToCart Exception (response.statusCode): ${e.response!.statusCode}');
       } else {
         printDebugMessage(
             'APIService.addToCart Exception (message): ${e.message}');
@@ -275,7 +280,7 @@ class APIServiceImpl implements APIService {
   // Get Cart Items
   @override
   Future<CartResponseModel> getCartItem() async {
-    CartResponseModel responseModel;
+    late CartResponseModel responseModel;
     final _userId = await _appPreferences.getUserId();
     final Map<String, dynamic> params = {'user_id': _userId};
     try {
@@ -307,7 +312,7 @@ class APIServiceImpl implements APIService {
       if (response.statusCode == 201) {
         final responseModel =
             OrderModel.fromJson(response.data as Map<String, dynamic>);
-        orderNumber = responseModel.orderNumber;
+        orderNumber = responseModel.orderNumber!;
         isOrderCreated = true;
 
         myOrderCreated = {
@@ -316,8 +321,8 @@ class APIServiceImpl implements APIService {
         };
       }
     } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        printDebugMessage(e.response.statusCode.toString());
+      if (e.response!.statusCode == 404) {
+        printDebugMessage(e.response!.statusCode.toString());
       } else {
         printDebugMessage(e.message);
         printDebugMessage(e.error.toString());

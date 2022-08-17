@@ -11,16 +11,16 @@ class ShippingModel {
     this.country,
     this.phone,
   });
-  String firstName;
-  String lastName;
-  String company;
-  String address1;
-  String address2;
-  String city;
-  String postcode;
-  String country;
-  String state;
-  String phone;
+  String? firstName;
+  String? lastName;
+  String? company;
+  String? address1;
+  String? address2;
+  String? city;
+  String? postcode;
+  String? country;
+  String? state;
+  String? phone;
 
   factory ShippingModel.fromJson(Map<String, dynamic> json) => ShippingModel(
         firstName:

@@ -5,7 +5,7 @@ import '/presentation/common/white_and_green_top_bar.dart';
 import 'models/drawer_model.dart';
 
 class DrawerForAnonymous extends StatelessWidget {
-  const DrawerForAnonymous({Key key}) : super(key: key);
+  const DrawerForAnonymous({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

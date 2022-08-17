@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/presentation/ressources/appsize_manager.dart';
 
 class ProductPackagingWidget extends StatelessWidget {
-  const ProductPackagingWidget({Key key, @required this.productStep})
+  const ProductPackagingWidget({Key? key, required this.productStep})
       : super(key: key);
   final int productStep;
 
