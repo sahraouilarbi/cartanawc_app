@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '/presentation/common/drawer/widgets/drawer_customer_tile.dart';
 import '/presentation/common/white_and_green_top_bar.dart';
+import '/presentation/pages.dart';
 import 'models/drawer_model.dart';
 
 class DrawerForAnonymous extends StatelessWidget {
@@ -12,7 +13,7 @@ class DrawerForAnonymous extends StatelessWidget {
     final List<DrawerContent> _drawerContent = [
       DrawerContent(
         onTap: () {
-          Navigator.pushNamed(context, '/', arguments: 1);
+          Navigator.pushNamed(context, AccueilPage.routeName, arguments: 1);
         },
         leadingIcon: const Icon(
           Icons.home,
@@ -23,14 +24,14 @@ class DrawerForAnonymous extends StatelessWidget {
       ),
       DrawerContent(
         onTap: () {
-          Navigator.pushNamed(context, '/', arguments: 0);
+          Navigator.pushNamed(context, AccueilPage.routeName, arguments: 0);
         },
         title: 'PRODUITS',
         backgroundColor: Colors.white,
       ),
       DrawerContent(
         onTap: () {
-          Navigator.pushNamed(context, '/', arguments: 2);
+          Navigator.pushNamed(context, AccueilPage.routeName, arguments: 2);
         },
         title: 'EXPLORER',
         backgroundColor: Colors.white,
@@ -52,7 +53,7 @@ class DrawerForAnonymous extends StatelessWidget {
       ),
       DrawerContent(
         onTap: () {
-          Navigator.pushNamed(context, '/aPropos');
+          Navigator.pushNamed(context, AProposPage.routeName);
         },
         title: 'A PROPOS',
         backgroundColor: Colors.black,

@@ -40,13 +40,22 @@ class _TabCategoriesState extends State<TabCategories> {
     return StreamBuilder<FlowState>(
       stream: _viewModel.outputState,
       builder: (context, snapshot) {
-        return snapshot.data!.getScreenWidget(
-          context,
-          _getContentWidget(),
-          () {
-            _viewModel.start();
-          },
-        );
+        if (snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        }
+        if (snapshot.hasData) {
+          return snapshot.data!.getScreenWidget(
+            context,
+            _getContentWidget(),
+            () {
+              _viewModel.start();
+            },
+          );
+        }
+        if (snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        }
+        return const SizedBox();
       },
     );
   }
@@ -81,7 +90,7 @@ class _TabCategoriesState extends State<TabCategories> {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    ProductPage(categoryId: snapshot.data![index].categoryId),
+                    ProductsPage(categoryId: snapshot.data![index].categoryId),
               ),
             );
           },

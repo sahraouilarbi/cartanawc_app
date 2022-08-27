@@ -4,6 +4,7 @@ import '/core/dependency_injection.dart';
 import '/core/extensions.dart';
 import '/domain/entities/entities.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/pages.dart';
 import '/presentation/ressources/appsize_manager.dart';
 import 'custom_expansion_tile.dart';
 import 'tab_commander_viewmodel.dart';
@@ -40,13 +41,23 @@ class _TabCommanderState extends State<TabCommander> {
     return StreamBuilder<FlowState>(
       stream: _tabCommanderViewModel.outputState,
       builder: (context, snapshot) {
-        return snapshot.data!.getScreenWidget(
-          context,
-          _getContentWidget(),
-          () {
-            _tabCommanderViewModel.start();
-          },
-        );
+        if (snapshot.hasData) {
+          return snapshot.data!.getScreenWidget(
+            context,
+            _getContentWidget(),
+            () {
+              _tabCommanderViewModel.start();
+            },
+          );
+        }
+        if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              snapshot.error.toString(),
+            ),
+          );
+        }
+        return const SizedBox();
       },
     );
   }
@@ -127,7 +138,7 @@ class _TabCommanderState extends State<TabCommander> {
                                   //   ),
                                   // );
                                   Navigator.pushNamed(
-                                      context, '/productDetails',
+                                      context, ProductDetailsPage.routeName,
                                       arguments: _productsInCategory[j]);
                                 },
                                 leading: Image.network(

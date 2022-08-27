@@ -13,8 +13,8 @@ class TabExplorer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Position currentPosition = Provider.of<Position>(context);
-
+    final Position? currentPosition =
+        Provider.of<Position?>(context, listen: false);
     return (currentPosition != null)
         ? Stack(
             alignment: AlignmentDirectional.bottomCenter,

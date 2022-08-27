@@ -14,6 +14,8 @@ import '/domain/usecase/commander_usecase.dart';
 import '/domain/usecase/customer_profile_edit_usecase.dart';
 import '/domain/usecase/customer_profile_usecase.dart';
 import '/domain/usecase/login_usecase.dart';
+import '/domain/usecase/products_usecase.dart';
+import '/presentation/accueil/view/tab_produits/products_viewmodel.dart';
 import '/presentation/accueil/view/tab_produits/tabview_categories_viewmodel.dart';
 import '/presentation/customer_profile/view/customer_profile_viewmodel.dart';
 import '/presentation/customer_profile_edit/view/customer_profile_edit_viewmodel.dart';
@@ -23,7 +25,7 @@ import '/presentation/tableau_de_bord/view/tab_commandes/tab_commander_viewmodel
 final instance = GetIt.instance;
 Future<void> initAppModule() async {
   // APIService
-  instance.registerLazySingleton<APIService>(() => APIServiceImpl());
+  //instance.registerLazySingleton<APIService>(() => APIService(dio));
 
   // SharedPreferences
   final sharedPrefs = await SharedPreferences.getInstance();
@@ -41,8 +43,8 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<DioFactory>(() => DioFactory(instance()));
 
   // App Service Client
-  // final dio = await instance<DioFactory>().getDio();
-  // instance.registerLazySingleton<AppServiceClient>(() => AppServiceClient(dio));
+  final dio = await instance<DioFactory>().getDio();
+  instance.registerLazySingleton<APIService>(() => APIService(dio));
 
   // Remote Data Source
   instance.registerLazySingleton<RemoteDataSource>(
@@ -99,6 +101,15 @@ void initTabCommanderModule() {
   }
 }
 
+void initGetProductsModule() {
+  if (!GetIt.I.isRegistered<ProductsUsecase>()) {
+    instance
+        .registerFactory<ProductsUsecase>(() => ProductsUsecase(instance()));
+    instance.registerFactory<ProductsViewModel>(
+        () => ProductsViewModel(instance()));
+  }
+}
+
 void resetModules() {
   instance.reset(dispose: false);
   initAppModule();
@@ -107,4 +118,5 @@ void resetModules() {
   initCustomerProfileModule();
   initCustomerProfileEditModule();
   initTabCommanderModule();
+  initGetProductsModule();
 }

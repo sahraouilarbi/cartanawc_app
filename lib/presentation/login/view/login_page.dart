@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 
 import '/core/dependency_injection.dart';
 import '/core/prefs/app_prefs.dart';
@@ -8,7 +9,9 @@ import '/presentation/common/my_text_buttom_widget.dart';
 import '/presentation/common/my_text_form_field_widget.dart';
 import '/presentation/common/section_header_widget.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/pages.dart';
 import '/presentation/ressources/appsize_manager.dart';
+import '/providers/auth_provider.dart';
 import 'login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
@@ -52,8 +55,9 @@ class _LoginPageState extends State<LoginPage> {
             _appPreferences.setIsUserLoggedIn();
             _appPreferences.setUsername(_usernameController.text);
             _appPreferences.setPassword(_passwordController.text);
+            Provider.of<AuthProvider>(context, listen: false).isUserLoggedIn();
             resetModules();
-            Navigator.pushNamed(context, '/tableauBord');
+            Navigator.pushNamed(context, TableauBordPage.routeName);
           },
         );
       },
@@ -77,18 +81,25 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(isLoginPage: true),
+      //appBar: const CustomAppBar(isLoginPage: true),
+      appBar: const CustomAppBar(),
       backgroundColor: Colors.black,
       body: StreamBuilder<FlowState>(
         stream: _loginViewModel.outputState,
         builder: (context, snapshot) {
-          return snapshot.data!.getScreenWidget(
-            context,
-            _getContentWidget(),
-            () {
-              _loginViewModel.login();
-            },
-          );
+          if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          }
+          if (snapshot.hasData) {
+            return snapshot.data!.getScreenWidget(
+              context,
+              _getContentWidget(),
+              () {
+                _loginViewModel.login();
+              },
+            );
+          }
+          return const SizedBox();
         },
       ),
     );

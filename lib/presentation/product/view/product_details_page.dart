@@ -19,7 +19,6 @@ import 'widgets.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   ProductDetailsPage({Key? key, required this.data}) : super(key: key);
-  //final ProductModel data;
   final ProductEntity data;
 
   final CartProductsModel cartProducts = CartProductsModel();
@@ -49,7 +48,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   bool inProgress = false;
 
   void calculMontant() {
-    montant = double.parse(widget.data.price) * qty * productStep;
+    //montant = double.parse(widget.data.price) * qty * productStep;
+    montant = productPrice * qty * productStep;
   }
 
   TextEditingController qtyStepController = TextEditingController();
@@ -71,7 +71,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     // Récuperer le prix
-    widget.data.price != null && widget.data.price != kEMPTY
+    widget.data.price != kEMPTY
         ? productPrice = double.parse(widget.data.price)
         : productPrice = 0;
 

@@ -60,7 +60,6 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
 
   @override
   void dispose() {
-    super.dispose();
     _shippingFirstNameTextEditingController.dispose();
     _shippingLastNameTextEditingController.dispose();
     _shippingAddress1TextEditingController.dispose();
@@ -73,6 +72,7 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddressPage> {
     _billingAddress2TextEditingController.dispose();
     _billingCityEditingController.dispose();
     _billingPostcodeTextEditingController.dispose();
+    super.dispose();
   }
 
   @override

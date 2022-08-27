@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/core/extensions.dart';
-import '/presentation/common/expanded_text.dart';
+import '/presentation/common/expanded_text_widget.dart';
 import '/presentation/common/image_network_loading_progress.dart';
 import '/presentation/common/no_image_placeholder.dart';
 import '/presentation/ressources/appsize_manager.dart';
@@ -25,7 +25,7 @@ class ProductDescriptionWidget extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          if (productImageUrl != null)
+          if (productImageUrl != kEMPTY)
             SizedBox(
               height: getProportionateScreenHeight(AppSize.s335),
               child: Image.network(
@@ -38,8 +38,7 @@ class ProductDescriptionWidget extends StatelessWidget {
             const NoImagePlaceholder(),
           Visibility(
             visible: productDescription != kEMPTY,
-            child: ExpandedText(
-              labelHeader: 'Détails du produit',
+            child: ExpandedTextWidget(
               description: productDescription,
               shortDescription: productShortDescription,
             ),

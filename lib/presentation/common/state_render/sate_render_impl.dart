@@ -8,18 +8,21 @@ abstract class FlowState {
   String getMessage();
 }
 
+// Loading State (POPUP, FULL, SCREEN)
 class LoadingState extends FlowState {
-  LoadingState({required this.stateRendererType, this.message});
+  LoadingState({required this.stateRendererType, String? message})
+      : message = message ?? 'Loading';
   StateRendererType stateRendererType;
-  String? message;
+  String message;
 
   @override
-  String getMessage() => message ?? kEMPTY;
+  String getMessage() => message;
 
   @override
   StateRendererType getStateRendererType() => stateRendererType;
 }
 
+// Error State (POPUP, FULL, SCREEN)
 class ErrorState extends FlowState {
   ErrorState(this.stateRendererType, this.message);
   StateRendererType stateRendererType;
@@ -32,6 +35,7 @@ class ErrorState extends FlowState {
   StateRendererType getStateRendererType() => stateRendererType;
 }
 
+// Content State
 class ContentState extends FlowState {
   ContentState();
 
@@ -43,6 +47,7 @@ class ContentState extends FlowState {
       StateRendererType.contentScreenState;
 }
 
+// Empty State
 class EmptyState extends FlowState {
   EmptyState(this.message);
 
@@ -73,7 +78,7 @@ extension FlowStateExtension on FlowState {
     Widget contentScreenWidget,
     Function retryActionFunction,
   ) {
-    switch (runtimeType) {
+    switch (this.runtimeType) {
       case LoadingState:
         {
           if (getStateRendererType() == StateRendererType.popupLoadingState) {
@@ -147,12 +152,12 @@ extension FlowStateExtension on FlowState {
   }
 
   bool _isThereCurrentDialogShowing(BuildContext context) =>
-      ModalRoute.of(context)!.isCurrent != true;
+      ModalRoute.of(context)?.isCurrent != true;
 
   void _showPopUp(
       BuildContext context, StateRendererType stateRendererType, String message,
       {String title = kEMPTY}) {
-    WidgetsBinding.instance!.addPostFrameCallback(
+    WidgetsBinding.instance?.addPostFrameCallback(
       (_) => showDialog(
         context: context,
         builder: (BuildContext context) => StateRenderer(

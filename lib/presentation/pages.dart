@@ -1,5 +1,6 @@
 export 'a_propos/a_propos.dart';
 export 'accueil/accueil.dart';
+export 'auth/auth.dart';
 export 'base/base.dart';
 export 'cart/cart.dart';
 export 'customer_profile/customer_profile.dart';

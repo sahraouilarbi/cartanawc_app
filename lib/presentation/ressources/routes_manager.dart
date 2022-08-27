@@ -5,14 +5,20 @@ import '/domain/entities/entities.dart';
 import '/presentation/pages.dart';
 
 class RouteGenerator {
-  final _fake = '';
+  final textIntrouvable = '404, Page Introuvable';
   static Route<dynamic> getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case AProposPage.routeName:
         return AProposPage.route();
       case AccueilPage.routeName:
         initGetCategoriesModule();
-        return AccueilPage.route(tabSelected: routeSettings.arguments as int);
+        initGetProductsModule();
+        return AccueilPage.route(
+            tabSelected: routeSettings.arguments != null
+                ? routeSettings.arguments! as int
+                : 1);
+      case AuthPage.routeName:
+        return AuthPage.route();
       case CartPage.routeName:
         return CartPage.route();
       case CustomerProfilePage.routeName:
@@ -25,16 +31,18 @@ class RouteGenerator {
       case OrdersPage.routeName:
         return OrdersPage.route();
       case OrderDetailsPage.routeName:
-        return OrderDetailsPage.route(orderId: routeSettings.arguments as int);
+        return OrderDetailsPage.route(orderId: routeSettings.arguments! as int);
       case PaymentMethodsPage.routeName:
         return PaymentMethodsPage.route();
       case ProductDetailsPage.routeName:
         return ProductDetailsPage.route(
-            data: routeSettings.arguments as ProductEntity);
+            data: routeSettings.arguments! as ProductEntity);
       case TableauBordPage.routeName:
         initTabCommanderModule();
         return TableauBordPage.route(
-            tabSelected: routeSettings.arguments as int);
+            tabSelected: routeSettings.arguments != null
+                ? routeSettings.arguments! as int
+                : 0);
       case VerifyAddressPage.routeName:
         return VerifyAddressPage.route();
       default:
@@ -57,7 +65,7 @@ class RouteGenerator {
         ),
         body: const Center(
           child: Text(
-            '404, Page introuvable',
+            '404, Page Introuvable',
             style: TextStyle(color: Colors.white),
           ),
         ),

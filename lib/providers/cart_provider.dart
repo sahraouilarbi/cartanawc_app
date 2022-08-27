@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '/core/dependency_injection.dart';
@@ -58,11 +59,11 @@ class CartProvider with ChangeNotifier {
       ));
     }
 
-    final CartProductsModel isProductExist = requestModel.products!.firstWhere(
+    final CartProductsModel? isProductExist =
+        requestModel.products!.firstWhereOrNull(
       (item) =>
           item.productId == product.productId &&
           item.variationId == product.variationId,
-      //orElse: () => null,
     );
 
     if (isProductExist != null) {
@@ -96,10 +97,9 @@ class CartProvider with ChangeNotifier {
   }
 
   void updateQty(int productId, int qty, {int variationId = 0}) {
-    final isProductExist = _cartItems!.firstWhere(
+    final isProductExist = _cartItems!.firstWhereOrNull(
       (element) =>
           element.productId == productId && element.variationId == variationId,
-      //orElse: () => null,
     );
     if (isProductExist != null) {
       isProductExist.qty = qty;
@@ -133,9 +133,8 @@ class CartProvider with ChangeNotifier {
   }
 
   void removeItem(int productId) {
-    final isProductExist = _cartItems!.firstWhere(
+    final isProductExist = _cartItems!.firstWhereOrNull(
       (element) => element.productId == productId,
-      //orElse: () => null,
     );
     if (isProductExist != null) {
       _cartItems!.remove(isProductExist);
@@ -144,7 +143,7 @@ class CartProvider with ChangeNotifier {
   }
 
   Future fetchShippingDetails() async {
-    _customerDetailModel ??= CustomerDetailModel();
+    //_customerDetailModel ??= CustomerDetailModel();
     final userId = await _appPreferences.getUserId();
     _customerDetailModel = await _apiService.getCustomerDetails(userId);
     notifyListeners();

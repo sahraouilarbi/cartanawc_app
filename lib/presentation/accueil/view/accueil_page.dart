@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '/core/dependency_injection.dart';
 import '/presentation/accueil/view/tab_accueil/tabview_accueil_widget.dart';
 import '/presentation/accueil/view/tab_explorer/tabview_explorer_widget.dart';
 import '/presentation/accueil/view/tab_produits/tabview_categories_page.dart';
 import '/presentation/common/appbar/custom_appbar_widget.dart';
 import '/presentation/common/drawer/drawer_for_anonymous_widget.dart';
-import '/presentation/ressources/size_config.dart';
-import '/providers/auth_provider.dart';
 
 class AccueilPage extends StatefulWidget {
-  const AccueilPage({Key? key, this.tabSelected}) : super(key: key);
+  const AccueilPage({Key? key, this.tabSelected = 1}) : super(key: key);
 
   static const String routeName = '/';
-  static Route route({int? tabSelected}) {
+  static Route route({int tabSelected = 1}) {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
-        builder: (context) => AccueilPage(tabSelected: tabSelected));
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => AccueilPage(tabSelected: tabSelected),
+    );
   }
 
   final int? tabSelected;
@@ -33,25 +30,25 @@ class _AccueilPageState extends State<AccueilPage>
     Tab(text: 'ACCUEIL'),
     Tab(text: 'EXPLORER'),
   ];
-  int firstComing = 0;
+  //int firstComing = 0;
 
   TabController? _tabController;
 
-  late AuthProvider authProvider;
+  // late AuthProvider authProvider;
 
-  Future<void> _bind() async {
-    authProvider = Provider.of<AuthProvider>(context, listen: false);
-    await authProvider.isUserLoggedIn();
-    if (authProvider.loggedInStatus == Status.loggedIn) {
-      resetModules();
-      Navigator.pushNamed(context, '/tableauBord');
-    }
-  }
+  // Future<void> _bind() async {
+  //   authProvider = Provider.of<AuthProvider>(context, listen: false);
+  //   await authProvider.isUserLoggedIn();
+  //   if (authProvider.loggedInStatus == Status.loggedIn) {
+  //     resetModules();
+  //     Navigator.pushNamed(context, TableauBordPage.routeName);
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
-    _bind();
+    //_bind();
     _tabController = TabController(length: homePageTabs.length, vsync: this);
 
     widget.tabSelected == null
@@ -68,7 +65,7 @@ class _AccueilPageState extends State<AccueilPage>
   @override
   Widget build(BuildContext context) {
     //Initialisation de valeurs MediaQuery
-    SizeConfig().init(context);
+    //SizeConfig().init(context);
 
     return SafeArea(
       child: Scaffold(

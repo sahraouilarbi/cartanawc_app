@@ -10,6 +10,7 @@ import '/presentation/common/section_header_widget.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';
 import '/presentation/common/text_customer_profile_view_widget.dart';
 import '/presentation/common/textbuttom_widget.dart';
+import '/presentation/pages.dart';
 import '/presentation/ressources/appsize_manager.dart';
 import 'customer_profile_viewmodel.dart';
 
@@ -47,20 +48,20 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: buildAppBar(context, isUserProfilePage: true),
-      appBar: const CustomAppBar(isUserProfilePage: true),
+      appBar: const CustomAppBar(),
       drawer: DrawerForAuthenticatedUser(),
       body: StreamBuilder<FlowState>(
-          stream: _customerProfileViewModel.outputState,
-          builder: (context, snapshot) {
-            return snapshot.data!.getScreenWidget(
-              context,
-              _customerProfile(),
-              () {
-                _customerProfileViewModel.start();
-              },
-            );
-          }),
+        stream: _customerProfileViewModel.outputState,
+        builder: (context, snapshot) {
+          return snapshot.data!.getScreenWidget(
+            context,
+            _customerProfile(),
+            () {
+              _customerProfileViewModel.start();
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -160,7 +161,8 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                       //MyTextButtonWidget(
                       textButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/customerProfileEdit');
+                          Navigator.pushNamed(
+                              context, CustomerProfileEditPage.routeName);
                         },
                         text: 'MODIFIER',
                       ),
@@ -170,7 +172,7 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                       MyTextButtonWidget(
                           onPressed: () {
                             _appPreferences.logout();
-                            Navigator.pushNamed(context, '/');
+                            Navigator.pushNamed(context, AccueilPage.routeName);
                           },
                           textButton: 'Se déconnecter'),
                     ],

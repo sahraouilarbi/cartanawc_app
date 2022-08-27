@@ -19,7 +19,8 @@ class OrderProvider with ChangeNotifier {
 
   Future fetchOrders() async {
     final List<OrderModel> orderList = await _apiService.getOrders();
-    _orderList ??= <OrderModel>[];
+    //_orderList ??= <OrderModel>[];
+    if (_orderList == null) _orderList = <OrderModel>[];
     if (orderList.isNotEmpty) {
       _orderList = [];
       _orderList.addAll(orderList);

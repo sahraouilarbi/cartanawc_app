@@ -23,15 +23,15 @@ abstract class Repository {
   // GetProducts
   Future<Either<Failure, List<ProductEntity>>> getProducts(
     String customerRole, {
-    String status = 'publish',
-    String strSearch,
-    int perPage,
-    int pageNumber,
-    String tagName,
-    List<int> productsIds,
-    String categoryId,
-    String sortBy,
-    String sortOrder = 'asc',
+    String? status = 'publish',
+    String? strSearch,
+    int? perPage,
+    int? pageNumber,
+    String? tagName,
+    List<int>? productsIds,
+    String? categoryId,
+    String? sortBy,
+    String? sortOrder = 'asc',
   });
 
   // Add to cart
@@ -46,15 +46,15 @@ abstract class Repository {
   //Get Orders
   Future<Either<Failure, List<OrderEntity>>> getOrders(
     int customerID, {
-    int pageNumber = 1,
-    int perPage = 10,
-    String search,
-    String after,
-    String before,
-    String sortOrder = 'desc',
-    String sortBy = 'date',
-    String status = 'any',
-    int product,
+    int? pageNumber = 1,
+    int? perPage = 10,
+    String? search,
+    String? after,
+    String? before,
+    String? sortOrder = 'desc',
+    String? sortBy = 'date',
+    String? status = 'any',
+    int? product,
   });
 
   // Get OrderDetails

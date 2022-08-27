@@ -10,6 +10,7 @@ class ProductsUsecase extends BaseUsecase<int, List<ProductEntity>> {
   ProductsUsecase(this._repository);
   @override
   Future<Either<Failure, List<ProductEntity>>> execute(int categoryId) {
-    return _repository.getProducts(categoryId.toString());
+    // TODO ajout de customerRole a la place de ''
+    return _repository.getProducts('', categoryId: categoryId.toString());
   }
 }

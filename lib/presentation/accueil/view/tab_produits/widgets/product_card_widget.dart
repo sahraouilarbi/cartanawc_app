@@ -4,6 +4,7 @@ import '/core/extensions.dart';
 import '/domain/entities/entities.dart';
 import '/presentation/common/image_network_loading_progress.dart';
 import '/presentation/common/no_image_placeholder.dart';
+import '/presentation/pages.dart';
 import '/presentation/ressources/appsize_manager.dart';
 
 class ProductTile extends StatelessWidget {
@@ -14,9 +15,13 @@ class ProductTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        Navigator.pushNamed(context, '/productDetails', arguments: data);
+        Navigator.pushNamed(
+          context,
+          ProductDetailsPage.routeName,
+          arguments: data,
+        );
       },
-      leading: data.images[0].woocommerceGalleryThumbnail != null
+      leading: data.images[0].woocommerceGalleryThumbnail != kEMPTY
           ? Container(
               width: AppSize.s56,
               height: AppSize.s56,
@@ -30,9 +35,7 @@ class ProductTile extends StatelessWidget {
           : const NoImagePlaceholder(),
       title: Text(data.name),
       trailing: Text(
-        data.price != null && data.price != kEMPTY
-            ? '${data.price.replaceAll('.', ',')} DA'
-            : kEMPTY,
+        data.price != kEMPTY ? '${data.price.replaceAll('.', ',')} DA' : kEMPTY,
       ),
     );
   }

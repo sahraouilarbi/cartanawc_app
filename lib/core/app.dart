@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/data/geolocator_service.dart';
+import '/presentation/pages.dart';
 import '/presentation/ressources/routes_manager.dart';
 import '/providers/auth_provider.dart';
 import '/providers/cart_provider.dart';
@@ -43,8 +44,7 @@ class CartanaApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        //initialRoute: 'Routes.homeRoute',
-        initialRoute: '/',
+        initialRoute: AuthPage.routeName,
         onGenerateRoute: RouteGenerator.getRoute,
         debugShowCheckedModeBanner: false,
         title: 'Cartana',
