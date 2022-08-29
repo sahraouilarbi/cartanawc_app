@@ -70,7 +70,7 @@ class CartItemModel {
     thumbnail = json['thumbnail'] != null ? json['thumbnail'] as String : null;
     qty = json['qty'] != null ? json['qty'] as int : null;
     productStep =
-        json['product_step'] != null ? json['product_step'] as String : null;
+        json['product_step'] != null ? json['product_step'] as String : '1';
     lineSubtotal = json['line_subtotal'] != null
         ? double.parse(json['line_subtotal'].toString())
         : 0.0;

@@ -29,17 +29,13 @@ class CartProvider with ChangeNotifier {
   String get orderNumber => _orderNumber;
 
   CartProvider() {
-    //_apiService = APIServiceImpl();
     _apiService = instance<APIService>();
     _cartItems = <CartItemModel>[];
-    //fetchCartItems();
   }
 
   void resetStream() {
-    //_apiService = APIServiceImpl();
     _apiService = instance<APIService>();
     _cartItems = <CartItemModel>[];
-    //fetchCartItems();
   }
 
   Future<void> addToCart(CartProductsModel product, Function onCallBack) async {

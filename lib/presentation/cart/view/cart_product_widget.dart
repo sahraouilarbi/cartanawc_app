@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '/data/models/models.dart';
 import '/presentation/common/row_montant.dart';
+import '/presentation/common/stepper_widget.dart';
 import '/presentation/common/utils.dart';
 import '/presentation/ressources/appsize_manager.dart';
 import '/presentation/ressources/color_manager.dart';
@@ -18,12 +19,41 @@ class CartProduct extends StatefulWidget {
 }
 
 class _CartProductState extends State<CartProduct> {
-  int? qty;
-  double? montant;
-  TextEditingController myController = TextEditingController();
+  int _cartonACommander = 1;
+  late int _qty;
+  late int _productStep;
+  late int _productMaxQty;
+  late double _productPrice;
+  late double? _montant;
+  TextEditingController qtyStepController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Récuperer la valeur step
+    _productStep = int.parse(widget.data.productStep!);
+
+    // Récuperer la quantité commandée
+    _qty = widget.data.qty!;
+
+    // Calculer le nombre de cartons commandés
+    _cartonACommander = _qty ~/ _productStep;
+
+    // Afficher le nombre de cartons commandés
+    qtyStepController.text = _cartonACommander.toString();
+
+    // Récupérer le prix du product
+    _productPrice = double.parse(widget.data.productRegularPrice!);
+
+    // Récuperer la valeur ProductMaxQty
+    // TODO Déterminer la valeur maximal a commander
+    _productMaxQty = 1000;
+  }
+
   @override
   void dispose() {
-    myController.dispose();
+    qtyStepController.dispose();
     super.dispose();
   }
 
@@ -63,7 +93,50 @@ class _CartProductState extends State<CartProduct> {
                       ),
                     ),
                     const SizedBox(height: AppSize.s5),
-                    stepper(),
+                    //stepperWidget(),
+                    StepperWidget(
+                      qtyStepController: qtyStepController,
+                      stepActionRemove: () {
+                        setState(() {
+                          if (_cartonACommander <= 1) {
+                            _cartonACommander = 1;
+                          } else {
+                            _cartonACommander--;
+                          }
+                          qtyStepController.text = _cartonACommander.toString();
+                          widget.data.qty = _cartonACommander * _productStep;
+                          _montant =
+                              _cartonACommander * _productStep * _productPrice;
+                        });
+                      },
+                      stepActionAdd: () {
+                        setState(() {
+                          if (_cartonACommander == _productMaxQty) {
+                            _cartonACommander = _productMaxQty;
+                          } else {
+                            _cartonACommander++;
+                          }
+                          qtyStepController.text = _cartonACommander.toString();
+                          widget.data.qty = _cartonACommander * _productStep;
+                          _montant =
+                              _cartonACommander * _productStep * _productPrice;
+                        });
+                      },
+                      stepActionOnSubmitedValue: (String value) {
+                        if (int.parse(value) > _productMaxQty) {
+                          value = _productMaxQty.toString();
+                        } else if (int.parse(value) < 1) {
+                          value = '1';
+                        }
+                        setState(() {
+                          qtyStepController.text = value;
+                          _cartonACommander = int.parse(value);
+                          widget.data.qty = _cartonACommander * _productStep;
+                          _montant =
+                              _cartonACommander * _productStep * _productPrice;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ],
@@ -80,7 +153,10 @@ class _CartProductState extends State<CartProduct> {
     );
   }
 
-  Container stepper() {
+  Widget stepperWidget() {
+    final int _qty = widget.data.qty!;
+    final int _step = int.parse(widget.data.productStep!);
+    final int _cartonACommander = _qty ~/ _step;
     return Container(
       decoration: const BoxDecoration(color: Colors.black),
       child: Row(
@@ -109,11 +185,9 @@ class _CartProductState extends State<CartProduct> {
             decoration:
                 BoxDecoration(color: Colors.white, border: Border.all()),
             child: Text(
-              widget.data.qty! < 10
-                  //? '0${widget.data.qty / int.parse(widget.data.productStep)}'
-                  //: '${widget.data.qty / int.parse(widget.data.step)}',
-                  ? '0${widget.data.qty}'
-                  : '${widget.data.qty}',
+              _cartonACommander < 10
+                  ? '0$_cartonACommander'
+                  : '$_cartonACommander',
               style: const TextStyle(
                 fontSize: 18.0,
               ),
@@ -128,7 +202,7 @@ class _CartProductState extends State<CartProduct> {
     );
   }
 
-  TextButton buttonSupprimer(BuildContext context) {
+  Widget buttonSupprimer(BuildContext context) {
     return TextButton(
       onPressed: () {
         Utils().showMessage(
@@ -167,7 +241,7 @@ class _CartProductState extends State<CartProduct> {
     );
   }
 
-  Container productImage() {
+  Widget productImage() {
     return Container(
       width: AppSize.s75,
       height: AppSize.s75,
@@ -180,7 +254,7 @@ class _CartProductState extends State<CartProduct> {
     );
   }
 
-  Container productName() {
+  Widget productName() {
     return Container(
       color: ColorManager.yellow,
       padding: const EdgeInsets.symmetric(

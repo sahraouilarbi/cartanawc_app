@@ -274,6 +274,7 @@ class _APIServiceImpl implements APIService {
     const _extra = <String, dynamic>{};
     final _queryParameters = <String, dynamic>{};
     final _data = model.toJson();
+    print('## apiService.addToCart data : $_data');
     try {
       final _response = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CartResponseModel>(

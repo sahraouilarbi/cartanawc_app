@@ -33,10 +33,6 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Panier'),
-      //   centerTitle: true,
-      // ),
       appBar: const CustomAppBar(),
       drawer: DrawerForAuthenticatedUser(),
       body: FutureBuilder(
@@ -77,7 +73,8 @@ class _CartPageState extends State<CartPage> {
         // contenue du panier
         Consumer<CartProvider>(
           builder: (context, cartModel, child) {
-            if (cartModel.cartItems != null && cartModel.cartItems.isNotEmpty) {
+            //if (cartModel.cartItems != null && cartModel.cartItems.isNotEmpty) {
+            if (cartModel.cartItems.isNotEmpty) {
               return ListView.builder(
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(),
