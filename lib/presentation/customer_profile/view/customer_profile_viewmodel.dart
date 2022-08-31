@@ -1,5 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 
+import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
 import '/domain/entities/entities.dart';
 import '/domain/usecase/customer_profile_usecase.dart';
 import '/presentation/base/base_viewmodel.dart';
@@ -15,8 +17,12 @@ class CustomerProfileViewModel extends BaseViewModel
   final _customerProfileStreamController =
       BehaviorSubject<CustomerDetailEntity>();
 
+  final AppPreferences _appPreferences = instance<AppPreferences>();
+  late int customerId;
+
   @override
-  void start() {
+  Future<void> start() async {
+    customerId = await _appPreferences.getUserId();
     _getCustomerProfile();
   }
 
@@ -30,7 +36,7 @@ class CustomerProfileViewModel extends BaseViewModel
     inputState.add(
       LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState),
     );
-    (await _customerProfileUsecase.execute(CustomerDetailEntity().id!)).fold(
+    (await _customerProfileUsecase.execute(customerId)).fold(
       (failure) {
         inputState.add(
           ErrorState(StateRendererType.fullScreenErrorState, failure.message),

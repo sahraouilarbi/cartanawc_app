@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/presentation/base/base_checkout.dart';
 import '/presentation/common/my_text_buttom_widget.dart';
 import '/presentation/pages.dart';
 import '/presentation/ressources/appsize_manager.dart';

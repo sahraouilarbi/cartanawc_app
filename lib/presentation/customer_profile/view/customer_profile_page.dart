@@ -66,123 +66,143 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
   }
 
   Widget _customerProfile() {
-    return StreamBuilder<CustomerDetailEntity>(
-      stream: _customerProfileViewModel.outputCustomerProfileData,
-      builder: (context, snapshot) {
-        return SingleChildScrollView(
-          physics: const ScrollPhysics(),
-          child: Container(
-            color: Colors.black,
-            padding: const EdgeInsets.all(AppPadding.p10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SectionHeader(sectionTitle: 'PROFIL'),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: AppPadding.p20, vertical: AppPadding.p40),
-                  color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // Customer Image profil
-                      CircleAvatar(
-                        radius: AppSize.s75,
-                        child: Image.network(
-                          snapshot.data!.avatarUrl!,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+    return SingleChildScrollView(
+      physics: const ScrollPhysics(),
+      child: Container(
+        color: Colors.black,
+        padding: const EdgeInsets.only(
+          left: AppPadding.p10,
+          right: AppPadding.p10,
+          bottom: AppPadding.p10,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SectionHeader(sectionTitle: 'PROFIL'),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p20, vertical: AppPadding.p40),
+              color: Colors.white,
+              child: Column(
+                children: [
+                  StreamBuilder<CustomerDetailEntity>(
+                    stream: _customerProfileViewModel.outputCustomerProfileData,
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                          return const Center(
+                              child: Text('Aucune donnée a affichée'));
+                        case ConnectionState.waiting:
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        case ConnectionState.active:
+                        case ConnectionState.done:
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              // Customer Image profil
+                              CircleAvatar(
+                                radius: AppSize.s75,
+                                child: Image.network(
+                                  snapshot.data!.avatarUrl!,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
 
-                      const SizedBox(height: AppSize.s20),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          //Nom
-                          TextCustomerProfileViewWidget(
-                            labelText: 'Nom',
-                            insideFieldText:
-                                '${snapshot.data!.firstName} ${snapshot.data!.lastName}',
-                          ),
-                          const SizedBox(height: AppSize.s10),
+                              const SizedBox(height: AppSize.s20),
 
-                          // Type
-                          TextCustomerProfileViewWidget(
-                            labelText: 'Type',
-                            insideFieldText: snapshot.data!.role!,
-                          ),
-                          const SizedBox(height: AppSize.s10),
+                              // Nom
+                              TextCustomerProfileViewWidget(
+                                labelText: 'Nom',
+                                insideFieldText:
+                                    '${snapshot.data!.firstName} ${snapshot.data!.lastName}',
+                              ),
 
-                          // Tél
-                          TextCustomerProfileViewWidget(
-                            labelText: 'Tél',
-                            insideFieldText: snapshot.data!.billing!.phone,
-                          ),
-                          const SizedBox(height: AppSize.s10),
+                              const SizedBox(height: AppSize.s10),
 
-                          // Email
-                          TextCustomerProfileViewWidget(
-                            labelText: 'Email',
-                            insideFieldText: snapshot.data!.email!,
-                          ),
-                          const SizedBox(height: AppSize.s10),
+                              // Type
+                              TextCustomerProfileViewWidget(
+                                labelText: 'Type',
+                                insideFieldText: snapshot.data!.role!,
+                              ),
 
-                          // Adresse
-                          TextCustomerProfileViewWidget(
-                            labelText: 'Adresse',
-                            insideFieldText:
-                                "${snapshot.data!.billing!.address1}, ${snapshot.data!.billing!.city}",
-                          ),
+                              const SizedBox(height: AppSize.s10),
 
-                          const SizedBox(height: AppSize.s10),
-                        ],
-                      ),
+                              // Télphone 01
+                              TextCustomerProfileViewWidget(
+                                labelText: 'Télphone 01',
+                                insideFieldText: snapshot.data!.billing!.phone,
+                              ),
 
-                      const SizedBox(height: AppSize.s15),
+                              const SizedBox(height: AppSize.s10),
 
-                      const Text(
-                        'Informations non correct?',
-                        textAlign: TextAlign.center,
-                      ),
+                              // Téléphone 02
+                              TextCustomerProfileViewWidget(
+                                labelText: 'Télphone 02',
+                                insideFieldText: snapshot.data!.shipping!.phone,
+                              ),
+                              const SizedBox(height: AppSize.s10),
 
-                      const SizedBox(height: AppSize.s10),
+                              // Email
+                              TextCustomerProfileViewWidget(
+                                labelText: 'Email',
+                                insideFieldText: snapshot.data!.email!,
+                              ),
 
-                      /**
-                      textButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, Routes.editProfileRoute);
-                        },
-                        text: 'MODIFIER',
-                        textColor: Colors.white,
-                        backgroundColor: Colors.black,
-                      ),**/
+                              const SizedBox(height: AppSize.s10),
 
-                      //MyTextButtonWidget(
-                      textButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, CustomerProfileEditPage.routeName);
-                        },
-                        text: 'MODIFIER',
-                      ),
+                              // Adresse
+                              TextCustomerProfileViewWidget(
+                                labelText: 'Adresse de facturation',
+                                insideFieldText:
+                                    "${snapshot.data!.billing!.address1}, ${snapshot.data!.billing!.city}",
+                              ),
 
-                      const SizedBox(height: AppSize.s10),
+                              const SizedBox(height: AppSize.s10),
 
-                      MyTextButtonWidget(
-                          onPressed: () {
-                            _appPreferences.logout();
-                            Navigator.pushNamed(context, AccueilPage.routeName);
-                          },
-                          textButton: 'Se déconnecter'),
-                    ],
+                              // Adresse
+                              TextCustomerProfileViewWidget(
+                                labelText: 'Adresse de livraison',
+                                insideFieldText:
+                                    "${snapshot.data!.shipping!.address1}, ${snapshot.data!.shipping!.city}",
+                              ),
+
+                              const SizedBox(height: AppSize.s25),
+
+                              const Text(
+                                'Informations non correct?',
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: AppSize.s10),
+
+                              //MyTextButtonWidget(
+                              textButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context,
+                                      CustomerProfileEditPage.routeName,
+                                      arguments: snapshot.data);
+                                },
+                                text: 'MODIFIER',
+                              ),
+                            ],
+                          );
+                      }
+                    },
                   ),
-                ),
-              ],
+                  const SizedBox(height: AppSize.s10),
+                  MyTextButtonWidget(
+                    onPressed: () {
+                      _appPreferences.logout();
+                      Navigator.pushNamed(context, AccueilPage.routeName);
+                    },
+                    textButton: 'Se déconnecter',
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/data/models/models.dart';
-import '/presentation/base/base_checkout.dart';
 import '/presentation/common/my_text_buttom_widget.dart';
 import '/presentation/common/my_text_form_field_widget.dart';
 import '/presentation/pages.dart';

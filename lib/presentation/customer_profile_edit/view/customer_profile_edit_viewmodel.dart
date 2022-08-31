@@ -1,32 +1,37 @@
 import 'dart:async';
 
+import 'package:cartanawc_app/domain/usecase/customer_profile_edit_usecase.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '/domain/entities/entities.dart';
-import '/domain/usecase/customer_profile_edit_usecase.dart';
 import '/presentation/base/base_viewmodel.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
-import '/presentation/common/state_render/state_renderer.dart';
 
 class CustomerProfileEditViewModel extends BaseViewModel
     with
         CustomerProfileEditViewModelInputs,
         CustomerProfileEditViewModelOutputs {
-  final StreamController _nomStreamController =
+  CustomerProfileEditUsecase _customerProfileEditUsecase;
+  CustomerProfileEditViewModel(this._customerProfileEditUsecase);
+
+  final StreamController _firstNameShippingStreamController =
       StreamController<String>.broadcast();
-  final StreamController _prenomStreamController =
+  final StreamController _lastNameShippingStreamController =
       StreamController<String>.broadcast();
-  final StreamController _emailStreamController =
+  final StreamController _companyShippingStreamController =
       StreamController<String>.broadcast();
-  final StreamController _telephoneStreamController =
+  final StreamController _address1ShippingStreamController =
       StreamController<String>.broadcast();
-  final StreamController _adresseStreamController =
+  final StreamController _address2ShippingStreamController =
       StreamController<String>.broadcast();
-  final StreamController _complementAdresseStreamController =
+  final StreamController _cityShippingStreamController =
       StreamController<String>.broadcast();
-  final StreamController _wilayaStreamController =
+  final StreamController _postCodeShippingStreamController =
       StreamController<String>.broadcast();
-  final StreamController _codePostalStreamController =
+  final StreamController _countryShippingStreamController =
+      StreamController<String>.broadcast();
+  final StreamController _stateShippingStreamController =
+      StreamController<String>.broadcast();
+  final StreamController _phoneShippingStreamController =
       StreamController<String>.broadcast();
   final StreamController _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
@@ -34,161 +39,197 @@ class CustomerProfileEditViewModel extends BaseViewModel
   final _customerProfileEditStreamController =
       BehaviorSubject<CustomerDetailEntity>();
 
-  final CustomerProfileEditUsecase _customerProfileEditUsecase;
+  late CustomerDetailEntity customerProfileEdit;
 
-  CustomerProfileEditViewModel(this._customerProfileEditUsecase);
+  String firstNameShipping = '';
+  String lastNameShipping = '';
+  String companyShipping = '';
+  String address1Shipping = '';
+  String address2Shipping = '';
+  String cityShipping = '';
+  String postCodeShipping = '';
+  String countryShipping = '';
+  String stateShipping = '';
+  String phoneShipping = '';
 
   @override
-  void start() {
+  Future<void> start() async {
     updateCustomerProfile();
   }
 
   @override
   void dispose() {
-    _nomStreamController.close();
-    _prenomStreamController.close();
-    _emailStreamController.close();
-    _telephoneStreamController.close();
-    _adresseStreamController.close();
-    _complementAdresseStreamController.close();
-    _wilayaStreamController.close();
-    _codePostalStreamController.close();
+    _firstNameShippingStreamController.close();
+    _lastNameShippingStreamController.close();
+    _companyShippingStreamController.close();
+    _address1ShippingStreamController.close();
+    _address2ShippingStreamController.close();
+    _cityShippingStreamController.close();
+    _postCodeShippingStreamController.close();
+    _countryShippingStreamController.close();
+    _stateShippingStreamController.close();
+    _phoneShippingStreamController.close();
     _isAllInputsValidStreamController.close();
     _customerProfileEditStreamController.close();
     super.dispose();
   }
 
-  Future<void> updateCustomerProfile() async {
-    inputState.add(
-      LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState),
-    );
-    (await _customerProfileEditUsecase.execute(CustomerDetailEntity().id!))
-        .fold((failure) {
-      inputState.add(
-        ErrorState(StateRendererType.fullScreenErrorState, failure.message),
-      );
-    }, (customerProfile) {
-      inputState.add(ContentState());
-    });
-  }
+  Future<void> updateCustomerProfile() async {}
 
   // Inputs ******************************************************************
   @override
-  void setNom(String nom) {
-    inputNom.add(nom);
-    // TODO: implement setNom
+  void setFirstNameShipping(String _firstNameShipping) {
+    inputFirstNameShipping.add(_firstNameShipping);
+    firstNameShipping = _firstNameShipping;
     _validate();
   }
 
   @override
-  void setPrenom(String prenom) {
-    inputPrenom.add(prenom);
-    // TODO: implement setPrenom
+  void setLastNameShipping(String _lastNameShipping) {
+    inputLastNameShipping.add(_lastNameShipping);
+    lastNameShipping = _lastNameShipping;
     _validate();
   }
 
   @override
-  void setEmail(String email) {
-    inputEmail.add(email);
-    // TODO: implement setEmail
+  void setCompanyShipping(String _companyShipping) {
+    inputCompanyShipping.add(_companyShipping);
+    companyShipping = _companyShipping;
     _validate();
   }
 
   @override
-  void setTelephone(String telephone) {
-    inputTelephone.add(telephone);
-    // TODO: implement setTelephone
+  void setAddress1Shipping(String _address1Shipping) {
+    inputAddress1Shipping.add(_address1Shipping);
+    address1Shipping = _address1Shipping;
     _validate();
   }
 
   @override
-  void setAdresse(String adresse) {
-    inputAdresse.add(adresse);
-    // TODO: implement setAdresse
+  void setAddress2Shipping(String _address2Shipping) {
+    inputAddress2Shipping.add(_address2Shipping);
+    address2Shipping = _address2Shipping;
     _validate();
   }
 
   @override
-  void setComplementAdresse(String complementAdresse) {
-    inputComplementAdresse.add(complementAdresse);
-    // TODO: implement setComplementAdresse
+  void setCityShipping(String _cityShipping) {
+    inputCityShipping.add(_cityShipping);
+    cityShipping = _cityShipping;
     _validate();
   }
 
   @override
-  void setWilaya(String wilaya) {
-    inputWilaya.add(wilaya);
-    // TODO: implement setWilaya
+  void setPostCodeShipping(String _postCodeShipping) {
+    inputPostCodeShipping.add(_postCodeShipping);
+    postCodeShipping = _postCodeShipping;
     _validate();
   }
 
   @override
-  void setCodePostal(String codePostal) {
-    inputCodePostal.add(codePostal);
-    // TODO: implement setCodePostal
+  void setCountryShipping(String _countryShipping) {
+    inputCountryShipping.add(_countryShipping);
+    countryShipping = _countryShipping;
     _validate();
   }
 
   @override
-  Sink get inputNom => _nomStreamController.sink;
+  void setStateShipping(String _stateShipping) {
+    inputStateShipping.add(_stateShipping);
+    stateShipping = _stateShipping;
+    _validate();
+  }
 
   @override
-  Sink get inputPrenom => _prenomStreamController.sink;
+  void setPhoneShipping(String _phoneShipping) {
+    inputPhoneShipping.add(phoneShipping);
+    phoneShipping = _phoneShipping;
+    _validate();
+  }
 
   @override
-  Sink get inputEmail => _emailStreamController.sink;
+  Sink get inputFirstNameShipping => _firstNameShippingStreamController.sink;
 
   @override
-  Sink get inputTelephone => _telephoneStreamController.sink;
+  Sink get inputLastNameShipping => _lastNameShippingStreamController.sink;
 
   @override
-  Sink get inputAdresse => _adresseStreamController.sink;
+  Sink get inputCompanyShipping => _companyShippingStreamController.sink;
 
   @override
-  Sink get inputComplementAdresse => _complementAdresseStreamController.sink;
+  Sink get inputAddress1Shipping => _address1ShippingStreamController.sink;
 
   @override
-  Sink get inputWilaya => _wilayaStreamController.sink;
+  Sink get inputAddress2Shipping => _address2ShippingStreamController.sink;
 
   @override
-  Sink get inputCodePostal => _codePostalStreamController.sink;
+  Sink get inputCityShipping => _cityShippingStreamController.sink;
+
+  @override
+  Sink get inputPostCodeShipping => _postCodeShippingStreamController.sink;
+
+  @override
+  Sink get inputCountryShipping => _countryShippingStreamController.sink;
+
+  @override
+  Sink get inputStateShipping => _stateShippingStreamController.sink;
+
+  @override
+  Sink get inputPhoneShipping => _phoneShippingStreamController.sink;
 
   @override
   Sink get inputIsAllInputsValid => _isAllInputsValidStreamController.sink;
 
   // Outputs ******************************************************************
   @override
-  Stream<bool> get outputIsNomValid =>
-      _nomStreamController.stream.map((nom) => _isNomValid(nom as String));
+  Stream<bool> get outputIsFirstNameShippingValid =>
+      _firstNameShippingStreamController.stream.map((firstNameShipping) =>
+          _isFirstNameShippingValid(firstNameShipping as String));
 
   @override
-  Stream<bool> get outputIsPrenomValid => _prenomStreamController.stream
-      .map((prenom) => _isPrenomValid(prenom as String));
+  Stream<bool> get outputIsLastNameShippingValid =>
+      _lastNameShippingStreamController.stream.map((lastNameShipping) =>
+          _isLastNameShippingValid(lastNameShipping as String));
 
   @override
-  Stream<bool> get outputIsEmailValid => _emailStreamController.stream
-      .map((email) => _isEmailValid(email as String));
+  Stream<bool> get outputIsCompanyShippingValid =>
+      _companyShippingStreamController.stream.map((companyShipping) =>
+          _isCompanyShippingValid(companyShipping as String));
 
   @override
-  Stream<bool> get outputIsTelephoneValid => _telephoneStreamController.stream
-      .map((telephone) => _isTelephoneValid(telephone as String));
+  Stream<bool> get outputIsAddress1ShippingValid =>
+      _address1ShippingStreamController.stream.map((address1Shipping) =>
+          _isAddress1ShippingValid(address1Shipping as String));
 
   @override
-  Stream<bool> get outputIsAdresseValid => _adresseStreamController.stream
-      .map((adresse) => _isAdresseValid(adresse as String));
+  Stream<bool> get outputIsAddress2ShippingValid =>
+      _address2ShippingStreamController.stream.map((address2Shipping) =>
+          _isAddress2ShippingValid(address2Shipping as String));
 
   @override
-  Stream<bool> get outputIsComplementAdresseValid =>
-      _complementAdresseStreamController.stream.map((complementAdresse) =>
-          _isComplementAdresseValid(complementAdresse as String));
+  Stream<bool> get outputIsCityShippingValid =>
+      _cityShippingStreamController.stream
+          .map((cityShipping) => _isCityShippingValid(cityShipping as String));
 
   @override
-  Stream<bool> get outputIsWilayaValid => _wilayaStreamController.stream
-      .map((wilaya) => _isWilayaValid(wilaya as String));
+  Stream<bool> get outputIsPostCodeShippingValid =>
+      _postCodeShippingStreamController.stream.map((postCodeShipping) =>
+          _isPostCodeShippingValid(postCodeShipping as String));
 
   @override
-  Stream<bool> get outputIsCodePostalValid => _codePostalStreamController.stream
-      .map((codePostal) => _isCodePostalValid(codePostal as String));
+  Stream<bool> get outputIsCountryShippingValid =>
+      _countryShippingStreamController.stream.map((countryShipping) =>
+          _isCountryShippingValid(countryShipping as String));
+
+  @override
+  Stream<bool> get outputIsStateShippingValid => _stateShippingStreamController
+      .stream
+      .map((stateShipping) => _isStateShippingValid(stateShipping as String));
+
+  @override
+  Stream<bool> get outputIsPhoneShippingValid => _phoneShippingStreamController
+      .stream
+      .map((phoneShipping) => _isPhoneShippingValid(phoneShipping as String));
 
   @override
   Stream<bool> get outputIsAllInputsValid =>
@@ -198,50 +239,57 @@ class CustomerProfileEditViewModel extends BaseViewModel
     inputIsAllInputsValid.add(null);
   }
 
-  bool _isNomValid(String nom) {
-    return nom.isNotEmpty;
+  bool _isFirstNameShippingValid(String firstNameShipping) {
+    return firstNameShipping.isNotEmpty;
   }
 
-  bool _isPrenomValid(String prenom) {
-    return prenom.isNotEmpty;
+  bool _isLastNameShippingValid(String lastNameShipping) {
+    return lastNameShipping.isNotEmpty;
   }
 
-  bool _isEmailValid(String email) {
-    return email.isNotEmpty;
+  bool _isCompanyShippingValid(String companyShipping) {
+    return companyShipping.isNotEmpty;
   }
 
-  bool _isTelephoneValid(String telephone) {
-    return telephone.isNotEmpty;
+  bool _isAddress1ShippingValid(String address1Shipping) {
+    return address1Shipping.isNotEmpty;
   }
 
-  bool _isAdresseValid(String adresse) {
-    return adresse.isNotEmpty;
+  bool _isAddress2ShippingValid(String address2Shipping) {
+    return address2Shipping.isNotEmpty;
   }
 
-  bool _isComplementAdresseValid(String complementAdresse) {
-    return complementAdresse.isNotEmpty;
+  bool _isCityShippingValid(String cityShipping) {
+    return cityShipping.isNotEmpty;
   }
 
-  bool _isWilayaValid(String wilaya) {
-    return wilaya.isNotEmpty;
+  bool _isPostCodeShippingValid(String postCodeShipping) {
+    return postCodeShipping.isNotEmpty;
   }
 
-  bool _isCodePostalValid(String codePostal) {
-    return codePostal.isNotEmpty;
+  bool _isCountryShippingValid(String countryShipping) {
+    return countryShipping.isNotEmpty;
+  }
+
+  bool _isStateShippingValid(String stateShipping) {
+    return stateShipping.isNotEmpty;
+  }
+
+  bool _isPhoneShippingValid(String phoneShipping) {
+    return phoneShipping.isNotEmpty;
   }
 
   bool _isAllInputsValid() {
-    return true;
-    /*
-        _isNomValid(nom) &&
-        _isPrenomValid(prenom) &&
-        _isEmailValid(email) &&
-        _isTelephoneValid(telephone) &&
-        _isAdresseValid(adresse) &&
-        _isComplementAdresseValid(complementAdresse) &&
-        _isWilayaValid(wilaya) &&
-        _isCodePostalValid(codePostal);
-     */
+    return _isFirstNameShippingValid(firstNameShipping) &&
+        _isLastNameShippingValid(lastNameShipping) &&
+        _isCompanyShippingValid(companyShipping) &&
+        _isAddress1ShippingValid(address1Shipping) &&
+        _isAddress2ShippingValid(address2Shipping) &&
+        _isCityShippingValid(cityShipping) &&
+        _isPostCodeShippingValid(postCodeShipping) &&
+        _isCountryShippingValid(countryShipping) &&
+        _isStateShippingValid(stateShipping) &&
+        _isPhoneShippingValid(phoneShipping);
   }
 
   @override
@@ -254,36 +302,42 @@ class CustomerProfileEditViewModel extends BaseViewModel
 }
 
 abstract class CustomerProfileEditViewModelInputs {
-  void setNom(String nom);
-  void setPrenom(String prenom);
-  void setEmail(String email);
-  void setTelephone(String telephone);
-  void setAdresse(String adresse);
-  void setComplementAdresse(String complementAdresse);
-  void setWilaya(String wilaya);
-  void setCodePostal(String codePostal);
+  void setFirstNameShipping(String firstNameShipping);
+  void setLastNameShipping(String lastNameShipping);
+  void setCompanyShipping(String companyShipping);
+  void setAddress1Shipping(String address1Shipping);
+  void setAddress2Shipping(String address2Shipping);
+  void setCityShipping(String cityShipping);
+  void setPostCodeShipping(String postCodeShipping);
+  void setCountryShipping(String countryShipping);
+  void setStateShipping(String stateShipping);
+  void setPhoneShipping(String phoneShipping);
 
-  Sink get inputNom;
-  Sink get inputPrenom;
-  Sink get inputEmail;
-  Sink get inputTelephone;
-  Sink get inputAdresse;
-  Sink get inputComplementAdresse;
-  Sink get inputWilaya;
-  Sink get inputCodePostal;
+  Sink get inputFirstNameShipping;
+  Sink get inputLastNameShipping;
+  Sink get inputCompanyShipping;
+  Sink get inputAddress1Shipping;
+  Sink get inputAddress2Shipping;
+  Sink get inputCityShipping;
+  Sink get inputPostCodeShipping;
+  Sink get inputCountryShipping;
+  Sink get inputStateShipping;
+  Sink get inputPhoneShipping;
   Sink get inputIsAllInputsValid;
   Sink get inputCustomerProfileEditData;
 }
 
 abstract class CustomerProfileEditViewModelOutputs {
-  Stream<bool> get outputIsNomValid;
-  Stream<bool> get outputIsPrenomValid;
-  Stream<bool> get outputIsEmailValid;
-  Stream<bool> get outputIsTelephoneValid;
-  Stream<bool> get outputIsAdresseValid;
-  Stream<bool> get outputIsComplementAdresseValid;
-  Stream<bool> get outputIsWilayaValid;
-  Stream<bool> get outputIsCodePostalValid;
+  Stream<bool> get outputIsFirstNameShippingValid;
+  Stream<bool> get outputIsLastNameShippingValid;
+  Stream<bool> get outputIsCompanyShippingValid;
+  Stream<bool> get outputIsAddress1ShippingValid;
+  Stream<bool> get outputIsAddress2ShippingValid;
+  Stream<bool> get outputIsCityShippingValid;
+  Stream<bool> get outputIsPostCodeShippingValid;
+  Stream<bool> get outputIsCountryShippingValid;
+  Stream<bool> get outputIsStateShippingValid;
+  Stream<bool> get outputIsPhoneShippingValid;
   Stream<bool> get outputIsAllInputsValid;
   Stream<CustomerDetailEntity> get outputCustomerProfileEditData;
 }

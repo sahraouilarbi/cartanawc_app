@@ -157,7 +157,7 @@ extension FlowStateExtension on FlowState {
   void _showPopUp(
       BuildContext context, StateRendererType stateRendererType, String message,
       {String title = kEMPTY}) {
-    WidgetsBinding.instance?.addPostFrameCallback(
+    WidgetsBinding.instance!.addPostFrameCallback(
       (_) => showDialog(
         context: context,
         builder: (BuildContext context) => StateRenderer(
