@@ -10,6 +10,7 @@ class MyTextFormFieldWidget extends StatelessWidget {
     this.hintText,
     this.labelText,
     this.errorText,
+    this.maxLines = 1,
     this.suffixIcon,
     this.readOnly = false,
     this.obscureText = false,
@@ -19,6 +20,7 @@ class MyTextFormFieldWidget extends StatelessWidget {
   final String? hintText;
   final String? labelText;
   final String? errorText;
+  final int? maxLines;
   final IconButton? suffixIcon;
   final bool readOnly;
   final bool obscureText;
@@ -46,6 +48,7 @@ class MyTextFormFieldWidget extends StatelessWidget {
         ),
         suffixIcon: suffixIcon,
       ),
+      maxLines: maxLines,
       readOnly: readOnly,
       obscureText: obscureText,
     );

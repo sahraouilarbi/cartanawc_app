@@ -4,6 +4,7 @@ export 'cart_response_model.dart';
 export 'category_model.dart';
 export 'customer_detail_model.dart';
 export 'customer_model.dart';
+export 'devenir_distributeur_model.dart';
 export 'forgot_password_response_model.dart';
 export 'login_model.dart';
 export 'meta_data_model.dart';

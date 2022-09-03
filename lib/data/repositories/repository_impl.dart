@@ -230,4 +230,21 @@ class RepositoryImpl implements Repository {
       return Left(DataSource.noInternetConnection.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, DevenirDistributeurResponseEntity>>
+      devenirDistributeur(DevenirDistributeurRequestEntity _formData) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response =
+            await _remoteDataSource.devenirDistributeur(_formData.toModel());
+        return Right(_response.toDomain());
+      } catch (_error) {
+        print('## repository.devenirDistributeur error : ${_error.toString()}');
+        return Left(ErrorHandler.handle(_error.toString()).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
 }

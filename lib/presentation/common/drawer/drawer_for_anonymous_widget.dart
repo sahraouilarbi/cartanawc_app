@@ -42,7 +42,9 @@ class DrawerForAnonymous extends StatelessWidget {
         backgroundColor: const Color(0xFFDB9F5A),
       ),
       DrawerContent(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, DevenirDistributeurPage.routeName);
+        },
         title: 'DEVENIR DISTRIBUTEUR',
         backgroundColor: Colors.black,
       ),

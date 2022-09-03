@@ -62,4 +62,8 @@ abstract class Repository {
 
   // Get Payment Gateways
   Future<Either<Failure, List<PaymentGatewaysEntity>>> getPaymentGateways();
+
+  // Devenir distributeur
+  Future<Either<Failure, DevenirDistributeurResponseEntity>>
+      devenirDistributeur(DevenirDistributeurRequestEntity _formData);
 }

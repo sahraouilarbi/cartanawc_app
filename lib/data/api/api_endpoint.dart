@@ -21,12 +21,6 @@ class APIEndPoint {
   // WooCommerce All Payment Gateways endpoint
   static const String paymentGateways = '/wp-json/wc/v3/payment_gateways';
 
-  // Advanced dynamic Pricing for WooCommerce endpoint
-  static const String wdpRules = '/wp-json/wdp-rules/all';
-
-  // JWT Auth endpoint
-  static const String jwtAuthToken = '/wp-json/jwt-auth/v1/token';
-
   // WooCommerce Customer endpoint
   String customer(int userId) {
     return '/wp-json/wc/v3/customers/$userId';
@@ -42,6 +36,17 @@ class APIEndPoint {
     return '/wp-json/wc/v3/payment_gateways/$paymentGatewayId';
   }
 
+  // Advanced dynamic Pricing for WooCommerce endpoint
+  static const String wdpRules = '/wp-json/wdp-rules/all';
+
+  // JWT Auth endpoint
+  static const String jwtAuthToken = '/wp-json/jwt-auth/v1/token';
+
+  // Devenir Distributeur endpoint
+  static const String devenirDistributeur =
+      '/wp-json/contact-form-7/v1/contact-forms/1433/feedback';
+
+  // Logo Url
   static const String cartanaLogoUrl =
       '/wp-content/uploads/2021/05/cartana-logo.png';
 

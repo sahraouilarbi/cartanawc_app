@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '/presentation/pages.dart';
 import '/presentation/ressources/appsize_manager.dart';
 import 'background_image_with_overlay_widget.dart';
 
@@ -32,7 +33,9 @@ class DevenirDistributeur extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, DevenirDistributeurPage.routeName);
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(
                     vertical: AppPadding.p5, horizontal: AppPadding.p10),

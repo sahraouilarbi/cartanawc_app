@@ -1,3 +1,5 @@
+import 'package:cartanawc_app/domain/usecase/devenir_distributeur_usecase.dart';
+import 'package:cartanawc_app/presentation/devenir_distributeur/view/devenir_distributeur_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -110,6 +112,15 @@ void initGetProductsModule() {
   }
 }
 
+void initDevenirDistributeurModule() {
+  if (!GetIt.I.isRegistered<DevenirDistributeurUsecase>()) {
+    instance.registerFactory<DevenirDistributeurUsecase>(
+        () => DevenirDistributeurUsecase(instance()));
+    instance.registerFactory<DevenirDistributeurViewModel>(
+        () => DevenirDistributeurViewModel(instance()));
+  }
+}
+
 void resetModules() {
   instance.reset(dispose: false);
   initAppModule();
@@ -119,4 +130,5 @@ void resetModules() {
   initCustomerProfileEditModule();
   initTabCommanderModule();
   initGetProductsModule();
+  initDevenirDistributeurModule();
 }

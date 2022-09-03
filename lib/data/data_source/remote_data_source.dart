@@ -25,6 +25,8 @@ abstract class RemoteDataSource {
   Future<List<OrderModel>> getOrders();
   Future<OrderDetailModel> getOrderDetails(int orderId);
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
+  Future<DevenirDistributeurResponseModel> devenirDistributeur(
+      DevenirDistributeurRequestModel _formData);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -102,5 +104,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       sortBy: sortBy,
       sortOrder: sortOrder,
     );
+  }
+
+  @override
+  Future<DevenirDistributeurResponseModel> devenirDistributeur(
+      DevenirDistributeurRequestModel _formData) {
+    return _apiService.devenirDistributeur(_formData);
   }
 }

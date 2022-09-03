@@ -4,6 +4,7 @@ export 'cart_response_entity.dart';
 export 'category_entity.dart';
 export 'customer_detail_entity.dart';
 export 'customer_entity.dart';
+export 'devenir_distributeur_entity.dart';
 export 'forgot_password_response_entity.dart';
 export 'login_entity.dart';
 export 'meta_data_entity.dart';

@@ -141,122 +141,151 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
               child: Column(
                 children: [
                   const Text('Adresse de livraison du client'),
-                  StreamBuilder<CustomerDetailEntity>(
-                    stream: _customerProfileEditViewModel
-                        .outputCustomerProfileEditData,
-                    builder: (context, snapshot) {
-                      print(snapshot.connectionState);
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.none:
-                          return const Center(
-                              child: Text('Aucune donnée a affichée'));
-                        case ConnectionState.waiting:
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        case ConnectionState.active:
-                        case ConnectionState.done:
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              // Customer Image profil
-                              // CircleAvatar(
-                              //   radius: AppSize.s75,
-                              //   child: Image.network(snapshot.data!.avatarUrl!),
-                              // ),
-                              //
-                              // const SizedBox(height: AppSize.s20),
-                              Form(
-                                key: _globalKey,
-                                child: Column(
-                                  children: <Widget>[
-                                    // TextFormField Nom
-                                    MyTextFormFieldWidget(
-                                      controller: _firstNameShippingController,
-                                      hintText: 'Nom de famille',
-                                      labelText: 'Nom',
-                                      errorText: (false)
-                                          ? null
-                                          : 'Nom de famille ne peut pas être vide',
-                                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Customer Image profil
+                      // CircleAvatar(
+                      //   radius: AppSize.s75,
+                      //   child: Image.network(snapshot.data!.avatarUrl!),
+                      // ),
+                      //
+                      // const SizedBox(height: AppSize.s20),
+                      Form(
+                        key: _globalKey,
+                        child: Column(
+                          children: <Widget>[
+                            // TextFormField Nom
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsFirstNameShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _firstNameShippingController,
+                                  hintText: 'Nom de famille',
+                                  labelText: 'Nom',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Nom de famille ne peut pas être vide',
+                                );
+                              },
+                            ),
 
-                                    const SizedBox(height: AppSize.s10),
+                            const SizedBox(height: AppSize.s10),
 
-                                    // TextFormField Prénom
-                                    MyTextFormFieldWidget(
-                                      controller: _lastNameShippingController,
-                                      hintText: 'Prénom',
-                                      labelText: 'Prénom',
-                                      errorText: (false)
-                                          ? null
-                                          : 'Prénom ne peut pas être vide',
-                                    ),
+                            // TextFormField Prénom
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsLastNameShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _lastNameShippingController,
+                                  hintText: 'Prénom',
+                                  labelText: 'Prénom',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Prénom ne peut pas être vide',
+                                );
+                              },
+                            ),
 
-                                    const SizedBox(height: AppSize.s10),
+                            const SizedBox(height: AppSize.s10),
 
-                                    // TextFormField type
-                                    MyTextFormFieldWidget(
-                                      controller: _companyShippingController,
-                                      hintText: 'Type de compte',
-                                      labelText: 'Type',
-                                      errorText: (false)
-                                          ? null
-                                          : 'Type ne peut pas être vide',
-                                    ),
+                            // TextFormField Company
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsCompanyShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _companyShippingController,
+                                  hintText: 'Type de compte',
+                                  labelText: 'Type',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Type ne peut pas être vide',
+                                );
+                              },
+                            ),
 
-                                    const SizedBox(height: AppSize.s10),
+                            const SizedBox(height: AppSize.s10),
 
-                                    // TextFormField Adresse
-                                    MyTextFormFieldWidget(
-                                      controller: _address1ShippingController,
-                                      keyboardType: TextInputType.streetAddress,
-                                      hintText: 'num, rue Nom de la rue',
-                                      labelText: 'Adresse',
-                                      errorText: (false)
-                                          ? null
-                                          : 'Email ne peut pas être vide',
-                                    ),
+                            // TextFormField Adresse
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsAddress1ShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _address1ShippingController,
+                                  keyboardType: TextInputType.streetAddress,
+                                  hintText: 'num, rue Nom de la rue',
+                                  labelText: 'Adresse',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Email ne peut pas être vide',
+                                );
+                              },
+                            ),
 
-                                    const SizedBox(height: AppSize.s10),
+                            const SizedBox(height: AppSize.s10),
 
-                                    // TextFormField Complement adresse
-                                    MyTextFormFieldWidget(
-                                      controller: _address2ShippingController,
-                                      keyboardType: TextInputType.streetAddress,
-                                      hintText: 'complement adresse',
-                                      labelText: 'Complement adresse',
-                                      errorText: (false)
-                                          ? null
-                                          : 'Téléphone ne peut pas être vide',
-                                    ),
+                            // TextFormField Complement adresse
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsAddress2ShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _address2ShippingController,
+                                  keyboardType: TextInputType.streetAddress,
+                                  hintText: 'complement adresse',
+                                  labelText: 'Complement adresse',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Téléphone ne peut pas être vide',
+                                );
+                              },
+                            ),
 
-                                    const SizedBox(height: AppSize.s10),
+                            const SizedBox(height: AppSize.s10),
 
-                                    // TextFormField City
-                                    MyTextFormFieldWidget(
-                                      controller: _cityShippingController,
-                                      keyboardType: TextInputType.streetAddress,
-                                      hintText: 'Alger',
-                                      labelText: 'City',
-                                      errorText: (false)
-                                          ? null
-                                          : 'Adresse ne peut pas être vide',
-                                    ),
+                            // TextFormField City
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsCityShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _cityShippingController,
+                                  keyboardType: TextInputType.streetAddress,
+                                  hintText: 'Alger',
+                                  labelText: 'City',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Adresse ne peut pas être vide',
+                                );
+                              },
+                            ),
 
-                                    const SizedBox(height: AppSize.s10),
+                            const SizedBox(height: AppSize.s10),
 
-                                    // TextFormField Complement d'adresse
-                                    MyTextFormFieldWidget(
-                                      controller: _postCodeShippingController,
-                                      hintText: "16000",
-                                      labelText: "Code postal",
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          );
-                      }
-                    },
+                            // TextFormField Complement d'adresse
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsPostCodeShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _postCodeShippingController,
+                                  keyboardType: TextInputType.number,
+                                  hintText: "16000",
+                                  labelText: "Code postal",
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Code postal ne peut pas être vide',
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: AppSize.s15),
                   StreamBuilder<bool>(

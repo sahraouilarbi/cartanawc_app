@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -32,6 +34,8 @@ abstract class APIService {
   Future<List<OrderModel>> getOrders();
   Future<OrderDetailModel> getOrderDetails(int _orderId);
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
+  Future<DevenirDistributeurResponseModel> devenirDistributeur(
+      DevenirDistributeurRequestModel _formData);
 }
 
 class _APIServiceImpl implements APIService {
@@ -433,8 +437,8 @@ class _APIServiceImpl implements APIService {
     final _queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     try {
-      final _response = await _dio.fetch(
-        _setStreamType(
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<OrderDetailModel>(
           Options(
             method: 'GET',
             headers: <String, dynamic>{},
@@ -449,8 +453,7 @@ class _APIServiceImpl implements APIService {
               .copyWith(baseUrl: APIEndPoint().baseUrl),
         ),
       );
-      _responseModel =
-          OrderDetailModel.fromJson(_response.data as Map<String, dynamic>);
+      _responseModel = OrderDetailModel.fromJson(_response.data!);
     } on DioError catch (e) {
       printDebugMessage(e.response.toString());
     }
@@ -467,8 +470,8 @@ class _APIServiceImpl implements APIService {
     final _data = <String, dynamic>{};
 
     try {
-      final _response = await _dio.fetch(
-        _setStreamType(
+      final _response = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<PaymentGatewaysModel>>(
           Options(
             method: 'GET',
             headers: <String, dynamic>{},
@@ -483,7 +486,7 @@ class _APIServiceImpl implements APIService {
               .copyWith(baseUrl: APIEndPoint().baseUrl),
         ),
       );
-      return (_response.data as List)
+      return (_response.data!)
           .map((element) =>
               PaymentGatewaysModel.fromJson(element as Map<String, dynamic>))
           .toList();
@@ -493,6 +496,44 @@ class _APIServiceImpl implements APIService {
     }
 
     return <PaymentGatewaysModel>[];
+  }
+
+  // Devenir Distributeur
+  @override
+  Future<DevenirDistributeurResponseModel> devenirDistributeur(
+      DevenirDistributeurRequestModel _formData) async {
+    DevenirDistributeurResponseModel _devenirDistributeurResponse =
+        DevenirDistributeurResponseModel();
+    const _extra = <String, dynamic>{};
+    final _queryParamets = <String, dynamic>{};
+    final FormData _data = FormData.fromMap(_formData.toJson());
+    try {
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DevenirDistributeurResponseModel>(
+          Options(
+            method: 'POST',
+            headers: {
+              HttpHeaders.authorizationHeader: "",
+              HttpHeaders.contentTypeHeader: "multipart/form-data"
+            },
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.devenirDistributeur,
+                queryParameters: _queryParamets,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+      _devenirDistributeurResponse =
+          DevenirDistributeurResponseModel.fromJson(_response.data!);
+    } on DioError catch (e) {
+      printDebugMessage(
+          'api_service - devenirDistributeur Exception : ${e.response}');
+    }
+    return _devenirDistributeurResponse;
   }
 
 //***************************************************************************
