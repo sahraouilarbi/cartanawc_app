@@ -44,6 +44,7 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethodsPage> {
   @override
   Widget pageUI() {
     return SingleChildScrollView(
+      physics: const ScrollPhysics(),
       child: Column(
         children: [
           FutureBuilder(
