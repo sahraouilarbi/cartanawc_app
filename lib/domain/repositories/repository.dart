@@ -17,6 +17,10 @@ abstract class Repository {
   Future<Either<Failure, CustomerDetailEntity>> getCustomerProfile(
       int customerId);
 
+  // Update Customer Profile
+  Future<Either<Failure, CustomerDetailEntity>> updateShippingInformations(
+      int _userId, ShippingEntity _shippingEntity);
+
   // Get Categories
   Future<Either<Failure, List<CategoryEntity>>> getCategories();
 

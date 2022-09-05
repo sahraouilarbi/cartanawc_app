@@ -73,6 +73,25 @@ class RepositoryImpl implements Repository {
     }
   }
 
+  // Update Shipping Informations repository implementation
+  @override
+  Future<Either<Failure, CustomerDetailEntity>> updateShippingInformations(
+      int _userId, ShippingEntity _shippingEntity) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.updateShippingInformations(
+            _userId, _shippingEntity.toModel());
+        if (true) {
+          return Right(_response.toDomain());
+        }
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
   @override
   Future<Either<Failure, CartResponseEntity>> addToCart(
       CartRequestEntity _cart) async {
@@ -240,7 +259,6 @@ class RepositoryImpl implements Repository {
             await _remoteDataSource.devenirDistributeur(_formData.toModel());
         return Right(_response.toDomain());
       } catch (_error) {
-        print('## repository.devenirDistributeur error : ${_error.toString()}');
         return Left(ErrorHandler.handle(_error.toString()).failure);
       }
     } else {

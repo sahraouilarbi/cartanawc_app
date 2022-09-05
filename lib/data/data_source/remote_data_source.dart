@@ -7,6 +7,8 @@ abstract class RemoteDataSource {
   Future<LoginResponseModel> login(LoginRequest loginRequest);
   Future<ForgotPasswordResponseModel> forgotPassword(String email);
   Future<CustomerDetailModel> getCustomerProfile(int userId);
+  Future<CustomerDetailModel> updateShippingInformations(
+      int _userId, ShippingModel _shippingModel);
   Future<List<CategoryModel>> getCategories();
   Future<List<ProductModel>> getProducts({
     String? status = 'publish',
@@ -40,6 +42,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<CustomerDetailModel> getCustomerProfile(int userId) {
     return _apiService.getCustomerDetails(userId);
+  }
+
+  @override
+  Future<CustomerDetailModel> updateShippingInformations(
+      int _userId, ShippingModel shippingModel) {
+    return _apiService.updateShippingInformations(_userId, shippingModel);
   }
 
   @override

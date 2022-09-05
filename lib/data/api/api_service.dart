@@ -14,6 +14,8 @@ abstract class APIService {
   factory APIService(Dio dio) = _APIServiceImpl;
   Future<LoginResponseModel> login(String _username, String _password);
   Future<CustomerDetailModel> getCustomerDetails(int _userId);
+  Future<CustomerDetailModel> updateShippingInformations(
+      int _userId, ShippingModel _shippingModel);
   Future<ForgotPasswordResponseModel> forgotPassword(String _email);
   //Future<CustomerDetailModel> customerDetails();
   Future<List<CategoryModel>> getCategories();
@@ -60,7 +62,7 @@ class _APIServiceImpl implements APIService {
         _setStreamType<LoginResponseModel>(
           Options(
             method: 'POST',
-            headers: <String, dynamic>{},
+            headers: {HttpHeaders.authorizationHeader: ''},
             extra: _extra,
           )
               .compose(
@@ -115,6 +117,46 @@ class _APIServiceImpl implements APIService {
         ),
       );
 
+      _customerDetailModel = CustomerDetailModel.fromJson(_response.data!);
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 404) {
+        printDebugMessage(e.response!.statusCode.toString());
+      } else {
+        debugPrint(e.message.toString());
+        debugPrint(e.error.toString());
+      }
+    }
+    return _customerDetailModel;
+  }
+
+  //***************************************************************************
+  // Update Customer Details
+  @override
+  Future<CustomerDetailModel> updateShippingInformations(
+      int _userId, ShippingModel _shippingModel) async {
+    late CustomerDetailModel _customerDetailModel;
+
+    const _extra = <String, dynamic>{};
+    final _queryParameters = <String, dynamic>{};
+    final _data = _shippingModel.toJson();
+
+    try {
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ShippingModel>(
+          Options(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                _apiEndPoint.customer(_userId),
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
       _customerDetailModel = CustomerDetailModel.fromJson(_response.data!);
     } on DioError catch (e) {
       if (e.response!.statusCode == 404) {

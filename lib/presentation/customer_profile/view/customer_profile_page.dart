@@ -53,13 +53,19 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
       body: StreamBuilder<FlowState>(
         stream: _customerProfileViewModel.outputState,
         builder: (context, snapshot) {
-          return snapshot.data!.getScreenWidget(
-            context,
-            _customerProfile(),
-            () {
-              _customerProfileViewModel.start();
-            },
-          );
+          if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          }
+          if (snapshot.hasData) {
+            return snapshot.data!.getScreenWidget(
+              context,
+              _customerProfile(),
+              () {
+                _customerProfileViewModel.start();
+              },
+            );
+          }
+          return const SizedBox();
         },
       ),
     );
@@ -178,6 +184,7 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                               //MyTextButtonWidget(
                               textButton(
                                 onPressed: () {
+                                  initCustomerProfileEditModule();
                                   Navigator.pushNamed(context,
                                       CustomerProfileEditPage.routeName,
                                       arguments: snapshot.data);

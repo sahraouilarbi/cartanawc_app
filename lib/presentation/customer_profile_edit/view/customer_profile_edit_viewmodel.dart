@@ -1,17 +1,25 @@
 import 'dart:async';
 
-import 'package:cartanawc_app/domain/usecase/customer_profile_edit_usecase.dart';
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/presentation/customer_profile_edit/view/customer_profile_edit_page.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '/domain/entities/entities.dart';
+import '/domain/usecase/customer_profile_edit_usecase.dart';
 import '/presentation/base/base_viewmodel.dart';
+import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_renderer.dart';
 
 class CustomerProfileEditViewModel extends BaseViewModel
     with
         CustomerProfileEditViewModelInputs,
         CustomerProfileEditViewModelOutputs {
-  CustomerProfileEditUsecase _customerProfileEditUsecase;
-  CustomerProfileEditViewModel(this._customerProfileEditUsecase);
+  final ShippingEditUsecase _customerProfileEditUsecase;
+  late final CustomerProfileEditPage customerProfileEditPage;
+  CustomerProfileEditViewModel(
+    this._customerProfileEditUsecase,
+    this.customerProfileEditPage,
+  );
 
   final StreamController _firstNameShippingStreamController =
       StreamController<String>.broadcast();
@@ -39,7 +47,8 @@ class CustomerProfileEditViewModel extends BaseViewModel
   final _customerProfileEditStreamController =
       BehaviorSubject<CustomerDetailEntity>();
 
-  late CustomerDetailEntity customerProfileEdit;
+  late CustomerDetailEntity customerDetailEntity;
+  late ShippingEditEntity shippingEditEntity;
 
   String firstNameShipping = '';
   String lastNameShipping = '';
@@ -54,7 +63,11 @@ class CustomerProfileEditViewModel extends BaseViewModel
 
   @override
   Future<void> start() async {
-    updateCustomerProfile();
+    customerProfileEditPage = instance<CustomerProfileEditPage>();
+    customerDetailEntity = customerProfileEditPage.customerProfileEdit;
+    shippingEditEntity.userId = customerDetailEntity.id!;
+    shippingEditEntity.shippingEntity = customerDetailEntity.shipping!;
+    updateShippingInformations();
   }
 
   @override
@@ -74,7 +87,30 @@ class CustomerProfileEditViewModel extends BaseViewModel
     super.dispose();
   }
 
-  Future<void> updateCustomerProfile() async {}
+  Future<void> updateShippingInformations() async {
+    inputState.add(
+      LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState),
+    );
+    shippingEditEntity.shippingEntity.firstName = firstNameShipping;
+    shippingEditEntity.shippingEntity.lastName = lastNameShipping;
+    shippingEditEntity.shippingEntity.company = companyShipping;
+    shippingEditEntity.shippingEntity.address1 = address1Shipping;
+    shippingEditEntity.shippingEntity.address2 = address2Shipping;
+    shippingEditEntity.shippingEntity.city = cityShipping;
+    shippingEditEntity.shippingEntity.postcode = postCodeShipping;
+    shippingEditEntity.shippingEntity.country = countryShipping;
+    shippingEditEntity.shippingEntity.state = stateShipping;
+    shippingEditEntity.shippingEntity.phone = phoneShipping;
+
+    (await _customerProfileEditUsecase.execute(shippingEditEntity)).fold(
+        (failure) => inputState.add(
+              ErrorState(
+                  StateRendererType.fullScreenErrorState, failure.message),
+            ), (data) {
+      inputState.add(ContentState());
+      //isCustomerProfilEditSuccessfullyStreamController.add(data);
+    });
+  }
 
   // Inputs ******************************************************************
   @override

@@ -5,12 +5,20 @@ import '/domain/entities/entities.dart';
 import '/domain/repositories/repository.dart';
 import '/domain/usecase/base_usecase.dart';
 
-class CustomerProfileEditUsecase
-    implements BaseUsecase<int, CustomerDetailEntity> {
+class ShippingEditUsecase
+    implements BaseUsecase<ShippingEditEntity, CustomerDetailEntity> {
   final Repository _repository;
-  CustomerProfileEditUsecase(this._repository);
+  ShippingEditUsecase(this._repository);
   @override
-  Future<Either<Failure, CustomerDetailEntity>> execute(int input) async {
-    return _repository.getCustomerProfile(input);
+  Future<Either<Failure, CustomerDetailEntity>> execute(
+      ShippingEditEntity shippingEditEntity) async {
+    return _repository.updateShippingInformations(
+        shippingEditEntity.userId, shippingEditEntity.shippingEntity);
   }
+}
+
+class ShippingEditEntity {
+  int userId;
+  ShippingEntity shippingEntity;
+  ShippingEditEntity(this.userId, this.shippingEntity);
 }

@@ -63,24 +63,45 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
   @override
   void initState() {
     super.initState();
-    _customerProfileEditViewModel.customerProfileEdit =
+
+    _customerProfileEditViewModel.customerDetailEntity =
         widget.customerProfileEdit;
+
+    // Initialize firstNameShippingController
     _firstNameShippingController.text =
         widget.customerProfileEdit.shipping!.firstName;
+
+    // Initialize lastNameShippingController
     _lastNameShippingController.text =
         widget.customerProfileEdit.shipping!.lastName;
+
+    // Initialize companyShippingController
     _companyShippingController.text =
         widget.customerProfileEdit.shipping!.company;
+
+    // Initialize address1ShippingController
     _address1ShippingController.text =
         widget.customerProfileEdit.shipping!.address1;
+
+    // Initialize address2ShippingController
     _address2ShippingController.text =
         widget.customerProfileEdit.shipping!.address2;
+
+    // Initialize cityShippingController
     _cityShippingController.text = widget.customerProfileEdit.shipping!.city;
+
+    // Initialize postcodeShippingController
     _postCodeShippingController.text =
         widget.customerProfileEdit.shipping!.postcode;
+
+    // Initialize countryShippingController
     _countryShippingController.text =
         widget.customerProfileEdit.shipping!.country;
+
+    // Initialize stateShippingController
     _stateShippingController.text = widget.customerProfileEdit.shipping!.state;
+
+    // Initialize phoneShippingController
     _phoneShippingController.text = widget.customerProfileEdit.shipping!.phone;
 
     _bind();
@@ -296,7 +317,7 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
                         onPressed: (snapshot.data ?? false)
                             ? () {
                                 _customerProfileEditViewModel
-                                    .updateCustomerProfile();
+                                    .updateShippingInformations();
                               }
                             : null,
                         text: 'METTRE A JOUR',

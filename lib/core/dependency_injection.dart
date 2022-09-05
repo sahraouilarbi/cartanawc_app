@@ -50,38 +50,67 @@ Future<void> initAppModule() async {
 
   // Remote Data Source
   instance.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSourceImpl(instance()));
+    () => RemoteDataSourceImpl(
+      instance(),
+    ),
+  );
 
   // Local Data Source
   // instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
 
   // Repository
   instance.registerLazySingleton<Repository>(
-      () => RepositoryImpl(instance(), instance(), instance()));
+    () => RepositoryImpl(
+      instance(),
+      instance(),
+      instance(),
+    ),
+  );
 }
 
 void initLoginModule() {
   if (!GetIt.I.isRegistered<LoginUsecase>()) {
-    instance.registerFactory<LoginUsecase>(() => LoginUsecase(instance()));
-    instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+    instance.registerFactory<LoginUsecase>(
+      () => LoginUsecase(
+        instance(),
+      ),
+    );
+    instance.registerFactory<LoginViewModel>(
+      () => LoginViewModel(
+        instance(),
+      ),
+    );
   }
 }
 
 void initCustomerProfileModule() {
   if (!GetIt.I.isRegistered<CustomerProfileUsecase>()) {
     instance.registerFactory<CustomerProfileUsecase>(
-        () => CustomerProfileUsecase(instance()));
+      () => CustomerProfileUsecase(
+        instance(),
+      ),
+    );
     instance.registerFactory<CustomerProfileViewModel>(
-        () => CustomerProfileViewModel(instance()));
+      () => CustomerProfileViewModel(
+        instance(),
+      ),
+    );
   }
 }
 
 void initCustomerProfileEditModule() {
-  if (!GetIt.I.isRegistered<CustomerProfileEditUsecase>()) {
-    instance.registerFactory<CustomerProfileEditUsecase>(
-        () => CustomerProfileEditUsecase(instance()));
+  if (!GetIt.I.isRegistered<ShippingEditUsecase>()) {
+    instance.registerFactory<ShippingEditUsecase>(
+      () => ShippingEditUsecase(
+        instance(),
+      ),
+    );
     instance.registerFactory<CustomerProfileEditViewModel>(
-        () => CustomerProfileEditViewModel(instance()));
+      () => CustomerProfileEditViewModel(
+        instance(),
+        instance(),
+      ),
+    );
   }
 }
 
