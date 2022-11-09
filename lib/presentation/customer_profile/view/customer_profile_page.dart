@@ -54,7 +54,11 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
         stream: _customerProfileViewModel.outputState,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Center(child: Text(snapshot.error.toString()));
+            return Center(
+              child: Text(
+                snapshot.error.toString(),
+              ),
+            );
           }
           if (snapshot.hasData) {
             return snapshot.data!.getScreenWidget(
@@ -97,10 +101,12 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                       switch (snapshot.connectionState) {
                         case ConnectionState.none:
                           return const Center(
-                              child: Text('Aucune donnée a affichée'));
+                            child: Text('Aucune donnée a affichée'),
+                          );
                         case ConnectionState.waiting:
                           return const Center(
-                              child: CircularProgressIndicator());
+                            child: CircularProgressIndicator(),
+                          );
                         case ConnectionState.active:
                         case ConnectionState.done:
                           return Column(
@@ -184,7 +190,6 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                               //MyTextButtonWidget(
                               textButton(
                                 onPressed: () {
-                                  initCustomerProfileEditModule();
                                   Navigator.pushNamed(context,
                                       CustomerProfileEditPage.routeName,
                                       arguments: snapshot.data);

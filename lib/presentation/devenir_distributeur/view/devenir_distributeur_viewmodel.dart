@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:cartanawc_app/domain/entities/devenir_distributeur_entity.dart';
-import 'package:cartanawc_app/domain/usecase/devenir_distributeur_usecase.dart';
-import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
-import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
-
+import '/domain/entities/devenir_distributeur_entity.dart';
+import '/domain/usecase/devenir_distributeur_usecase.dart';
 import '/presentation/base/base.dart';
+import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_renderer.dart';
 
 class DevenirDistributeurViewModel extends BaseViewModel
     with
@@ -75,7 +74,7 @@ class DevenirDistributeurViewModel extends BaseViewModel
 
   @override
   Future<void> devenirDistributeur() async {
-    DevenirDistributeurRequestEntity _formData =
+    final DevenirDistributeurRequestEntity _formData =
         DevenirDistributeurRequestEntity(yourName, yourEmail, yourPhone,
             yourAddress, yourCity, yourPostcode, yourSubject, yourMessage);
 

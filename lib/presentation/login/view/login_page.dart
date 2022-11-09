@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
             _appPreferences.setUsername(_usernameController.text);
             _appPreferences.setPassword(_passwordController.text);
             Provider.of<AuthProvider>(context, listen: false).isUserLoggedIn();
-            resetModules();
+            resetDIModules();
             Navigator.pushNamed(context, TableauBordPage.routeName);
           },
         );
@@ -206,8 +206,10 @@ class _LoginPageState extends State<LoginPage> {
 //*******************************************************************
   Widget accountRecovery() {
     return TextButton(
-      onPressed: () {},
-      child: const Text('compte oublié ?'),
+      onPressed: () {
+        Navigator.pushNamed(context, ForgotPasswordPage.routeName);
+      },
+      child: const Text('mot de passe oublié ?'),
     );
   }
 

@@ -5,7 +5,7 @@ import '/data/models/models.dart';
 
 abstract class RemoteDataSource {
   Future<LoginResponseModel> login(LoginRequest loginRequest);
-  Future<ForgotPasswordResponseModel> forgotPassword(String email);
+  Future<ResetPasswordResponseModel> forgotPassword(String email);
   Future<CustomerDetailModel> getCustomerProfile(int userId);
   Future<CustomerDetailModel> updateShippingInformations(
       int _userId, ShippingModel _shippingModel);
@@ -51,7 +51,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<ForgotPasswordResponseModel> forgotPassword(String email) {
+  Future<ResetPasswordResponseModel> forgotPassword(String email) {
     return _apiService.forgotPassword(email);
   }
 

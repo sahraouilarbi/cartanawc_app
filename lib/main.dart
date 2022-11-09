@@ -7,6 +7,6 @@ import '/core/dependency_injection.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
-  await initAppModule();
+  await initDIAppModule();
   runApp(CartanaApp());
 }

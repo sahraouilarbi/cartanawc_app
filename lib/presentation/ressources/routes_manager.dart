@@ -11,8 +11,8 @@ class RouteGenerator {
       case AProposPage.routeName:
         return AProposPage.route();
       case AccueilPage.routeName:
-        initGetCategoriesModule();
-        initGetProductsModule();
+        initDIGetCategoriesModule();
+        initDIGetProductsModule();
         return AccueilPage.route(
             tabSelected: routeSettings.arguments != null
                 ? routeSettings.arguments! as int
@@ -24,15 +24,16 @@ class RouteGenerator {
       case CustomerProfilePage.routeName:
         return CustomerProfilePage.route();
       case CustomerProfileEditPage.routeName:
-        initCustomerProfileEditModule();
         return CustomerProfileEditPage.route(
             customerProfileEdit:
                 routeSettings.arguments! as CustomerDetailEntity);
       case DevenirDistributeurPage.routeName:
-        initDevenirDistributeurModule();
+        initDIDevenirDistributeurModule();
         return DevenirDistributeurPage.route();
+      case ForgotPasswordPage.routeName:
+        return ForgotPasswordPage.route();
       case LoginPage.routeName:
-        initLoginModule();
+        initDILoginModule();
         return LoginPage.route();
       case OrdersPage.routeName:
         return OrdersPage.route();
@@ -44,7 +45,7 @@ class RouteGenerator {
         return ProductDetailsPage.route(
             data: routeSettings.arguments! as ProductEntity);
       case TableauBordPage.routeName:
-        initTabCommanderModule();
+        initDITabCommanderModule();
         return TableauBordPage.route(
             tabSelected: routeSettings.arguments != null
                 ? routeSettings.arguments! as int

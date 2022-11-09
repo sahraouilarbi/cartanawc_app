@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/core/extensions.dart';
+import '/core/extensions.dart';
 
 class DevenirDistributeurRequestModel {
   String yourName;

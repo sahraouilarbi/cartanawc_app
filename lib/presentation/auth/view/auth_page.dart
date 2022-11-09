@@ -31,7 +31,7 @@ class _AuthPageState extends State<AuthPage> {
     authProvider = Provider.of<AuthProvider>(context, listen: false);
     await authProvider.isUserLoggedIn();
     if (authProvider.loggedInStatus == Status.loggedIn) {
-      resetModules();
+      resetDIModules();
       Navigator.pushNamed(
         context,
         TableauBordPage.routeName,

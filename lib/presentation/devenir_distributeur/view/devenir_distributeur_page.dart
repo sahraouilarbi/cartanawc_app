@@ -1,11 +1,11 @@
-import 'package:cartanawc_app/presentation/accueil/accueil.dart';
-import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '/core/dependency_injection.dart';
+import '/presentation/accueil/accueil.dart';
 import '/presentation/common/appbar/custom_appbar_widget.dart';
 import '/presentation/common/drawer/drawer_for_anonymous_widget.dart';
+import '/presentation/common/my_text_buttom_widget.dart';
 import '/presentation/common/my_text_form_field_widget.dart';
 import '/presentation/common/section_header_widget.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';

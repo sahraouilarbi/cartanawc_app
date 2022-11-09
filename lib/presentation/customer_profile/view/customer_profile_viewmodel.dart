@@ -10,9 +10,9 @@ import '/presentation/common/state_render/state_renderer.dart';
 
 class CustomerProfileViewModel extends BaseViewModel
     with CustomerProfileViewModelInputs, CustomerProfileViewModelOutputs {
-  CustomerProfileViewModel(this._customerProfileUsecase);
-
   final CustomerProfileUsecase _customerProfileUsecase;
+
+  CustomerProfileViewModel(this._customerProfileUsecase);
 
   final _customerProfileStreamController =
       BehaviorSubject<CustomerDetailEntity>();

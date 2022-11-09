@@ -97,30 +97,38 @@ class _CartProductState extends State<CartProduct> {
                     StepperWidget(
                       qtyStepController: qtyStepController,
                       stepActionRemove: () {
-                        setState(() {
-                          if (_cartonACommander <= 1) {
-                            _cartonACommander = 1;
-                          } else {
-                            _cartonACommander--;
-                          }
-                          qtyStepController.text = _cartonACommander.toString();
-                          widget.data.qty = _cartonACommander * _productStep;
-                          _montant =
-                              _cartonACommander * _productStep * _productPrice;
-                        });
+                        setState(
+                          () {
+                            if (_cartonACommander <= 1) {
+                              _cartonACommander = 1;
+                            } else {
+                              _cartonACommander--;
+                            }
+                            qtyStepController.text =
+                                _cartonACommander.toString();
+                            widget.data.qty = _cartonACommander * _productStep;
+                            _montant = _cartonACommander *
+                                _productStep *
+                                _productPrice;
+                          },
+                        );
                       },
                       stepActionAdd: () {
-                        setState(() {
-                          if (_cartonACommander == _productMaxQty) {
-                            _cartonACommander = _productMaxQty;
-                          } else {
-                            _cartonACommander++;
-                          }
-                          qtyStepController.text = _cartonACommander.toString();
-                          widget.data.qty = _cartonACommander * _productStep;
-                          _montant =
-                              _cartonACommander * _productStep * _productPrice;
-                        });
+                        setState(
+                          () {
+                            if (_cartonACommander == _productMaxQty) {
+                              _cartonACommander = _productMaxQty;
+                            } else {
+                              _cartonACommander++;
+                            }
+                            qtyStepController.text =
+                                _cartonACommander.toString();
+                            widget.data.qty = _cartonACommander * _productStep;
+                            _montant = _cartonACommander *
+                                _productStep *
+                                _productPrice;
+                          },
+                        );
                       },
                       stepActionOnSubmitedValue: (String value) {
                         if (int.parse(value) > _productMaxQty) {
@@ -128,13 +136,16 @@ class _CartProductState extends State<CartProduct> {
                         } else if (int.parse(value) < 1) {
                           value = '1';
                         }
-                        setState(() {
-                          qtyStepController.text = value;
-                          _cartonACommander = int.parse(value);
-                          widget.data.qty = _cartonACommander * _productStep;
-                          _montant =
-                              _cartonACommander * _productStep * _productPrice;
-                        });
+                        setState(
+                          () {
+                            qtyStepController.text = value;
+                            _cartonACommander = int.parse(value);
+                            widget.data.qty = _cartonACommander * _productStep;
+                            _montant = _cartonACommander *
+                                _productStep *
+                                _productPrice;
+                          },
+                        );
                       },
                     ),
                   ],

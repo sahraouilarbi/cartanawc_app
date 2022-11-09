@@ -16,7 +16,7 @@ abstract class APIService {
   Future<CustomerDetailModel> getCustomerDetails(int _userId);
   Future<CustomerDetailModel> updateShippingInformations(
       int _userId, ShippingModel _shippingModel);
-  Future<ForgotPasswordResponseModel> forgotPassword(String _email);
+  Future<ResetPasswordResponseModel> forgotPassword(String _email);
   //Future<CustomerDetailModel> customerDetails();
   Future<List<CategoryModel>> getCategories();
   Future<List<ProductModel>> getProducts({
@@ -84,7 +84,7 @@ class _APIServiceImpl implements APIService {
   //***************************************************************************
   // ForgotPassword
   @override
-  Future<ForgotPasswordResponseModel> forgotPassword(String email) {
+  Future<ResetPasswordResponseModel> forgotPassword(String email) {
     // TODO: implement forgotPassword
     throw UnimplementedError();
   }

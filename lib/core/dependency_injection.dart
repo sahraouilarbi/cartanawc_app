@@ -1,5 +1,3 @@
-import 'package:cartanawc_app/domain/usecase/devenir_distributeur_usecase.dart';
-import 'package:cartanawc_app/presentation/devenir_distributeur/view/devenir_distributeur_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,17 +13,19 @@ import '/domain/usecase/categories_usecase.dart';
 import '/domain/usecase/commander_usecase.dart';
 import '/domain/usecase/customer_profile_edit_usecase.dart';
 import '/domain/usecase/customer_profile_usecase.dart';
+import '/domain/usecase/devenir_distributeur_usecase.dart';
 import '/domain/usecase/login_usecase.dart';
 import '/domain/usecase/products_usecase.dart';
 import '/presentation/accueil/view/tab_produits/products_viewmodel.dart';
 import '/presentation/accueil/view/tab_produits/tabview_categories_viewmodel.dart';
 import '/presentation/customer_profile/view/customer_profile_viewmodel.dart';
 import '/presentation/customer_profile_edit/view/customer_profile_edit_viewmodel.dart';
+import '/presentation/devenir_distributeur/view/devenir_distributeur_viewmodel.dart';
 import '/presentation/login/view/login_viewmodel.dart';
 import '/presentation/tableau_de_bord/view/tab_commandes/tab_commander_viewmodel.dart';
 
 final instance = GetIt.instance;
-Future<void> initAppModule() async {
+Future<void> initDIAppModule() async {
   // APIService
   //instance.registerLazySingleton<APIService>(() => APIService(dio));
 
@@ -68,7 +68,7 @@ Future<void> initAppModule() async {
   );
 }
 
-void initLoginModule() {
+void initDILoginModule() {
   if (!GetIt.I.isRegistered<LoginUsecase>()) {
     instance.registerFactory<LoginUsecase>(
       () => LoginUsecase(
@@ -83,7 +83,7 @@ void initLoginModule() {
   }
 }
 
-void initCustomerProfileModule() {
+void initDICustomerProfileModule() {
   if (!GetIt.I.isRegistered<CustomerProfileUsecase>()) {
     instance.registerFactory<CustomerProfileUsecase>(
       () => CustomerProfileUsecase(
@@ -98,7 +98,7 @@ void initCustomerProfileModule() {
   }
 }
 
-void initCustomerProfileEditModule() {
+void initDICustomerProfileEditModule() {
   if (!GetIt.I.isRegistered<ShippingEditUsecase>()) {
     instance.registerFactory<ShippingEditUsecase>(
       () => ShippingEditUsecase(
@@ -114,7 +114,7 @@ void initCustomerProfileEditModule() {
   }
 }
 
-void initGetCategoriesModule() {
+void initDIGetCategoriesModule() {
   if (!GetIt.I.isRegistered<CategoriesUsecase>()) {
     instance.registerFactory<CategoriesUsecase>(
         () => CategoriesUsecase(instance()));
@@ -123,7 +123,7 @@ void initGetCategoriesModule() {
   }
 }
 
-void initTabCommanderModule() {
+void initDITabCommanderModule() {
   if (!GetIt.I.isRegistered<CommanderUsecase>()) {
     instance
         .registerFactory<CommanderUsecase>(() => CommanderUsecase(instance()));
@@ -132,7 +132,7 @@ void initTabCommanderModule() {
   }
 }
 
-void initGetProductsModule() {
+void initDIGetProductsModule() {
   if (!GetIt.I.isRegistered<ProductsUsecase>()) {
     instance
         .registerFactory<ProductsUsecase>(() => ProductsUsecase(instance()));
@@ -141,7 +141,7 @@ void initGetProductsModule() {
   }
 }
 
-void initDevenirDistributeurModule() {
+void initDIDevenirDistributeurModule() {
   if (!GetIt.I.isRegistered<DevenirDistributeurUsecase>()) {
     instance.registerFactory<DevenirDistributeurUsecase>(
         () => DevenirDistributeurUsecase(instance()));
@@ -150,14 +150,14 @@ void initDevenirDistributeurModule() {
   }
 }
 
-void resetModules() {
+void resetDIModules() {
   instance.reset(dispose: false);
-  initAppModule();
-  initLoginModule();
-  initGetCategoriesModule();
-  initCustomerProfileModule();
-  initCustomerProfileEditModule();
-  initTabCommanderModule();
-  initGetProductsModule();
-  initDevenirDistributeurModule();
+  initDIAppModule();
+  initDILoginModule();
+  initDIGetCategoriesModule();
+  initDICustomerProfileModule();
+  initDICustomerProfileEditModule();
+  initDITabCommanderModule();
+  initDIGetProductsModule();
+  initDIDevenirDistributeurModule();
 }

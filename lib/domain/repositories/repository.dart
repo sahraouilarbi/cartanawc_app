@@ -10,7 +10,7 @@ abstract class Repository {
   Future<Either<Failure, LoginResponseModel>> login(LoginRequest loginRequest);
 
   // Forgot Password
-  Future<Either<Failure, ForgotPasswordResponseEntity>> forgotPassword(
+  Future<Either<Failure, ResetPasswordResponseEntity>> forgotPassword(
       String email);
 
   // Get Customer Profile

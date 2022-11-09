@@ -46,6 +46,15 @@ class APIEndPoint {
   static const String devenirDistributeur =
       '/wp-json/contact-form-7/v1/contact-forms/1433/feedback';
 
+  // Reset Password endpoint
+  static const String passwordReset = '/wp-json/bdpwr/v1/reset-password';
+
+  // Set Password endpoint
+  static const String passwordSet = '/wp-json/bdpwr/v1/set-password';
+
+  // Validate code OTP for Reset Password endpoint
+  static const String passwordValidateCode = '/wp-json/bdpwr/v1/validate-code';
+
   // Logo Url
   static const String cartanaLogoUrl =
       '/wp-content/uploads/2021/05/cartana-logo.png';

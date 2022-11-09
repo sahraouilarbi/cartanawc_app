@@ -40,7 +40,7 @@ class RepositoryImpl implements Repository {
 
   // Forgot password repository implementation
   @override
-  Future<Either<Failure, ForgotPasswordResponseEntity>> forgotPassword(
+  Future<Either<Failure, ResetPasswordResponseEntity>> forgotPassword(
       String email) async {
     if (await _networkInfo.isConnected) {
       try {

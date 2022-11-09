@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/presentation/customer_profile_edit/view/customer_profile_edit_page.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '/core/dependency_injection.dart';
 import '/domain/entities/entities.dart';
 import '/domain/usecase/customer_profile_edit_usecase.dart';
 import '/presentation/base/base_viewmodel.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';
 import '/presentation/common/state_render/state_renderer.dart';
+import '/presentation/customer_profile_edit/view/customer_profile_edit_page.dart';
 
 class CustomerProfileEditViewModel extends BaseViewModel
     with

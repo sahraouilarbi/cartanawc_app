@@ -6,6 +6,7 @@ export 'cart/cart.dart';
 export 'customer_profile/customer_profile.dart';
 export 'customer_profile_edit/customer_profile_edit.dart';
 export 'devenir_distributeur/devenir_distributeur.dart';
+export 'forgot_password/forgot_password.dart';
 export 'login/login.dart';
 export 'order/order.dart';
 export 'payment_methods/payment_methods.dart';
