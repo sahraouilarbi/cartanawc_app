@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
 import '/domain/entities/entities.dart';
 import '/presentation/common/appbar/custom_appbar_widget.dart';
 import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
@@ -9,33 +10,36 @@ import '/presentation/common/section_header_widget.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';
 import '/presentation/common/textbuttom_widget.dart';
 import '/presentation/ressources/appsize_manager.dart';
-import 'customer_profile_edit_viewmodel.dart';
+import 'customer_profile_edit_copy_viewmodel.dart';
 
-class CustomerProfileEditPage extends StatefulWidget {
-  const CustomerProfileEditPage({
+class CustomerProfileEditCopyPage extends StatefulWidget {
+  const CustomerProfileEditCopyPage({
     Key? key,
-    required this.customerProfileEdit,
+//    required this.customerProfileEdit,
   }) : super(key: key);
 
-  final CustomerDetailEntity customerProfileEdit;
+//  final CustomerDetailEntity customerProfileEdit;
 
-  static const String routeName = '/customerProfileEdit';
+  static const String routeName = '/customerProfileEditCopy';
 
   static Route route({required CustomerDetailEntity customerProfileEdit}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (context) =>
-          CustomerProfileEditPage(customerProfileEdit: customerProfileEdit),
+//          CustomerProfileEditCopyPage(customerProfileEdit: customerProfileEdit),
+          const CustomerProfileEditCopyPage(),
     );
   }
 
   @override
-  _CustomerProfileEditState createState() => _CustomerProfileEditState();
+  _CustomerProfileEditCopyState createState() =>
+      _CustomerProfileEditCopyState();
 }
 
-class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
-  final CustomerProfileEditViewModel _customerProfileEditViewModel =
-      instance<CustomerProfileEditViewModel>();
+class _CustomerProfileEditCopyState extends State<CustomerProfileEditCopyPage> {
+  final CustomerProfileEditCopyViewModel _customerProfileEditCopyViewModel =
+      instance<CustomerProfileEditCopyViewModel>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   final TextEditingController _firstNameShippingController =
@@ -58,54 +62,68 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
   final TextEditingController _phoneShippingController =
       TextEditingController();
 
-  void _bind() {
-    _customerProfileEditViewModel.start();
+  Future<void> _bind() async {
+    await _customerProfileEditCopyViewModel.start();
+
+    _firstNameShippingController.addListener(
+      () => _customerProfileEditCopyViewModel.setFirstNameShipping(
+        _firstNameShippingController.text,
+      ),
+    );
+    _lastNameShippingController.addListener(
+      () => _customerProfileEditCopyViewModel.setLastNameShipping(
+        _lastNameShippingController.text,
+      ),
+    );
+    _companyShippingController.addListener(
+      () => _customerProfileEditCopyViewModel.setCompanyShipping(
+        _companyShippingController.text,
+      ),
+    );
+    _address1ShippingController.addListener(
+      () => _customerProfileEditCopyViewModel.setAddress1Shipping(
+        _address1ShippingController.text,
+      ),
+    );
+    _address2ShippingController.addListener(
+      () => _customerProfileEditCopyViewModel.setAddress2Shipping(
+        _address2ShippingController.text,
+      ),
+    );
+    _cityShippingController.addListener(
+      () => _customerProfileEditCopyViewModel.setCityShipping(
+        _cityShippingController.text,
+      ),
+    );
+    _postCodeShippingController.addListener(
+      () => _customerProfileEditCopyViewModel.setPostcodeShipping(
+        _postCodeShippingController.text,
+      ),
+    );
+    _countryShippingController.addListener(
+      () => _customerProfileEditCopyViewModel.setCountryShipping(
+        _countryShippingController.text,
+      ),
+    );
+    _stateShippingController.addListener(
+      () => _customerProfileEditCopyViewModel.setStateShipping(
+        _stateShippingController.text,
+      ),
+    );
+    _phoneShippingController.addListener(
+      () => _customerProfileEditCopyViewModel.setPhoneShipping(
+        _phoneShippingController.text,
+      ),
+    );
+
+    // _customerProfileEditCopyViewModel
+    //     .isUserProfileSavedSuccessfullyStreamController.stream
+    //     .listen(() {});
   }
 
   @override
   void initState() {
     super.initState();
-
-    _customerProfileEditViewModel.customerDetailEntity =
-        widget.customerProfileEdit;
-
-    // Initialize firstNameShippingController
-    _firstNameShippingController.text =
-        widget.customerProfileEdit.shipping!.firstName;
-
-    // Initialize lastNameShippingController
-    _lastNameShippingController.text =
-        widget.customerProfileEdit.shipping!.lastName;
-
-    // Initialize companyShippingController
-    _companyShippingController.text =
-        widget.customerProfileEdit.shipping!.company;
-
-    // Initialize address1ShippingController
-    _address1ShippingController.text =
-        widget.customerProfileEdit.shipping!.address1;
-
-    // Initialize address2ShippingController
-    _address2ShippingController.text =
-        widget.customerProfileEdit.shipping!.address2;
-
-    // Initialize cityShippingController
-    _cityShippingController.text = widget.customerProfileEdit.shipping!.city;
-
-    // Initialize postcodeShippingController
-    _postCodeShippingController.text =
-        widget.customerProfileEdit.shipping!.postcode;
-
-    // Initialize countryShippingController
-    _countryShippingController.text =
-        widget.customerProfileEdit.shipping!.country;
-
-    // Initialize stateShippingController
-    _stateShippingController.text = widget.customerProfileEdit.shipping!.state;
-
-    // Initialize phoneShippingController
-    _phoneShippingController.text = widget.customerProfileEdit.shipping!.phone;
-
     _bind();
   }
 
@@ -130,20 +148,73 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
       appBar: const CustomAppBar(),
       drawer: DrawerForAuthenticatedUser(),
       body: StreamBuilder<FlowState>(
-          stream: _customerProfileEditViewModel.outputState,
-          builder: (context, snapshot) {
+        stream: _customerProfileEditCopyViewModel.outputState,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                snapshot.error.toString(),
+              ),
+            );
+          }
+          if (snapshot.hasData) {
             return snapshot.data!.getScreenWidget(
               context,
               _customerProfileEdit(),
               () {
-                _customerProfileEditViewModel.start();
+                _customerProfileEditCopyViewModel.start();
               },
             );
-          }),
+          }
+          return const Center(
+            child: Text('rien a affiché'),
+          );
+        },
+      ),
     );
   }
 
   Widget _customerProfileEdit() {
+    // Initialize firstNameShippingController
+    _firstNameShippingController.text =
+        _customerProfileEditCopyViewModel.firstNameShipping;
+
+    // Initialize lastNameShippingController
+    _lastNameShippingController.text =
+        _customerProfileEditCopyViewModel.lastNameShipping;
+
+    // Initialize address2ShippingController
+    _companyShippingController.text =
+        _customerProfileEditCopyViewModel.companyShipping;
+
+    // Initialize address1ShippingController
+    _address1ShippingController.text =
+        _customerProfileEditCopyViewModel.address1Shipping;
+
+    // Initialize address2ShippingController
+    _address2ShippingController.text =
+        _customerProfileEditCopyViewModel.address2Shipping;
+
+    // Initialize cityShippingController
+    _cityShippingController.text =
+        _customerProfileEditCopyViewModel.cityShipping;
+
+    // Initialize postcodeShippingController
+    _postCodeShippingController.text =
+        _customerProfileEditCopyViewModel.postcodeShipping;
+
+    // Initialize countryShippingController
+    _countryShippingController.text =
+        _customerProfileEditCopyViewModel.countryShipping;
+
+    // Initialize stateShippingController
+    _stateShippingController.text =
+        _customerProfileEditCopyViewModel.stateShipping;
+
+    // Initialize phoneShippingController
+    _phoneShippingController.text =
+        _customerProfileEditCopyViewModel.phoneShipping;
+
     return SingleChildScrollView(
       physics: const ScrollPhysics(),
       child: Container(
@@ -163,7 +234,14 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
               color: Colors.white,
               child: Column(
                 children: [
-                  const Text('Adresse de livraison du client'),
+                  const Text(
+                    'Adresse de livraison',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: AppSize.s20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -178,13 +256,30 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
                         key: _globalKey,
                         child: Column(
                           children: <Widget>[
-                            // TextFormField Nom
+                            // TextFormField Prénom
                             StreamBuilder<bool>(
-                              stream: _customerProfileEditViewModel
+                              stream: _customerProfileEditCopyViewModel
                                   .outputIsFirstNameShippingValid,
                               builder: (context, snapshot) {
                                 return MyTextFormFieldWidget(
                                   controller: _firstNameShippingController,
+                                  hintText: 'Prénom',
+                                  labelText: 'Prénom',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Prénom ne peut pas être vide',
+                                );
+                              },
+                            ),
+
+                            const SizedBox(height: AppSize.s10),
+                            // TextFormField Nom
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditCopyViewModel
+                                  .outputIsLastNameShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _lastNameShippingController,
                                   hintText: 'Nom de famille',
                                   labelText: 'Nom',
                                   errorText: snapshot.data ?? true
@@ -196,45 +291,27 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
 
                             const SizedBox(height: AppSize.s10),
 
-                            // TextFormField Prénom
-                            StreamBuilder<bool>(
-                              stream: _customerProfileEditViewModel
-                                  .outputIsLastNameShippingValid,
-                              builder: (context, snapshot) {
-                                return MyTextFormFieldWidget(
-                                  controller: _lastNameShippingController,
-                                  hintText: 'Prénom',
-                                  labelText: 'Prénom',
-                                  errorText: snapshot.data ?? true
-                                      ? null
-                                      : 'Prénom ne peut pas être vide',
-                                );
-                              },
-                            ),
-
-                            const SizedBox(height: AppSize.s10),
-
                             // TextFormField Company
                             StreamBuilder<bool>(
-                              stream: _customerProfileEditViewModel
+                              stream: _customerProfileEditCopyViewModel
                                   .outputIsCompanyShippingValid,
                               builder: (context, snapshot) {
                                 return MyTextFormFieldWidget(
                                   controller: _companyShippingController,
-                                  hintText: 'Type de compte',
-                                  labelText: 'Type',
+                                  hintText: 'Entreprise',
+                                  labelText: 'Entreprise',
                                   errorText: snapshot.data ?? true
                                       ? null
-                                      : 'Type ne peut pas être vide',
+                                      : 'Entreprise ne peut pas être vide',
                                 );
                               },
                             ),
 
                             const SizedBox(height: AppSize.s10),
 
-                            // TextFormField Adresse
+                            // TextFormField Adresse1
                             StreamBuilder<bool>(
-                              stream: _customerProfileEditViewModel
+                              stream: _customerProfileEditCopyViewModel
                                   .outputIsAddress1ShippingValid,
                               builder: (context, snapshot) {
                                 return MyTextFormFieldWidget(
@@ -244,26 +321,26 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
                                   labelText: 'Adresse',
                                   errorText: snapshot.data ?? true
                                       ? null
-                                      : 'Email ne peut pas être vide',
+                                      : 'Adresse ne peut pas être vide',
                                 );
                               },
                             ),
 
                             const SizedBox(height: AppSize.s10),
 
-                            // TextFormField Complement adresse
+                            // TextFormField Adresse2
                             StreamBuilder<bool>(
-                              stream: _customerProfileEditViewModel
+                              stream: _customerProfileEditCopyViewModel
                                   .outputIsAddress2ShippingValid,
                               builder: (context, snapshot) {
                                 return MyTextFormFieldWidget(
                                   controller: _address2ShippingController,
                                   keyboardType: TextInputType.streetAddress,
-                                  hintText: 'complement adresse',
-                                  labelText: 'Complement adresse',
-                                  errorText: snapshot.data ?? true
-                                      ? null
-                                      : 'Téléphone ne peut pas être vide',
+                                  hintText: "complement d'adresse",
+                                  labelText: "Complement d'adresse",
+                                  // errorText: snapshot.data ?? true
+                                  //     ? null
+                                  //     : 'Adresse ne peut pas être vide',
                                 );
                               },
                             ),
@@ -272,26 +349,26 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
 
                             // TextFormField City
                             StreamBuilder<bool>(
-                              stream: _customerProfileEditViewModel
+                              stream: _customerProfileEditCopyViewModel
                                   .outputIsCityShippingValid,
                               builder: (context, snapshot) {
                                 return MyTextFormFieldWidget(
                                   controller: _cityShippingController,
                                   keyboardType: TextInputType.streetAddress,
                                   hintText: 'Alger',
-                                  labelText: 'City',
+                                  labelText: 'Commune',
                                   errorText: snapshot.data ?? true
                                       ? null
-                                      : 'Adresse ne peut pas être vide',
+                                      : 'Ville ne peut pas être vide',
                                 );
                               },
                             ),
 
                             const SizedBox(height: AppSize.s10),
 
-                            // TextFormField Complement d'adresse
+                            // TextFormField Code Postal
                             StreamBuilder<bool>(
-                              stream: _customerProfileEditViewModel
+                              stream: _customerProfileEditCopyViewModel
                                   .outputIsPostCodeShippingValid,
                               builder: (context, snapshot) {
                                 return MyTextFormFieldWidget(
@@ -305,6 +382,43 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
                                 );
                               },
                             ),
+
+                            const SizedBox(height: AppSize.s10),
+
+                            // TextFormField State
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditCopyViewModel
+                                  .outputIsStateShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _stateShippingController,
+                                  hintText: 'Alger',
+                                  labelText: 'Wilaya',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Wilaya ne peut pas être vide',
+                                );
+                              },
+                            ),
+
+                            const SizedBox(height: AppSize.s10),
+
+                            // TextFormField Phone
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditCopyViewModel
+                                  .outputIsPhoneShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _phoneShippingController,
+                                  keyboardType: TextInputType.phone,
+                                  hintText: '021 ## ## ##',
+                                  labelText: 'Téléphone',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Téléphone ne peut pas être vide',
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -312,13 +426,13 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
                   ),
                   const SizedBox(height: AppSize.s15),
                   StreamBuilder<bool>(
-                    stream:
-                        _customerProfileEditViewModel.outputIsAllInputsValid,
+                    stream: _customerProfileEditCopyViewModel
+                        .outputIsAllInputsValid,
                     builder: (context, snapshot) {
                       return textButton(
                         onPressed: (snapshot.data ?? false)
                             ? () {
-                                _customerProfileEditViewModel
+                                _customerProfileEditCopyViewModel
                                     .updateShippingInformations();
                               }
                             : null,

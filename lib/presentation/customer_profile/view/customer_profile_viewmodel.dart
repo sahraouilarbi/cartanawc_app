@@ -12,7 +12,9 @@ class CustomerProfileViewModel extends BaseViewModel
     with CustomerProfileViewModelInputs, CustomerProfileViewModelOutputs {
   final CustomerProfileUsecase _customerProfileUsecase;
 
-  CustomerProfileViewModel(this._customerProfileUsecase);
+  CustomerProfileViewModel(
+    this._customerProfileUsecase,
+  );
 
   final _customerProfileStreamController =
       BehaviorSubject<CustomerDetailEntity>();
@@ -34,12 +36,17 @@ class CustomerProfileViewModel extends BaseViewModel
 
   Future<void> _getCustomerProfile() async {
     inputState.add(
-      LoadingState(stateRendererType: StateRendererType.fullScreenLoadingState),
+      LoadingState(
+        stateRendererType: StateRendererType.fullScreenLoadingState,
+      ),
     );
     (await _customerProfileUsecase.execute(customerId)).fold(
       (failure) {
         inputState.add(
-          ErrorState(StateRendererType.fullScreenErrorState, failure.message),
+          ErrorState(
+            StateRendererType.fullScreenErrorState,
+            failure.message,
+          ),
         );
       },
       (customerProfile) {

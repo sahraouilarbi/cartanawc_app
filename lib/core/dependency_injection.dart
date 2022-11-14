@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +21,7 @@ import '/presentation/accueil/view/tab_produits/products_viewmodel.dart';
 import '/presentation/accueil/view/tab_produits/tabview_categories_viewmodel.dart';
 import '/presentation/customer_profile/view/customer_profile_viewmodel.dart';
 import '/presentation/customer_profile_edit/view/customer_profile_edit_viewmodel.dart';
+import '/presentation/customer_profile_edit_copy/view/customer_profile_edit_copy_viewmodel.dart';
 import '/presentation/devenir_distributeur/view/devenir_distributeur_viewmodel.dart';
 import '/presentation/login/view/login_viewmodel.dart';
 import '/presentation/tableau_de_bord/view/tab_commandes/tab_commander_viewmodel.dart';
@@ -114,6 +116,36 @@ void initDICustomerProfileEditModule() {
   }
 }
 
+void initDICustomerProfileEditCopyModule() {
+  if (!GetIt.I.isRegistered<ShippingEditUsecase>()) {
+    instance.registerFactory<ShippingEditUsecase>(
+      () => ShippingEditUsecase(
+        instance(),
+      ),
+    );
+    instance.registerFactory<CustomerProfileEditCopyViewModel>(
+      () => CustomerProfileEditCopyViewModel(
+        instance(),
+        instance(),
+      ),
+    );
+  }
+}
+
+void initDICustomerProfileEditCopyPageModule() {
+  if (!GetIt.I.isRegistered<CustomerDetailEntity>()) {
+    instance.registerFactory<CustomerDetailEntity>(
+      () => CustomerDetailEntity(),
+    );
+    instance.registerFactory<CustomerProfileEditCopyViewModel>(
+      () => CustomerProfileEditCopyViewModel(
+        instance(),
+        instance(),
+      ),
+    );
+  }
+}
+
 void initDIGetCategoriesModule() {
   if (!GetIt.I.isRegistered<CategoriesUsecase>()) {
     instance.registerFactory<CategoriesUsecase>(
@@ -157,6 +189,8 @@ void resetDIModules() {
   initDIGetCategoriesModule();
   initDICustomerProfileModule();
   initDICustomerProfileEditModule();
+  initDICustomerProfileEditCopyModule();
+  initDICustomerProfileEditCopyPageModule();
   initDITabCommanderModule();
   initDIGetProductsModule();
   initDIDevenirDistributeurModule();

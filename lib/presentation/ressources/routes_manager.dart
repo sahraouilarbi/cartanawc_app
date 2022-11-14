@@ -23,8 +23,8 @@ class RouteGenerator {
         return CartPage.route();
       case CustomerProfilePage.routeName:
         return CustomerProfilePage.route();
-      case CustomerProfileEditPage.routeName:
-        return CustomerProfileEditPage.route(
+      case CustomerProfileEditCopyPage.routeName:
+        return CustomerProfileEditCopyPage.route(
             customerProfileEdit:
                 routeSettings.arguments! as CustomerDetailEntity);
       case DevenirDistributeurPage.routeName:

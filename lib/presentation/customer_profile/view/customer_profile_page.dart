@@ -191,7 +191,7 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                               textButton(
                                 onPressed: () {
                                   Navigator.pushNamed(context,
-                                      CustomerProfileEditPage.routeName,
+                                      CustomerProfileEditCopyPage.routeName,
                                       arguments: snapshot.data);
                                 },
                                 text: 'MODIFIER',

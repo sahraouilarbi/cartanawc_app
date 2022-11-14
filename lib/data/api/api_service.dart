@@ -138,13 +138,14 @@ class _APIServiceImpl implements APIService {
 
     const _extra = <String, dynamic>{};
     final _queryParameters = <String, dynamic>{};
-    final _data = _shippingModel.toJson();
+    final _data = {"shipping": _shippingModel.toJson()};
 
     try {
       final _response = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ShippingModel>(
+        //_setStreamType<ShippingModel>(
+        _setStreamType<CustomerDetailModel>(
           Options(
-            method: 'POST',
+            method: 'PUT',
             headers: <String, dynamic>{},
             extra: _extra,
           )
