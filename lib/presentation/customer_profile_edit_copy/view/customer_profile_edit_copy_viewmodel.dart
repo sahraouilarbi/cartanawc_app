@@ -99,7 +99,7 @@ class CustomerProfileEditCopyViewModel extends BaseViewModel
   Future<void> _getCustomerProfile() async {
     inputState.add(
       LoadingState(
-        stateRendererType: StateRendererType.fullScreenErrorState,
+        stateRendererType: StateRendererType.fullScreenLoadingState,
       ),
     );
     (await _customerProfileUsecase.execute(customerId)).fold(
