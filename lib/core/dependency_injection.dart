@@ -1,4 +1,3 @@
-import 'package:cartanawc_app/domain/entities/customer_detail_entity.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,12 +8,14 @@ import '/data/data_source/remote_data_source.dart';
 import '/data/network/dio_factory.dart';
 import '/data/network/network_info.dart';
 import '/data/repositories/repository_impl.dart';
+import '/domain/entities/customer_detail_entity.dart';
 import '/domain/repositories/repository.dart';
 import '/domain/usecase/categories_usecase.dart';
 import '/domain/usecase/commander_usecase.dart';
 import '/domain/usecase/customer_profile_edit_usecase.dart';
 import '/domain/usecase/customer_profile_usecase.dart';
 import '/domain/usecase/devenir_distributeur_usecase.dart';
+import '/domain/usecase/historique_usecase.dart';
 import '/domain/usecase/login_usecase.dart';
 import '/domain/usecase/products_usecase.dart';
 import '/presentation/accueil/view/tab_produits/products_viewmodel.dart';
@@ -25,6 +26,7 @@ import '/presentation/customer_profile_edit_copy/view/customer_profile_edit_copy
 import '/presentation/devenir_distributeur/view/devenir_distributeur_viewmodel.dart';
 import '/presentation/login/view/login_viewmodel.dart';
 import '/presentation/tableau_de_bord/view/tab_commandes/tab_commander_viewmodel.dart';
+import '/presentation/tableau_de_bord/view/tab_historique/tab_historique_viewmodel.dart';
 
 final instance = GetIt.instance;
 Future<void> initDIAppModule() async {
@@ -37,18 +39,27 @@ Future<void> initDIAppModule() async {
 
   // App prefs instance
   instance.registerLazySingleton<AppPreferences>(
-      () => AppPreferencesImpl(instance()));
+    () => AppPreferencesImpl(
+      instance(),
+    ),
+  );
 
   // network info
   instance.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(DataConnectionChecker()));
 
   // DioFactory
-  instance.registerLazySingleton<DioFactory>(() => DioFactory(instance()));
+  instance.registerLazySingleton<DioFactory>(
+    () => DioFactory(
+      instance(),
+    ),
+  );
 
   // App Service Client
   final dio = await instance<DioFactory>().getDio();
-  instance.registerLazySingleton<APIService>(() => APIService(dio));
+  instance.registerLazySingleton<APIService>(
+    () => APIService(dio),
+  );
 
   // Remote Data Source
   instance.registerLazySingleton<RemoteDataSource>(
@@ -149,36 +160,75 @@ void initDICustomerProfileEditCopyPageModule() {
 void initDIGetCategoriesModule() {
   if (!GetIt.I.isRegistered<CategoriesUsecase>()) {
     instance.registerFactory<CategoriesUsecase>(
-        () => CategoriesUsecase(instance()));
+      () => CategoriesUsecase(
+        instance(),
+      ),
+    );
     instance.registerFactory<TabCategoriesViewModel>(
-        () => TabCategoriesViewModel(instance()));
+      () => TabCategoriesViewModel(
+        instance(),
+      ),
+    );
   }
 }
 
 void initDITabCommanderModule() {
   if (!GetIt.I.isRegistered<CommanderUsecase>()) {
-    instance
-        .registerFactory<CommanderUsecase>(() => CommanderUsecase(instance()));
+    instance.registerFactory<CommanderUsecase>(
+      () => CommanderUsecase(
+        instance(),
+      ),
+    );
     instance.registerFactory<TabCommanderViewModel>(
-        () => TabCommanderViewModel(instance()));
+      () => TabCommanderViewModel(
+        instance(),
+      ),
+    );
+  }
+}
+
+void initDITabHistoriqueModule() {
+  if (!GetIt.I.isRegistered<HistoriqueUsecase>()) {
+    instance.registerFactory<HistoriqueUsecase>(
+      () => HistoriqueUsecase(
+        instance(),
+      ),
+    );
+    instance.registerFactory<TabHistoriqueViewModel>(
+      () => TabHistoriqueViewModel(
+        instance(),
+      ),
+    );
   }
 }
 
 void initDIGetProductsModule() {
   if (!GetIt.I.isRegistered<ProductsUsecase>()) {
-    instance
-        .registerFactory<ProductsUsecase>(() => ProductsUsecase(instance()));
+    instance.registerFactory<ProductsUsecase>(
+      () => ProductsUsecase(
+        instance(),
+      ),
+    );
     instance.registerFactory<ProductsViewModel>(
-        () => ProductsViewModel(instance()));
+      () => ProductsViewModel(
+        instance(),
+      ),
+    );
   }
 }
 
 void initDIDevenirDistributeurModule() {
   if (!GetIt.I.isRegistered<DevenirDistributeurUsecase>()) {
     instance.registerFactory<DevenirDistributeurUsecase>(
-        () => DevenirDistributeurUsecase(instance()));
+      () => DevenirDistributeurUsecase(
+        instance(),
+      ),
+    );
     instance.registerFactory<DevenirDistributeurViewModel>(
-        () => DevenirDistributeurViewModel(instance()));
+      () => DevenirDistributeurViewModel(
+        instance(),
+      ),
+    );
   }
 }
 
@@ -192,6 +242,7 @@ void resetDIModules() {
   initDICustomerProfileEditCopyModule();
   initDICustomerProfileEditCopyPageModule();
   initDITabCommanderModule();
+  initDITabHistoriqueModule();
   initDIGetProductsModule();
   initDIDevenirDistributeurModule();
 }

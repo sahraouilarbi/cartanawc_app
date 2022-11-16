@@ -55,19 +55,20 @@ class _TableauBordPageState extends State<TableauBordPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(
-          tabController: _tabController,
-          tabs: tableauBordTabs,
-          hasTabs: true,
-        ),
-        drawer: DrawerForAuthenticatedUser(),
-        body: TabBarView(
-          controller: _tabController,
-          children: [
-            const TabCommander(),
-            tabPaiement(),
-            tabHistorique(),
-          ],
-        ));
+      appBar: CustomAppBar(
+        tabController: _tabController,
+        tabs: tableauBordTabs,
+        hasTabs: true,
+      ),
+      drawer: DrawerForAuthenticatedUser(),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          const TabCommander(),
+          tabPaiement(),
+          const TabHistorique(),
+        ],
+      ),
+    );
   }
 }

@@ -34,14 +34,21 @@ class TabCommanderViewModel extends BaseViewModel
       ),
     );
     _userRole = await _appPreferences.getUserRole();
-    (await commanderUsecase.execute(_userRole)).fold((failure) {
-      inputState.add(
-          ErrorState(StateRendererType.fullScreenErrorState, failure.message));
-    }, (products) async {
-      inputState.add(ContentState());
-      final List<ProductEntity> _products = products;
-      inputProducts.add(_products);
-    });
+    (await commanderUsecase.execute(_userRole)).fold(
+      (failure) {
+        inputState.add(
+          ErrorState(
+            StateRendererType.fullScreenErrorState,
+            failure.message,
+          ),
+        );
+      },
+      (products) async {
+        inputState.add(ContentState());
+        final List<ProductEntity> _products = products;
+        inputProducts.add(_products);
+      },
+    );
   }
 
   @override

@@ -33,7 +33,18 @@ abstract class APIService {
   Future<CartResponseModel> addToCart(CartRequestModel _model);
   Future<CartResponseModel> getCartItem();
   Future<Map<String, dynamic>> createOrder(OrderModel _model);
-  Future<List<OrderModel>> getOrders();
+  Future<List<OrderModel>> getOrders(
+    int customerID, {
+    int? pageNumber = 1,
+    int? perPage = 10,
+    String? search,
+    String? after,
+    String? before,
+    String? sortOrder = 'desc',
+    String? sortBy = 'date',
+    String? status = 'any',
+    int? product,
+  });
   Future<OrderDetailModel> getOrderDetails(int _orderId);
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
@@ -53,8 +64,8 @@ class _APIServiceImpl implements APIService {
   Future<LoginResponseModel> login(String _username, String _password) async {
     late LoginResponseModel _loginResponseModel;
 
-    const _extra = <String, dynamic>{};
-    final _queryParameters = <String, dynamic>{};
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
     final _data = {'username': _username, 'password': _password};
 
     try {
@@ -95,9 +106,9 @@ class _APIServiceImpl implements APIService {
   Future<CustomerDetailModel> getCustomerDetails(int _userId) async {
     late CustomerDetailModel _customerDetailModel;
 
-    const _extra = <String, dynamic>{};
-    final _queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
 
     try {
       final _response = await _dio.fetch<Map<String, dynamic>>(
@@ -136,8 +147,8 @@ class _APIServiceImpl implements APIService {
       int _userId, ShippingModel _shippingModel) async {
     late CustomerDetailModel _customerDetailModel;
 
-    const _extra = <String, dynamic>{};
-    final _queryParameters = <String, dynamic>{};
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
     final _data = {"shipping": _shippingModel.toJson()};
 
     try {
@@ -174,7 +185,7 @@ class _APIServiceImpl implements APIService {
   // Get Categories
   @override
   Future<List<CategoryModel>> getCategories() async {
-    const _extra = <String, dynamic>{};
+    const Map<String, dynamic> _extra = <String, dynamic>{};
     final _queryParameters = {
       'hide_empty': false,
       'per_page': 100,
@@ -251,8 +262,8 @@ class _APIServiceImpl implements APIService {
     }
     List<ProductModel> _products = <ProductModel>[];
     try {
-      const _extra = <String, dynamic>{};
-      final _data = <String, dynamic>{};
+      const Map<String, dynamic> _extra = <String, dynamic>{};
+      final Map<String, dynamic> _data = <String, dynamic>{};
       final _response = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<ProductModel>>(
           Options(
@@ -318,9 +329,9 @@ class _APIServiceImpl implements APIService {
     // }
     model.userId = await _appPreferences.getUserId();
     late CartResponseModel _responseModel;
-    const _extra = <String, dynamic>{};
-    final _queryParameters = <String, dynamic>{};
-    final _data = model.toJson();
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final Map<String, dynamic> _data = model.toJson();
     try {
       final _response = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CartResponseModel>(
@@ -359,9 +370,9 @@ class _APIServiceImpl implements APIService {
   Future<CartResponseModel> getCartItem() async {
     late CartResponseModel _responseModel;
     final _userId = await _appPreferences.getUserId();
-    const _extra = <String, dynamic>{};
+    const Map<String, dynamic> _extra = <String, dynamic>{};
     final _queryParameters = {'user_id': _userId};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
     try {
       final _response = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CartResponseModel>(
@@ -395,8 +406,8 @@ class _APIServiceImpl implements APIService {
     Map<String, dynamic> _myOrderCreated = <String, dynamic>{};
     bool _isOrderCreated = false;
     String _orderNumber;
-    const _extra = <String, dynamic>{};
-    final _queryParameters = <String, dynamic>{};
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
     final _data = model.toJson();
     try {
       final _response = await _dio.fetch<Map<String, dynamic>>(
@@ -440,10 +451,50 @@ class _APIServiceImpl implements APIService {
   //***************************************************************************
   // Get Orders
   @override
-  Future<List<OrderModel>> getOrders() async {
-    const _extra = <String, dynamic>{};
-    final _queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+  Future<List<OrderModel>> getOrders(
+    int customerID, {
+    int? pageNumber = 1,
+    int? perPage = 10,
+    String? search,
+    String? after,
+    String? before,
+    String? sortOrder = 'desc',
+    String? sortBy = 'date',
+    String? status = 'any',
+    int? product,
+  }) async {
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    _queryParameters['customer'] = customerID;
+    if (pageNumber != null) {
+      _queryParameters['page'] = pageNumber;
+    }
+    if (pageNumber != null) {
+      _queryParameters['per_page'] = perPage;
+    }
+    if (search != null) {
+      _queryParameters['search'] = search;
+    }
+    if (after != null) {
+      _queryParameters['after'] = after;
+    }
+    if (before != null) {
+      _queryParameters['before'] = before;
+    }
+    if (sortOrder != null) {
+      _queryParameters['order'] = sortOrder;
+    }
+    if (sortBy != null) {
+      _queryParameters['orderby'] = sortBy;
+    }
+    if (status != null) {
+      _queryParameters['status'] = status;
+    }
+    if (product != null) {
+      _queryParameters['product'] = product;
+    }
+
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
     try {
       final _response = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<OrderModel>>(
@@ -476,9 +527,9 @@ class _APIServiceImpl implements APIService {
   @override
   Future<OrderDetailModel> getOrderDetails(int _orderId) async {
     OrderDetailModel _responseModel = OrderDetailModel();
-    const _extra = <String, dynamic>{};
-    final _queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
     try {
       final _response = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<OrderDetailModel>(
@@ -508,9 +559,9 @@ class _APIServiceImpl implements APIService {
   @override
   Future<List<PaymentGatewaysModel>> getPaymentGateways() async {
     //List<PaymentGatewaysModel> _getPayments = <PaymentGatewaysModel>[];
-    const _extra = <String, dynamic>{};
+    const Map<String, dynamic> _extra = <String, dynamic>{};
     final _queryParamets = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
 
     try {
       final _response = await _dio.fetch<List<dynamic>>(
@@ -547,7 +598,7 @@ class _APIServiceImpl implements APIService {
       DevenirDistributeurRequestModel _formData) async {
     DevenirDistributeurResponseModel _devenirDistributeurResponse =
         DevenirDistributeurResponseModel();
-    const _extra = <String, dynamic>{};
+    const Map<String, dynamic> _extra = <String, dynamic>{};
     final _queryParamets = <String, dynamic>{};
     final FormData _data = FormData.fromMap(_formData.toJson());
     try {

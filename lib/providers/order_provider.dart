@@ -1,3 +1,4 @@
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:flutter/material.dart';
 
 import '/core/dependency_injection.dart';
@@ -9,16 +10,22 @@ class OrderProvider with ChangeNotifier {
   late List<OrderModel> _orderList;
   List<OrderModel> get allOrders => _orderList;
   double get totalRecords => _orderList.length.toDouble();
+
+  final AppPreferences _appPreferences = instance<AppPreferences>();
+  late int _customerId;
+
   OrderProvider() {
     resetStream();
   }
-  void resetStream() {
+
+  Future<void> resetStream() async {
     //_apiService = APIServiceImpl();
     _apiService = instance<APIService>();
+    _customerId = await _appPreferences.getUserId();
   }
 
   Future fetchOrders() async {
-    final List<OrderModel> orderList = await _apiService.getOrders();
+    final List<OrderModel> orderList = await _apiService.getOrders(_customerId);
     //_orderList ??= <OrderModel>[];
     //if (_orderList == null) _orderList = <OrderModel>[];
     if (orderList.isNotEmpty) {

@@ -183,7 +183,18 @@ class RepositoryImpl implements Repository {
   }) async {
     if (await _networkInfo.isConnected) {
       try {
-        final _response = await _remoteDataSource.getOrders();
+        final _response = await _remoteDataSource.getOrders(
+          customerID,
+          pageNumber: pageNumber,
+          perPage: perPage,
+          search: search,
+          after: after,
+          before: before,
+          sortOrder: sortOrder,
+          sortBy: sortBy,
+          status: status,
+          product: product,
+        );
         final List<OrderEntity> _orderEntity =
             List.from(_response.map((e) => e.toDomain()));
         return Right(_orderEntity);

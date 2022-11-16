@@ -24,7 +24,18 @@ abstract class RemoteDataSource {
   Future<CartResponseModel> addToCart(CartRequestModel model);
   Future<CartResponseModel> getCartItem();
   Future<Map<String, dynamic>> createOrder(OrderModel model);
-  Future<List<OrderModel>> getOrders();
+  Future<List<OrderModel>> getOrders(
+    int customerID, {
+    int? pageNumber = 1,
+    int? perPage = 10,
+    String? search,
+    String? after,
+    String? before,
+    String? sortOrder = 'desc',
+    String? sortBy = 'date',
+    String? status = 'any',
+    int? product,
+  });
   Future<OrderDetailModel> getOrderDetails(int orderId);
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
@@ -81,8 +92,30 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<List<OrderModel>> getOrders() {
-    return _apiService.getOrders();
+  Future<List<OrderModel>> getOrders(
+    int customerID, {
+    int? pageNumber = 1,
+    int? perPage = 10,
+    String? search,
+    String? after,
+    String? before,
+    String? sortOrder = 'desc',
+    String? sortBy = 'date',
+    String? status = 'any',
+    int? product,
+  }) {
+    return _apiService.getOrders(
+      customerID,
+      pageNumber: pageNumber,
+      perPage: perPage,
+      search: search,
+      after: after,
+      before: before,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      status: status,
+      product: product,
+    );
   }
 
   @override

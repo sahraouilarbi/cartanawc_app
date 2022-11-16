@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/domain/usecase/customer_profile_usecase.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
 import '/domain/entities/entities.dart';
 import '/domain/usecase/customer_profile_edit_usecase.dart';
+import '/domain/usecase/customer_profile_usecase.dart';
 import '/presentation/base/base_viewmodel.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';
 import '/presentation/common/state_render/state_renderer.dart';

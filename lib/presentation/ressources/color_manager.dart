@@ -13,6 +13,30 @@ class ColorManager {
   static Color purple = HexColor.fromHex('#60009F');
   static Color red = HexColor.fromHex('#C22222');
   static Color yellow = HexColor.fromHex('#FFF700');
+  // Woocommerce Commande Status - Cancelled
+  static Color commandeStatusCancelled = HexColor.fromHex('#777777');
+  static Color commandeStatusCancelledBg = HexColor.fromHex('#E5E5E5');
+  // Woocommerce Commande Status - Checkout Draft
+  static Color commandeStatusCheckoutDraft = HexColor.fromHex('#777777');
+  static Color commandeStatusCheckoutDraftBg = HexColor.fromHex('#E5E5E5');
+  // Woocommerce Commande Status - Completed
+  static Color commandeStatusCompleted = HexColor.fromHex('#2E4453');
+  static Color commandeStatusCompletedBg = HexColor.fromHex('#C8D7E1');
+  // Woocommerce Commande Status - Failed
+  static Color commandeStatusFailed = HexColor.fromHex('#761919');
+  static Color commandeStatusFailedBg = HexColor.fromHex('#EBA3A3');
+  // Woocommerce Commande Status - On Hold
+  static Color commandeStatusOnHold = HexColor.fromHex('#94660C');
+  static Color commandeStatusOnHoldBg = HexColor.fromHex('#F8DDA7');
+  // Woocommerce Commande Status - Pending
+  static Color commandeStatusPending = HexColor.fromHex('#777777');
+  static Color commandeStatusPendingBg = HexColor.fromHex('#E5E5E5');
+  // Woocommerce Commande Status - Processing
+  static Color commandeStatusProcessing = HexColor.fromHex('#5B841B');
+  static Color commandeStatusProcessingBg = HexColor.fromHex('#C6E1C6');
+  // Woocommerce Commande Status - Refunded
+  static Color commandeStatusRefunded = HexColor.fromHex('#777777');
+  static Color commandeStatusRefundedBg = HexColor.fromHex('#E5E5E5');
 }
 
 extension HexColor on Color {

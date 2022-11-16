@@ -37,6 +37,7 @@ dependencies:
   ## Google_maps_flutter updates -> 30/04/2022 ->
   google_maps_flutter: ^2.0.9
   # Provider updated -> 20/08/2022
+  intl: ^0.17.0
   provider: ^6.0.3
   # Rxdart updated -> 30/04/2022
   rxdart: ^0.27.5

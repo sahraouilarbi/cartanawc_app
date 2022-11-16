@@ -69,7 +69,7 @@ class _TabCommanderState extends State<TabCommander> {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
             return const Center(
-              child: Text('Pase de données'),
+              child: Text('Pas de données'),
             );
           case ConnectionState.waiting:
             return const Center(child: CircularProgressIndicator());
