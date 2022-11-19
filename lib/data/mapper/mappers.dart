@@ -8,6 +8,7 @@ export 'forgot_password_mapper.dart';
 export 'login_response_mapper.dart';
 export 'meta_data_mapper.dart';
 export 'order_mapper.dart';
+export 'paiement_mapper.dart';
 export 'payment_gateways_mapper.dart';
 export 'product_mapper.dart';
 export 'shipping_mapper.dart';

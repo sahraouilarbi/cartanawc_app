@@ -10,6 +10,7 @@ export 'login_model.dart';
 export 'meta_data_model.dart';
 export 'order_detail_model.dart';
 export 'order_model.dart';
+export 'paiement_model.dart';
 export 'payment_method_model.dart';
 export 'product_model.dart';
 export 'product_variations_model.dart';

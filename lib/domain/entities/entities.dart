@@ -10,6 +10,7 @@ export 'login_entity.dart';
 export 'meta_data_entity.dart';
 export 'order_detail_entity.dart';
 export 'order_entity.dart';
+export 'paiement_entity.dart';
 export 'payment_method_entity.dart';
 export 'product_entity.dart';
 export 'product_variations_entity.dart';

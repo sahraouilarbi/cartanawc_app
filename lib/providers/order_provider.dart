@@ -1,7 +1,7 @@
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
 import 'package:flutter/material.dart';
 
 import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
 import '/data/api/api_service.dart';
 import '/data/models/models.dart';
 

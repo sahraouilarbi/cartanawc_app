@@ -70,4 +70,7 @@ abstract class Repository {
   // Devenir distributeur
   Future<Either<Failure, DevenirDistributeurResponseEntity>>
       devenirDistributeur(DevenirDistributeurRequestEntity _formData);
+
+  // Get Paiements
+  Future<Either<Failure, List<PaiementEntity>>> getPaiements(int customerId);
 }

@@ -1,4 +1,3 @@
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -6,6 +5,7 @@ import '/core/dependency_injection.dart';
 import '/domain/entities/entities.dart';
 import '/presentation/common/state_render/sate_render_impl.dart';
 import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
 import '/presentation/tableau_de_bord/view/tab_historique/tab_historique_viewmodel.dart';
 
 class TabHistorique extends StatefulWidget {
@@ -70,7 +70,6 @@ class _TabHistoriqueState extends State<TabHistorique> {
         await _tabHistoriqueViewModel.start();
       },
       child: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(AppSize.s10),
           child: Column(
@@ -82,7 +81,7 @@ class _TabHistoriqueState extends State<TabHistorique> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: AppSize.s20),
+              const SizedBox(height: AppSize.s10),
               _displayHistorique(),
             ],
           ),
@@ -136,9 +135,9 @@ class _TabHistoriqueState extends State<TabHistorique> {
 
   List<DataColumn> _ordersColumns() {
     return const [
-      DataColumn(
-        label: Text('#'),
-      ),
+      // DataColumn(
+      //   label: Text('#'),
+      // ),
       DataColumn(
         label: Text('Date'),
       ),
@@ -153,13 +152,14 @@ class _TabHistoriqueState extends State<TabHistorique> {
 
   List<DataRow> _ordersRows(AsyncSnapshot<List<OrderEntity>> snapshot) {
     final _dateFormat = DateFormat('dd/MM/yy');
+    final _numberFormat = NumberFormat.currency(locale: "fr-FR", symbol: "DA");
     return snapshot.data!
         .map(
           (e) => DataRow(
             cells: [
-              DataCell(
-                Text(e.orderNumber),
-              ),
+              // DataCell(
+              //   Text(e.orderNumber),
+              // ),
               DataCell(
                 Text(
                   _dateFormat.format(e.orderDateCreated),
@@ -178,7 +178,11 @@ class _TabHistoriqueState extends State<TabHistorique> {
                 ),
               ),
               DataCell(
-                Text(e.orderTotal),
+                Text(
+                  _numberFormat.format(
+                    double.parse(e.orderTotal),
+                  ),
+                ),
               ),
             ],
           ),

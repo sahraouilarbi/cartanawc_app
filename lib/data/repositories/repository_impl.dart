@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 
 import '/core/error/error_handler.dart';
 import '/core/error/failure.dart';
@@ -196,7 +197,7 @@ class RepositoryImpl implements Repository {
           product: product,
         );
         final List<OrderEntity> _orderEntity =
-            List.from(_response.map((e) => e.toDomain()));
+            List<OrderEntity>.from(_response.map((e) => e.toDomain()));
         return Right(_orderEntity);
       } catch (_error) {
         return Left(ErrorHandler.handle(_error).failure);
@@ -270,6 +271,29 @@ class RepositoryImpl implements Repository {
             await _remoteDataSource.devenirDistributeur(_formData.toModel());
         return Right(_response.toDomain());
       } catch (_error) {
+        return Left(ErrorHandler.handle(_error.toString()).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  // Get Paiements
+  @override
+  Future<Either<Failure, List<PaiementEntity>>> getPaiements(
+      int customerId) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.getPaiements();
+        final List<PaiementEntity> _paiements =
+            List<PaiementEntity>.from(_response.map((e) => e.toDomain()))
+                .where((element) {
+          return element.acf.client.id == customerId;
+        }).toList();
+
+        return Right(_paiements);
+      } catch (_error) {
+        debugPrint(_error.toString());
         return Left(ErrorHandler.handle(_error.toString()).failure);
       }
     } else {

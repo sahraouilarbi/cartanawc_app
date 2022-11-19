@@ -63,10 +63,10 @@ class _TableauBordPageState extends State<TableauBordPage>
       drawer: DrawerForAuthenticatedUser(),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          const TabCommander(),
-          tabPaiement(),
-          const TabHistorique(),
+        children: const [
+          TabCommander(),
+          TabPaiement(),
+          TabHistorique(),
         ],
       ),
     );

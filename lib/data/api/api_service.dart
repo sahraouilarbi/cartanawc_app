@@ -49,6 +49,7 @@ abstract class APIService {
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
       DevenirDistributeurRequestModel _formData);
+  Future<List<PaiementModel>> getPaiements();
 }
 
 class _APIServiceImpl implements APIService {
@@ -73,7 +74,9 @@ class _APIServiceImpl implements APIService {
         _setStreamType<LoginResponseModel>(
           Options(
             method: 'POST',
-            headers: {HttpHeaders.authorizationHeader: ''},
+            headers: {
+              HttpHeaders.authorizationHeader: '',
+            },
             extra: _extra,
           )
               .compose(
@@ -599,7 +602,7 @@ class _APIServiceImpl implements APIService {
     DevenirDistributeurResponseModel _devenirDistributeurResponse =
         DevenirDistributeurResponseModel();
     const Map<String, dynamic> _extra = <String, dynamic>{};
-    final _queryParamets = <String, dynamic>{};
+    final Map<String, dynamic> _queryParamets = <String, dynamic>{};
     final FormData _data = FormData.fromMap(_formData.toJson());
     try {
       final _response = await _dio.fetch<Map<String, dynamic>>(
@@ -628,6 +631,43 @@ class _APIServiceImpl implements APIService {
           'api_service - devenirDistributeur Exception : ${e.response}');
     }
     return _devenirDistributeurResponse;
+  }
+
+  // Get Paiements
+  @override
+  Future<List<PaiementModel>> getPaiements() async {
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    try {
+      final _response = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<PaiementModel>>(
+          Options(
+            method: 'GET',
+            headers: {
+              HttpHeaders.authorizationHeader:
+                  'Basic ${APIApplicationPassword().basicAuth}',
+            },
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.paiements,
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+      return (_response.data!)
+          .map((e) => PaiementModel.fromJson(e as Map<String, dynamic>))
+          .toList();
+    } on DioError catch (e) {
+      printDebugMessage(e.response.toString());
+    } catch (e) {
+      printDebugMessage(e.toString());
+    }
+    return <PaiementModel>[];
   }
 
 //***************************************************************************

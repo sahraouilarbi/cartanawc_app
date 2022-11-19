@@ -40,57 +40,69 @@ abstract class RemoteDataSource {
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
       DevenirDistributeurRequestModel _formData);
+  Future<List<PaiementModel>> getPaiements();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   RemoteDataSourceImpl(this._apiService);
   final APIService _apiService;
+
+  // Login
   @override
   Future<LoginResponseModel> login(LoginRequest loginRequest) async {
     return _apiService.login(loginRequest.username, loginRequest.password);
   }
 
+  // Get Customer Profile
   @override
   Future<CustomerDetailModel> getCustomerProfile(int userId) {
     return _apiService.getCustomerDetails(userId);
   }
 
+  // Update Shipping Informations
   @override
   Future<CustomerDetailModel> updateShippingInformations(
       int _userId, ShippingModel shippingModel) {
     return _apiService.updateShippingInformations(_userId, shippingModel);
   }
 
+  // Forgot Password
   @override
   Future<ResetPasswordResponseModel> forgotPassword(String email) {
     return _apiService.forgotPassword(email);
   }
 
+  // Add to cart
   @override
   Future<CartResponseModel> addToCart(CartRequestModel model) {
     return _apiService.addToCart(model);
   }
 
+  // Create order
   @override
   Future<Map<String, dynamic>> createOrder(OrderModel model) {
     return _apiService.createOrder(model);
   }
 
+  // Get Cart Item
   @override
   Future<CartResponseModel> getCartItem() {
     return _apiService.getCartItem();
   }
 
+  // Get Categories
   @override
   Future<List<CategoryModel>> getCategories() {
     return _apiService.getCategories();
   }
 
+  // Get Order Details
   @override
   Future<OrderDetailModel> getOrderDetails(int orderId) {
     return _apiService.getOrderDetails(orderId);
   }
 
+  // Get Orders
   @override
   Future<List<OrderModel>> getOrders(
     int customerID, {
@@ -118,11 +130,13 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     );
   }
 
+  // Get Payment Gateways
   @override
   Future<List<PaymentGatewaysModel>> getPaymentGateways() {
     return _apiService.getPaymentGateways();
   }
 
+  // Get Products
   @override
   Future<List<ProductModel>> getProducts(
       {String? status = 'publish',
@@ -147,9 +161,16 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     );
   }
 
+  // Devenir Distributeur
   @override
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
       DevenirDistributeurRequestModel _formData) {
     return _apiService.devenirDistributeur(_formData);
+  }
+
+  // Get Paiement
+  @override
+  Future<List<PaiementModel>> getPaiements() {
+    return _apiService.getPaiements();
   }
 }

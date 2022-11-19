@@ -1,3 +1,5 @@
+import 'package:cartanawc_app/domain/usecase/paiement_usecase.dart';
+import 'package:cartanawc_app/presentation/tableau_de_bord/view/tab_paiement/tab_paiement_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -202,6 +204,21 @@ void initDITabHistoriqueModule() {
   }
 }
 
+void initDITabPaiementModule() {
+  if (!GetIt.I.isRegistered<PaiementUsecase>()) {
+    instance.registerFactory<PaiementUsecase>(
+      () => PaiementUsecase(
+        instance(),
+      ),
+    );
+    instance.registerFactory<TabPaiementViewModel>(
+      () => TabPaiementViewModel(
+        instance(),
+      ),
+    );
+  }
+}
+
 void initDIGetProductsModule() {
   if (!GetIt.I.isRegistered<ProductsUsecase>()) {
     instance.registerFactory<ProductsUsecase>(
@@ -243,6 +260,7 @@ void resetDIModules() {
   initDICustomerProfileEditCopyPageModule();
   initDITabCommanderModule();
   initDITabHistoriqueModule();
+  initDITabPaiementModule();
   initDIGetProductsModule();
   initDIDevenirDistributeurModule();
 }

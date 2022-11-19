@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '/core/dependency_injection.dart';
-import '/core/prefs/app_prefs.dart';
 import '/domain/entities/entities.dart';
 import '/presentation/common/appbar/custom_appbar_widget.dart';
 import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
@@ -39,7 +38,7 @@ class CustomerProfileEditCopyPage extends StatefulWidget {
 class _CustomerProfileEditCopyState extends State<CustomerProfileEditCopyPage> {
   final CustomerProfileEditCopyViewModel _customerProfileEditCopyViewModel =
       instance<CustomerProfileEditCopyViewModel>();
-  final AppPreferences _appPreferences = instance<AppPreferences>();
+
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   final TextEditingController _firstNameShippingController =

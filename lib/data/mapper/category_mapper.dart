@@ -6,12 +6,13 @@ import '/domain/entities/entities.dart';
 extension CategorieModelMapper on CategoryModel? {
   CategoryEntity toDomain() {
     return CategoryEntity(
-        this?.categoryId?.orZero() ?? kZERO,
-        this?.categoryName?.orEmpty() ?? kEMPTY,
-        this?.categorySlug?.orEmpty() ?? kEMPTY,
-        this?.categoryParent?.orZero() ?? kZERO,
-        this?.categoryDescription?.orEmpty() ?? kEMPTY,
-        this!.categoryImage.toDomain());
+      this?.categoryId?.orZero() ?? kZERO,
+      this?.categoryName?.orEmpty() ?? kEMPTY,
+      this?.categorySlug?.orEmpty() ?? kEMPTY,
+      this?.categoryParent?.orZero() ?? kZERO,
+      this?.categoryDescription?.orEmpty() ?? kEMPTY,
+      this!.categoryImage.toDomain(),
+    );
   }
 }
 

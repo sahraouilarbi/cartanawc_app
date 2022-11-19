@@ -36,6 +36,9 @@ class APIEndPoint {
     return '/wp-json/wc/v3/payment_gateways/$paymentGatewayId';
   }
 
+  // Paiement endpoint
+  static const String paiements = '/wp-json/wp/v2/paiements';
+
   // Advanced dynamic Pricing for WooCommerce endpoint
   static const String wdpRules = '/wp-json/wdp-rules/all';
 
@@ -70,5 +73,13 @@ class APIConsumer {
   final String consumerSecret = dotenv.env['CONSUMER_SECRET']!;
   String get basicAuth {
     return base64Encode(utf8.encode('$consumerKey:$consumerSecret'));
+  }
+}
+
+class APIApplicationPassword {
+  final String nameKey = dotenv.env['NAME_KEY']!;
+  final String secretKey = dotenv.env['SECRET_KEY']!;
+  String get basicAuth {
+    return base64Encode(utf8.encode('$nameKey:$secretKey'));
   }
 }
