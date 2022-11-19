@@ -1,24 +1,25 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '/presentation/ressources/appsize_manager.dart';
+
 class MyTextButtonWidget extends StatelessWidget {
   const MyTextButtonWidget({
-    Key key,
-    this.onPressed,
+    Key? key,
+    required this.onPressed,
     this.backgroundColor,
-    this.textButton,
+    required this.textButton,
     this.textColor,
     this.hasIcon = false,
     this.svgIconSrc,
     this.inProgress = false,
   }) : super(key: key);
-  final VoidCallback onPressed;
-  final Color backgroundColor;
+  final VoidCallback? onPressed;
+  final Color? backgroundColor;
   final String textButton;
-  final Color textColor;
+  final Color? textColor;
   final bool hasIcon;
-  final String svgIconSrc;
+  final String? svgIconSrc;
   final bool inProgress;
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class MyTextButtonWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    textButton ?? '',
+                    textButton.toUpperCase(),
                     style: TextStyle(
                       color: textColor ?? Colors.white,
                     ),
@@ -60,7 +61,7 @@ class MyTextButtonWidget extends StatelessWidget {
       children: [
         const SizedBox(width: AppSize.s5),
         SvgPicture.asset(
-          svgIconSrc,
+          svgIconSrc!,
           color: Colors.white,
           fit: BoxFit.cover,
         ),

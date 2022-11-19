@@ -1,23 +1,23 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/presentation/common/checkpoint_widget.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 
+import '/core/dependency_injection.dart';
+import '/data/api/api_service.dart';
 import '/data/models/models.dart';
+import '/presentation/common/checkpoint_widget.dart';
 import '/presentation/pages.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
 
 class OrderDetailsPage extends BasePage {
-  const OrderDetailsPage({Key key, this.orderId}) : super(key: key);
+  const OrderDetailsPage({Key? key, required this.orderId}) : super(key: key);
   final int orderId;
 
   static const String routeName = '/orderDetails';
 
-  static Route route() {
+  static Route route({required int orderId}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => const OrderDetailsPage(),
+      builder: (context) => OrderDetailsPage(orderId: orderId),
     );
   }
 
@@ -26,7 +26,7 @@ class OrderDetailsPage extends BasePage {
 }
 
 class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
-  APIService apiService;
+  late APIService apiService;
   @override
   void initState() {
     super.initState();
@@ -43,7 +43,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
         AsyncSnapshot<OrderDetailModel> orderDetailsModel,
       ) {
         if (orderDetailsModel.hasData) {
-          return orderDetailUI(orderDetailsModel.data);
+          return orderDetailUI(orderDetailsModel.data!);
         }
         return const Center(
           child: CircularProgressIndicator(),
@@ -64,14 +64,14 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
             height: AppSize.s20,
           ),
           const Text('Livrer à :'),
-          Text(model.shipping.address1),
-          Text(model.shipping.address2),
-          Text('${model.shipping.city}, ${model.shipping.state}'),
+          Text(model.shipping!.address1!),
+          Text(model.shipping!.address2!),
+          Text('${model.shipping!.city}, ${model.shipping!.state}'),
           const SizedBox(
             height: AppSize.s20,
           ),
           const Text('Methode de paiement :'),
-          Text(model.paymentMethod),
+          Text(model.paymentMethod!),
           Divider(color: ColorManager.grey),
           const SizedBox(
             height: AppSize.s5,
@@ -94,11 +94,11 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
 
   Widget _listOrderItems(OrderDetailModel model) {
     return ListView.builder(
-        itemCount: model.lineItems.length,
+        itemCount: model.lineItems!.length,
         physics: const ScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return _productItems(model.lineItems[index]);
+          return _productItems(model.lineItems![index]);
         });
   }
 
@@ -107,7 +107,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
       dense: true,
       contentPadding: const EdgeInsets.all(AppPadding.p2),
       onTap: () {},
-      title: Text(product.productName),
+      title: Text(product.productName!),
       subtitle: Padding(
         padding: const EdgeInsets.all(AppPadding.p1),
         child: Text('Qte: ${product.quantity}'),
@@ -116,7 +116,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
     );
   }
 
-  Widget _itemTotal(String label, String value, {TextStyle textStyle}) {
+  Widget _itemTotal(String label, String value, {TextStyle? textStyle}) {
     return ListTile(
       dense: true,
       // s_4 = -4.0;

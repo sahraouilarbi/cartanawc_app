@@ -1,14 +1,14 @@
 import 'models.dart';
 
 class CustomerDetailModel {
-  int id;
-  String email;
-  String firstName;
-  String lastName;
-  String role;
-  BillingModel billing;
-  ShippingModel shipping;
-  String avatarUrl;
+  int? id;
+  String? email;
+  String? firstName;
+  String? lastName;
+  String? role;
+  BillingModel? billing;
+  ShippingModel? shipping;
+  String? avatarUrl;
 
   CustomerDetailModel({
     this.id,
@@ -39,4 +39,21 @@ class CustomerDetailModel {
         avatarUrl:
             json['avatar_url'] != null ? json['avatar_url'] as String : null,
       );
+
+  @override
+  String toString() {
+    final String customerDetail = """
+id:$id,
+email:$email,
+lastName: $lastName,
+role: $role,
+---------------------------
+BILLING:\n${billing.toString()},
+---------------------------
+SHIPPING:\n${shipping.toString()},
+---------------------------
+avatarUrl : $avatarUrl, 
+""";
+    return customerDetail;
+  }
 }

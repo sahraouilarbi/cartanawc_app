@@ -1,15 +1,15 @@
 class ShippingEntity {
   ShippingEntity({
-    this.firstName,
-    this.lastName,
-    this.company,
-    this.address1,
-    this.address2,
-    this.city,
-    this.postcode,
-    this.country,
-    this.state,
-    this.phone,
+    required this.firstName,
+    required this.lastName,
+    required this.company,
+    required this.address1,
+    required this.address2,
+    required this.city,
+    required this.postcode,
+    required this.country,
+    required this.state,
+    required this.phone,
   });
   String firstName;
   String lastName;
@@ -21,4 +21,20 @@ class ShippingEntity {
   String country;
   String state;
   String phone;
+
+  @override
+  String toString() {
+    return """
+firstName:$firstName,
+lastName:$lastName,
+company:$company,
+address1:$address1,
+address2:$address2,
+city:$city,
+postcode:$postcode,
+country:$country,
+state:$state,
+phone:$phone,
+""";
+  }
 }

@@ -1,5 +1,6 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
+
+import '/presentation/ressources/appsize_manager.dart';
 
 class BadgeWidget extends StatelessWidget {
   final Alignment alignment;
@@ -7,10 +8,10 @@ class BadgeWidget extends StatelessWidget {
   final Color backgroundColor;
   final bool left;
   const BadgeWidget({
-    Key key,
-    @required this.alignment,
-    @required this.text,
-    @required this.backgroundColor,
+    Key? key,
+    required this.alignment,
+    required this.text,
+    required this.backgroundColor,
     this.left = false,
   }) : super(key: key);
 

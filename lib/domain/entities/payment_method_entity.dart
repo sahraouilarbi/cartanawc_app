@@ -1,15 +1,15 @@
 class PaymentGatewaysEntity {
   PaymentGatewaysEntity({
-    this.id,
-    this.title,
-    this.description,
-    this.order,
-    this.enabled,
-    this.methodTitle,
-    this.methodDescription,
-    this.methodSupports,
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.order,
+    required this.enabled,
+    required this.methodTitle,
+    required this.methodDescription,
+    required this.methodSupports,
     this.settings,
-    this.links,
+    required this.links,
   });
 
   String id;
@@ -20,14 +20,14 @@ class PaymentGatewaysEntity {
   String methodTitle;
   String methodDescription;
   List<String> methodSupports;
-  Map<String, PaymentGatewaysSettingEntity> settings;
+  Map<String, PaymentGatewaysSettingEntity>? settings;
   PaymentGatewaysLinksEntity links;
 }
 
 class PaymentGatewaysLinksEntity {
   PaymentGatewaysLinksEntity({
-    this.self,
-    this.collection,
+    required this.self,
+    required this.collection,
   });
 
   List<PaymentGatewaysCollectionEntity> self;
@@ -36,7 +36,7 @@ class PaymentGatewaysLinksEntity {
 
 class PaymentGatewaysCollectionEntity {
   PaymentGatewaysCollectionEntity({
-    this.href,
+    required this.href,
   });
 
   String href;
@@ -44,15 +44,15 @@ class PaymentGatewaysCollectionEntity {
 
 class PaymentGatewaysSettingEntity {
   PaymentGatewaysSettingEntity({
-    this.id,
-    this.label,
-    this.description,
-    this.type,
-    this.value,
-    this.settingDefault,
-    this.tip,
+    required this.id,
+    required this.label,
+    required this.description,
+    required this.type,
+    required this.value,
+    required this.settingDefault,
+    required this.tip,
     this.placeholder,
-    this.options,
+    required this.options,
   });
 
   String id;
@@ -62,17 +62,17 @@ class PaymentGatewaysSettingEntity {
   String value;
   String settingDefault;
   String tip;
-  PaymentGatewaysEntityPlaceholder placeholder;
+  PaymentGatewaysEntityPlaceholder? placeholder;
   PaymentGatewaysSettingsOptionsEntity options;
 }
 
 class PaymentGatewaysSettingsOptionsEntity {
   PaymentGatewaysSettingsOptionsEntity({
-    this.forfait,
-    this.livraisonGratuite,
-    this.pointDeVente,
-    this.sale,
-    this.authorization,
+    required this.forfait,
+    required this.livraisonGratuite,
+    required this.pointDeVente,
+    required this.sale,
+    required this.authorization,
   });
 
   PaymentGatewaysForfaitEntity forfait;
@@ -84,7 +84,7 @@ class PaymentGatewaysSettingsOptionsEntity {
 
 class PaymentGatewaysForfaitEntity {
   PaymentGatewaysForfaitEntity({
-    this.flatRate,
+    required this.flatRate,
   });
 
   String flatRate;
@@ -92,8 +92,8 @@ class PaymentGatewaysForfaitEntity {
 
 class PaymentGatewaysLivraisonGratuiteEntity {
   PaymentGatewaysLivraisonGratuiteEntity({
-    this.freeShipping,
-    this.freeShipping1,
+    required this.freeShipping,
+    required this.freeShipping1,
   });
 
   String freeShipping;
@@ -102,7 +102,7 @@ class PaymentGatewaysLivraisonGratuiteEntity {
 
 class PaymentGatewaysPointDeVenteEntity {
   PaymentGatewaysPointDeVenteEntity({
-    this.localPickup,
+    required this.localPickup,
   });
 
   String localPickup;
@@ -118,7 +118,7 @@ final placeholderValues = PaymentGatewaysEnumValuesEntity({
 
 class PaymentGatewaysEnumValuesEntity<T> {
   Map<String, T> map;
-  Map<T, String> reverseMap;
+  Map<T, String>? reverseMap;
 
   PaymentGatewaysEnumValuesEntity(this.map);
 }

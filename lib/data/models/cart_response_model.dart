@@ -1,7 +1,9 @@
+import '/core/extensions.dart';
+
 class CartResponseModel {
-  bool status;
-  List<CartItemModel> data;
-  int userId;
+  bool? status;
+  List<CartItemModel>? data;
+  int? userId;
 
   CartResponseModel({
     this.status,
@@ -21,25 +23,25 @@ class CartResponseModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class CartItemModel {
-  int productId;
-  String productName;
-  String productRegularPrice;
-  String productSalePrice;
-  String thumbnail;
-  int qty;
-  String productStep;
-  double lineSubtotal;
-  double lineTotal;
-  int variationId;
-  String attribute;
-  String attributeValue;
+  int? productId;
+  String? productName;
+  String? productRegularPrice;
+  String? productSalePrice;
+  String? thumbnail;
+  int? qty;
+  String? productStep;
+  double? lineSubtotal;
+  double? lineTotal;
+  int? variationId;
+  String? attribute;
+  String? attributeValue;
 
   CartItemModel({
     this.productId,
@@ -68,7 +70,7 @@ class CartItemModel {
     thumbnail = json['thumbnail'] != null ? json['thumbnail'] as String : null;
     qty = json['qty'] != null ? json['qty'] as int : null;
     productStep =
-        json['product_step'] != null ? json['product_step'] as String : null;
+        json['product_step'] != null ? json['product_step'] as String : '1';
     lineSubtotal = json['line_subtotal'] != null
         ? double.parse(json['line_subtotal'].toString())
         : 0.0;
@@ -84,13 +86,13 @@ class CartItemModel {
               .keys
               .first
               .toString()
-          : '';
+          : kEMPTY;
       attributeValue = (json['attribute'].toString() != "[]")
           ? Map<String, dynamic>.from(json['attribute'] as Map<String, dynamic>)
               .values
               .first
               .toString()
-          : '';
+          : kEMPTY;
     }
   }
   Map<String, dynamic> toJson() {

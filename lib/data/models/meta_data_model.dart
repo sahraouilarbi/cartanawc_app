@@ -1,7 +1,7 @@
 class MetaDataModel {
-  int id;
-  String key;
-  String value;
+  int? id;
+  String? key;
+  String? value;
 
   MetaDataModel({
     this.id,
@@ -20,5 +20,15 @@ class MetaDataModel {
     _data['key'] = key;
     _data['value'] = value;
     return _data;
+  }
+
+  @override
+  String toString() {
+    return """
+    MetaData:
+      id: $id
+      key: $key
+      value: $value
+    """;
   }
 }

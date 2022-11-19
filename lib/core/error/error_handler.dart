@@ -1,5 +1,6 @@
-import 'package:cartanawc_app/core/error/failure.dart';
 import 'package:dio/dio.dart';
+
+import '/core/error/failure.dart';
 
 enum DataSource {
   badRequest,
@@ -19,7 +20,7 @@ enum DataSource {
 }
 
 class ErrorHandler implements Exception {
-  Failure failure;
+  late Failure failure;
   ErrorHandler.handle(dynamic error) {
     if (error is DioError) {
       failure = _handleError(error);
@@ -55,7 +56,7 @@ class ErrorHandler implements Exception {
       case DioErrorType.sendTimeout:
         return DataSource.sendTimeout.getFailure();
       case DioErrorType.response:
-        return _dioErrorTypeResponse(error.response.statusCode);
+        return _dioErrorTypeResponse(error.response!.statusCode!);
       case DioErrorType.other:
         return DataSource.kDEFAULT.getFailure();
       default:

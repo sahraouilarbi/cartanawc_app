@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import '/core/dependency_injection.dart';
 import '/core/prefs/app_prefs.dart';
+import '/presentation/pages.dart';
 import '/presentation/ressources/appsize_manager.dart';
 
 class AppBarActionCustomerIcon extends StatelessWidget {
-  AppBarActionCustomerIcon({Key key}) : super(key: key);
+  AppBarActionCustomerIcon({Key? key}) : super(key: key);
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
   @override
@@ -15,9 +16,9 @@ class AppBarActionCustomerIcon extends StatelessWidget {
         _appPreferences.isUserLoggedIn().then(
           (isUserLoggedIn) {
             if (isUserLoggedIn) {
-              Navigator.pushNamed(context, '/customerProfile');
+              Navigator.pushNamed(context, CustomerProfilePage.routeName);
             } else {
-              Navigator.pushNamed(context, '/login');
+              Navigator.pushNamed(context, LoginPage.routeName);
             }
           },
         );

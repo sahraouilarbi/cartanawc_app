@@ -1,18 +1,20 @@
-import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
-import 'package:cartanawc_app/model_views/providers/loader_provider.dart';
-import 'package:cartanawc_app/presentation/cart/view/cart_product_widget.dart';
-import 'package:cartanawc_app/presentation/verify_address/view/verify_address_page.dart';
-import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
-import 'package:cartanawc_app/presentation/common/row_montant.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/progress_hud.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
+import '/presentation/cart/view/cart_product_widget.dart';
+import '/presentation/common/appbar/custom_appbar_widget.dart';
+import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
+import '/presentation/common/my_text_buttom_widget.dart';
+import '/presentation/common/page_sub_header.dart';
+import '/presentation/common/row_montant.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
+import '/presentation/verify_address/view/verify_address_page.dart';
+import '/providers/cart_provider.dart';
+import '/providers/loader_provider.dart';
+
 class CartPage extends StatefulWidget {
-  const CartPage({Key key}) : super(key: key);
+  const CartPage({Key? key}) : super(key: key);
 
   static const String routeName = '/cart';
 
@@ -31,23 +33,28 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Panier'),
-        centerTitle: true,
-      ),
+      appBar: const CustomAppBar(),
+      drawer: DrawerForAuthenticatedUser(),
       body: FutureBuilder(
         future: Future.value(true), //SharedService.isLoggedIn(),
         builder: (BuildContext context, AsyncSnapshot<bool> loginModel) {
           if (loginModel.hasData) {
-            if (loginModel.data) {
+            if (loginModel.data!) {
               return Consumer<LoaderProvider>(
                   builder: (context, loaderProvider, child) {
                 return Scaffold(
-                  body: ProgressHUD(
-                    isAsyncCall: loaderProvider.isApiCallProcess,
-                    opacity: 0.3,
-                    child: SingleChildScrollView(
-                      child: _cartItemsList(),
+                  body: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        PageSubHeaderWidget(
+                          title: 'PANIER',
+                          svgUrl: 'assets/images/shopping_cart.svg',
+                          textColor: Colors.white,
+                          backgroundColor: ColorManager.blue,
+                          hasBackReturn: true,
+                        ),
+                        _cartItemsList(),
+                      ],
                     ),
                   ),
                 );
@@ -63,36 +70,11 @@ class _CartPageState extends State<CartPage> {
   Widget _cartItemsList() {
     return Column(
       children: [
-        // Titre de la page : 'Panier' + Icon Shopping cart
-        Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: AppPadding.p10,
-            horizontal: AppPadding.p30,
-          ),
-          decoration: BoxDecoration(
-            border: const Border(bottom: BorderSide()),
-            color: ColorManager.blue,
-          ),
-          child: Row(
-            children: [
-              SvgPicture.asset('assets/images/shopping_cart.svg',
-                  color: Colors.white, fit: BoxFit.cover),
-              const SizedBox(width: AppSize.s5),
-              const Text(
-                'PANIER',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              ),
-            ],
-          ),
-        ),
-
         // contenue du panier
         Consumer<CartProvider>(
           builder: (context, cartModel, child) {
-            if (cartModel.cartItems != null && cartModel.cartItems.isNotEmpty) {
+            //if (cartModel.cartItems != null && cartModel.cartItems.isNotEmpty) {
+            if (cartModel.cartItems.isNotEmpty) {
               return ListView.builder(
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(),

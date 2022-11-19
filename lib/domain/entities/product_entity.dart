@@ -2,24 +2,24 @@ import '/domain/entities/entities.dart';
 
 class ProductEntity {
   ProductEntity({
-    this.id,
-    this.name,
-    this.description,
-    this.shortDescription,
-    this.type,
-    this.status,
-    this.sku,
-    this.price,
-    this.regularPrice,
-    this.salePrice,
-    this.stockStatus,
-    this.images,
-    this.categories,
-    this.attributes,
-    this.relatedIds,
-    this.variations,
-    this.metaData,
-    this.acf,
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.shortDescription,
+    required this.type,
+    required this.status,
+    required this.sku,
+    required this.price,
+    required this.regularPrice,
+    required this.salePrice,
+    required this.stockStatus,
+    required this.images,
+    required this.categories,
+    required this.attributes,
+    required this.relatedIds,
+    required this.variations,
+    required this.metaData,
+    required this.acf,
   });
   int id;
   String name;
@@ -36,17 +36,17 @@ class ProductEntity {
   List<ProductCategoryEntity> categories;
   List<ProductAttributesEntity> attributes;
   List<int> relatedIds;
-  ProductVariationsEntity variations;
+  List<dynamic> variations;
   List<MetaDataEntity> metaData;
   ProductACFEntity acf;
 }
 
 class ProductImageEntity {
   ProductImageEntity({
-    this.src,
-    this.woocommerceThumbnail,
-    this.woocommerceSingle,
-    this.woocommerceGalleryThumbnail,
+    required this.src,
+    required this.woocommerceThumbnail,
+    required this.woocommerceSingle,
+    required this.woocommerceGalleryThumbnail,
   });
   String src;
   String woocommerceThumbnail;
@@ -55,18 +55,18 @@ class ProductImageEntity {
 }
 
 class ProductCategoryEntity {
-  ProductCategoryEntity({this.id, this.name});
+  ProductCategoryEntity({required this.id, required this.name});
   int id;
   String name;
 }
 
 class ProductACFEntity {
   ProductACFEntity({
-    this.contenance,
-    this.grossite,
-    this.superGros,
-    this.grandeMoyenneSurface,
-    this.hypermarche,
+    required this.contenance,
+    required this.grossite,
+    required this.superGros,
+    required this.grandeMoyenneSurface,
+    required this.hypermarche,
   });
   String contenance;
   String grossite;
@@ -80,8 +80,8 @@ class ProductAttributesEntity {
   String name;
   List<dynamic> options;
   ProductAttributesEntity({
-    this.id,
-    this.name,
-    this.options,
+    required this.id,
+    required this.name,
+    required this.options,
   });
 }

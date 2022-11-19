@@ -17,20 +17,20 @@ class OrderModel {
     this.billing,
     this.shipping,
   });
-  int orderId;
-  String orderNumber;
-  String orderKey;
-  String status;
-  DateTime orderDateCreated;
-  String orderTotal;
-  int customerId;
-  BillingModel billing;
-  ShippingModel shipping;
-  String paymentMethod;
-  String paymentMethodTitle;
-  String transactionId;
-  List<OrderLineItemsModel> lineItems;
-  bool setPaid;
+  int? orderId;
+  String? orderNumber;
+  String? orderKey;
+  String? status;
+  DateTime? orderDateCreated;
+  String? orderTotal;
+  int? customerId;
+  BillingModel? billing;
+  ShippingModel? shipping;
+  String? paymentMethod;
+  String? paymentMethodTitle;
+  String? transactionId;
+  List<OrderLineItemsModel>? lineItems;
+  bool? setPaid;
 
   OrderModel.fromJson(Map<String, dynamic> json) {
     orderId = json['id'] as int;
@@ -49,10 +49,10 @@ class OrderModel {
     data['payment_method_title'] = paymentMethodTitle;
     data['set_paid'] = setPaid;
     data['transaction_id'] = transactionId;
-    data['shipping'] = shipping.toJson();
-    data['billing'] = billing.toJson();
+    data['shipping'] = shipping!.toJson();
+    data['billing'] = billing!.toJson();
     if (lineItems != null) {
-      data['line_items'] = lineItems.map((v) => v.toJson()).toList();
+      data['line_items'] = lineItems!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -66,10 +66,10 @@ class OrderLineItemsModel {
     this.subtotal,
   });
 
-  int productId;
-  int variationId;
-  int quantity;
-  String subtotal;
+  int? productId;
+  int? variationId;
+  int? quantity;
+  String? subtotal;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};

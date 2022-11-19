@@ -1,15 +1,16 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/data/api/api_service.dart';
-import 'package:cartanawc_app/model_views/providers/cart_provider.dart';
-import 'package:cartanawc_app/presentation/base/base_checkout.dart';
-import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
-import 'package:cartanawc_app/presentation/order/view/order_success_widget.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '/core/dependency_injection.dart';
+import '/core/extensions.dart';
+import '/data/api/api_service.dart';
 import '/data/models/models.dart';
+import '/presentation/base/base_checkout.dart';
+import '/presentation/common/my_text_buttom_widget.dart';
+import '/presentation/order/view/order_success_widget.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
+import '/providers/cart_provider.dart';
 
 class PaymentMethodsPage extends CheckoutBasePage {
   static const String routeName = '/paymentMethods';
@@ -26,16 +27,15 @@ class PaymentMethodsPage extends CheckoutBasePage {
 }
 
 class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethodsPage> {
-  APIService apiService;
-  Future<List<PaymentGatewaysModel>> paymentGateways;
-  String _paymentGatewaysID = '';
-  CartProvider cartProvider;
+  late APIService apiService;
+  late Future<List<PaymentGatewaysModel>> paymentGateways;
+  String _paymentGatewaysID = kEMPTY;
+  late CartProvider cartProvider;
 
   @override
   void initState() {
     super.initState();
     currentPage = 1;
-    //apiService = APIServiceImpl();
     apiService = instance<APIService>();
     cartProvider = Provider.of<CartProvider>(context, listen: false);
     paymentGateways = apiService.getPaymentGateways();
@@ -44,6 +44,7 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethodsPage> {
   @override
   Widget pageUI() {
     return SingleChildScrollView(
+      physics: const ScrollPhysics(),
       child: Column(
         children: [
           FutureBuilder(
@@ -53,11 +54,9 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethodsPage> {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                   return Text(snapshot.error.toString());
-                  break;
                 case ConnectionState.active:
                 case ConnectionState.waiting:
                   return const Center(child: CircularProgressIndicator());
-                  break;
                 case ConnectionState.done:
                   if (snapshot.hasError) {
                     return Text(snapshot.error.toString());
@@ -68,40 +67,40 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethodsPage> {
                         physics: const ScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          if (snapshot.data[index].enabled == true) {
-                            return RadioListTile(
-                              value: snapshot.data[index].id,
+                          if (snapshot.data![index].enabled == true) {
+                            return RadioListTile<String>(
+                              value: snapshot.data![index].id!,
                               groupValue: _paymentGatewaysID,
                               onChanged: (value) {
                                 setState(() {
                                   _paymentGatewaysID = value.toString();
                                 });
                                 cartProvider.orderModel.paymentMethod =
-                                    snapshot.data[index].id;
+                                    snapshot.data![index].id;
                                 cartProvider.orderModel.paymentMethodTitle =
-                                    snapshot.data[index].title;
+                                    snapshot.data![index].title;
                                 cartProvider.orderModel.setPaid = false;
                               },
                               toggleable: true,
                               title: Text(
-                                snapshot.data[index].title,
+                                snapshot.data![index].title!,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold),
                               ),
                               subtitle: Text(
-                                snapshot.data[index].description,
+                                snapshot.data![index].description!,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,
                               ),
                               isThreeLine: true,
                             );
                           }
-                          return null;
+                          return const SizedBox();
                         },
                         separatorBuilder: (context, index) {
                           return const Divider();
                         },
-                        itemCount: snapshot.data.length,
+                        itemCount: snapshot.data!.length,
                       ),
                       const SizedBox(height: AppSize.s20),
                       MyTextButtonWidget(
@@ -120,23 +119,8 @@ class _PaymentMethodsState extends CheckoutBasePageState<PaymentMethodsPage> {
                     ],
                   );
               }
-              return null;
             },
           ),
-          // const SizedBox(height: AppSize.s20),
-          // MyTextButtonWidget(
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => OrderSuccessWidget(),
-          //       ),
-          //     );
-          //   },
-          //   backgroundColor: ColorManager.greenAccent,
-          //   textButton: 'SUIVANT',
-          // ),
-          // const SizedBox(height: AppSize.s20),
         ],
       ),
     );

@@ -1,9 +1,10 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
+
 class WhiteAndGreenBar extends StatelessWidget {
-  const WhiteAndGreenBar({Key key}) : super(key: key);
+  const WhiteAndGreenBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

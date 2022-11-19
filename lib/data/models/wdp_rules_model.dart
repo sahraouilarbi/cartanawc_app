@@ -20,24 +20,24 @@ class WdpRulesModel {
     this.getProducts,
   });
 
-  String id;
-  String deleted;
-  String enabled;
-  String exclusive;
-  String type;
-  String title;
-  String priority;
-  WdpRulesOptionsModel options;
-  WdpRulesAdditionalModel additional;
-  List<dynamic> conditions;
-  List<WdpRulesFiltersModel> filters;
-  List<dynamic> limits;
-  WdpRulesProductAdjustmentsModel productAdjustments;
-  WdpRulesBulkAdjustmentsModel bulkAdjustments;
-  List<String> sortableBlocksPriority;
-  List<WdpRulesRoleDiscountsModel> roleDiscounts;
-  List<dynamic> cartAdjustments;
-  WdpRulesGetProductsModel getProducts;
+  String? id;
+  String? deleted;
+  String? enabled;
+  String? exclusive;
+  String? type;
+  String? title;
+  String? priority;
+  WdpRulesOptionsModel? options;
+  WdpRulesAdditionalModel? additional;
+  List<dynamic>? conditions;
+  List<WdpRulesFiltersModel>? filters;
+  List<dynamic>? limits;
+  WdpRulesProductAdjustmentsModel? productAdjustments;
+  WdpRulesBulkAdjustmentsModel? bulkAdjustments;
+  List<String>? sortableBlocksPriority;
+  List<WdpRulesRoleDiscountsModel>? roleDiscounts;
+  List<dynamic>? cartAdjustments;
+  WdpRulesGetProductsModel? getProducts;
 
   factory WdpRulesModel.fromJson(Map<String, dynamic> json) => WdpRulesModel(
         id: json['id'] != null ? json['id'] as String : null,
@@ -130,8 +130,8 @@ class WdpRulesModel {
 
 // Advanced Dynamic Pricing - options
 class WdpRulesOptionsModel {
-  String repeat;
-  String applyTo;
+  String? repeat;
+  String? applyTo;
 
   WdpRulesOptionsModel({
     this.repeat,
@@ -147,10 +147,10 @@ class WdpRulesOptionsModel {
 
 // Advanced Dynamic Pricing - additional
 class WdpRulesAdditionalModel {
-  String replaceName;
-  String sortableApplyMode;
-  String freeProductsReplaceName;
-  String conditionsRelationship;
+  String? replaceName;
+  String? sortableApplyMode;
+  String? freeProductsReplaceName;
+  String? conditionsRelationship;
 
   WdpRulesAdditionalModel({
     this.replaceName,
@@ -185,11 +185,11 @@ class WdpRulesFiltersModel {
     this.method,
     this.value,
   });
-  String qty;
-  String type;
-  String limitation;
-  String method;
-  List<String> value;
+  String? qty;
+  String? type;
+  String? limitation;
+  String? method;
+  List<String>? value;
   factory WdpRulesFiltersModel.fromJson(Map<String, dynamic> json) =>
       WdpRulesFiltersModel(
         qty: json['qty'] != null ? json['qty'] as String : null,
@@ -205,10 +205,10 @@ class WdpRulesFiltersModel {
 
 // Advanced Dynamic Pricing - product_adjustments
 class WdpRulesProductAdjustmentsModel {
-  WdpRulesProductAdjustmentsTotalModel total;
-  List<WdpRulesProductAdjustmentsSplitModel> split;
-  String maxDiscountSum;
-  String splitDiscountBy;
+  WdpRulesProductAdjustmentsTotalModel? total;
+  List<WdpRulesProductAdjustmentsSplitModel>? split;
+  String? maxDiscountSum;
+  String? splitDiscountBy;
 
   WdpRulesProductAdjustmentsModel({
     this.total,
@@ -251,8 +251,8 @@ class WdpRulesProductAdjustmentsTotalModel {
     this.type,
     this.value,
   });
-  String type;
-  String value;
+  String? type;
+  String? value;
 
   factory WdpRulesProductAdjustmentsTotalModel.fromJson(
           Map<String, dynamic> json) =>
@@ -264,8 +264,8 @@ class WdpRulesProductAdjustmentsTotalModel {
 
 // Advanced Dynamic Pricing - product_adjustments -> split
 class WdpRulesProductAdjustmentsSplitModel {
-  String type;
-  String value;
+  String? type;
+  String? value;
 
   WdpRulesProductAdjustmentsSplitModel({
     this.type,
@@ -282,8 +282,8 @@ class WdpRulesProductAdjustmentsSplitModel {
 
 // Advanced Dynamic Pricing - bulk_adjustments
 class WdpRulesBulkAdjustmentsModel {
-  String type;
-  String tableMessage;
+  String? type;
+  String? tableMessage;
 
   WdpRulesBulkAdjustmentsModel({
     this.type,
@@ -301,9 +301,9 @@ class WdpRulesBulkAdjustmentsModel {
 
 // Advanced Dynamic Pricing - role_discounts
 class WdpRulesRoleDiscountsModel {
-  List<String> roles;
-  String discountType;
-  String discountValue;
+  List<String>? roles;
+  String? discountType;
+  String? discountValue;
 
   WdpRulesRoleDiscountsModel({
     this.roles,
@@ -327,8 +327,8 @@ class WdpRulesRoleDiscountsModel {
 
 // Advanced Dynamic Pricing - get_products
 class WdpRulesGetProductsModel {
-  String repeat;
-  String repeatSubtotal;
+  String? repeat;
+  String? repeatSubtotal;
 
   WdpRulesGetProductsModel({
     this.repeat,
@@ -348,8 +348,8 @@ class WdpRulesGetProductsModel {
  * les differents prix selon le rôle de l'utilisateur
  */
 class CartanaWdpRulesModel {
-  String id;
-  List<CartanaWdpRulesRolesModel> cartanaWdpRulesRoles;
+  String? id;
+  List<CartanaWdpRulesRolesModel>? cartanaWdpRulesRoles;
 
   CartanaWdpRulesModel({
     this.id,
@@ -372,8 +372,8 @@ class CartanaWdpRulesModel {
 }
 
 class CartanaWdpRulesRolesModel {
-  String roles;
-  String discountValue;
+  String? roles;
+  String? discountValue;
 
   CartanaWdpRulesRolesModel({
     this.roles,

@@ -1,68 +1,104 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/data/api/api_endpoint.dart';
-import 'package:cartanawc_app/data/http_service.dart';
-import 'package:cartanawc_app/presentation/common/utils.dart';
-import 'package:dio/dio.dart';
+import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+
+import '/core/dependency_injection.dart';
+import '/core/extensions.dart';
+import '/core/prefs/app_prefs.dart';
+import '/data/api/api_endpoint.dart';
 import '/data/models/models.dart';
+import '/presentation/common/utils.dart';
 
 abstract class APIService {
-  Future<LoginResponseModel> login(String username, String password);
-  Future<CustomerDetailModel> getCustomerDetails(int userId);
-  Future<ForgotPasswordResponseModel> forgotPassword(String email);
+  factory APIService(Dio dio) = _APIServiceImpl;
+  Future<LoginResponseModel> login(String _username, String _password);
+  Future<CustomerDetailModel> getCustomerDetails(int _userId);
+  Future<CustomerDetailModel> updateShippingInformations(
+      int _userId, ShippingModel _shippingModel);
+  Future<ResetPasswordResponseModel> forgotPassword(String _email);
   //Future<CustomerDetailModel> customerDetails();
   Future<List<CategoryModel>> getCategories();
   Future<List<ProductModel>> getProducts({
-    String status = 'publish',
-    String strSearch,
-    int perPage,
-    int pageNumber,
-    String tagName,
-    List<int> productsIds,
-    String categoryId,
-    String sortBy,
-    String sortOrder = 'asc',
+    String? status = 'publish',
+    String? strSearch,
+    int? perPage,
+    int? pageNumber,
+    String? tagName,
+    List<int>? productsIds,
+    String? categoryId,
+    String? sortBy,
+    String? sortOrder = 'asc',
   });
-  Future<CartResponseModel> addToCart(CartRequestModel model);
+  Future<CartResponseModel> addToCart(CartRequestModel _model);
   Future<CartResponseModel> getCartItem();
-  Future<Map<String, dynamic>> createOrder(OrderModel model);
-  Future<List<OrderModel>> getOrders();
-  Future<OrderDetailModel> getOrderDetails(int orderId);
+  Future<Map<String, dynamic>> createOrder(OrderModel _model);
+  Future<List<OrderModel>> getOrders(
+    int customerID, {
+    int? pageNumber = 1,
+    int? perPage = 10,
+    String? search,
+    String? after,
+    String? before,
+    String? sortOrder = 'desc',
+    String? sortBy = 'date',
+    String? status = 'any',
+    int? product,
+  });
+  Future<OrderDetailModel> getOrderDetails(int _orderId);
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
+  Future<DevenirDistributeurResponseModel> devenirDistributeur(
+      DevenirDistributeurRequestModel _formData);
+  Future<List<PaiementModel>> getPaiements();
 }
 
-class APIServiceImpl implements APIService {
+class _APIServiceImpl implements APIService {
+  _APIServiceImpl(this._dio);
+
   final APIEndPoint _apiEndPoint = APIEndPoint();
-  HttpService httpService = HttpService();
   final AppPreferences _appPreferences = instance<AppPreferences>();
+  final Dio _dio;
 
   //***************************************************************************
   //Login
   @override
-  Future<LoginResponseModel> login(String username, String password) async {
-    LoginResponseModel loginResponseModel;
+  Future<LoginResponseModel> login(String _username, String _password) async {
+    late LoginResponseModel _loginResponseModel;
+
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final _data = {'username': _username, 'password': _password};
 
     try {
-      final Response response =
-          await httpService.postRequest(APIEndPoint.jwtAuthToken, {
-        'username': username,
-        'password': password,
-      });
-      if (response.statusCode == 200) {
-        loginResponseModel =
-            LoginResponseModel.fromJson(response.data as Map<String, dynamic>);
-      }
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<LoginResponseModel>(
+          Options(
+            method: 'POST',
+            headers: {
+              HttpHeaders.authorizationHeader: '',
+            },
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.jwtAuthToken,
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+      _loginResponseModel = LoginResponseModel.fromJson(_response.data!);
     } on DioError catch (e) {
       printDebugMessage('APIService.loginCustomer Exception : ${e.message}');
     }
-    return loginResponseModel;
+    return _loginResponseModel;
   }
 
   //***************************************************************************
   // ForgotPassword
   @override
-  Future<ForgotPasswordResponseModel> forgotPassword(String email) {
+  Future<ResetPasswordResponseModel> forgotPassword(String email) {
     // TODO: implement forgotPassword
     throw UnimplementedError();
   }
@@ -70,184 +106,220 @@ class APIServiceImpl implements APIService {
   //***************************************************************************
   // Get Customer Details
   @override
-  Future<CustomerDetailModel> getCustomerDetails(int userId) async {
-    CustomerDetailModel customerDetailModel;
+  Future<CustomerDetailModel> getCustomerDetails(int _userId) async {
+    late CustomerDetailModel _customerDetailModel;
+
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
+
     try {
-      final Response response =
-          await httpService.getRequest(_apiEndPoint.customer(userId));
-      if (response.statusCode == 200) {
-        customerDetailModel =
-            CustomerDetailModel.fromJson(response.data as Map<String, dynamic>);
-      }
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CustomerDetailModel>(
+          Options(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                _apiEndPoint.customer(_userId),
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+
+      _customerDetailModel = CustomerDetailModel.fromJson(_response.data!);
     } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        printDebugMessage(e.response.statusCode.toString());
+      if (e.response!.statusCode == 404) {
+        printDebugMessage(e.response!.statusCode.toString());
       } else {
-        printDebugMessage(e.message.toString());
-        printDebugMessage(e.error.toString());
+        debugPrint(e.message.toString());
+        debugPrint(e.error.toString());
       }
     }
-    return customerDetailModel;
+    return _customerDetailModel;
   }
 
   //***************************************************************************
-  // Customer Details
-  // TODO A SUPRIMMER SI gerCustomerDetails() fonctionne !!
-  // @override
-  // Future<CustomerDetailModel> customerDetails() async {
-  //   CustomerDetailModel customerDetailModel;
-  //   try {
-  //     final bool isLoggedIn = await SharedService.isLoggedIn();
-  //     if (isLoggedIn) {
-  //       int userId;
-  //       final LoginResponseModel loginResponseModel =
-  //           await SharedService.loginDetails();
-  //       if (loginResponseModel.data != null) {
-  //         userId = loginResponseModel.data.id;
-  //       }
-  //       final Response response =
-  //           await httpService.getRequest(_apiEndPoint.customer(userId));
-  //       if (response.statusCode == 200) {
-  //         customerDetailModel = CustomerDetailModel.fromJson(
-  //             response.data as Map<String, dynamic>);
-  //       }
-  //     }
-  //   } on DioError catch (e) {
-  //     if (e.response.statusCode == 404) {
-  //       printDebugMessage(e.response.statusCode.toString());
-  //     } else {
-  //       printDebugMessage(e.message.toString());
-  //       printDebugMessage(e.error.toString());
-  //     }
-  //   }
-  //   return customerDetailModel;
-  // }
+  // Update Customer Details
+  @override
+  Future<CustomerDetailModel> updateShippingInformations(
+      int _userId, ShippingModel _shippingModel) async {
+    late CustomerDetailModel _customerDetailModel;
+
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final _data = {"shipping": _shippingModel.toJson()};
+
+    try {
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        //_setStreamType<ShippingModel>(
+        _setStreamType<CustomerDetailModel>(
+          Options(
+            method: 'PUT',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                _apiEndPoint.customer(_userId),
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+      _customerDetailModel = CustomerDetailModel.fromJson(_response.data!);
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 404) {
+        printDebugMessage(e.response!.statusCode.toString());
+      } else {
+        debugPrint(e.message.toString());
+        debugPrint(e.error.toString());
+      }
+    }
+    return _customerDetailModel;
+  }
 
   //***************************************************************************
-  // Categories
+  // Get Categories
   @override
   Future<List<CategoryModel>> getCategories() async {
-    List<CategoryModel> categories = <CategoryModel>[];
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final _queryParameters = {
+      'hide_empty': false,
+      'per_page': 100,
+    };
+    const _data = <String, dynamic>{};
     try {
-      final Response response = await httpService.getRequest(
-        APIEndPoint.categories,
-        queryParameters: {
-          'hide_empty': false,
-          'per_page': 100,
-        },
+      final _response = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<CategoryModel>>(
+          Options(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.categories,
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
       );
-      if (response.statusCode == 200) {
-        categories = (response.data as List)
-            .map((i) => CategoryModel.fromJson(i as Map<String, dynamic>))
-            .toList();
-      }
+      return (_response.data!)
+          .map((i) => CategoryModel.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on DioError catch (e) {
-      printDebugMessage(e.message);
+      printDebugMessage('## getCategories DioError : ${e.message}');
     }
-    return categories;
+    return <CategoryModel>[];
   }
 
   //***************************************************************************
   //Produits
   @override
   Future<List<ProductModel>> getProducts({
-    String status = 'publish',
-    String strSearch,
-    int perPage,
-    int pageNumber,
-    String tagName,
-    List<int> productsIds,
-    String categoryId,
-    String sortBy,
-    String sortOrder = 'asc',
+    String? status = 'publish',
+    String? strSearch,
+    int? perPage,
+    int? pageNumber,
+    String? tagName,
+    List<int>? productsIds,
+    String? categoryId,
+    String? sortBy,
+    String? sortOrder = 'asc',
   }) async {
-    //CustomerDetailModel customerDetailModel;
-    //String userRole = '';
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
 
-    //final bool isLoggedIn = await SharedService.isLoggedIn();
-    // if (isLoggedIn) {
-    //   customerDetailModel = await customerDetails();
-    //   userRole = customerDetailModel.role;
-    // }
-
-    // ***
-    String _userRole = '';
-    final _isUserLoggedIn = await _appPreferences.isUserLoggedIn();
-    if (_isUserLoggedIn) {
-      final _userId = await _appPreferences.getUserId();
-      final _customerDetailModel = await getCustomerDetails(_userId);
-      _userRole = _customerDetailModel.role;
+    if (status != null) {
+      _queryParameters['status'] = status;
     }
-    // ***
-
-    List<ProductModel> products = <ProductModel>[];
-
+    if (strSearch != null) {
+      _queryParameters['search'] = strSearch;
+    }
+    if (perPage != null) {
+      _queryParameters['per_page'] = perPage;
+    }
+    if (pageNumber != null) {
+      _queryParameters['page'] = pageNumber;
+    }
+    if (tagName != null) {
+      _queryParameters['tag'] = tagName;
+    }
+    if (productsIds != null) {
+      _queryParameters['include'] = productsIds.join(',').toString();
+    }
+    if (categoryId != null) {
+      _queryParameters['category'] = categoryId;
+    }
+    if (sortBy != null) {
+      _queryParameters['orderby'] = sortBy;
+    }
+    if (sortOrder != null) {
+      _queryParameters['order'] = sortOrder;
+    }
+    List<ProductModel> _products = <ProductModel>[];
     try {
-      final Map<String, dynamic> params = <String, dynamic>{};
-
-      if (status != null) {
-        params['status'] = status;
-      }
-      if (strSearch != null) {
-        params['search'] = strSearch;
-      }
-      if (perPage != null) {
-        params['per_page'] = perPage;
-      }
-      if (pageNumber != null) {
-        params['page'] = pageNumber;
-      }
-      if (tagName != null) {
-        params['tag'] = tagName;
-      }
-      if (productsIds != null) {
-        params['include'] = productsIds.join(',').toString();
-      }
-      if (categoryId != null) {
-        params['category'] = categoryId;
-      }
-      if (sortBy != null) {
-        params['orderby'] = sortBy;
-      }
-      if (sortOrder != null) {
-        params['order'] = sortOrder;
-      }
-
-      final Response response = await httpService.getRequest(
-        APIEndPoint.products,
-        queryParameters: params,
+      const Map<String, dynamic> _extra = <String, dynamic>{};
+      final Map<String, dynamic> _data = <String, dynamic>{};
+      final _response = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<ProductModel>>(
+          Options(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.products,
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
       );
-      if (response.statusCode == 200) {
-        products = (response.data as List)
-            .map((i) => ProductModel.fromJson(i as Map<String, dynamic>))
-            .where((element) => element.status == 'publish')
-            .toList();
-        if (_userRole != null) {
-          for (final ProductModel product in products) {
-            switch (_userRole) {
-              case 'grossite':
-                product.price = _isUserLoggedIn ? product.acf.grossite : '';
-                break;
-              case 'super_gros':
-                product.price = _isUserLoggedIn ? product.acf.superGros : '';
-                break;
-              case 'grand_moyenne_surface':
-                product.price =
-                    _isUserLoggedIn ? product.acf.grandeMoyenneSurface : '';
-                break;
-              case 'hypermarche':
-                product.price = _isUserLoggedIn ? product.acf.hypermarche : '';
-                break;
-              default:
-                product.price = '';
-            }
-          }
+      _products = (_response.data!)
+          .map((i) => ProductModel.fromJson(i as Map<String, dynamic>))
+          .toList();
+
+      String _userRole = kEMPTY;
+      final _isUserLoggedIn = await _appPreferences.isUserLoggedIn();
+      if (_isUserLoggedIn) {
+        final _userId = await _appPreferences.getUserId();
+        final _customerDetailModel = await getCustomerDetails(_userId);
+        _userRole = _customerDetailModel.role!;
+      }
+
+      for (final ProductModel product in _products) {
+        switch (_userRole) {
+          case 'grossite':
+            product.price = _isUserLoggedIn ? product.acf!.grossite : kEMPTY;
+            break;
+          case 'super_gros':
+            product.price = _isUserLoggedIn ? product.acf!.superGros : kEMPTY;
+            break;
+          case 'grand_moyenne_surface':
+            product.price =
+                _isUserLoggedIn ? product.acf!.grandeMoyenneSurface : kEMPTY;
+            break;
+          case 'hypermarche':
+            product.price = _isUserLoggedIn ? product.acf!.hypermarche : kEMPTY;
+            break;
+          default:
+            product.price = kEMPTY;
         }
       }
+      return _products;
     } on DioError catch (e) {
       printDebugMessage('APIService.getProducts Exception : ${e.response}');
     }
-    return products;
+
+    return <ProductModel>[];
   }
 
   //***************************************************************************
@@ -259,47 +331,74 @@ class APIServiceImpl implements APIService {
     //   model.userId = loginResponseModel.data.id;
     // }
     model.userId = await _appPreferences.getUserId();
-    CartResponseModel responseModel;
+    late CartResponseModel _responseModel;
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final Map<String, dynamic> _data = model.toJson();
     try {
-      final Response response =
-          await httpService.postRequest(APIEndPoint.addToCart, model.toJson());
-      if (response.statusCode == 200) {
-        responseModel =
-            CartResponseModel.fromJson(response.data as Map<String, dynamic>);
-      }
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CartResponseModel>(
+          Options(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.addToCart,
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+      _responseModel = CartResponseModel.fromJson(
+          _response.data!); // as Map<String, dynamic>);
     } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
+      if (e.response!.statusCode == 404) {
         printDebugMessage(
-            'APIService.addToCart Exception (response.statusCode): ${e.response.statusCode}');
+            'APIService.addToCart Exception (response.statusCode): ${e.response!.statusCode}');
       } else {
         printDebugMessage(
             'APIService.addToCart Exception (message): ${e.message}');
         printDebugMessage('APIService.addToCart Exception (error): ${e.error}');
       }
     }
-    return responseModel;
+    return _responseModel;
   }
 
   //***************************************************************************
   // Get Cart Items
   @override
   Future<CartResponseModel> getCartItem() async {
-    CartResponseModel responseModel;
+    late CartResponseModel _responseModel;
     final _userId = await _appPreferences.getUserId();
-    final Map<String, dynamic> params = {'user_id': _userId};
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final _queryParameters = {'user_id': _userId};
+    final Map<String, dynamic> _data = <String, dynamic>{};
     try {
-      final Response response = await httpService.getRequest(
-        APIEndPoint.cart,
-        queryParameters: params,
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CartResponseModel>(
+          Options(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.cart,
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
       );
-      if (response.statusCode == 200) {
-        responseModel =
-            CartResponseModel.fromJson(response.data as Map<String, dynamic>);
-      }
+      _responseModel = CartResponseModel.fromJson(
+          _response.data!); // as Map<String, dynamic>);
     } on DioError catch (e) {
       printDebugMessage(e.response.toString());
     }
-    return responseModel;
+    return _responseModel;
   }
 
   //***************************************************************************
@@ -307,90 +406,282 @@ class APIServiceImpl implements APIService {
   @override
   Future<Map<String, dynamic>> createOrder(OrderModel model) async {
     model.customerId = await _appPreferences.getUserId();
-    Map<String, dynamic> myOrderCreated = <String, dynamic>{};
-    bool isOrderCreated = false;
-    String orderNumber;
+    Map<String, dynamic> _myOrderCreated = <String, dynamic>{};
+    bool _isOrderCreated = false;
+    String _orderNumber;
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final _data = model.toJson();
     try {
-      final Response response =
-          await httpService.postRequest(APIEndPoint.orders, model.toJson());
-      if (response.statusCode == 201) {
-        final responseModel =
-            OrderModel.fromJson(response.data as Map<String, dynamic>);
-        orderNumber = responseModel.orderNumber;
-        isOrderCreated = true;
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Map<String, dynamic>>(
+          Options(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.orders,
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
 
-        myOrderCreated = {
-          'orderNumber': orderNumber,
-          'isOrderCreated': isOrderCreated,
-        };
-      }
+      final _responseModel =
+          OrderModel.fromJson(_response.data!); // as Map<String, dynamic>);
+      _orderNumber = _responseModel.orderNumber!;
+      _isOrderCreated = true;
+
+      _myOrderCreated = {
+        'orderNumber': _orderNumber,
+        'isOrderCreated': _isOrderCreated,
+      };
     } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        printDebugMessage(e.response.statusCode.toString());
+      if (e.response!.statusCode == 404) {
+        printDebugMessage(e.response!.statusCode.toString());
       } else {
         printDebugMessage(e.message);
         printDebugMessage(e.error.toString());
       }
     }
 
-    return myOrderCreated;
+    return _myOrderCreated;
   }
 
   //***************************************************************************
   // Get Orders
   @override
-  Future<List<OrderModel>> getOrders() async {
-    List<OrderModel> data = <OrderModel>[];
+  Future<List<OrderModel>> getOrders(
+    int customerID, {
+    int? pageNumber = 1,
+    int? perPage = 10,
+    String? search,
+    String? after,
+    String? before,
+    String? sortOrder = 'desc',
+    String? sortBy = 'date',
+    String? status = 'any',
+    int? product,
+  }) async {
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    _queryParameters['customer'] = customerID;
+    if (pageNumber != null) {
+      _queryParameters['page'] = pageNumber;
+    }
+    if (pageNumber != null) {
+      _queryParameters['per_page'] = perPage;
+    }
+    if (search != null) {
+      _queryParameters['search'] = search;
+    }
+    if (after != null) {
+      _queryParameters['after'] = after;
+    }
+    if (before != null) {
+      _queryParameters['before'] = before;
+    }
+    if (sortOrder != null) {
+      _queryParameters['order'] = sortOrder;
+    }
+    if (sortBy != null) {
+      _queryParameters['orderby'] = sortBy;
+    }
+    if (status != null) {
+      _queryParameters['status'] = status;
+    }
+    if (product != null) {
+      _queryParameters['product'] = product;
+    }
+
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
     try {
-      final Response response =
-          await httpService.getRequest(APIEndPoint.orders);
-      if (response.statusCode == 200) {
-        data = (response.data as List)
-            .map((element) =>
-                OrderModel.fromJson(element as Map<String, dynamic>))
-            .toList();
-      }
+      final _response = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<OrderModel>>(
+          Options(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.orders,
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+      return (_response.data!) // as List<dynamic>)
+          .map(
+              (element) => OrderModel.fromJson(element as Map<String, dynamic>))
+          .toList();
     } on DioError catch (e) {
       printDebugMessage(e.response.toString());
     }
-    return data;
+    return <OrderModel>[];
   }
 
   //***************************************************************************
   // Get Orders Details
   @override
-  Future<OrderDetailModel> getOrderDetails(int orderId) async {
-    OrderDetailModel responseModel = OrderDetailModel();
+  Future<OrderDetailModel> getOrderDetails(int _orderId) async {
+    OrderDetailModel _responseModel = OrderDetailModel();
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
     try {
-      final Response response =
-          await httpService.getRequest(_apiEndPoint.order(orderId));
-      if (response.statusCode == 200) {
-        responseModel =
-            OrderDetailModel.fromJson(response.data as Map<String, dynamic>);
-      }
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<OrderDetailModel>(
+          Options(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                _apiEndPoint.order(_orderId),
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+      _responseModel = OrderDetailModel.fromJson(_response.data!);
     } on DioError catch (e) {
       printDebugMessage(e.response.toString());
     }
-    return responseModel;
+    return _responseModel;
   }
 
+//***************************************************************************
+// Get Payment Methods
   @override
   Future<List<PaymentGatewaysModel>> getPaymentGateways() async {
-    List<PaymentGatewaysModel> data = <PaymentGatewaysModel>[];
+    //List<PaymentGatewaysModel> _getPayments = <PaymentGatewaysModel>[];
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final _queryParamets = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
+
     try {
-      final Response response =
-          await httpService.getRequest(APIEndPoint.paymentGateways);
-      if (response.statusCode == 200) {
-        data = (response.data as List)
-            .map((element) =>
-                PaymentGatewaysModel.fromJson(element as Map<String, dynamic>))
-            .toList();
-      }
+      final _response = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<PaymentGatewaysModel>>(
+          Options(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.paymentGateways,
+                queryParameters: _queryParamets,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+      return (_response.data!)
+          .map((element) =>
+              PaymentGatewaysModel.fromJson(element as Map<String, dynamic>))
+          .toList();
     } on DioError catch (e) {
       printDebugMessage(
           'api_service - getPaymentGateways Exception : ${e.response}');
     }
 
-    return data;
+    return <PaymentGatewaysModel>[];
+  }
+
+  // Devenir Distributeur
+  @override
+  Future<DevenirDistributeurResponseModel> devenirDistributeur(
+      DevenirDistributeurRequestModel _formData) async {
+    DevenirDistributeurResponseModel _devenirDistributeurResponse =
+        DevenirDistributeurResponseModel();
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParamets = <String, dynamic>{};
+    final FormData _data = FormData.fromMap(_formData.toJson());
+    try {
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DevenirDistributeurResponseModel>(
+          Options(
+            method: 'POST',
+            headers: {
+              HttpHeaders.authorizationHeader: "",
+              HttpHeaders.contentTypeHeader: "multipart/form-data"
+            },
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.devenirDistributeur,
+                queryParameters: _queryParamets,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+      _devenirDistributeurResponse =
+          DevenirDistributeurResponseModel.fromJson(_response.data!);
+    } on DioError catch (e) {
+      printDebugMessage(
+          'api_service - devenirDistributeur Exception : ${e.response}');
+    }
+    return _devenirDistributeurResponse;
+  }
+
+  // Get Paiements
+  @override
+  Future<List<PaiementModel>> getPaiements() async {
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    try {
+      final _response = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<PaiementModel>>(
+          Options(
+            method: 'GET',
+            headers: {
+              HttpHeaders.authorizationHeader:
+                  'Basic ${APIApplicationPassword().basicAuth}',
+            },
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.paiements,
+                queryParameters: _queryParameters,
+                data: _data,
+              )
+              .copyWith(baseUrl: APIEndPoint().baseUrl),
+        ),
+      );
+      return (_response.data!)
+          .map((e) => PaiementModel.fromJson(e as Map<String, dynamic>))
+          .toList();
+    } on DioError catch (e) {
+      printDebugMessage(e.response.toString());
+    } catch (e) {
+      printDebugMessage(e.toString());
+    }
+    return <PaiementModel>[];
+  }
+
+//***************************************************************************
+// Request Options
+  RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
+    if (T != dynamic &&
+        !(requestOptions.responseType == ResponseType.bytes ||
+            requestOptions.responseType == ResponseType.stream)) {
+      if (T == String) {
+        requestOptions.responseType = ResponseType.plain;
+      } else {
+        requestOptions.responseType = ResponseType.json;
+      }
+    }
+    return requestOptions;
   }
 }

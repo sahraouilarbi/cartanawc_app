@@ -1,23 +1,23 @@
 class WdpRulesEntity {
   WdpRulesEntity({
-    this.id,
-    this.deleted,
-    this.enabled,
-    this.exclusive,
-    this.type,
-    this.title,
-    this.priority,
-    this.options,
-    this.additional,
-    this.conditions,
-    this.filters,
-    this.limits,
-    this.productAdjustments,
-    this.sortableBlocksPriority,
-    this.bulkAdjustments,
-    this.roleDiscounts,
-    this.cartAdjustments,
-    this.getProducts,
+    required this.id,
+    required this.deleted,
+    required this.enabled,
+    required this.exclusive,
+    required this.type,
+    required this.title,
+    required this.priority,
+    required this.options,
+    required this.additional,
+    required this.conditions,
+    required this.filters,
+    required this.limits,
+    required this.productAdjustments,
+    required this.sortableBlocksPriority,
+    required this.bulkAdjustments,
+    required this.roleDiscounts,
+    required this.cartAdjustments,
+    required this.getProducts,
   });
 
   String id;
@@ -43,8 +43,8 @@ class WdpRulesEntity {
 // Advanced Dynamic Pricing - options
 class WdpRulesOptionsEntity {
   WdpRulesOptionsEntity({
-    this.repeat,
-    this.applyTo,
+    required this.repeat,
+    required this.applyTo,
   });
   String repeat;
   String applyTo;
@@ -53,10 +53,10 @@ class WdpRulesOptionsEntity {
 // Advanced Dynamic Pricing - additional
 class WdpRulesAdditionalEntity {
   WdpRulesAdditionalEntity({
-    this.replaceName,
-    this.sortableApplyMode,
-    this.freeProductsReplaceName,
-    this.conditionsRelationship,
+    required this.replaceName,
+    required this.sortableApplyMode,
+    required this.freeProductsReplaceName,
+    required this.conditionsRelationship,
   });
   String replaceName;
   String sortableApplyMode;
@@ -67,11 +67,11 @@ class WdpRulesAdditionalEntity {
 // Advanced Dynamic Pricing - filters
 class WdpRulesFiltersEntity {
   WdpRulesFiltersEntity({
-    this.qty,
-    this.type,
-    this.limitation,
-    this.method,
-    this.value,
+    required this.qty,
+    required this.type,
+    required this.limitation,
+    required this.method,
+    required this.value,
   });
   String qty;
   String type;
@@ -83,9 +83,10 @@ class WdpRulesFiltersEntity {
 // Advanced Dynamic Pricing - product_adjustments
 class WdpRulesProductAdjustmentsEntity {
   WdpRulesProductAdjustmentsEntity({
-    this.split,
-    this.maxDiscountSum,
-    this.splitDiscountBy,
+    required this.total,
+    required this.split,
+    required this.maxDiscountSum,
+    required this.splitDiscountBy,
   });
   WdpRulesProductAdjustmentsTotalEntity total;
   List<WdpRulesProductAdjustmentsSplitEntity> split;
@@ -96,8 +97,8 @@ class WdpRulesProductAdjustmentsEntity {
 // Advanced Dynamic Pricing - product_adjustments -> total
 class WdpRulesProductAdjustmentsTotalEntity {
   WdpRulesProductAdjustmentsTotalEntity({
-    this.type,
-    this.value,
+    required this.type,
+    required this.value,
   });
   String type;
   String value;
@@ -106,8 +107,8 @@ class WdpRulesProductAdjustmentsTotalEntity {
 // Advanced Dynamic Pricing - product_adjustments -> split
 class WdpRulesProductAdjustmentsSplitEntity {
   WdpRulesProductAdjustmentsSplitEntity({
-    this.type,
-    this.value,
+    required this.type,
+    required this.value,
   });
   String type;
   String value;
@@ -116,8 +117,8 @@ class WdpRulesProductAdjustmentsSplitEntity {
 // Advanced Dynamic Pricing - bulk_adjustments
 class WdpRulesBulkAdjustmentsEntity {
   WdpRulesBulkAdjustmentsEntity({
-    this.type,
-    this.tableMessage,
+    required this.type,
+    required this.tableMessage,
   });
   String type;
   String tableMessage;
@@ -126,7 +127,9 @@ class WdpRulesBulkAdjustmentsEntity {
 // Advanced Dynamic Pricing - role_discounts
 class WdpRulesRoleDiscountsEntity {
   WdpRulesRoleDiscountsEntity(
-      {this.roles, this.discountType, this.discountValue});
+      {required this.roles,
+      required this.discountType,
+      required this.discountValue});
   List<String> roles;
   String discountType;
   String discountValue;
@@ -135,8 +138,8 @@ class WdpRulesRoleDiscountsEntity {
 // Advanced Dynamic Pricing - get_products
 class WdpRulesGetProductsEntity {
   WdpRulesGetProductsEntity({
-    this.repeat,
-    this.repeatSubtotal,
+    required this.repeat,
+    required this.repeatSubtotal,
   });
   String repeat;
   String repeatSubtotal;
@@ -147,13 +150,14 @@ class WdpRulesGetProductsEntity {
  * les differents prix selon le rôle de l'utilisateur
  */
 class CartanaWdpRulesEntity {
-  CartanaWdpRulesEntity({this.id, this.cartanaWdpRulesRoles});
+  CartanaWdpRulesEntity({required this.id, required this.cartanaWdpRulesRoles});
   String id;
   List<CartanaWdpRulesRolesEntity> cartanaWdpRulesRoles;
 }
 
 class CartanaWdpRulesRolesEntity {
-  CartanaWdpRulesRolesEntity({this.roles, this.discountValue});
+  CartanaWdpRulesRolesEntity(
+      {required this.roles, required this.discountValue});
   String roles;
   String discountValue;
 }

@@ -1,12 +1,13 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
+
+import '/presentation/ressources/appsize_manager.dart';
 
 class BackgroundImageWithOverlay extends StatelessWidget {
   final String src;
   final double overlayOpacity;
   const BackgroundImageWithOverlay({
-    Key key,
-    this.src,
+    Key? key,
+    required this.src,
     this.overlayOpacity = AppSize.s0_3,
   }) : super(key: key);
 

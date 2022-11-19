@@ -1,14 +1,17 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/presentation/common/drawer/widgets/drawer_customer_tile.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
+import '/presentation/common/drawer/widgets/drawer_customer_tile.dart';
+import '/presentation/pages.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
+import '/providers/auth_provider.dart';
 import 'models/drawer_model.dart';
 
 class DrawerForAuthenticatedUser extends StatelessWidget {
-  DrawerForAuthenticatedUser({Key key}) : super(key: key);
+  DrawerForAuthenticatedUser({Key? key}) : super(key: key);
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
   @override
@@ -16,36 +19,39 @@ class DrawerForAuthenticatedUser extends StatelessWidget {
     final List<DrawerContent> _drawerContent = [
       DrawerContent(
         onTap: () {
-          Navigator.pushNamed(context, '/tableauBord', arguments: 0);
+          Navigator.pushNamed(context, TableauBordPage.routeName, arguments: 0);
         },
         title: 'COMMANDER',
         backgroundColor: Colors.white,
       ),
       DrawerContent(
         onTap: () {
-          Navigator.pushNamed(context, '/tableauBord', arguments: 1);
+          Navigator.pushNamed(context, TableauBordPage.routeName, arguments: 1);
         },
         title: 'PAIMENT',
         backgroundColor: Colors.white,
       ),
       DrawerContent(
         onTap: () {
-          Navigator.pushNamed(context, '/tableauBord', arguments: 2);
+          Navigator.pushNamed(context, TableauBordPage.routeName, arguments: 2);
         },
         title: 'HISTORIQUE',
         backgroundColor: Colors.white,
       ),
       DrawerContent(
         onTap: () {
-          Navigator.pushNamed(context, '/customerProfile');
+          Navigator.pushNamed(context, CustomerProfilePage.routeName);
         },
         title: 'PROFILE',
         backgroundColor: Colors.white,
       ),
       DrawerContent(
         onTap: () {
-          _appPreferences.logout();
-          Navigator.pushNamed(context, '/');
+          _appPreferences.logout().then(
+                (value) => Provider.of<AuthProvider>(context, listen: false)
+                    .isUserLoggedIn(),
+              );
+          Navigator.pushNamed(context, AccueilPage.routeName);
         },
         title: 'SE DECONNECTER',
         backgroundColor: Colors.white,

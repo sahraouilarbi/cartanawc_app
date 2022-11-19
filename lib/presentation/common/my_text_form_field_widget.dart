@@ -1,24 +1,27 @@
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
+
+import '/presentation/ressources/color_manager.dart';
 
 class MyTextFormFieldWidget extends StatelessWidget {
   const MyTextFormFieldWidget({
-    Key key,
+    Key? key,
     this.controller,
     this.keyboardType = TextInputType.text,
     this.hintText,
     this.labelText,
     this.errorText,
+    this.maxLines = 1,
     this.suffixIcon,
     this.readOnly = false,
     this.obscureText = false,
   }) : super(key: key);
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType keyboardType;
-  final String hintText;
-  final String labelText;
-  final String errorText;
-  final IconButton suffixIcon;
+  final String? hintText;
+  final String? labelText;
+  final String? errorText;
+  final int? maxLines;
+  final IconButton? suffixIcon;
   final bool readOnly;
   final bool obscureText;
 
@@ -45,6 +48,7 @@ class MyTextFormFieldWidget extends StatelessWidget {
         ),
         suffixIcon: suffixIcon,
       ),
+      maxLines: maxLines,
       readOnly: readOnly,
       obscureText: obscureText,
     );

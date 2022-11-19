@@ -2,31 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/core/dependency_injection.dart';
+import '/core/extensions.dart';
 import '/core/prefs/app_prefs.dart';
 import '/data/models/models.dart';
-import '/model_views/providers/auth_provider.dart';
-import '/model_views/providers/cart_provider.dart';
-import '/model_views/providers/loader_provider.dart';
+import '/domain/entities/entities.dart';
 import '/presentation/common/appbar/custom_appbar_widget.dart';
 import '/presentation/common/my_text_buttom_widget.dart';
 import '/presentation/common/row_montant.dart';
 import '/presentation/common/stepper_widget.dart';
 import '/presentation/ressources/appsize_manager.dart';
 import '/presentation/ressources/color_manager.dart';
+import '/providers/auth_provider.dart';
+import '/providers/cart_provider.dart';
+import '/providers/loader_provider.dart';
 import 'widgets.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  ProductDetailsPage({Key key, this.data}) : super(key: key);
-  final ProductModel data;
+  ProductDetailsPage({Key? key, required this.data}) : super(key: key);
+  final ProductEntity data;
 
   final CartProductsModel cartProducts = CartProductsModel();
 
   static const String routeName = '/productDetails';
 
-  static Route route() {
+  static Route route({required ProductEntity data}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => ProductDetailsPage(),
+      builder: (context) => ProductDetailsPage(data: data),
     );
   }
 
@@ -38,15 +40,18 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   final AppPreferences _appPreferences = instance<AppPreferences>();
   bool isUserLoggedIn = false;
 
-  int qty;
-  double productPrice;
-  double montant;
-  int productStep, productMinQty, productMaxQty;
-  AuthProvider authProvider;
+  late int _cartonACommander;
+  late double productPrice;
+  late double montant;
+  late int productStep;
+  late int productMinQty;
+  late int productMaxQty;
+  late AuthProvider authProvider;
   bool inProgress = false;
 
   void calculMontant() {
-    montant = double.parse(widget.data.price) * qty * productStep;
+    //montant = double.parse(widget.data.price) * qty * productStep;
+    montant = productPrice * _cartonACommander * productStep;
   }
 
   TextEditingController qtyStepController = TextEditingController();
@@ -68,7 +73,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     // Récuperer le prix
-    widget.data.price != null && widget.data.price != ''
+    widget.data.price != kEMPTY
         ? productPrice = double.parse(widget.data.price)
         : productPrice = 0;
 
@@ -77,6 +82,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         .where((element) => element.key == '_wcmmq_s_product_step')
         .first
         .value);
+
+    widget.cartProducts.productStep = productStep.toString();
 
     // Récuperer la valeur minStep du produit des metadata
     productMinQty = int.parse(widget.data.metaData
@@ -91,14 +98,14 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         .value);
 
     // initialiser la qty a 1 et calculer le montant
-    qty = 1;
+    _cartonACommander = 1;
     calculMontant();
 
     // initiliser la quantité du produit dans le panier
-    widget.cartProducts.quantity = qty * productStep;
+    widget.cartProducts.quantity = _cartonACommander * productStep;
 
     // Afficher une quantité 1 dans le textField Qty
-    qtyStepController.text = qty.toString();
+    qtyStepController.text = _cartonACommander.toString();
   }
 
   @override
@@ -158,58 +165,68 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         StepperWidget(
-                            qtyStepController: qtyStepController,
-                            stepActionRemove: () {
-                              setState(
-                                () {
-                                  if (qty <= 1) {
-                                    qty = 1;
-                                  } else {
-                                    qty -= 1;
-                                  }
-                                  qtyStepController.text = qty.toString();
-                                  widget.cartProducts.quantity =
-                                      qty * productStep;
-                                  montant = productStep * qty * productPrice;
-                                },
-                              );
-                            },
-                            stepActionAdd: () {
-                              setState(
-                                () {
-                                  if (qty ==
-                                      (productMaxQty / productStep).round()) {
-                                    qty = (productMaxQty / productStep).round();
-                                  } else {
-                                    qty += 1;
-                                  }
-                                  qtyStepController.text = qty.toString();
-                                  widget.cartProducts.quantity =
-                                      qty * productStep;
-                                  montant = productStep * qty * productPrice;
-                                },
-                              );
-                            },
-                            stepActionOnSubmitedValue: (String value) {
-                              if (int.parse(value) >
-                                  (productMaxQty / productStep).round()) {
-                                value = (productMaxQty / productStep)
-                                    .round()
-                                    .toString();
-                              } else if (int.parse(value) <
-                                  productMinQty / productStep) {
-                                value = '1';
-                              }
-                              setState(
-                                () {
-                                  qtyStepController.text = value;
-                                  qty = int.parse(value);
-                                  widget.cartProducts.quantity =
-                                      qty * productStep;
-                                  montant = productStep * qty * productPrice;
-                                },
-                              );
-                            }),
+                          qtyStepController: qtyStepController,
+                          stepActionRemove: () {
+                            setState(
+                              () {
+                                if (_cartonACommander <= 1) {
+                                  _cartonACommander = 1;
+                                } else {
+                                  _cartonACommander -= 1;
+                                }
+                                qtyStepController.text =
+                                    _cartonACommander.toString();
+                                widget.cartProducts.quantity =
+                                    _cartonACommander * productStep;
+                                montant = productStep *
+                                    _cartonACommander *
+                                    productPrice;
+                              },
+                            );
+                          },
+                          stepActionAdd: () {
+                            setState(
+                              () {
+                                if (_cartonACommander ==
+                                    (productMaxQty / productStep).round()) {
+                                  _cartonACommander =
+                                      (productMaxQty / productStep).round();
+                                } else {
+                                  _cartonACommander += 1;
+                                }
+                                qtyStepController.text =
+                                    _cartonACommander.toString();
+                                widget.cartProducts.quantity =
+                                    _cartonACommander * productStep;
+                                montant = productStep *
+                                    _cartonACommander *
+                                    productPrice;
+                              },
+                            );
+                          },
+                          stepActionOnSubmitedValue: (String value) {
+                            if (int.parse(value) >
+                                (productMaxQty / productStep).round()) {
+                              value = (productMaxQty / productStep)
+                                  .round()
+                                  .toString();
+                            } else if (int.parse(value) <
+                                productMinQty / productStep) {
+                              value = '1';
+                            }
+                            setState(
+                              () {
+                                qtyStepController.text = value;
+                                _cartonACommander = int.parse(value);
+                                widget.cartProducts.quantity =
+                                    _cartonACommander * productStep;
+                                montant = productStep *
+                                    _cartonACommander *
+                                    productPrice;
+                              },
+                            );
+                          },
+                        ),
                       ],
                     ),
 
@@ -225,12 +242,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
                     MyTextButtonWidget(
                       onPressed: () {
-                        if (qty == 0) {
+                        if (_cartonACommander == 0) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: const Text('Ajouter une quantité > 0'),
                             backgroundColor: ColorManager.red,
                           ));
-                        } else if (qty > 0) {
+                        } else if (_cartonACommander > 0) {
                           setState(() {
                             inProgress = !inProgress;
                           });
@@ -240,11 +257,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           final cartProvider =
                               Provider.of<CartProvider>(context, listen: false);
                           widget.cartProducts.productId = widget.data.id;
-                          widget.cartProducts.variationId =
-                              widget.data.variations != null
-                                  ? widget.data.variations.id
-                                  : 0;
-                          //TODO
+                          // TODO revoir variations
+                          // widget.cartProducts.variationId =
+                          //     widget.data.variations != null
+                          //         ? widget.data.variations.id
+                          //         : 0;
+                          // TODO
                           cartProvider.addToCart(
                             widget.cartProducts,
                             (val) {

@@ -1,27 +1,27 @@
 class CartResponseEntity {
   CartResponseEntity({
-    this.status,
-    this.data,
+    required this.status,
+    required this.data,
   });
   bool status;
   List<CartItemEntity> data;
-  int userId;
+  int? userId;
 }
 
 class CartItemEntity {
   CartItemEntity({
-    this.productId,
-    this.productName,
-    this.productRegularPrice,
-    this.productSalePrice,
-    this.thumbnail,
-    this.qty,
-    this.productStep,
-    this.lineSubtotal,
-    this.lineTotal,
-    this.variationId,
-    this.attribute,
-    this.attributeValue,
+    required this.productId,
+    required this.productName,
+    required this.productRegularPrice,
+    required this.productSalePrice,
+    required this.thumbnail,
+    required this.qty,
+    required this.productStep,
+    required this.lineSubtotal,
+    required this.lineTotal,
+    required this.variationId,
+    required this.attribute,
+    required this.attributeValue,
   });
 
   int productId;

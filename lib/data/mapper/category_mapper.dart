@@ -1,25 +1,26 @@
-// CategorieModel
-import '../../domain/entities/entities.dart';
-import '../models/models.dart';
+import '/core/extensions.dart';
+import '/data/models/models.dart';
+import '/domain/entities/entities.dart';
 
-extension CategorieModelMapper on CategoryModel {
+// CategorieModel
+extension CategorieModelMapper on CategoryModel? {
   CategoryEntity toDomain() {
     return CategoryEntity(
-      categoryId,
-      categoryName,
-      categorySlug,
-      categoryParent,
-      categoryDescription,
-      categoryImage.toDomain(),
+      this?.categoryId?.orZero() ?? kZERO,
+      this?.categoryName?.orEmpty() ?? kEMPTY,
+      this?.categorySlug?.orEmpty() ?? kEMPTY,
+      this?.categoryParent?.orZero() ?? kZERO,
+      this?.categoryDescription?.orEmpty() ?? kEMPTY,
+      this!.categoryImage.toDomain(),
     );
   }
 }
 
 // CategorieImageModel
-extension CategorieImageModelMapper on CategoryImageModel {
+extension CategorieImageModelMapper on CategoryImageModel? {
   CategoryImageEntity toDomain() {
     return CategoryImageEntity(
-      src: src,
+      src: this?.src?.orEmpty() ?? kEMPTY,
     );
   }
 }

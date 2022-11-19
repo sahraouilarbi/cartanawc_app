@@ -1,4 +1,4 @@
-import 'package:cartanawc_app/core/error/error_handler.dart';
+import '/core/error/error_handler.dart';
 
 class Failure {
   Failure(this.code, this.message);

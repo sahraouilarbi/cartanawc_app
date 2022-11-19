@@ -1,29 +1,30 @@
-import 'package:cartanawc_app/presentation/common/appbar/widgets/action_customer.dart';
-import 'package:cartanawc_app/presentation/common/appbar/widgets/action_shopping.dart';
-import 'package:cartanawc_app/presentation/common/appbar/widgets/cartana_logo.dart';
-import 'package:cartanawc_app/presentation/common/white_and_green_top_bar.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '/presentation/common/appbar/widgets/action_customer.dart';
+import '/presentation/common/appbar/widgets/action_shopping.dart';
+import '/presentation/common/appbar/widgets/cartana_logo.dart';
+import '/presentation/common/white_and_green_top_bar.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
+import '/providers/auth_provider.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({
-    Key key,
+    Key? key,
     this.hasTabs = false,
     this.tabController,
     this.tabs,
-    this.isLoginPage = false,
-    this.isUserProfilePage = false,
   }) : super(key: key);
 
   final bool hasTabs;
-  final TabController tabController;
-  final List<Tab> tabs;
-  final bool isLoginPage;
-  final bool isUserProfilePage;
+  final TabController? tabController;
+  final List<Tab>? tabs;
 
   @override
   Widget build(BuildContext context) {
+    final Status loggedInStatus = context.read<AuthProvider>().loggedInStatus;
+
     return AppBar(
       elevation: 0,
       title: const AppBarCartanaLogo(),
@@ -31,11 +32,11 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       backgroundColor: Colors.black,
       bottom: buildBottomAppBar(
         tabController: tabController,
-        tabs: tabs,
+        tabs: hasTabs ? tabs! : <Tab>[],
         hasTabs: hasTabs,
       ),
       actions: [
-        const AppBarActionShoppingIcon(),
+        if (loggedInStatus == Status.loggedIn) const AppBarActionShoppingIcon(),
         AppBarActionCustomerIcon(),
       ],
     );
@@ -47,35 +48,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       : const Size.fromHeight(AppSize.s62);
 }
 
-AppBar buildAppBar(
-  BuildContext context, {
-  bool hasTabs = false,
-  TabController tabController,
-  List<Tab> tabs,
-  bool isLoginPage = false,
-  bool isUserProfilePage = false,
-}) {
-  return AppBar(
-    elevation: 0,
-    title: const AppBarCartanaLogo(),
-    centerTitle: true,
-    backgroundColor: Colors.black,
-    bottom: buildBottomAppBar(
-      tabController: tabController,
-      tabs: tabs,
-      hasTabs: hasTabs,
-    ),
-    actions: [
-      const AppBarActionShoppingIcon(),
-      AppBarActionCustomerIcon(),
-    ],
-  );
-}
-
 PreferredSize buildBottomAppBar({
   bool hasTabs = false,
-  TabController tabController,
-  List<Tab> tabs,
+  TabController? tabController,
+  required List<Tab> tabs,
 }) {
   return PreferredSize(
     preferredSize: hasTabs ? const Size.fromHeight(AppSize.s50) : Size.zero,

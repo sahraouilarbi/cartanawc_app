@@ -1,13 +1,17 @@
-import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
 import 'package:flutter/material.dart';
+
+import '/core/extensions.dart';
+import '/presentation/common/state_render/state_renderer.dart';
 
 abstract class FlowState {
   StateRendererType getStateRendererType();
   String getMessage();
 }
 
+// Loading State (POPUP, FULL, SCREEN)
 class LoadingState extends FlowState {
-  LoadingState({this.stateRendererType, this.message});
+  LoadingState({required this.stateRendererType, String? message})
+      : message = message ?? 'Loading';
   StateRendererType stateRendererType;
   String message;
 
@@ -18,6 +22,7 @@ class LoadingState extends FlowState {
   StateRendererType getStateRendererType() => stateRendererType;
 }
 
+// Error State (POPUP, FULL, SCREEN)
 class ErrorState extends FlowState {
   ErrorState(this.stateRendererType, this.message);
   StateRendererType stateRendererType;
@@ -30,17 +35,19 @@ class ErrorState extends FlowState {
   StateRendererType getStateRendererType() => stateRendererType;
 }
 
+// Content State
 class ContentState extends FlowState {
   ContentState();
 
   @override
-  String getMessage() => '';
+  String getMessage() => kEMPTY;
 
   @override
   StateRendererType getStateRendererType() =>
       StateRendererType.contentScreenState;
 }
 
+// Empty State
 class EmptyState extends FlowState {
   EmptyState(this.message);
 
@@ -71,25 +78,24 @@ extension FlowStateExtension on FlowState {
     Widget contentScreenWidget,
     Function retryActionFunction,
   ) {
-    switch (runtimeType) {
+    switch (this.runtimeType) {
       case LoadingState:
         {
           if (getStateRendererType() == StateRendererType.popupLoadingState) {
             _showPopUp(
               context,
               getStateRendererType(),
-              getMessage() ?? '',
+              getMessage(),
             );
             return contentScreenWidget;
           } else {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
-              message: getMessage() ?? '',
+              message: getMessage(),
               retryActionFunction: retryActionFunction,
             );
           }
         }
-        break;
       case ErrorState:
         {
           _dismissDialog(context);
@@ -97,18 +103,17 @@ extension FlowStateExtension on FlowState {
             _showPopUp(
               context,
               getStateRendererType(),
-              getMessage() ?? '',
+              getMessage(),
             );
             return contentScreenWidget;
           } else {
             return StateRenderer(
               stateRendererType: getStateRendererType(),
-              message: getMessage() ?? '',
+              message: getMessage(),
               retryActionFunction: retryActionFunction,
             );
           }
         }
-        break;
       case ContentState:
         {
           _dismissDialog(context);
@@ -118,7 +123,7 @@ extension FlowStateExtension on FlowState {
         {
           return StateRenderer(
             stateRendererType: getStateRendererType(),
-            message: getMessage() ?? '',
+            message: getMessage(),
             retryActionFunction: retryActionFunction,
           );
         }
@@ -128,7 +133,7 @@ extension FlowStateExtension on FlowState {
           _showPopUp(
             context,
             StateRendererType.popupSuccess,
-            getMessage() ?? '',
+            getMessage(),
             title: 'Success',
           );
           return contentScreenWidget;
@@ -147,12 +152,12 @@ extension FlowStateExtension on FlowState {
   }
 
   bool _isThereCurrentDialogShowing(BuildContext context) =>
-      ModalRoute.of(context).isCurrent != true;
+      ModalRoute.of(context)?.isCurrent != true;
 
   void _showPopUp(
       BuildContext context, StateRendererType stateRendererType, String message,
-      {String title = ''}) {
-    WidgetsBinding.instance.addPostFrameCallback(
+      {String title = kEMPTY}) {
+    WidgetsBinding.instance!.addPostFrameCallback(
       (_) => showDialog(
         context: context,
         builder: (BuildContext context) => StateRenderer(

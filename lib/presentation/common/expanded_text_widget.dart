@@ -1,25 +1,24 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
-class ExpandedText extends StatefulWidget {
-  const ExpandedText({
-    Key key,
-    @required this.labelHeader,
-    @required this.description,
-    @required this.shortDescription,
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/size_config.dart';
+
+class ExpandedTextWidget extends StatefulWidget {
+  const ExpandedTextWidget({
+    Key? key,
+    required this.description,
+    required this.shortDescription,
   }) : super(key: key);
 
-  final String labelHeader;
   final String description;
   final String shortDescription;
 
   @override
-  _ExpandedTextState createState() => _ExpandedTextState();
+  _ExpandedTextWidgetState createState() => _ExpandedTextWidgetState();
 }
 
-class _ExpandedTextState extends State<ExpandedText> {
+class _ExpandedTextWidgetState extends State<ExpandedTextWidget> {
   bool lireLaSuiteFlag = false;
   @override
   Widget build(BuildContext context) {
@@ -27,13 +26,6 @@ class _ExpandedTextState extends State<ExpandedText> {
       margin: EdgeInsets.all(getProportionateScreenWidth(5.0)),
       child: Column(
         children: [
-          Text(
-            widget.labelHeader,
-            style: const TextStyle(
-              fontSize: 15.0,
-              color: Colors.black,
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(AppPadding.p10),
             child: Html(

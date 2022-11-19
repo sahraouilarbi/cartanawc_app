@@ -1,13 +1,19 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
+import '/core/extensions.dart';
+import '/presentation/ressources/appsize_manager.dart';
+
 enum StateRendererType {
+  // POPUP STATE
   popupLoadingState,
   popupErrorState,
   popupSuccess,
+  // FULLSCREEN STATE
   fullScreenLoadingState,
   fullScreenErrorState,
+  //UI OF THE SCREEN
   contentScreenState,
+  // EMPTY VIEW WHEN WE RECEIVE NO DATA FROM API
   emptyScreenState
 }
 
@@ -15,14 +21,17 @@ class StateRenderer extends StatelessWidget {
   final StateRendererType stateRendererType;
   final String message;
   final String title;
-  final Function retryActionFunction;
+  final Function? retryActionFunction;
+
   const StateRenderer({
-    Key key,
-    this.stateRendererType,
-    this.message,
-    this.title,
-    this.retryActionFunction,
-  }) : super(key: key);
+    Key? key,
+    required this.stateRendererType,
+    String? message,
+    String? title,
+    required this.retryActionFunction,
+  })  : message = message ?? 'Loading',
+        title = title ?? kEMPTY,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,35 +42,51 @@ class StateRenderer extends StatelessWidget {
     switch (stateRendererType) {
       case StateRendererType.popupLoadingState:
         return _getPopUpDialog(
-            context, [const CircularProgressIndicatorWidget()]);
+          context,
+          [
+            const CircularProgressIndicatorWidget(),
+          ],
+        );
       case StateRendererType.popupErrorState:
-        return _getPopUpDialog(context, [
-          _cancelIcon(),
-          _getMessage(message),
-          _getRetryButton(context, 'Réessayer')
-        ]);
+        return _getPopUpDialog(
+          context,
+          [
+            _cancelIcon(),
+            _getMessage(message),
+            _getRetryButton(context, 'Ok'),
+          ],
+        );
       case StateRendererType.popupSuccess:
-        return _getPopUpDialog(context, [
-          _validIcon(),
-          _getMessage(title),
-          _getMessage(message),
-          _getRetryButton(context, 'Ok'),
-        ]);
+        return _getPopUpDialog(
+          context,
+          [
+            _validIcon(),
+            _getMessage(title),
+            _getMessage(message),
+            _getRetryButton(context, 'Ok'),
+          ],
+        );
       case StateRendererType.fullScreenLoadingState:
         return _getItemsInColumn([
           const CircularProgressIndicatorWidget(),
           _getMessage(message),
         ]);
       case StateRendererType.fullScreenErrorState:
-        return _getItemsInColumn([
-          _cancelIcon(),
-          _getMessage(message),
-          _getRetryButton(context, 'Réessayer'),
-        ]);
+        return _getItemsInColumn(
+          [
+            _cancelIcon(),
+            _getMessage(message),
+            _getRetryButton(context, 'Réessayer'),
+          ],
+        );
       case StateRendererType.contentScreenState:
         return Container();
       case StateRendererType.emptyScreenState:
-        return _getItemsInColumn([_getMessage(message)]);
+        return _getItemsInColumn(
+          [
+            _getMessage(message),
+          ],
+        );
       default:
         return Container();
     }
@@ -117,7 +142,7 @@ class StateRenderer extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               if (stateRendererType == StateRendererType.fullScreenErrorState) {
-                retryActionFunction.call();
+                retryActionFunction?.call();
               } else {
                 Navigator.of(context).pop();
               }
@@ -157,7 +182,7 @@ class StateRenderer extends StatelessWidget {
 
 class CircularProgressIndicatorWidget extends StatelessWidget {
   const CircularProgressIndicatorWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

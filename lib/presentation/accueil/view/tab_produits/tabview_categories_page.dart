@@ -10,7 +10,7 @@ import 'products_page.dart';
  * Build Woocommerce Categories List
  */
 class TabCategories extends StatefulWidget {
-  const TabCategories({Key key}) : super(key: key);
+  const TabCategories({Key? key}) : super(key: key);
 
   @override
   State<TabCategories> createState() => _TabCategoriesState();
@@ -40,14 +40,22 @@ class _TabCategoriesState extends State<TabCategories> {
     return StreamBuilder<FlowState>(
       stream: _viewModel.outputState,
       builder: (context, snapshot) {
-        return snapshot.data.getScreenWidget(
-              context,
-              _getContentWidget(),
-              () {
-                _viewModel.start();
-              },
-            ) ??
-            Container();
+        if (snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        }
+        if (snapshot.hasData) {
+          return snapshot.data!.getScreenWidget(
+            context,
+            _getContentWidget(),
+            () {
+              _viewModel.start();
+            },
+          );
+        }
+        if (snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        }
+        return const SizedBox();
       },
     );
   }
@@ -59,10 +67,8 @@ class _TabCategoriesState extends State<TabCategories> {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
             return const Center(child: Text('Pas de données'));
-            break;
           case ConnectionState.waiting:
             return const Center(child: CircularProgressIndicator());
-            break;
           case ConnectionState.active:
           case ConnectionState.done:
             if (snapshot.hasData) {
@@ -84,23 +90,23 @@ class _TabCategoriesState extends State<TabCategories> {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    ProductPage(categoryId: snapshot.data[index].categoryId),
+                    ProductsPage(categoryId: snapshot.data![index].categoryId),
               ),
             );
           },
           leading: const Icon(Icons.keyboard_arrow_right),
-          title: Text(snapshot.data[index].categoryName),
+          title: Text(snapshot.data![index].categoryName),
         );
       },
       separatorBuilder: (context, index) {
         return const Divider();
       },
-      itemCount: snapshot.data.length,
+      itemCount: snapshot.data!.length,
     );
   }
 }
 // class TabCategories extends StatelessWidget {
-//   TabCategories({Key key}) : super(key: key);
+//   TabCategories({Key? key}) : super(key: key);
 
 //   final APIService apiService = instance<APIService>();
 

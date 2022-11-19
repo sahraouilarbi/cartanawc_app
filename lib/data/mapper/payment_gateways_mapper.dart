@@ -1,31 +1,35 @@
-import '../../domain/entities/entities.dart';
-import '../models/models.dart';
+import '/core/extensions.dart';
+import '/data/models/models.dart';
+import '/domain/entities/entities.dart';
 
-extension PaymentGatewaysMapper on PaymentGatewaysModel {
+extension PaymentGatewaysMapper on PaymentGatewaysModel? {
   PaymentGatewaysEntity toDomain() {
-    final List<String> _methodSupportsMapped =
-        List<String>.from(methodSupports.map((e) => e));
+    final List<String> _methodSupportsMapped = List<String>.from(
+        this?.methodSupports?.map((e) => e) ?? const Iterable.empty());
     return PaymentGatewaysEntity(
-      id: id,
-      title: title,
-      description: description,
-      order: order,
-      enabled: enabled,
-      methodTitle: methodTitle,
-      methodDescription: methodDescription,
+      id: this?.id?.orEmpty() ?? kEMPTY,
+      title: this?.title?.orEmpty() ?? kEMPTY,
+      description: this?.description?.orEmpty() ?? kEMPTY,
+      order: this?.order?.orZero() ?? kZERO,
+      enabled: this?.enabled?.orFalseBool() ?? false,
+      methodTitle: this?.methodTitle?.orEmpty() ?? kEMPTY,
+      methodDescription: this?.methodDescription?.orEmpty() ?? kEMPTY,
       methodSupports: _methodSupportsMapped,
-      //settings: settings,
-      links: links.toDomain(),
+      // TODO A COMMENTER EN CAS DE BLOCAGE
+      //settings: this?.settings?.orEmpty() ?? kEMPTY,
+      links: this!.links.toDomain(),
     );
   }
 }
 
-extension LinksModelMapper on LinksModel {
+extension LinksModelMapper on LinksModel? {
   PaymentGatewaysLinksEntity toDomain() {
     final List<PaymentGatewaysCollectionEntity> _selfMapped =
-        List<PaymentGatewaysCollectionEntity>.from(self.map((e) => e));
+        List<PaymentGatewaysCollectionEntity>.from(
+            this?.self?.map((e) => e) ?? const Iterable.empty());
     final List<PaymentGatewaysCollectionEntity> _collectionMapped =
-        List<PaymentGatewaysCollectionEntity>.from(self.map((e) => e));
+        List<PaymentGatewaysCollectionEntity>.from(
+            this?.self?.map((e) => e) ?? const Iterable.empty());
     return PaymentGatewaysLinksEntity(
       self: _selfMapped,
       collection: _collectionMapped,
@@ -33,56 +37,57 @@ extension LinksModelMapper on LinksModel {
   }
 }
 
-extension SettingModelMapped on SettingModel {
+extension SettingModelMapped on SettingModel? {
   PaymentGatewaysSettingEntity toDomain() {
     return PaymentGatewaysSettingEntity(
-      id: id,
-      label: label,
-      description: description,
-      type: type,
-      value: value,
-      settingDefault: settingDefault,
-      tip: tip,
+      id: this?.id?.orEmpty() ?? kEMPTY,
+      label: this?.label?.orEmpty() ?? kEMPTY,
+      description: this?.description?.orEmpty() ?? kEMPTY,
+      type: this?.type?.orEmpty() ?? kEMPTY,
+      value: this?.value?.orEmpty() ?? kEMPTY,
+      settingDefault: this?.settingDefault?.orEmpty() ?? kEMPTY,
+      tip: this?.tip?.orEmpty() ?? kEMPTY,
+      //TODO A COMMENTER EN CAS DE BLOCAGE
       //placeholder: placeholder,
-      options: options.toDomain(),
+      options: this!.options.toDomain(),
     );
   }
 }
 
-extension SettingsOptionsModelMapper on SettingsOptionsModel {
+extension SettingsOptionsModelMapper on SettingsOptionsModel? {
   PaymentGatewaysSettingsOptionsEntity toDomain() {
     return PaymentGatewaysSettingsOptionsEntity(
-      forfait: forfait.toDomain(),
-      livraisonGratuite: livraisonGratuite.toDomain(),
-      pointDeVente: pointDeVente.toDomain(),
-      sale: sale,
-      authorization: authorization,
+      forfait: this!.forfait.toDomain(),
+      livraisonGratuite: this!.livraisonGratuite.toDomain(),
+      pointDeVente: this!.pointDeVente.toDomain(),
+      sale: this?.sale?.orEmpty() ?? kEMPTY,
+      authorization: this?.authorization?.orEmpty() ?? kEMPTY,
     );
   }
 }
 
-extension ForfaitModelMapper on ForfaitModel {
+extension ForfaitModelMapper on ForfaitModel? {
   PaymentGatewaysForfaitEntity toDomain() {
     return PaymentGatewaysForfaitEntity(
-      flatRate: flatRate,
+      flatRate: this?.flatRate?.orEmpty() ?? kEMPTY,
     );
   }
 }
 
-extension LivraisonGratuiteModelMapper on LivraisonGratuiteModel {
+extension LivraisonGratuiteModelMapper on LivraisonGratuiteModel? {
   PaymentGatewaysLivraisonGratuiteEntity toDomain() {
     return PaymentGatewaysLivraisonGratuiteEntity(
-      freeShipping: freeShipping,
-      freeShipping1: freeShipping1,
+      freeShipping: this?.freeShipping?.orEmpty() ?? kEMPTY,
+      freeShipping1: this?.freeShipping1?.orEmpty() ?? kEMPTY,
     );
   }
 }
 
 // Point de vente
-extension PointDeVenteModelMapper on PointDeVenteModel {
+extension PointDeVenteModelMapper on PointDeVenteModel? {
   PaymentGatewaysPointDeVenteEntity toDomain() {
     return PaymentGatewaysPointDeVenteEntity(
-      localPickup: localPickup,
+      localPickup: this?.localPickup?.orEmpty() ?? kEMPTY,
     );
   }
 }

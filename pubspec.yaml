@@ -6,52 +6,59 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+7
 
 environment:
-  sdk: ">=2.10.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  # updated -> 30/04/2022
-  badges: ^2.0.2
-  cupertino_icons: ^1.0.2
-  # updated -> 30/04/2022
+  # Badges updated -> 20/08/2022
+  badges: ^2.0.3
+  # Cupertino_icons updated -> 20/08/2022
+  cupertino_icons: ^1.0.5
+  # Dartz updated -> 30/04/2022
   dartz: ^0.10.1
-  # updated -> 30/04/2022
+  # Data Connection Checker updated -> 30/04/2022
   data_connection_checker:
     git:
       url: https://github.com/chornthorn/data_connection_checker.git
       ref: master
-  # updated -> 30/04/2022
+  # Dio updated -> 30/04/2022
   dio: ^4.0.6
   flutter:
     sdk: flutter
-  # updated -> 30/04/2022
+  # Flutter_dotenv updated -> 30/04/2022
   flutter_dotenv: ^5.0.2
-  # updated -> 30/04/2022
+  # Flutter_html updated -> 30/04/2022
   flutter_html: ^2.2.1
-  ## updated 30/04/2022 ->
-  flutter_native_splash: ^1.2.3
-  ## updated -> 30/04/2022 ->
-  flutter_svg: ^0.22.0
-  # updated 30/04/2022
+  # Flutter_svg updated -> 20/08/2022 ->
+  flutter_svg: ^0.23.0+1
+  # Geolocator updated 30/04/2022
   geolocator: ^8.0.5
-  # updated-> 30/04/2022
+  # Get_it updated-> 30/04/2022
   get_it: ^7.2.0
-  ## updates -> 30/04/2022 ->
+  ## Google_maps_flutter updates -> 30/04/2022 ->
   google_maps_flutter: ^2.0.9
-  # updated 30/04/2022
-  provider: ^6.0.2
-  # updated 30/04/2022
-  rxdart: ^0.27.3
-  ## updated 30/04/2022 ->
+  # Provider updated -> 20/08/2022
+  intl: ^0.17.0
+  provider: ^6.0.3
+  # Rxdart updated -> 30/04/2022
+  rxdart: ^0.27.5
+  ## Shared_preferences updated -> 30/04/2022 ->
   shared_preferences: ^2.0.7
 
 dev_dependencies:
-  analyzer: ^0.41.1
-  build_runner: ^1.10.0
+  ##analyzer: ^0.41.1
+  analyzer: ^1.0.0
+  ##build_runner: ^1.10.0
+  build_runner: ^2.0.0
+  ## Flutter_native_splash updated -> 20/08/2022 ->
+  flutter_native_splash: ^1.3.2
   flutter_test:
     sdk: flutter
-  freezed: ^0.12.7
-  json_serializable: ^3.5.1
-  lint: ^1.0.0
+  ##freezed: ^0.12.7
+  freezed: ^0.14.0
+  ##json_serializable: ^3.5.1
+  json_serializable: ^4.1.0
+  ## Lint updated -> 20/08/2022
+  lint: ^1.5.0
   pretty_dio_logger: ^1.1.1
 
 flutter_native_splash:

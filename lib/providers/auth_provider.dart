@@ -1,8 +1,8 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/data/api/api_service.dart';
 import 'package:flutter/material.dart';
 
+import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
+import '/data/api/api_service.dart';
 import '/data/models/models.dart';
 
 enum Status {
@@ -19,7 +19,7 @@ class AuthProvider with ChangeNotifier {
   final APIService _apiService = instance<APIService>();
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
-  CustomerDetailModel _customerDetailModel;
+  late CustomerDetailModel _customerDetailModel;
   CustomerDetailModel get customerDetailModel => _customerDetailModel;
 
   Status loggedInStatus = Status.notLoggedIn;
@@ -36,11 +36,11 @@ class AuthProvider with ChangeNotifier {
     loggedInStatus = Status.authenticating;
     notifyListeners();
 
-    LoginResponseModel loginResponseModel;
+    late LoginResponseModel loginResponseModel;
 
     try {
       loginResponseModel = await _apiService.login(username, password);
-      if (loginResponseModel.data.id != null) {
+      if (loginResponseModel.data!.id != null) {
         loggedInStatus = Status.loggedIn;
         notifyListeners();
       } else {

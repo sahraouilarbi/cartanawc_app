@@ -1,10 +1,10 @@
-import 'package:cartanawc_app/core/error/failure.dart';
-import 'package:cartanawc_app/data/models/login_request.dart';
-import 'package:cartanawc_app/domain/repositories/repository.dart';
-import 'package:cartanawc_app/domain/usecase/base_usecase.dart';
 import 'package:dartz/dartz.dart';
 
+import '/core/error/failure.dart';
+import '/data/models/login_request.dart';
 import '/data/models/models.dart';
+import '/domain/repositories/repository.dart';
+import '/domain/usecase/base_usecase.dart';
 
 class LoginUsecase
     implements BaseUsecase<LoginUsecaseInput, LoginResponseModel> {

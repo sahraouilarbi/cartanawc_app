@@ -1,18 +1,21 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
-import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
-import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
-import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 
+import '/core/dependency_injection.dart';
+import '/core/prefs/app_prefs.dart';
+import '/presentation/common/appbar/custom_appbar_widget.dart';
+import '/presentation/common/my_text_buttom_widget.dart';
+import '/presentation/common/my_text_form_field_widget.dart';
+import '/presentation/common/section_header_widget.dart';
+import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/pages.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/providers/auth_provider.dart';
 import 'login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   static const String routeName = '/login';
 
@@ -36,9 +39,6 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   bool _hidePassword = true;
-  //bool isApiCallProcess = false;
-  //String username;
-  //String password;
 
   void _bind() {
     _loginViewModel.start();
@@ -48,15 +48,16 @@ class _LoginPageState extends State<LoginPage> {
         () => _loginViewModel.setPassword(_passwordController.text));
     _loginViewModel.isUserLoggedInSuccessfullyStreamController.stream.listen(
       (dataEntity) {
-        SchedulerBinding.instance.addPostFrameCallback(
+        SchedulerBinding.instance!.addPostFrameCallback(
           (_) {
             _appPreferences.setUserToken(dataEntity.token.toString());
             _appPreferences.setUserId(dataEntity.id as int);
             _appPreferences.setIsUserLoggedIn();
             _appPreferences.setUsername(_usernameController.text);
             _appPreferences.setPassword(_passwordController.text);
-            resetModules();
-            Navigator.pushNamed(context, '/tableauBord');
+            Provider.of<AuthProvider>(context, listen: false).isUserLoggedIn();
+            resetDIModules();
+            Navigator.pushNamed(context, TableauBordPage.routeName);
           },
         );
       },
@@ -80,16 +81,25 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(isLoginPage: true),
+      //appBar: const CustomAppBar(isLoginPage: true),
+      appBar: const CustomAppBar(),
       backgroundColor: Colors.black,
       body: StreamBuilder<FlowState>(
         stream: _loginViewModel.outputState,
         builder: (context, snapshot) {
-          return snapshot.data.getScreenWidget(context, _getContentWidget(),
-                  () {
+          if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          }
+          if (snapshot.hasData) {
+            return snapshot.data!.getScreenWidget(
+              context,
+              _getContentWidget(),
+              () {
                 _loginViewModel.login();
-              }) ??
-              _getContentWidget();
+              },
+            );
+          }
+          return const SizedBox();
         },
       ),
     );
@@ -196,8 +206,10 @@ class _LoginPageState extends State<LoginPage> {
 //*******************************************************************
   Widget accountRecovery() {
     return TextButton(
-      onPressed: () {},
-      child: const Text('compte oublié ?'),
+      onPressed: () {
+        Navigator.pushNamed(context, ForgotPasswordPage.routeName);
+      },
+      child: const Text('mot de passe oublié ?'),
     );
   }
 

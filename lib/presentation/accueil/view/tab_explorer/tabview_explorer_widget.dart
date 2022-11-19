@@ -1,19 +1,20 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '/presentation/ressources/appsize_manager.dart';
+
 /*
  * Build Explorer Page from de site : www2.cartana.dz
  */
 class TabExplorer extends StatelessWidget {
-  const TabExplorer({Key key}) : super(key: key);
+  const TabExplorer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Position currentPosition = Provider.of<Position>(context);
-
+    final Position? currentPosition =
+        Provider.of<Position?>(context, listen: false);
     return (currentPosition != null)
         ? Stack(
             alignment: AlignmentDirectional.bottomCenter,
@@ -50,10 +51,6 @@ class TabExplorer extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
   }
-}
-
-Widget tabViewExplorer(BuildContext context) {
-  return null;
 }
 
 Container magasinCosmetiqueNeabByWidget(String title) {

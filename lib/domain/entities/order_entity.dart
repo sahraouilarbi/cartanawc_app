@@ -2,18 +2,18 @@ import '/domain/entities/entities.dart';
 
 class OrderEntity {
   OrderEntity({
-    this.customerId,
-    this.paymentMethod,
-    this.paymentMethodTitle,
-    this.setPaid,
-    this.transactionId,
-    this.lineItems,
-    this.orderId,
-    this.orderNumber,
-    this.orderKey,
-    this.status,
-    this.orderDateCreated,
-    this.orderTotal,
+    required this.customerId,
+    required this.paymentMethod,
+    required this.paymentMethodTitle,
+    required this.setPaid,
+    required this.transactionId,
+    required this.lineItems,
+    required this.orderId,
+    required this.orderNumber,
+    required this.orderKey,
+    required this.status,
+    required this.orderDateCreated,
+    required this.orderTotal,
   });
   int orderId;
   String orderNumber;
@@ -22,8 +22,8 @@ class OrderEntity {
   DateTime orderDateCreated;
   String orderTotal;
   int customerId;
-  BillingEntity billing;
-  ShippingEntity shipping;
+  BillingEntity? billing;
+  ShippingEntity? shipping;
   String paymentMethod;
   String paymentMethodTitle;
   String transactionId;
@@ -33,10 +33,10 @@ class OrderEntity {
 
 class OrderLineItemsEntity {
   OrderLineItemsEntity({
-    this.productId,
-    this.variationId,
-    this.quantity,
-    this.subtotal,
+    required this.productId,
+    required this.variationId,
+    required this.quantity,
+    required this.subtotal,
   });
 
   int productId;

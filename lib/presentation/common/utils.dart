@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '/core/extensions.dart';
+
 class Utils {
   void showMessage(
     BuildContext context,
@@ -8,8 +10,8 @@ class Utils {
     String buttonText,
     Function() onPressed, {
     bool isConfirmationDialog = false,
-    String buttonText2 = '',
-    Function() onPressed2,
+    String buttonText2 = kEMPTY,
+    Function()? onPressed2,
   }) {
     showDialog(
       context: context,

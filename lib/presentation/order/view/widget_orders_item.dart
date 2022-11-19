@@ -1,12 +1,13 @@
-import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
-import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 
+import '/core/extensions.dart';
 import '/data/models/models.dart';
+import '/presentation/common/textbuttom_widget.dart';
+import '/presentation/ressources/appsize_manager.dart';
+import '/presentation/ressources/color_manager.dart';
 
 class WidgetOrderItem extends StatelessWidget {
-  const WidgetOrderItem({Key key, this.orderModel}) : super(key: key);
+  const WidgetOrderItem({Key? key, required this.orderModel}) : super(key: key);
   final OrderModel orderModel;
 
   @override
@@ -15,7 +16,7 @@ class WidgetOrderItem extends StatelessWidget {
       margin: const EdgeInsets.all(AppMargin.m10),
       child: Column(
         children: [
-          _orderStatus(orderModel.status),
+          _orderStatus(orderModel.status!),
           Divider(
             color: ColorManager.grey,
           ),
@@ -33,7 +34,7 @@ class WidgetOrderItem extends StatelessWidget {
                 ),
               ),
               const Text(
-                '', //'${orderModel.dateCreated}',
+                kEMPTY, //'${orderModel.dateCreated}',
                 style: TextStyle(fontSize: 14.0),
               ),
             ],
@@ -68,8 +69,8 @@ class WidgetOrderItem extends StatelessWidget {
   }
 
   Widget _orderStatus(String status) {
-    Icon icon;
-    Color color;
+    late Icon icon;
+    late Color color;
     if (status == 'pending' || status == 'processing' || status == 'on-hold') {
       icon = const Icon(
         Icons.timer,
@@ -90,15 +91,16 @@ class WidgetOrderItem extends StatelessWidget {
       color = ColorManager.red;
     }
     return _iconText(
-        icon,
-        Text(
-          'Commande $status',
-          style: TextStyle(
-            fontSize: 15.0,
-            fontWeight: FontWeight.bold,
-            color: color,
-          ),
-        ));
+      icon,
+      Text(
+        'Commande $status',
+        style: TextStyle(
+          fontSize: 15.0,
+          fontWeight: FontWeight.bold,
+          color: color,
+        ),
+      ),
+    );
   }
 
   Widget _iconText(Icon icon, Text text) {

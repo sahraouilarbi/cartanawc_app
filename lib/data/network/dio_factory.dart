@@ -1,8 +1,11 @@
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/data/api/api_endpoint.dart';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '/core/prefs/app_prefs.dart';
+import '/data/api/api_endpoint.dart';
 
 class DioFactory {
   DioFactory(this._appPreferences);
@@ -10,13 +13,14 @@ class DioFactory {
   Future<Dio> getDio() async {
     final Dio dio = Dio();
     const int _timeOut = 60 * 1000;
-    final String token = await _appPreferences.getUserToken() != ''
-        ? await _appPreferences.getUserToken()
-        : APIConsumer().basicAuth;
+    // final String token = await _appPreferences.getUserToken() != kEMPTY
+    //     ? await _appPreferences.getUserToken()
+    //     : APIConsumer().basicAuth;
+    final String token = 'Basic ${APIConsumer().basicAuth}';
     final Map<String, String> headers = {
-      "content-type": "application/json",
-      "accept": "application/json",
-      "authorization": token,
+      HttpHeaders.contentTypeHeader: "application/json",
+      HttpHeaders.acceptHeader: "application/json",
+      HttpHeaders.authorizationHeader: token,
     };
     dio.options = BaseOptions(
       baseUrl: APIEndPoint().baseUrl,

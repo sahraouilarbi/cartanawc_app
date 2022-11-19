@@ -11,12 +11,12 @@ class CategoryEntity {
   String categoryName;
   String categorySlug;
   int categoryParent;
-  String categoryDisplay;
+  String? categoryDisplay;
   String categoryDescription;
   CategoryImageEntity categoryImage;
 }
 
 class CategoryImageEntity {
-  CategoryImageEntity({this.src});
+  CategoryImageEntity({required this.src});
   String src;
 }

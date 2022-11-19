@@ -1,25 +1,31 @@
-import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
-import 'package:cartanawc_app/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
-import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
-import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
-import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
-import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
+import '/core/dependency_injection.dart';
 import '/domain/entities/entities.dart';
+import '/presentation/common/appbar/custom_appbar_widget.dart';
+import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
+import '/presentation/common/my_text_form_field_widget.dart';
+import '/presentation/common/section_header_widget.dart';
+import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/textbuttom_widget.dart';
+import '/presentation/ressources/appsize_manager.dart';
 import 'customer_profile_edit_viewmodel.dart';
 
 class CustomerProfileEditPage extends StatefulWidget {
-  const CustomerProfileEditPage({Key key}) : super(key: key);
+  const CustomerProfileEditPage({
+    Key? key,
+    required this.customerProfileEdit,
+  }) : super(key: key);
+
+  final CustomerDetailEntity customerProfileEdit;
 
   static const String routeName = '/customerProfileEdit';
 
-  static Route route() {
+  static Route route({required CustomerDetailEntity customerProfileEdit}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) => const CustomerProfileEditPage(),
+      builder: (context) =>
+          CustomerProfileEditPage(customerProfileEdit: customerProfileEdit),
     );
   }
 
@@ -32,16 +38,25 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
       instance<CustomerProfileEditViewModel>();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
-  final TextEditingController _nomController = TextEditingController();
-  final TextEditingController _prenomController = TextEditingController();
-  final TextEditingController _typeController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _telephoneController = TextEditingController();
-  final TextEditingController _adresseController = TextEditingController();
-  final TextEditingController _complementAdresseController =
+  final TextEditingController _firstNameShippingController =
       TextEditingController();
-  final TextEditingController _wilayaController = TextEditingController();
-  final TextEditingController _codePostalController = TextEditingController();
+  final TextEditingController _lastNameShippingController =
+      TextEditingController();
+  final TextEditingController _companyShippingController =
+      TextEditingController();
+  final TextEditingController _address1ShippingController =
+      TextEditingController();
+  final TextEditingController _address2ShippingController =
+      TextEditingController();
+  final TextEditingController _cityShippingController = TextEditingController();
+  final TextEditingController _postCodeShippingController =
+      TextEditingController();
+  final TextEditingController _countryShippingController =
+      TextEditingController();
+  final TextEditingController _stateShippingController =
+      TextEditingController();
+  final TextEditingController _phoneShippingController =
+      TextEditingController();
 
   void _bind() {
     _customerProfileEditViewModel.start();
@@ -50,210 +65,275 @@ class _CustomerProfileEditState extends State<CustomerProfileEditPage> {
   @override
   void initState() {
     super.initState();
+
+    _customerProfileEditViewModel.customerDetailEntity =
+        widget.customerProfileEdit;
+
+    // Initialize firstNameShippingController
+    _firstNameShippingController.text =
+        widget.customerProfileEdit.shipping!.firstName;
+
+    // Initialize lastNameShippingController
+    _lastNameShippingController.text =
+        widget.customerProfileEdit.shipping!.lastName;
+
+    // Initialize companyShippingController
+    _companyShippingController.text =
+        widget.customerProfileEdit.shipping!.company;
+
+    // Initialize address1ShippingController
+    _address1ShippingController.text =
+        widget.customerProfileEdit.shipping!.address1;
+
+    // Initialize address2ShippingController
+    _address2ShippingController.text =
+        widget.customerProfileEdit.shipping!.address2;
+
+    // Initialize cityShippingController
+    _cityShippingController.text = widget.customerProfileEdit.shipping!.city;
+
+    // Initialize postcodeShippingController
+    _postCodeShippingController.text =
+        widget.customerProfileEdit.shipping!.postcode;
+
+    // Initialize countryShippingController
+    _countryShippingController.text =
+        widget.customerProfileEdit.shipping!.country;
+
+    // Initialize stateShippingController
+    _stateShippingController.text = widget.customerProfileEdit.shipping!.state;
+
+    // Initialize phoneShippingController
+    _phoneShippingController.text = widget.customerProfileEdit.shipping!.phone;
+
     _bind();
   }
 
   @override
   void dispose() {
-    _nomController.dispose();
-    _prenomController.dispose();
-    _typeController.dispose();
-    _emailController.dispose();
-    _telephoneController.dispose();
-    _adresseController.dispose();
-    _complementAdresseController.dispose();
-    _wilayaController.dispose();
-    _codePostalController.dispose();
+    _firstNameShippingController.dispose();
+    _lastNameShippingController.dispose();
+    _companyShippingController.dispose();
+    _address1ShippingController.dispose();
+    _address2ShippingController.dispose();
+    _cityShippingController.dispose();
+    _postCodeShippingController.dispose();
+    _countryShippingController.dispose();
+    _stateShippingController.dispose();
+    _phoneShippingController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: buildAppBar(context, isUserProfilePage: true),
-      appBar: const CustomAppBar(isUserProfilePage: true),
+      appBar: const CustomAppBar(),
       drawer: DrawerForAuthenticatedUser(),
       body: StreamBuilder<FlowState>(
           stream: _customerProfileEditViewModel.outputState,
           builder: (context, snapshot) {
-            return snapshot.data
-                    .getScreenWidget(context, _customerProfileEdit(), () {
-                  _customerProfileEditViewModel.start();
-                }) ??
-                Container();
+            return snapshot.data!.getScreenWidget(
+              context,
+              _customerProfileEdit(),
+              () {
+                _customerProfileEditViewModel.start();
+              },
+            );
           }),
     );
   }
 
   Widget _customerProfileEdit() {
-    return StreamBuilder<CustomerDetailEntity>(
-        stream: null,
-        builder: (context, snapshot) {
-          return SingleChildScrollView(
-            physics: const ScrollPhysics(),
-            child: Container(
-              color: Colors.black,
-              padding: const EdgeInsets.all(AppPadding.p10),
+    return SingleChildScrollView(
+      physics: const ScrollPhysics(),
+      child: Container(
+        color: Colors.black,
+        padding: const EdgeInsets.only(
+          left: AppPadding.p10,
+          right: AppPadding.p10,
+          bottom: AppPadding.p10,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SectionHeader(sectionTitle: 'PROFIL: MODIFICATION'),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p20, vertical: AppPadding.p40),
+              color: Colors.white,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SectionHeader(sectionTitle: 'PROFIL'),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppPadding.p20, vertical: AppPadding.p40),
-                    color: Colors.white,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // Customer Image profil
-                        CircleAvatar(
-                          radius: AppSize.s75,
-                          child: Image.network(snapshot.data.avatarUrl),
+                  const Text('Adresse de livraison du client'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Customer Image profil
+                      // CircleAvatar(
+                      //   radius: AppSize.s75,
+                      //   child: Image.network(snapshot.data!.avatarUrl!),
+                      // ),
+                      //
+                      // const SizedBox(height: AppSize.s20),
+                      Form(
+                        key: _globalKey,
+                        child: Column(
+                          children: <Widget>[
+                            // TextFormField Nom
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsFirstNameShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _firstNameShippingController,
+                                  hintText: 'Nom de famille',
+                                  labelText: 'Nom',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Nom de famille ne peut pas être vide',
+                                );
+                              },
+                            ),
+
+                            const SizedBox(height: AppSize.s10),
+
+                            // TextFormField Prénom
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsLastNameShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _lastNameShippingController,
+                                  hintText: 'Prénom',
+                                  labelText: 'Prénom',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Prénom ne peut pas être vide',
+                                );
+                              },
+                            ),
+
+                            const SizedBox(height: AppSize.s10),
+
+                            // TextFormField Company
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsCompanyShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _companyShippingController,
+                                  hintText: 'Type de compte',
+                                  labelText: 'Type',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Type ne peut pas être vide',
+                                );
+                              },
+                            ),
+
+                            const SizedBox(height: AppSize.s10),
+
+                            // TextFormField Adresse
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsAddress1ShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _address1ShippingController,
+                                  keyboardType: TextInputType.streetAddress,
+                                  hintText: 'num, rue Nom de la rue',
+                                  labelText: 'Adresse',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Email ne peut pas être vide',
+                                );
+                              },
+                            ),
+
+                            const SizedBox(height: AppSize.s10),
+
+                            // TextFormField Complement adresse
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsAddress2ShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _address2ShippingController,
+                                  keyboardType: TextInputType.streetAddress,
+                                  hintText: 'complement adresse',
+                                  labelText: 'Complement adresse',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Téléphone ne peut pas être vide',
+                                );
+                              },
+                            ),
+
+                            const SizedBox(height: AppSize.s10),
+
+                            // TextFormField City
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsCityShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _cityShippingController,
+                                  keyboardType: TextInputType.streetAddress,
+                                  hintText: 'Alger',
+                                  labelText: 'City',
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Adresse ne peut pas être vide',
+                                );
+                              },
+                            ),
+
+                            const SizedBox(height: AppSize.s10),
+
+                            // TextFormField Complement d'adresse
+                            StreamBuilder<bool>(
+                              stream: _customerProfileEditViewModel
+                                  .outputIsPostCodeShippingValid,
+                              builder: (context, snapshot) {
+                                return MyTextFormFieldWidget(
+                                  controller: _postCodeShippingController,
+                                  keyboardType: TextInputType.number,
+                                  hintText: "16000",
+                                  labelText: "Code postal",
+                                  errorText: snapshot.data ?? true
+                                      ? null
+                                      : 'Code postal ne peut pas être vide',
+                                );
+                              },
+                            ),
+                          ],
                         ),
-
-                        const SizedBox(height: AppSize.s20),
-                        Form(
-                          key: _globalKey,
-                          child: Column(
-                            children: <Widget>[
-                              // TextFormField Nom
-                              MyTextFormFieldWidget(
-                                controller: _nomController,
-                                hintText: 'Nom de famille',
-                                labelText: 'Nom',
-                                errorText: (false)
-                                    ? null
-                                    : 'Nom de famille ne peut pas être vide',
-                              ),
-
-                              const SizedBox(height: AppSize.s10),
-
-                              // TextFormField Prénom
-                              MyTextFormFieldWidget(
-                                controller: _prenomController,
-                                hintText: 'Prénom',
-                                labelText: 'Préom',
-                                errorText: (false)
-                                    ? null
-                                    : 'Prénom ne peut pas être vide',
-                              ),
-
-                              const SizedBox(height: AppSize.s10),
-
-                              // TextFormField type
-                              MyTextFormFieldWidget(
-                                controller: _typeController,
-                                hintText: 'Type de compte',
-                                labelText: 'Type',
-                                errorText: (false)
-                                    ? null
-                                    : 'Type ne peut pas être vide',
-                              ),
-
-                              const SizedBox(height: AppSize.s10),
-
-                              // TextFormField Email
-                              MyTextFormFieldWidget(
-                                controller: _emailController,
-                                keyboardType: TextInputType.emailAddress,
-                                hintText: 'email@example.com',
-                                labelText: 'Email',
-                                errorText: (false)
-                                    ? null
-                                    : 'Email ne peut pas être vide',
-                              ),
-
-                              const SizedBox(height: AppSize.s10),
-
-                              // TextFormField Téléphone
-                              MyTextFormFieldWidget(
-                                controller: _telephoneController,
-                                keyboardType: TextInputType.phone,
-                                hintText: '0550 xx xx xx',
-                                labelText: 'Téléphone',
-                                errorText: (false)
-                                    ? null
-                                    : 'Téléphone ne peut pas être vide',
-                              ),
-
-                              const SizedBox(height: AppSize.s10),
-
-                              // TextFormField Adresse
-                              MyTextFormFieldWidget(
-                                controller: _adresseController,
-                                keyboardType: TextInputType.streetAddress,
-                                hintText: 'num, rue Nom de la rue',
-                                labelText: 'Adresse',
-                                errorText: (false)
-                                    ? null
-                                    : 'Adresse ne peut pas être vide',
-                              ),
-
-                              const SizedBox(height: AppSize.s10),
-
-                              // TextFormField Complement d'adresse
-                              MyTextFormFieldWidget(
-                                controller: _complementAdresseController,
-                                keyboardType: TextInputType.streetAddress,
-                                hintText: "Complement d'adresse",
-                                labelText: "Complement d'adresse",
-                              ),
-
-                              const SizedBox(height: AppSize.s10),
-
-                              // TextFormField Wilaya
-                              MyTextFormFieldWidget(
-                                controller: _wilayaController,
-                                hintText: 'Alger',
-                                labelText: 'Wilaya',
-                                errorText: (false)
-                                    ? null
-                                    : 'Wilaya ne peut pas être vide',
-                              ),
-
-                              const SizedBox(height: AppSize.s10),
-
-                              // TextFormField CodePostal
-                              MyTextFormFieldWidget(
-                                controller: _codePostalController,
-                                keyboardType: TextInputType.number,
-                                hintText: '16000',
-                                labelText: 'Code Postal',
-                                errorText: (false)
-                                    ? null
-                                    : 'Code postal ne peut pas être vide',
-                              ),
-
-                              const SizedBox(height: AppSize.s10),
-                            ],
-                          ),
-                        ),
-
-                        const SizedBox(height: AppSize.s15),
-
-                        StreamBuilder<bool>(
-                            stream: _customerProfileEditViewModel
-                                .outputIsAllInputsValid,
-                            builder: (context, snapshot) {
-                              return textButton(
-                                onPressed: (snapshot.data ?? false)
-                                    ? () {
-                                        _customerProfileEditViewModel
-                                            .updateCustomerProfile();
-                                      }
-                                    : null,
-                                text: 'METTRE A JOUR',
-                                textColor: Colors.white,
-                                backgroundColor: Colors.black,
-                              );
-                            }),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSize.s15),
+                  StreamBuilder<bool>(
+                    stream:
+                        _customerProfileEditViewModel.outputIsAllInputsValid,
+                    builder: (context, snapshot) {
+                      return textButton(
+                        onPressed: (snapshot.data ?? false)
+                            ? () {
+                                _customerProfileEditViewModel
+                                    .updateShippingInformations();
+                              }
+                            : null,
+                        text: 'METTRE A JOUR',
+                        textColor: Colors.white,
+                        backgroundColor: Colors.black,
+                      );
+                    },
                   ),
                 ],
               ),
             ),
-          );
-        });
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -1,36 +1,37 @@
-import '../../domain/entities/entities.dart';
-import '../models/models.dart';
+import '/core/extensions.dart';
+import '/data/models/models.dart';
+import '/domain/entities/entities.dart';
 
 // CartResponseModel
-extension CartResponseModelMapper on CartResponseModel {
+extension CartResponseModelMapper on CartResponseModel? {
   CartResponseEntity toDomain() {
     final List<CartItemEntity> dataMapped =
-        (data.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.data?.map((v) => v.toDomain()) ?? const Iterable.empty())
             .cast<CartItemEntity>()
             .toList();
     return CartResponseEntity(
-      status: status,
+      status: this?.status?.orFalseBool() ?? false,
       data: dataMapped,
     );
   }
 }
 
 // CartItemModel
-extension CartItemModelMapper on CartItemModel {
+extension CartItemModelMapper on CartItemModel? {
   CartItemEntity toDomain() {
     return CartItemEntity(
-      productId: productId,
-      productName: productName,
-      productRegularPrice: productRegularPrice,
-      productSalePrice: productSalePrice,
-      thumbnail: thumbnail,
-      qty: qty,
-      productStep: productStep,
-      lineSubtotal: lineSubtotal,
-      lineTotal: lineTotal,
-      variationId: variationId,
-      attribute: attribute,
-      attributeValue: attributeValue,
+      productId: this?.productId?.orZero() ?? kZERO,
+      productName: this?.productName?.orEmpty() ?? kEMPTY,
+      productRegularPrice: this?.productRegularPrice?.orEmpty() ?? kEMPTY,
+      productSalePrice: this?.productSalePrice?.orEmpty() ?? kEMPTY,
+      thumbnail: this?.thumbnail?.orEmpty() ?? kEMPTY,
+      qty: this?.qty?.orZero() ?? kZERO,
+      productStep: this?.productStep?.orEmpty() ?? kEMPTY,
+      lineSubtotal: this?.lineSubtotal?.orZeroDouble() ?? kZeroDouble,
+      lineTotal: this?.lineTotal?.orZeroDouble() ?? kZeroDouble,
+      variationId: this?.variationId?.orZero() ?? kZERO,
+      attribute: this?.attribute?.orEmpty() ?? kEMPTY,
+      attributeValue: this?.attributeValue?.orEmpty() ?? kEMPTY,
     );
   }
 }

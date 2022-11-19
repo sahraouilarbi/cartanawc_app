@@ -1,9 +1,9 @@
 class CustomerEntity {
   CustomerEntity({
-    this.email,
-    this.firstName,
-    this.lastName,
-    this.password,
+    required this.email,
+    required this.firstName,
+    required this.lastName,
+    required this.password,
   });
   String email;
   String firstName;

@@ -1,17 +1,18 @@
-import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
+
+import '/presentation/ressources/appsize_manager.dart';
 
 class CheckPoints extends StatelessWidget {
   const CheckPoints({
-    Key key,
+    Key? key,
     this.checkedTill = 1,
-    this.checkPoints,
+    required this.checkPoints,
     this.checkPointFilledColor,
   }) : super(key: key);
 
-  final int checkedTill;
+  final int? checkedTill;
   final List<String> checkPoints;
-  final Color checkPointFilledColor;
+  final Color? checkPointFilledColor;
 
   static double circleDia = AppSize.s32;
 
@@ -40,9 +41,9 @@ class CheckPoints extends StatelessWidget {
                           padding: const EdgeInsets.all(AppPadding.p4),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: index <= checkedTill
+                            color: index <= checkedTill!
                                 ? checkPointFilledColor
-                                : checkPointFilledColor
+                                : checkPointFilledColor!
                                     .withOpacity(AppSize.s0_2),
                           ),
                           child: const Icon(
@@ -55,9 +56,9 @@ class CheckPoints extends StatelessWidget {
                           Container(
                             width: cWidth,
                             height: AppSize.s2,
-                            color: index < checkedTill
+                            color: index < checkedTill!
                                 ? checkPointFilledColor
-                                : checkPointFilledColor
+                                : checkPointFilledColor!
                                     .withOpacity(AppSize.s0_2),
                           )
                         else

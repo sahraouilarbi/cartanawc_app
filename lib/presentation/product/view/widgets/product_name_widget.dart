@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/presentation/ressources/appsize_manager.dart';
 
 class ProductNameWidget extends StatelessWidget {
-  const ProductNameWidget({Key key, @required this.productName})
+  const ProductNameWidget({Key? key, required this.productName})
       : super(key: key);
   final String productName;
 

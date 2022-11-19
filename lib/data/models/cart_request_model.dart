@@ -1,7 +1,7 @@
 class CartRequestModel {
   CartRequestModel({this.userId, this.products});
-  int userId;
-  List<CartProductsModel> products;
+  int? userId;
+  List<CartProductsModel>? products;
 
   factory CartRequestModel.fromJson(Map<String, dynamic> json) =>
       CartRequestModel(
@@ -17,7 +17,7 @@ class CartRequestModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['user_id'] = userId;
     if (products != null) {
-      data['products'] = products.map((product) => product.toJson()).toList();
+      data['products'] = products!.map((product) => product.toJson()).toList();
     }
     return data;
   }
@@ -30,10 +30,10 @@ class CartProductsModel {
     this.quantity,
     this.productStep,
   });
-  int productId;
-  int variationId = 0;
-  int quantity;
-  String productStep;
+  int? productId;
+  int? variationId = 0;
+  int? quantity;
+  String? productStep;
 
   factory CartProductsModel.fromJson(Map<String, dynamic> json) =>
       CartProductsModel(

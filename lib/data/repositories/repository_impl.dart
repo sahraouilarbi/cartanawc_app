@@ -1,15 +1,16 @@
-import 'package:cartanawc_app/core/error/error_handler.dart';
-import 'package:cartanawc_app/core/error/failure.dart';
-import 'package:cartanawc_app/core/prefs/app_prefs.dart';
-import 'package:cartanawc_app/data/data_source/remote_data_source.dart';
-import 'package:cartanawc_app/data/models/login_request.dart';
-import 'package:cartanawc_app/data/network/network_info.dart';
-import 'package:cartanawc_app/domain/repositories/repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 
+import '/core/error/error_handler.dart';
+import '/core/error/failure.dart';
+import '/core/prefs/app_prefs.dart';
+import '/data/data_source/remote_data_source.dart';
 import '/data/mapper/mappers.dart';
+import '/data/models/login_request.dart';
 import '/data/models/models.dart';
+import '/data/network/network_info.dart';
 import '/domain/entities/entities.dart';
+import '/domain/repositories/repository.dart';
 
 class RepositoryImpl implements Repository {
   RepositoryImpl(
@@ -28,7 +29,7 @@ class RepositoryImpl implements Repository {
         if (_response.statusCode == 200) {
           return Right(_response);
         } else {
-          return Left(Failure(_response.statusCode, _response.message));
+          return Left(Failure(_response.statusCode!, _response.message!));
         }
       } catch (_error) {
         return Left(ErrorHandler.handle(_error).failure);
@@ -40,7 +41,7 @@ class RepositoryImpl implements Repository {
 
   // Forgot password repository implementation
   @override
-  Future<Either<Failure, ForgotPasswordResponseEntity>> forgotPassword(
+  Future<Either<Failure, ResetPasswordResponseEntity>> forgotPassword(
       String email) async {
     if (await _networkInfo.isConnected) {
       try {
@@ -62,6 +63,25 @@ class RepositoryImpl implements Repository {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.getCustomerProfile(userID);
+        if (true) {
+          return Right(_response.toDomain());
+        }
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  // Update Shipping Informations repository implementation
+  @override
+  Future<Either<Failure, CustomerDetailEntity>> updateShippingInformations(
+      int _userId, ShippingEntity _shippingEntity) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.updateShippingInformations(
+            _userId, _shippingEntity.toModel());
         if (true) {
           return Right(_response.toDomain());
         }
@@ -150,21 +170,34 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, List<OrderEntity>>> getOrders(int customerID,
-      {int pageNumber = 1,
-      int perPage = 10,
-      String search,
-      String after,
-      String before,
-      String sortOrder = 'desc',
-      String sortBy = 'date',
-      String status = 'any',
-      int product}) async {
+  Future<Either<Failure, List<OrderEntity>>> getOrders(
+    int customerID, {
+    int? pageNumber = 1,
+    int? perPage = 10,
+    String? search,
+    String? after,
+    String? before,
+    String? sortOrder = 'desc',
+    String? sortBy = 'date',
+    String? status = 'any',
+    int? product,
+  }) async {
     if (await _networkInfo.isConnected) {
       try {
-        final _response = await _remoteDataSource.getOrders();
+        final _response = await _remoteDataSource.getOrders(
+          customerID,
+          pageNumber: pageNumber,
+          perPage: perPage,
+          search: search,
+          after: after,
+          before: before,
+          sortOrder: sortOrder,
+          sortBy: sortBy,
+          status: status,
+          product: product,
+        );
         final List<OrderEntity> _orderEntity =
-            List.from(_response.map((e) => e.toDomain()));
+            List<OrderEntity>.from(_response.map((e) => e.toDomain()));
         return Right(_orderEntity);
       } catch (_error) {
         return Left(ErrorHandler.handle(_error).failure);
@@ -177,15 +210,15 @@ class RepositoryImpl implements Repository {
   @override
   Future<Either<Failure, List<ProductEntity>>> getProducts(
     String customerRole, {
-    String status = 'publish',
-    String strSearch,
-    int perPage,
-    int pageNumber,
-    String tagName,
-    List<int> productsIds,
-    String categoryId,
-    String sortBy,
-    String sortOrder = 'asc',
+    String? status = 'publish',
+    String? strSearch,
+    int? perPage = 100,
+    int? pageNumber,
+    String? tagName,
+    List<int>? productsIds,
+    String? categoryId,
+    String? sortBy,
+    String? sortOrder = 'asc',
   }) async {
     if (await _networkInfo.isConnected) {
       try {
@@ -223,6 +256,45 @@ class RepositoryImpl implements Repository {
         return Right(_paymentGateways);
       } catch (_error) {
         return Left(ErrorHandler.handle(_error).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, DevenirDistributeurResponseEntity>>
+      devenirDistributeur(DevenirDistributeurRequestEntity _formData) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response =
+            await _remoteDataSource.devenirDistributeur(_formData.toModel());
+        return Right(_response.toDomain());
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error.toString()).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
+
+  // Get Paiements
+  @override
+  Future<Either<Failure, List<PaiementEntity>>> getPaiements(
+      int customerId) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.getPaiements();
+        final List<PaiementEntity> _paiements =
+            List<PaiementEntity>.from(_response.map((e) => e.toDomain()))
+                .where((element) {
+          return element.acf.client.id == customerId;
+        }).toList();
+
+        return Right(_paiements);
+      } catch (_error) {
+        debugPrint(_error.toString());
+        return Left(ErrorHandler.handle(_error.toString()).failure);
       }
     } else {
       return Left(DataSource.noInternetConnection.getFailure());

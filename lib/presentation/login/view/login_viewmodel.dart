@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:cartanawc_app/domain/usecase/login_usecase.dart';
-import 'package:cartanawc_app/presentation/base/base_viewmodel.dart';
-import 'package:cartanawc_app/presentation/common/freezed_data_class/freezed_data_classes.dart';
-import 'package:cartanawc_app/presentation/common/state_render/sate_render_impl.dart';
-import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
-
+import '/core/extensions.dart';
 import '/data/models/models.dart';
+import '/domain/usecase/login_usecase.dart';
+import '/presentation/base/base_viewmodel.dart';
+import '/presentation/common/freezed_data_class/freezed_data_classes.dart';
+import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_renderer.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
@@ -18,7 +18,7 @@ class LoginViewModel extends BaseViewModel
       StreamController<void>.broadcast();
   final StreamController isUserLoggedInSuccessfullyStreamController =
       StreamController<LoginResponseDataModel>();
-  LoginObject loginObject = LoginObject('', '');
+  LoginObject loginObject = LoginObject(kEMPTY, kEMPTY);
   final LoginUsecase _loginUsecase;
   LoginViewModel(this._loginUsecase);
 
@@ -110,7 +110,7 @@ abstract class LoginViewModelInputs {
   void login();
   Sink get inputUsername;
   Sink get inputPassword;
-  Sink inputIsAllInputsValid;
+  Sink get inputIsAllInputsValid;
 }
 
 abstract class LoginViewModelOutputs {
