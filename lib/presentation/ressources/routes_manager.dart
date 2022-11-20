@@ -13,6 +13,7 @@ class RouteGenerator {
       case AccueilPage.routeName:
         initDIGetCategoriesModule();
         initDIGetProductsModule();
+        initDIMagasinsCosmetiquesModule();
         return AccueilPage.route(
             tabSelected: routeSettings.arguments != null
                 ? routeSettings.arguments! as int

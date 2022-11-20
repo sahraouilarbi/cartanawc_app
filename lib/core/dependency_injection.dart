@@ -1,5 +1,3 @@
-import 'package:cartanawc_app/domain/usecase/paiement_usecase.dart';
-import 'package:cartanawc_app/presentation/tableau_de_bord/view/tab_paiement/tab_paiement_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,14 +10,8 @@ import '/data/network/network_info.dart';
 import '/data/repositories/repository_impl.dart';
 import '/domain/entities/customer_detail_entity.dart';
 import '/domain/repositories/repository.dart';
-import '/domain/usecase/categories_usecase.dart';
-import '/domain/usecase/commander_usecase.dart';
-import '/domain/usecase/customer_profile_edit_usecase.dart';
-import '/domain/usecase/customer_profile_usecase.dart';
-import '/domain/usecase/devenir_distributeur_usecase.dart';
-import '/domain/usecase/historique_usecase.dart';
-import '/domain/usecase/login_usecase.dart';
-import '/domain/usecase/products_usecase.dart';
+import '/domain/usecase/usecases.dart';
+import '/presentation/accueil/view/tab_explorer/tabview_explorer_viewmodel.dart';
 import '/presentation/accueil/view/tab_produits/products_viewmodel.dart';
 import '/presentation/accueil/view/tab_produits/tabview_categories_viewmodel.dart';
 import '/presentation/customer_profile/view/customer_profile_viewmodel.dart';
@@ -29,6 +21,7 @@ import '/presentation/devenir_distributeur/view/devenir_distributeur_viewmodel.d
 import '/presentation/login/view/login_viewmodel.dart';
 import '/presentation/tableau_de_bord/view/tab_commandes/tab_commander_viewmodel.dart';
 import '/presentation/tableau_de_bord/view/tab_historique/tab_historique_viewmodel.dart';
+import '/presentation/tableau_de_bord/view/tab_paiement/tab_paiement_viewmodel.dart';
 
 final instance = GetIt.instance;
 Future<void> initDIAppModule() async {
@@ -145,6 +138,7 @@ void initDICustomerProfileEditCopyModule() {
   }
 }
 
+// TODO A Verifier <CustomerProfileEditCopyUsecase> au lieu de <CustomerDetailEntity> !!
 void initDICustomerProfileEditCopyPageModule() {
   if (!GetIt.I.isRegistered<CustomerDetailEntity>()) {
     instance.registerFactory<CustomerDetailEntity>(
@@ -249,6 +243,21 @@ void initDIDevenirDistributeurModule() {
   }
 }
 
+void initDIMagasinsCosmetiquesModule() {
+  if (!GetIt.I.isRegistered<MagasinsCosmetiquesUseCase>()) {
+    instance.registerFactory<MagasinsCosmetiquesUseCase>(
+      () => MagasinsCosmetiquesUseCase(
+        instance(),
+      ),
+    );
+    instance.registerFactory<TabviewExplorerViewModel>(
+      () => TabviewExplorerViewModel(
+        instance(),
+      ),
+    );
+  }
+}
+
 void resetDIModules() {
   instance.reset(dispose: false);
   initDIAppModule();
@@ -263,4 +272,5 @@ void resetDIModules() {
   initDITabPaiementModule();
   initDIGetProductsModule();
   initDIDevenirDistributeurModule();
+  initDIMagasinsCosmetiquesModule();
 }

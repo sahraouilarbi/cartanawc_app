@@ -39,6 +39,10 @@ class APIEndPoint {
   // Paiement endpoint
   static const String paiements = '/wp-json/wp/v2/paiements';
 
+  // Magasin Cosmetique endpoint
+  static const String magasinsCosmetiques =
+      '/wp-json/wp/v2/magasins_cosmetiques';
+
   // Advanced dynamic Pricing for WooCommerce endpoint
   static const String wdpRules = '/wp-json/wdp-rules/all';
 

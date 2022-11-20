@@ -31,7 +31,8 @@ dependencies:
   # Flutter_svg updated -> 20/08/2022 ->
   flutter_svg: ^0.23.0+1
   # Geolocator updated 30/04/2022
-  geolocator: ^8.0.5
+  # geolocator: ^8.0.5
+  geolocator: ^7.5.0
   # Get_it updated-> 30/04/2022
   get_it: ^7.2.0
   ## Google_maps_flutter updates -> 30/04/2022 ->
