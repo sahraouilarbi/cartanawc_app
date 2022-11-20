@@ -52,9 +52,6 @@ class _TabCategoriesState extends State<TabCategories> {
             },
           );
         }
-        if (snapshot.hasError) {
-          return Center(child: Text(snapshot.error.toString()));
-        }
         return const SizedBox();
       },
     );
@@ -66,7 +63,9 @@ class _TabCategoriesState extends State<TabCategories> {
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
-            return const Center(child: Text('Pas de données'));
+            return const Center(
+              child: Text('Pas de données'),
+            );
           case ConnectionState.waiting:
             return const Center(child: CircularProgressIndicator());
           case ConnectionState.active:

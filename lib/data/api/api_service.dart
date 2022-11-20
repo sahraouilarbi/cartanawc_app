@@ -50,6 +50,7 @@ abstract class APIService {
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
       DevenirDistributeurRequestModel _formData);
   Future<List<PaiementModel>> getPaiements();
+  Future<List<MagasinCosmetiqueModel>> getMagasinsCosmetiques();
 }
 
 class _APIServiceImpl implements APIService {
@@ -656,7 +657,9 @@ class _APIServiceImpl implements APIService {
                 queryParameters: _queryParameters,
                 data: _data,
               )
-              .copyWith(baseUrl: APIEndPoint().baseUrl),
+              .copyWith(
+                baseUrl: APIEndPoint().baseUrl,
+              ),
         ),
       );
       return (_response.data!)
@@ -668,6 +671,43 @@ class _APIServiceImpl implements APIService {
       printDebugMessage(e.toString());
     }
     return <PaiementModel>[];
+  }
+
+  // Get Magasins Cosmétiques
+  @override
+  Future<List<MagasinCosmetiqueModel>> getMagasinsCosmetiques() async {
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{};
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    try {
+      final _response = await _dio.fetch<List<dynamic>>(
+        Options(
+          method: 'GET',
+          headers: {
+            HttpHeaders.authorizationHeader:
+                'Basic ${APIApplicationPassword().basicAuth}',
+          },
+          extra: _extra,
+        )
+            .compose(
+              _dio.options,
+              APIEndPoint.magasinsCosmetiques,
+              queryParameters: _queryParameters,
+              data: _data,
+            )
+            .copyWith(
+              baseUrl: APIEndPoint().baseUrl,
+            ),
+      );
+      return (_response.data!)
+          .map((e) => MagasinCosmetiqueModel.fromMap(e as Map<String, dynamic>))
+          .toList();
+    } on DioError catch (_e) {
+      printDebugMessage(_e.response.toString());
+    } catch (_e) {
+      printDebugMessage(_e.toString());
+    }
+    return <MagasinCosmetiqueModel>[];
   }
 
 //***************************************************************************

@@ -6,6 +6,7 @@ export 'customer_mapper.dart';
 export 'devenir_distributeur_mapper.dart';
 export 'forgot_password_mapper.dart';
 export 'login_response_mapper.dart';
+export 'magasin_cosmetique_mapper.dart';
 export 'meta_data_mapper.dart';
 export 'order_mapper.dart';
 export 'paiement_mapper.dart';

@@ -300,4 +300,23 @@ class RepositoryImpl implements Repository {
       return Left(DataSource.noInternetConnection.getFailure());
     }
   }
+
+  // Get Magasins Cosmetiques
+  @override
+  Future<Either<Failure, List<MagasinCosmetiqueEntity>>>
+      getMagasinsCosmetiques() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.getMagasinsCosmetiques();
+        final List<MagasinCosmetiqueEntity> _magasinsCosmetiques =
+            List<MagasinCosmetiqueEntity>.from(
+                _response.map((e) => e.toDomain()));
+        return Right(_magasinsCosmetiques);
+      } catch (_error) {
+        return Left(ErrorHandler.handle(_error.toString()).failure);
+      }
+    } else {
+      return Left(DataSource.noInternetConnection.getFailure());
+    }
+  }
 }

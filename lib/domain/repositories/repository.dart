@@ -73,4 +73,8 @@ abstract class Repository {
 
   // Get Paiements
   Future<Either<Failure, List<PaiementEntity>>> getPaiements(int customerId);
+
+  // Get Magasins Cosmetiques
+  Future<Either<Failure, List<MagasinCosmetiqueEntity>>>
+      getMagasinsCosmetiques();
 }

@@ -7,6 +7,7 @@ export 'customer_entity.dart';
 export 'devenir_distributeur_entity.dart';
 export 'forgot_password_response_entity.dart';
 export 'login_entity.dart';
+export 'magasin_cosmetique_entity.dart';
 export 'meta_data_entity.dart';
 export 'order_detail_entity.dart';
 export 'order_entity.dart';
