@@ -5,7 +5,7 @@ import '/domain/entities/entities.dart';
 import '/presentation/accueil/view/tab_produits/widgets/product_card_widget.dart';
 import '/presentation/common/appbar/custom_appbar_widget.dart';
 import '/presentation/common/drawer/drawer_for_anonymous_widget.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_render_impl.dart';
 import 'products_viewmodel.dart';
 
 class ProductsPage extends StatefulWidget {

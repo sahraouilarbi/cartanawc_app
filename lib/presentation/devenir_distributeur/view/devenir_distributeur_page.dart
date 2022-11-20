@@ -8,7 +8,7 @@ import '/presentation/common/drawer/drawer_for_anonymous_widget.dart';
 import '/presentation/common/my_text_buttom_widget.dart';
 import '/presentation/common/my_text_form_field_widget.dart';
 import '/presentation/common/section_header_widget.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_render_impl.dart';
 import '/presentation/devenir_distributeur/view/devenir_distributeur_viewmodel.dart';
 import '/presentation/ressources/appsize_manager.dart';
 

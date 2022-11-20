@@ -3,6 +3,7 @@ export 'accueil/accueil.dart';
 export 'auth/auth.dart';
 export 'base/base.dart';
 export 'cart/cart.dart';
+export 'contact/contact.dart';
 export 'customer_profile/customer_profile.dart';
 export 'customer_profile_edit_copy/customer_profile_edit_copy.dart';
 export 'devenir_distributeur/devenir_distributeur.dart';

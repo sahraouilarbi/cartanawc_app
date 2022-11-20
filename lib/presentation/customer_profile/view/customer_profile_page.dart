@@ -7,7 +7,7 @@ import '/presentation/common/appbar/custom_appbar_widget.dart';
 import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
 import '/presentation/common/my_text_buttom_widget.dart';
 import '/presentation/common/section_header_widget.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_render_impl.dart';
 import '/presentation/common/text_customer_profile_view_widget.dart';
 import '/presentation/common/textbuttom_widget.dart';
 import '/presentation/pages.dart';
