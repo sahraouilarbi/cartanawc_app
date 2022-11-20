@@ -18,7 +18,7 @@ Cartana Woocommerce application.
 - package: flutter_svg migrate 0.19.2+1->0.22.0 (30/04/2022)
 - package: flutter_html migrate 1.2.0->2.0.0 (30/04/2022)
 - package: flutter_native_splash migrate 0.3.2->1.2.3 (30/04/2022)
-- package: geolocator migrate 6.2.1->8.0.5 (30/04/2022)
+- package: geolocator migrate 6.2.1->7.5.0 (30/04/2022)
 - package: provider migrate 5.0.0->6.0.2 (30/04/2022)
 - package: flutter_html migrate 2.0.0->2.2.1 (30/04/2022)
 - Création de abstract class APIService()
