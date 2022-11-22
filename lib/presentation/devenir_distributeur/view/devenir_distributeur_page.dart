@@ -44,37 +44,57 @@ class _DevenirDistributeurPageState extends State<DevenirDistributeurPage> {
 
   void _bind() {
     _viewModel.start();
-    _yourNameController.addListener(() {
-      _viewModel.setYourName(_yourNameController.text);
-    });
-    _yourEmailController.addListener(() {
-      _viewModel.setYourEmail(_yourEmailController.text);
-    });
-    _yourPhoneController.addListener(() {
-      _viewModel.setYourPhone(_yourPhoneController.text);
-    });
-    _yourAddressController.addListener(() {
-      _viewModel.setYourAddress(_yourAddressController.text);
-    });
-    _yourCityController.addListener(() {
-      _viewModel.setYourCity(_yourCityController.text);
-    });
-    _yourPostcodeController.addListener(() {
-      _viewModel.setYourPostcode(_yourPostcodeController.text);
-    });
-    _yourSubjectController.addListener(() {
-      _viewModel.setYourSubject(_yourSubjectController.text);
-    });
-    _yourMessageController.addListener(() {
-      _viewModel.setYourMessage(_yourMessageController.text);
-    });
+    _yourNameController.addListener(
+      () {
+        _viewModel.setYourName(_yourNameController.text);
+      },
+    );
+    _yourEmailController.addListener(
+      () {
+        _viewModel.setYourEmail(_yourEmailController.text);
+      },
+    );
+    _yourPhoneController.addListener(
+      () {
+        _viewModel.setYourPhone(_yourPhoneController.text);
+      },
+    );
+    _yourAddressController.addListener(
+      () {
+        _viewModel.setYourAddress(_yourAddressController.text);
+      },
+    );
+    _yourCityController.addListener(
+      () {
+        _viewModel.setYourCity(_yourCityController.text);
+      },
+    );
+    _yourPostcodeController.addListener(
+      () {
+        _viewModel.setYourPostcode(_yourPostcodeController.text);
+      },
+    );
+    _yourSubjectController.addListener(
+      () {
+        _viewModel.setYourSubject(_yourSubjectController.text);
+      },
+    );
+    _yourMessageController.addListener(
+      () {
+        _viewModel.setYourMessage(_yourMessageController.text);
+      },
+    );
     _viewModel
         .isDevenirDistributeurSendMessageSuccessfullyStreamController.stream
-        .listen((data) {
-      SchedulerBinding.instance!.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, AccueilPage.routeName);
-      });
-    });
+        .listen(
+      (data) {
+        SchedulerBinding.instance!.addPostFrameCallback(
+          (_) {
+            Navigator.pushNamed(context, AccueilPage.routeName);
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -107,7 +127,11 @@ class _DevenirDistributeurPageState extends State<DevenirDistributeurPage> {
           stream: _viewModel.outputState,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
+              return Center(
+                child: Text(
+                  snapshot.error.toString(),
+                ),
+              );
             }
             if (snapshot.hasData) {
               return snapshot.data!.getScreenWidget(
@@ -133,8 +157,10 @@ class _DevenirDistributeurPageState extends State<DevenirDistributeurPage> {
         child: Column(
           children: <Widget>[
             const SectionHeader(sectionTitle: 'DEVENIR DISTRIBUTEUR'),
-            Image.asset('assets/images/devenir_distributeur_bg.jpg',
-                fit: BoxFit.cover),
+            Image.asset(
+              'assets/images/devenir_distributeur_bg.jpg',
+              fit: BoxFit.cover,
+            ),
             Container(
               padding: const EdgeInsets.only(
                 left: AppPadding.p20,
@@ -154,127 +180,136 @@ class _DevenirDistributeurPageState extends State<DevenirDistributeurPage> {
                       children: <Widget>[
                         // YourName field
                         StreamBuilder<bool>(
-                            stream: _viewModel.outputIsYourNameValid,
-                            builder: (context, snapshot) {
-                              return MyTextFormFieldWidget(
-                                controller: _yourNameController,
-                                hintText: 'Nom et prénom',
-                                labelText: 'Nom et prénom',
-                                errorText: snapshot.data ?? true
-                                    ? null
-                                    : "Saisissez votre nom et prénom",
-                              );
-                            }),
+                          stream: _viewModel.outputIsYourNameValid,
+                          builder: (context, snapshot) {
+                            return MyTextFormFieldWidget(
+                              controller: _yourNameController,
+                              keyboardType: TextInputType.name,
+                              hintText: 'Nom et prénom',
+                              labelText: 'Nom et prénom',
+                              errorText: snapshot.data ?? true
+                                  ? null
+                                  : "Saisissez votre nom et prénom",
+                            );
+                          },
+                        ),
                         const SizedBox(height: AppSize.s20),
 
                         // YourEmail field
                         StreamBuilder<bool>(
-                            stream: _viewModel.outputIsYourEmailValid,
-                            builder: (context, snapshot) {
-                              return MyTextFormFieldWidget(
-                                controller: _yourEmailController,
-                                keyboardType: TextInputType.emailAddress,
-                                hintText: 'email@exemple.com',
-                                labelText: 'Email',
-                                errorText: snapshot.data ?? true
-                                    ? null
-                                    : "Saisissez votre email",
-                              );
-                            }),
+                          stream: _viewModel.outputIsYourEmailValid,
+                          builder: (context, snapshot) {
+                            return MyTextFormFieldWidget(
+                              controller: _yourEmailController,
+                              keyboardType: TextInputType.emailAddress,
+                              hintText: 'email@exemple.com',
+                              labelText: 'Email',
+                              errorText: snapshot.data ?? true
+                                  ? null
+                                  : "Saisissez votre email",
+                            );
+                          },
+                        ),
                         const SizedBox(height: AppSize.s20),
 
                         // YourPhone field
                         StreamBuilder<bool>(
-                            stream: _viewModel.outputIsYourPhoneValid,
-                            builder: (context, snapshot) {
-                              return MyTextFormFieldWidget(
-                                controller: _yourPhoneController,
-                                keyboardType: TextInputType.phone,
-                                hintText: '0661 00 00 00',
-                                labelText: 'Téléphone',
-                                errorText: snapshot.data ?? true
-                                    ? null
-                                    : "Saisissez votre numéro téléphone",
-                              );
-                            }),
+                          stream: _viewModel.outputIsYourPhoneValid,
+                          builder: (context, snapshot) {
+                            return MyTextFormFieldWidget(
+                              controller: _yourPhoneController,
+                              keyboardType: TextInputType.phone,
+                              hintText: '0661 00 00 00',
+                              labelText: 'Téléphone',
+                              errorText: snapshot.data ?? true
+                                  ? null
+                                  : "Saisissez votre numéro téléphone",
+                            );
+                          },
+                        ),
                         const SizedBox(height: AppSize.s20),
 
                         // YourAddress field
                         StreamBuilder<bool>(
-                            stream: _viewModel.outputIsYourAddressValid,
-                            builder: (context, snapshot) {
-                              return MyTextFormFieldWidget(
-                                controller: _yourAddressController,
-                                keyboardType: TextInputType.streetAddress,
-                                hintText: 'num, rue Nom de la rue',
-                                labelText: 'Adresse',
-                                errorText: snapshot.data ?? true
-                                    ? null
-                                    : "Saisissez votre adresse",
-                              );
-                            }),
+                          stream: _viewModel.outputIsYourAddressValid,
+                          builder: (context, snapshot) {
+                            return MyTextFormFieldWidget(
+                              controller: _yourAddressController,
+                              keyboardType: TextInputType.streetAddress,
+                              hintText: 'num, rue Nom de la rue',
+                              labelText: 'Adresse',
+                              errorText: snapshot.data ?? true
+                                  ? null
+                                  : "Saisissez votre adresse",
+                            );
+                          },
+                        ),
                         const SizedBox(height: AppSize.s20),
 
                         // YourCity field
                         StreamBuilder<bool>(
-                            stream: _viewModel.outputIsYourCityValid,
-                            builder: (context, snapshot) {
-                              return MyTextFormFieldWidget(
-                                controller: _yourCityController,
-                                hintText: 'Alger',
-                                labelText: 'Wilaya',
-                                errorText: snapshot.data ?? true
-                                    ? null
-                                    : "Saisissez votre wilaya",
-                              );
-                            }),
+                          stream: _viewModel.outputIsYourCityValid,
+                          builder: (context, snapshot) {
+                            return MyTextFormFieldWidget(
+                              controller: _yourCityController,
+                              hintText: 'Alger',
+                              labelText: 'Wilaya',
+                              errorText: snapshot.data ?? true
+                                  ? null
+                                  : "Saisissez votre wilaya",
+                            );
+                          },
+                        ),
                         const SizedBox(height: AppSize.s20),
 
                         // YourPostcode field
                         StreamBuilder<bool>(
-                            stream: _viewModel.outputIsYourPostcodeValid,
-                            builder: (context, snapshot) {
-                              return MyTextFormFieldWidget(
-                                controller: _yourPostcodeController,
-                                keyboardType: TextInputType.number,
-                                hintText: '16000',
-                                labelText: 'Code Postal',
-                                errorText: snapshot.data ?? true
-                                    ? null
-                                    : "Saisissez votre code postal",
-                              );
-                            }),
+                          stream: _viewModel.outputIsYourPostcodeValid,
+                          builder: (context, snapshot) {
+                            return MyTextFormFieldWidget(
+                              controller: _yourPostcodeController,
+                              keyboardType: TextInputType.number,
+                              hintText: '16000',
+                              labelText: 'Code Postal',
+                              errorText: snapshot.data ?? true
+                                  ? null
+                                  : "Saisissez votre code postal",
+                            );
+                          },
+                        ),
                         const SizedBox(height: AppSize.s20),
 
                         // YourSubject field
                         StreamBuilder<bool>(
-                            stream: _viewModel.outputIsYourSubjectValid,
-                            builder: (context, snapshot) {
-                              return MyTextFormFieldWidget(
-                                controller: _yourSubjectController,
-                                hintText: 'Sujet',
-                                labelText: 'Sujet',
-                                errorText: snapshot.data ?? true
-                                    ? null
-                                    : "Saisissez le sujet",
-                              );
-                            }),
+                          stream: _viewModel.outputIsYourSubjectValid,
+                          builder: (context, snapshot) {
+                            return MyTextFormFieldWidget(
+                              controller: _yourSubjectController,
+                              hintText: 'Sujet',
+                              labelText: 'Sujet',
+                              errorText: snapshot.data ?? true
+                                  ? null
+                                  : "Saisissez le sujet",
+                            );
+                          },
+                        ),
                         const SizedBox(height: AppSize.s20),
 
                         // YourMessage field
                         StreamBuilder<bool>(
-                            stream: _viewModel.outputIsYourMessageValid,
-                            builder: (context, snapshot) {
-                              return MyTextFormFieldWidget(
-                                controller: _yourMessageController,
-                                maxLines: 5,
-                                hintText: 'Message',
-                                labelText: 'Message',
-                                errorText: snapshot.data ?? true
-                                    ? null
-                                    : "Saisissez votre message",
-                              );
-                            }),
+                          stream: _viewModel.outputIsYourMessageValid,
+                          builder: (context, snapshot) {
+                            return MyTextFormFieldWidget(
+                              controller: _yourMessageController,
+                              maxLines: 5,
+                              hintText: 'Message',
+                              labelText: 'Message',
+                              errorText: snapshot.data ?? true
+                                  ? null
+                                  : "Saisissez votre message",
+                            );
+                          },
+                        ),
                         const SizedBox(height: AppSize.s20),
 
                         StreamBuilder<bool>(

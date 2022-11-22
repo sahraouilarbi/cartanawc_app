@@ -75,19 +75,37 @@ class DevenirDistributeurViewModel extends BaseViewModel
   @override
   Future<void> devenirDistributeur() async {
     final DevenirDistributeurRequestEntity _formData =
-        DevenirDistributeurRequestEntity(yourName, yourEmail, yourPhone,
-            yourAddress, yourCity, yourPostcode, yourSubject, yourMessage);
+        DevenirDistributeurRequestEntity(
+      yourName,
+      yourEmail,
+      yourPhone,
+      yourAddress,
+      yourCity,
+      yourPostcode,
+      yourSubject,
+      yourMessage,
+    );
 
     inputState.add(
-        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+      LoadingState(
+        stateRendererType: StateRendererType.popupLoadingState,
+      ),
+    );
 
     (await _devenirDistributeurUsecase.execute(_formData)).fold(
-        (failure) => inputState.add(
-              ErrorState(StateRendererType.popupErrorState, failure.message),
-            ), (data) {
-      inputState.add(ContentState());
-      isDevenirDistributeurSendMessageSuccessfullyStreamController.add(data);
-    });
+      (failure) => inputState.add(
+        ErrorState(
+          StateRendererType.popupErrorState,
+          failure.message,
+        ),
+      ),
+      (data) {
+        inputState.add(
+          ContentState(),
+        );
+        isDevenirDistributeurSendMessageSuccessfullyStreamController.add(data);
+      },
+    );
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:cartanawc_app/domain/usecase/contact_usecase.dart';
+import 'package:cartanawc_app/presentation/contact/view/contact_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -139,19 +141,19 @@ void initDICustomerProfileEditCopyModule() {
 }
 
 // TODO A Verifier <CustomerProfileEditCopyUsecase> au lieu de <CustomerDetailEntity> !!
-void initDICustomerProfileEditCopyPageModule() {
-  if (!GetIt.I.isRegistered<CustomerDetailEntity>()) {
-    instance.registerFactory<CustomerDetailEntity>(
-      () => CustomerDetailEntity(),
-    );
-    instance.registerFactory<CustomerProfileEditCopyViewModel>(
-      () => CustomerProfileEditCopyViewModel(
-        instance(),
-        instance(),
-      ),
-    );
-  }
-}
+// void initDICustomerProfileEditCopyPageModule() {
+//   if (!GetIt.I.isRegistered<CustomerDetailEntity>()) {
+//     instance.registerFactory<CustomerDetailEntity>(
+//       () => CustomerDetailEntity(),
+//     );
+//     instance.registerFactory<CustomerProfileEditCopyViewModel>(
+//       () => CustomerProfileEditCopyViewModel(
+//         instance(),
+//         instance(),
+//       ),
+//     );
+//   }
+// }
 
 void initDIGetCategoriesModule() {
   if (!GetIt.I.isRegistered<CategoriesUsecase>()) {
@@ -228,6 +230,7 @@ void initDIGetProductsModule() {
   }
 }
 
+// Devenir Distributeur DI
 void initDIDevenirDistributeurModule() {
   if (!GetIt.I.isRegistered<DevenirDistributeurUsecase>()) {
     instance.registerFactory<DevenirDistributeurUsecase>(
@@ -243,6 +246,23 @@ void initDIDevenirDistributeurModule() {
   }
 }
 
+// Contact DI
+void initDIContactModule() {
+  if (!GetIt.I.isRegistered<ContactUsecase>()) {
+    instance.registerFactory<ContactUsecase>(
+      () => ContactUsecase(
+        instance(),
+      ),
+    );
+    instance.registerFactory<ContactViewModel>(
+      () => ContactViewModel(
+        instance(),
+      ),
+    );
+  }
+}
+
+// Magasins Cosmétiques (Tab : Explorer)
 void initDIMagasinsCosmetiquesModule() {
   if (!GetIt.I.isRegistered<MagasinsCosmetiquesUseCase>()) {
     instance.registerFactory<MagasinsCosmetiquesUseCase>(
@@ -261,16 +281,17 @@ void initDIMagasinsCosmetiquesModule() {
 void resetDIModules() {
   instance.reset(dispose: false);
   initDIAppModule();
-  initDILoginModule();
-  initDIGetCategoriesModule();
-  initDICustomerProfileModule();
-  initDICustomerProfileEditModule();
+  initDIContactModule();
   initDICustomerProfileEditCopyModule();
-  initDICustomerProfileEditCopyPageModule();
+  //initDICustomerProfileEditCopyPageModule();
+  initDICustomerProfileEditModule();
+  initDICustomerProfileModule();
+  initDIDevenirDistributeurModule();
+  initDIGetCategoriesModule();
+  initDIGetProductsModule();
+  initDILoginModule();
+  initDIMagasinsCosmetiquesModule();
   initDITabCommanderModule();
   initDITabHistoriqueModule();
   initDITabPaiementModule();
-  initDIGetProductsModule();
-  initDIDevenirDistributeurModule();
-  initDIMagasinsCosmetiquesModule();
 }

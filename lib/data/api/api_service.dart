@@ -49,6 +49,7 @@ abstract class APIService {
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
       DevenirDistributeurRequestModel _formData);
+  Future<ContactResponseModel> contact(ContactRequestModel _formData);
   Future<List<PaiementModel>> getPaiements();
   Future<List<MagasinCosmetiqueModel>> getMagasinsCosmetiques();
 }
@@ -629,9 +630,46 @@ class _APIServiceImpl implements APIService {
           DevenirDistributeurResponseModel.fromJson(_response.data!);
     } on DioError catch (e) {
       printDebugMessage(
-          'api_service - devenirDistributeur Exception : ${e.response}');
+          'api_service - devenirDistributeur Exception - DioError: ${e.response}');
     }
     return _devenirDistributeurResponse;
+  }
+
+  // Contact
+  @override
+  Future<ContactResponseModel> contact(ContactRequestModel _formData) async {
+    ContactResponseModel _contactResponse = ContactResponseModel();
+    const Map<String, dynamic> _extra = <String, dynamic>{};
+    final Map<String, dynamic> _queryParamets = <String, dynamic>{};
+    final FormData _data = FormData.fromMap(_formData.toMap());
+    try {
+      final _response = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ContactResponseModel>(
+          Options(
+            method: 'POST',
+            headers: {
+              HttpHeaders.authorizationHeader: "",
+              HttpHeaders.contentTypeHeader: "multipart/form-data",
+            },
+            extra: _extra,
+          )
+              .compose(
+                _dio.options,
+                APIEndPoint.contact,
+                queryParameters: _queryParamets,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: APIEndPoint().baseUrl,
+              ),
+        ),
+      );
+      _contactResponse = ContactResponseModel.fromMap(_response.data!);
+    } on DioError catch (e) {
+      printDebugMessage(
+          'api_service - contact Exception - DioError : ${e.response}');
+    }
+    return _contactResponse;
   }
 
   // Get Paiements

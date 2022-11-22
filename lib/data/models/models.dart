@@ -2,6 +2,7 @@ export 'billing_model.dart';
 export 'cart_request_model.dart';
 export 'cart_response_model.dart';
 export 'category_model.dart';
+export 'contact_model.dart';
 export 'customer_detail_model.dart';
 export 'customer_model.dart';
 export 'devenir_distributeur_model.dart';

@@ -267,14 +267,55 @@ class RepositoryImpl implements Repository {
       devenirDistributeur(DevenirDistributeurRequestEntity _formData) async {
     if (await _networkInfo.isConnected) {
       try {
-        final _response =
-            await _remoteDataSource.devenirDistributeur(_formData.toModel());
-        return Right(_response.toDomain());
+        final _response = await _remoteDataSource.devenirDistributeur(
+          _formData.toModel(),
+        );
+        return Right(
+          _response.toDomain(),
+        );
       } catch (_error) {
-        return Left(ErrorHandler.handle(_error.toString()).failure);
+        return Left(
+          ErrorHandler.handle(
+            _error.toString(),
+          ).failure,
+        );
       }
     } else {
-      return Left(DataSource.noInternetConnection.getFailure());
+      return Left(
+        DataSource.noInternetConnection.getFailure(),
+      );
+    }
+  }
+
+  // Contact
+  @override
+  Future<Either<Failure, ContactResponseEntity>> contact(
+      ContactRequestEntity _formData) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final _response = await _remoteDataSource.contact(
+          _formData.toModel(),
+        );
+        if (_response.status != "validation_failed") {
+          return Right(
+            _response.toDomain(),
+          );
+        } else {
+          return Left(
+            ErrorHandler.handle(_response.message.toString()).failure,
+          );
+        }
+      } catch (_error) {
+        return Left(
+          ErrorHandler.handle(
+            _error.toString(),
+          ).failure,
+        );
+      }
+    } else {
+      return Left(
+        DataSource.noInternetConnection.getFailure(),
+      );
     }
   }
 

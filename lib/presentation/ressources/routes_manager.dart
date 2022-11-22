@@ -28,6 +28,9 @@ class RouteGenerator {
         return CustomerProfileEditCopyPage.route(
             customerProfileEdit:
                 routeSettings.arguments! as CustomerDetailEntity);
+      case ContactPage.routeName:
+        initDIContactModule();
+        return ContactPage.route();
       case DevenirDistributeurPage.routeName:
         initDIDevenirDistributeurModule();
         return DevenirDistributeurPage.route();
