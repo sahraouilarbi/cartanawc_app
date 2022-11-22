@@ -6,7 +6,7 @@ import '/presentation/common/appbar/custom_appbar_widget.dart';
 import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
 import '/presentation/common/my_text_form_field_widget.dart';
 import '/presentation/common/section_header_widget.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_render_impl.dart';
 import '/presentation/common/textbuttom_widget.dart';
 import '/presentation/ressources/appsize_manager.dart';
 import 'customer_profile_edit_viewmodel.dart';

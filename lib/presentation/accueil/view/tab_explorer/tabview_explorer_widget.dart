@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -6,7 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '/core/dependency_injection.dart';
 import '/domain/entities/magasin_cosmetique_entity.dart';
 import '/presentation/accueil/view/tab_explorer/tabview_explorer_viewmodel.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_render_impl.dart';
 import '/presentation/ressources/appsize_manager.dart';
 
 /*

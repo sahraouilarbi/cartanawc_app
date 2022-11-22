@@ -61,7 +61,9 @@ class DrawerForAnonymous extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
       DrawerContent(
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, ContactPage.routeName);
+        },
         title: 'CONTACT',
         backgroundColor: Colors.black,
       ),

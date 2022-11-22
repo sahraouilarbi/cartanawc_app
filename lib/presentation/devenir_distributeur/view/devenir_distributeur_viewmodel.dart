@@ -3,7 +3,7 @@ import 'dart:async';
 import '/domain/entities/devenir_distributeur_entity.dart';
 import '/domain/usecase/devenir_distributeur_usecase.dart';
 import '/presentation/base/base.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_render_impl.dart';
 import '/presentation/common/state_render/state_renderer.dart';
 
 class DevenirDistributeurViewModel extends BaseViewModel
@@ -75,19 +75,37 @@ class DevenirDistributeurViewModel extends BaseViewModel
   @override
   Future<void> devenirDistributeur() async {
     final DevenirDistributeurRequestEntity _formData =
-        DevenirDistributeurRequestEntity(yourName, yourEmail, yourPhone,
-            yourAddress, yourCity, yourPostcode, yourSubject, yourMessage);
+        DevenirDistributeurRequestEntity(
+      yourName,
+      yourEmail,
+      yourPhone,
+      yourAddress,
+      yourCity,
+      yourPostcode,
+      yourSubject,
+      yourMessage,
+    );
 
     inputState.add(
-        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+      LoadingState(
+        stateRendererType: StateRendererType.popupLoadingState,
+      ),
+    );
 
     (await _devenirDistributeurUsecase.execute(_formData)).fold(
-        (failure) => inputState.add(
-              ErrorState(StateRendererType.popupErrorState, failure.message),
-            ), (data) {
-      inputState.add(ContentState());
-      isDevenirDistributeurSendMessageSuccessfullyStreamController.add(data);
-    });
+      (failure) => inputState.add(
+        ErrorState(
+          StateRendererType.popupErrorState,
+          failure.message,
+        ),
+      ),
+      (data) {
+        inputState.add(
+          ContentState(),
+        );
+        isDevenirDistributeurSendMessageSuccessfullyStreamController.add(data);
+      },
+    );
   }
 
   @override

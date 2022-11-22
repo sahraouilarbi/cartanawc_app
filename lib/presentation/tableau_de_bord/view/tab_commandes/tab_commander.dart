@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/core/dependency_injection.dart';
 import '/core/extensions.dart';
 import '/domain/entities/entities.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_render_impl.dart';
 import '/presentation/pages.dart';
 import '/presentation/ressources/appsize_manager.dart';
 import 'custom_expansion_tile.dart';

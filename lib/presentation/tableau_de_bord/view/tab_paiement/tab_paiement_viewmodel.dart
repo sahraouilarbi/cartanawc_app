@@ -4,7 +4,7 @@ import '/core/dependency_injection.dart';
 import '/core/prefs/app_prefs.dart';
 import '/domain/entities/entities.dart';
 import '/domain/usecase/paiement_usecase.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_render_impl.dart';
 import '/presentation/common/state_render/state_renderer.dart';
 import '/presentation/pages.dart';
 

@@ -53,6 +53,10 @@ class APIEndPoint {
   static const String devenirDistributeur =
       '/wp-json/contact-form-7/v1/contact-forms/1433/feedback';
 
+  // Contact endpoint
+  static const String contact =
+      '/wp-json/contact-form-7/v1/contact-forms/1491/feedback';
+
   // Reset Password endpoint
   static const String passwordReset = '/wp-json/bdpwr/v1/reset-password';
 

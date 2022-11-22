@@ -2,6 +2,7 @@ export 'billing_mapper.dart';
 export 'cart_request_mapper.dart';
 export 'cart_response_mapper.dart';
 export 'category_mapper.dart';
+export 'contact_mapper.dart';
 export 'customer_mapper.dart';
 export 'devenir_distributeur_mapper.dart';
 export 'forgot_password_mapper.dart';

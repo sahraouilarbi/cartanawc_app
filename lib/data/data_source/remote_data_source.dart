@@ -40,6 +40,7 @@ abstract class RemoteDataSource {
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
       DevenirDistributeurRequestModel _formData);
+  Future<ContactResponseModel> contact(ContactRequestModel _formData);
   Future<List<PaiementModel>> getPaiements();
   Future<List<MagasinCosmetiqueModel>> getMagasinsCosmetiques();
 }
@@ -167,6 +168,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
       DevenirDistributeurRequestModel _formData) {
     return _apiService.devenirDistributeur(_formData);
+  }
+
+  // Contact
+  @override
+  Future<ContactResponseModel> contact(ContactRequestModel _formData) {
+    return _apiService.contact(_formData);
   }
 
   // Get Paiement

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import '/domain/entities/entities.dart';
 import '/presentation/base/base.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_render_impl.dart';
 
 class ForgotPasswordViewModel extends BaseViewModel
     with ForgotPasswordViewModelInputs, ForgotPasswordViewModelOutputs {

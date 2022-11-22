@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 import '/core/dependency_injection.dart';
 import '/domain/entities/entities.dart';
-import '/presentation/common/state_render/sate_render_impl.dart';
+import '/presentation/common/state_render/state_render_impl.dart';
 import '/presentation/ressources/appsize_manager.dart';
 import '/presentation/ressources/color_manager.dart';
 import '/presentation/tableau_de_bord/view/tab_historique/tab_historique_viewmodel.dart';
