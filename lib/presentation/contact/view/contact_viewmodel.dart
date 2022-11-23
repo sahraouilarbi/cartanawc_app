@@ -131,7 +131,6 @@ class ContactViewModel extends BaseViewModel
         ),
       ),
       (data) {
-        print('### status: ${data.status}');
         if (data.status == "mail_sent") {
           inputState.add(
             SuccessState(data.message),

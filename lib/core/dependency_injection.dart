@@ -10,7 +10,6 @@ import '/data/data_source/remote_data_source.dart';
 import '/data/network/dio_factory.dart';
 import '/data/network/network_info.dart';
 import '/data/repositories/repository_impl.dart';
-import '/domain/entities/customer_detail_entity.dart';
 import '/domain/repositories/repository.dart';
 import '/domain/usecase/usecases.dart';
 import '/presentation/accueil/view/tab_explorer/tabview_explorer_viewmodel.dart';
