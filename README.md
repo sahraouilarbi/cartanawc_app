@@ -3,6 +3,11 @@
 Cartana Woocommerce application.
 
 # Changelog
+
+## 1.0.0+12
+- correction de bugs
+- implementation du formulaire contact
+
 ## 1.0.0+11
 - package: badges migrate 1.2.0->2.0.2 (30/04/2022)
 - package: dartz migrate ->0.10.1 (30/04/2022)
