@@ -1,10 +1,9 @@
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/tabview_accueil_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_explorer/tabview_explorer_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_produits/tabview_categories_page.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_anonymous_widget.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/accueil/view/tab_accueil/tabview_accueil_widget.dart';
-import '/presentation/accueil/view/tab_explorer/tabview_explorer_widget.dart';
-import '/presentation/accueil/view/tab_produits/tabview_categories_page.dart';
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/drawer/drawer_for_anonymous_widget.dart';
 
 class AccueilPage extends StatefulWidget {
   const AccueilPage({Key? key, this.tabSelected = 1}) : super(key: key);

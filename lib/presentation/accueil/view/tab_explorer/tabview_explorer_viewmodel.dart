@@ -1,11 +1,11 @@
 import 'dart:ffi';
-import 'package:rxdart/subjects.dart';
 
-import '/domain/entities/entities.dart';
-import '/domain/usecase/magasins_cosmetiques_usecase.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/common/state_render/state_renderer.dart';
-import '/presentation/pages.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/domain/usecase/magasins_cosmetiques_usecase.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:rxdart/subjects.dart';
 
 class TabviewExplorerViewModel extends BaseViewModel
     with TabviewExplorerViewModelInput, TabviewExplorerViewModelOutput {

@@ -5,9 +5,11 @@
 import 'dart:convert';
 
 List<PaymentGatewaysModel> paymentGatewaysFromJson(String str) =>
-    List<PaymentGatewaysModel>.from(json.decode(str).map(
-            (x) => PaymentGatewaysModel.fromJson(x as Map<String, dynamic>))
-        as List);
+    List<PaymentGatewaysModel>.from(
+      json.decode(str).map(
+            (x) => PaymentGatewaysModel.fromJson(x as Map<String, dynamic>),
+          ) as List,
+    );
 
 String paymentGatewaysToJson(List<PaymentGatewaysModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -49,8 +51,11 @@ class PaymentGatewaysModel {
         methodSupports:
             List<String>.from((json["method_supports"] as List).map((x) => x)),
         settings: Map.from(json["settings"] as Map<String, dynamic>).map(
-            (k, v) => MapEntry<String, SettingModel>(
-                k as String, SettingModel.fromJson(v as Map<String, dynamic>))),
+          (k, v) => MapEntry<String, SettingModel>(
+            k as String,
+            SettingModel.fromJson(v as Map<String, dynamic>),
+          ),
+        ),
         links: LinksModel.fromJson(json["_links"] as Map<String, dynamic>),
       );
 
@@ -79,10 +84,14 @@ class LinksModel {
   List<CollectionModel>? collection;
 
   factory LinksModel.fromJson(Map<String, dynamic> json) => LinksModel(
-        self: List<CollectionModel>.from((json["self"] as List)
-            .map((x) => CollectionModel.fromJson(x as Map<String, dynamic>))),
-        collection: List<CollectionModel>.from((json["collection"] as List)
-            .map((x) => CollectionModel.fromJson(x as Map<String, dynamic>))),
+        self: List<CollectionModel>.from(
+          (json["self"] as List)
+              .map((x) => CollectionModel.fromJson(x as Map<String, dynamic>)),
+        ),
+        collection: List<CollectionModel>.from(
+          (json["collection"] as List)
+              .map((x) => CollectionModel.fromJson(x as Map<String, dynamic>)),
+        ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -143,7 +152,8 @@ class SettingModel {
         options: json["options"] == null
             ? null
             : SettingsOptionsModel.fromJson(
-                json["options"] as Map<String, dynamic>),
+                json["options"] as Map<String, dynamic>,
+              ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -182,11 +192,13 @@ class SettingsOptionsModel {
         livraisonGratuite: json["Livraison gratuite"] == null
             ? null
             : LivraisonGratuiteModel.fromJson(
-                json["Livraison gratuite"] as Map<String, dynamic>),
+                json["Livraison gratuite"] as Map<String, dynamic>,
+              ),
         pointDeVente: json["Point de vente"] == null
             ? null
             : PointDeVenteModel.fromJson(
-                json["Point de vente"] as Map<String, dynamic>),
+                json["Point de vente"] as Map<String, dynamic>,
+              ),
         sale: json["sale"] == null ? null : json["sale"] as String,
         authorization: json["authorization"] == null
             ? null

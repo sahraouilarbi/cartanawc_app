@@ -1,5 +1,5 @@
-import '/core/extensions.dart';
-import '/data/models/models.dart';
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/data/models/models.dart';
 
 class ProductModel {
   int? id;
@@ -64,31 +64,46 @@ class ProductModel {
             ? json['stock_status'] as String
             : null,
         images: json['images'] != null
-            ? List<ProductImageModel>.from((json['images'] as List<dynamic>)
-                .map((e) =>
-                    ProductImageModel.fromJson(e as Map<String, dynamic>)))
+            ? List<ProductImageModel>.from(
+                (json['images'] as List<dynamic>).map(
+                  (e) => ProductImageModel.fromJson(e as Map<String, dynamic>),
+                ),
+              )
             : <ProductImageModel>[],
         categories: json['categories'] != null
             ? List<ProductCategoriesModel>.from(
-                (json['categories'] as List<dynamic>).map((e) =>
-                    ProductCategoriesModel.fromJson(e as Map<String, dynamic>)))
+                (json['categories'] as List<dynamic>).map(
+                  (e) => ProductCategoriesModel.fromJson(
+                    e as Map<String, dynamic>,
+                  ),
+                ),
+              )
             : <ProductCategoriesModel>[],
         attributes: json['attributes'] != null || json['attributes'].length == 0
             ? List<ProductAttributesModel>.from(
-                (json['attributes'] as List<dynamic>).map((e) =>
-                    ProductAttributesModel.fromJson(e as Map<String, dynamic>)))
+                (json['attributes'] as List<dynamic>).map(
+                  (e) => ProductAttributesModel.fromJson(
+                    e as Map<String, dynamic>,
+                  ),
+                ),
+              )
             : <ProductAttributesModel>[],
         relatedIds: json['related_ids'] != null
             ? List<int>.from(
-                (json['related_ids'] as List<dynamic>).map((e) => e))
+                (json['related_ids'] as List<dynamic>).map((e) => e),
+              )
             : <int>[],
         variations: json['variations'] != null
             ? List<dynamic>.from(
-                (json['variations'] as List<dynamic>).map((e) => e))
+                (json['variations'] as List<dynamic>).map((e) => e),
+              )
             : <dynamic>[],
         metaData: json['meta_data'] != null
-            ? List<MetaDataModel>.from((json['meta_data'] as List<dynamic>)
-                .map((e) => MetaDataModel.fromJson(e as Map<String, dynamic>)))
+            ? List<MetaDataModel>.from(
+                (json['meta_data'] as List<dynamic>).map(
+                  (e) => MetaDataModel.fromJson(e as Map<String, dynamic>),
+                ),
+              )
             : <MetaDataModel>[],
         acf: (json['acf'] != null)
             ? ProductACFModel.fromJson(json['acf'] as Map<String, dynamic>)
@@ -189,7 +204,8 @@ class ProductAttributesModel {
         name: json['name'] != null ? json['name'] as String : null,
         options: json['option'] != null
             ? List<dynamic>.from(
-                (json['option'] as List<dynamic>).map((e) => e))
+                (json['option'] as List<dynamic>).map((e) => e),
+              )
             : <dynamic>[],
       );
 }

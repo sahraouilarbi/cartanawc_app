@@ -1,4 +1,4 @@
-import '/data/models/models.dart';
+import 'package:cartanawc_app/data/models/models.dart';
 
 class OrderDetailModel {
   OrderDetailModel({
@@ -48,8 +48,11 @@ class OrderDetailModel {
     if (json['line_items'] != null) {
       lineItems = <OrderDetailLineItemsModel>[];
       json['line_items'].forEach((element) {
-        lineItems!.add(OrderDetailLineItemsModel.fromJson(
-            element as Map<String, dynamic>));
+        lineItems!.add(
+          OrderDetailLineItemsModel.fromJson(
+            element as Map<String, dynamic>,
+          ),
+        );
       });
       //TODO PEUT ETRE PLACER itemTotalAmount ICI
     }

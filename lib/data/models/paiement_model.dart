@@ -58,7 +58,8 @@ class PaiementModel {
             : null,
         content: json['content'] != null
             ? PaiementModelContent.fromJson(
-                json['content'] as Map<String, dynamic>)
+                json['content'] as Map<String, dynamic>,
+              )
             : null,
         commentStatus: json['comment_status'] != null
             ? json['comment_status'] as String
@@ -149,7 +150,8 @@ class PaiementModelACF {
           : null,
       client: map['client'] != null
           ? PaiementModelACFClient.fromMap(
-              map['client'] as Map<String, dynamic>)
+              map['client'] as Map<String, dynamic>,
+            )
           : null,
     );
   }
@@ -182,5 +184,6 @@ class PaiementModelACFClient {
 
   factory PaiementModelACFClient.fromJson(String source) =>
       PaiementModelACFClient.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+        json.decode(source) as Map<String, dynamic>,
+      );
 }

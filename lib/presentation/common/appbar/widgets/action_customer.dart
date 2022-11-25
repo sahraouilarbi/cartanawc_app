@@ -1,9 +1,8 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/core/dependency_injection.dart';
-import '/core/prefs/app_prefs.dart';
-import '/presentation/pages.dart';
-import '/presentation/ressources/appsize_manager.dart';
 
 class AppBarActionCustomerIcon extends StatelessWidget {
   AppBarActionCustomerIcon({Key? key}) : super(key: key);

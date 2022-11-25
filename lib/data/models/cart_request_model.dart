@@ -7,9 +7,11 @@ class CartRequestModel {
       CartRequestModel(
         userId: json['user_id'] != null ? json['user_id'] as int : null,
         products: json['products'] != null
-            ? List<CartProductsModel>.from((json['products'] as List<dynamic>)
-                .map((e) =>
-                    CartProductsModel.fromJson(e as Map<String, dynamic>)))
+            ? List<CartProductsModel>.from(
+                (json['products'] as List<dynamic>).map(
+                  (e) => CartProductsModel.fromJson(e as Map<String, dynamic>),
+                ),
+              )
             : <CartProductsModel>[],
       );
 

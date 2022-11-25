@@ -1,8 +1,7 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/size_config.dart';
 
 class ExpandedTextWidget extends StatefulWidget {
   const ExpandedTextWidget({
@@ -47,11 +46,15 @@ class _ExpandedTextWidgetState extends State<ExpandedTextWidget> {
                   Text(
                     lireLaSuiteFlag ? 'Lire moins' : 'Lire la suite',
                     style: const TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  Icon(lireLaSuiteFlag
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down),
+                  Icon(
+                    lireLaSuiteFlag
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                  ),
                 ],
               ),
             ),

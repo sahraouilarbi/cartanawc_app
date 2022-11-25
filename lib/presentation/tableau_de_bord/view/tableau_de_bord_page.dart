@@ -1,10 +1,9 @@
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
+import 'package:cartanawc_app/presentation/tableau_de_bord/view/tab_commandes/tab_commander.dart';
+import 'package:cartanawc_app/presentation/tableau_de_bord/view/tab_historique/tab_historique.dart';
+import 'package:cartanawc_app/presentation/tableau_de_bord/view/tab_paiement/tab_paiement.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
-import 'tab_commandes/tab_commander.dart';
-import 'tab_historique/tab_historique.dart';
-import 'tab_paiement/tab_paiement.dart';
 
 class TableauBordPage extends StatefulWidget {
   const TableauBordPage({Key? key, this.tabSelected}) : super(key: key);

@@ -1,7 +1,7 @@
-import '/core/extensions.dart';
-import '/data/mapper/mappers.dart';
-import '/data/models/models.dart';
-import '/domain/entities/entities.dart';
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/data/mapper/mappers.dart';
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
 
 // OrderModel - toDomain()
 extension OrderModelMapper on OrderModel? {

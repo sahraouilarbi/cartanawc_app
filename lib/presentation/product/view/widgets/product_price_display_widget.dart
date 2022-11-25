@@ -1,11 +1,12 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
-import '/presentation/ressources/appsize_manager.dart';
-
 class ProductPriceDisplayWidget extends StatelessWidget {
-  const ProductPriceDisplayWidget(
-      {Key? key, required this.productPrice, required this.isUserLoggedIn})
-      : super(key: key);
+  const ProductPriceDisplayWidget({
+    Key? key,
+    required this.productPrice,
+    required this.isUserLoggedIn,
+  }) : super(key: key);
   final String productPrice;
   final bool isUserLoggedIn;
 

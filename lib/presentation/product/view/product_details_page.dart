@@ -1,21 +1,20 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
+import 'package:cartanawc_app/presentation/common/row_montant.dart';
+import 'package:cartanawc_app/presentation/common/stepper_widget.dart';
+import 'package:cartanawc_app/presentation/product/view/widgets.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
+import 'package:cartanawc_app/providers/auth_provider.dart';
+import 'package:cartanawc_app/providers/cart_provider.dart';
+import 'package:cartanawc_app/providers/loader_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '/core/dependency_injection.dart';
-import '/core/extensions.dart';
-import '/core/prefs/app_prefs.dart';
-import '/data/models/models.dart';
-import '/domain/entities/entities.dart';
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/my_text_buttom_widget.dart';
-import '/presentation/common/row_montant.dart';
-import '/presentation/common/stepper_widget.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/color_manager.dart';
-import '/providers/auth_provider.dart';
-import '/providers/cart_provider.dart';
-import '/providers/loader_provider.dart';
-import 'widgets.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   ProductDetailsPage({Key? key, required this.data}) : super(key: key);
@@ -78,24 +77,30 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         : productPrice = 0;
 
     // Récuperer la valeur step du produit des metadata
-    productStep = int.parse(widget.data.metaData
-        .where((element) => element.key == '_wcmmq_s_product_step')
-        .first
-        .value);
+    productStep = int.parse(
+      widget.data.metaData
+          .where((element) => element.key == '_wcmmq_s_product_step')
+          .first
+          .value,
+    );
 
     widget.cartProducts.productStep = productStep.toString();
 
     // Récuperer la valeur minStep du produit des metadata
-    productMinQty = int.parse(widget.data.metaData
-        .where((element) => element.key == '_wcmmq_s_min_quantity')
-        .first
-        .value);
+    productMinQty = int.parse(
+      widget.data.metaData
+          .where((element) => element.key == '_wcmmq_s_min_quantity')
+          .first
+          .value,
+    );
 
     // Récuperer la valeur MaxStep du produit des metadata
-    productMaxQty = int.parse(widget.data.metaData
-        .where((element) => element.key == '_wcmmq_s_max_quantity')
-        .first
-        .value);
+    productMaxQty = int.parse(
+      widget.data.metaData
+          .where((element) => element.key == '_wcmmq_s_max_quantity')
+          .first
+          .value,
+    );
 
     // initialiser la qty a 1 et calculer le montant
     _cartonACommander = 1;
@@ -243,10 +248,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     MyTextButtonWidget(
                       onPressed: () {
                         if (_cartonACommander == 0) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: const Text('Ajouter une quantité > 0'),
-                            backgroundColor: ColorManager.red,
-                          ));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text('Ajouter une quantité > 0'),
+                              backgroundColor: ColorManager.red,
+                            ),
+                          );
                         } else if (_cartonACommander > 0) {
                           setState(() {
                             inProgress = !inProgress;
@@ -276,9 +283,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
-                              Provider.of<LoaderProvider>(context,
-                                      listen: false)
-                                  .setLoadingStatus(status: false);
+                              Provider.of<LoaderProvider>(
+                                context,
+                                listen: false,
+                              ).setLoadingStatus(status: false);
                             },
                           );
                         }

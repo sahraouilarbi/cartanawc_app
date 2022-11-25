@@ -1,11 +1,10 @@
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/presentation/order/view/widget_orders_item.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/size_config.dart';
+import 'package:cartanawc_app/providers/order_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '/data/models/models.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/size_config.dart';
-import '/providers/order_provider.dart';
-import 'widget_orders_item.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({Key? key}) : super(key: key);
@@ -33,14 +32,16 @@ class _OrdersPageState extends State<OrdersPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<OrderProvider>(builder: (context, ordersModel, child) {
-      if (ordersModel.allOrders != null && ordersModel.allOrders.isNotEmpty) {
-        return _listOfOrders(context, ordersModel.allOrders);
-      }
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    });
+    return Consumer<OrderProvider>(
+      builder: (context, ordersModel, child) {
+        if (ordersModel.allOrders != null && ordersModel.allOrders.isNotEmpty) {
+          return _listOfOrders(context, ordersModel.allOrders);
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
   }
 
   Widget _listOfOrders(
@@ -50,23 +51,24 @@ class _OrdersPageState extends State<OrdersPage> {
     return ListView(
       children: [
         ListView.builder(
-            itemCount: orders.length,
-            physics: const ScrollPhysics(),
-            padding: EdgeInsets.all(
-              getProportionateScreenHeight(AppPadding.p8),
-            ),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Card(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSize.s16),
-                ),
-                child: WidgetOrderItem(
-                  orderModel: orders[index],
-                ),
-              );
-            }),
+          itemCount: orders.length,
+          physics: const ScrollPhysics(),
+          padding: EdgeInsets.all(
+            getProportionateScreenHeight(AppPadding.p8),
+          ),
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return Card(
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSize.s16),
+              ),
+              child: WidgetOrderItem(
+                orderModel: orders[index],
+              ),
+            );
+          },
+        ),
       ],
     );
   }

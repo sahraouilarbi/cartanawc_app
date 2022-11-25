@@ -1,11 +1,12 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 
-import '/presentation/ressources/appsize_manager.dart';
-
 class TextCustomerProfileViewWidget extends StatelessWidget {
-  const TextCustomerProfileViewWidget(
-      {Key? key, required this.labelText, required this.insideFieldText})
-      : super(key: key);
+  const TextCustomerProfileViewWidget({
+    Key? key,
+    required this.labelText,
+    required this.insideFieldText,
+  }) : super(key: key);
   final String labelText;
   final String insideFieldText;
   @override

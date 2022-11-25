@@ -52,19 +52,22 @@ class WdpRulesModel {
         //options
         options: json['options'] != null
             ? WdpRulesOptionsModel.fromJson(
-                json['options'] as Map<String, dynamic>)
+                json['options'] as Map<String, dynamic>,
+              )
             : null,
 
         //additional
         additional: json['additional'] != null
             ? WdpRulesAdditionalModel.fromJson(
-                json['additional'] as Map<String, dynamic>)
+                json['additional'] as Map<String, dynamic>,
+              )
             : null,
 
         //conditions
         conditions: json['conditions'] != null
             ? List<dynamic>.from(
-                (json['conditions'] as List<dynamic>).map((e) => e))
+                (json['conditions'] as List<dynamic>).map((e) => e),
+              )
             : [],
 
         //filters
@@ -81,26 +84,30 @@ class WdpRulesModel {
         //limits
         limits: json['limits'] != null
             ? List<dynamic>.from(
-                (json['limits'] as List<dynamic>).map((e) => e))
+                (json['limits'] as List<dynamic>).map((e) => e),
+              )
             : <dynamic>[],
 
         //product_adjustments
         productAdjustments: json['product_adjustments'] != null
             ? WdpRulesProductAdjustmentsModel.fromJson(
-                json['product_adjustments'] as Map<String, dynamic>)
+                json['product_adjustments'] as Map<String, dynamic>,
+              )
             : null,
 
         //bulk_adjustments
         bulkAdjustments: json['bulk_adjustments'] != null
             ? WdpRulesBulkAdjustmentsModel.fromJson(
-                json['bulk_adjustments'] as Map<String, dynamic>)
+                json['bulk_adjustments'] as Map<String, dynamic>,
+              )
             : null,
 
         //sortable_blocks_priority
         sortableBlocksPriority: json['sortable_blocks_priority'] != null
             ? List<String>.from(
                 (json['sortable_blocks_priority'] as List<dynamic>)
-                    .map((e) => e as String))
+                    .map((e) => e as String),
+              )
             : <String>[],
 
         //role_discount
@@ -117,13 +124,15 @@ class WdpRulesModel {
         //cart_adjustments
         cartAdjustments: json['cart_adjustments'] != null
             ? List<dynamic>.from(
-                (json['cart_adjustments'] as List<dynamic>).map((e) => e))
+                (json['cart_adjustments'] as List<dynamic>).map((e) => e),
+              )
             : <dynamic>[],
 
         //get_products
         getProducts: json['get_products'] != null
             ? WdpRulesGetProductsModel.fromJson(
-                json['get_products'] as Map<String, dynamic>)
+                json['get_products'] as Map<String, dynamic>,
+              )
             : null,
       );
 }
@@ -222,7 +231,8 @@ class WdpRulesProductAdjustmentsModel {
         //total
         total: json['total'] != null
             ? WdpRulesProductAdjustmentsTotalModel.fromJson(
-                json['total'] as Map<String, dynamic>)
+                json['total'] as Map<String, dynamic>,
+              )
             : null,
 
         //split
@@ -255,7 +265,8 @@ class WdpRulesProductAdjustmentsTotalModel {
   String? value;
 
   factory WdpRulesProductAdjustmentsTotalModel.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       WdpRulesProductAdjustmentsTotalModel(
         type: json['type'] != null ? json['type'] as String : null,
         value: json['value'] != null ? json['value'] as String : null,
@@ -273,7 +284,8 @@ class WdpRulesProductAdjustmentsSplitModel {
   });
 
   factory WdpRulesProductAdjustmentsSplitModel.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       WdpRulesProductAdjustmentsSplitModel(
         type: json['type'] != null ? json['type'] as String : null,
         value: json['value'] != null ? json['value'] as String : null,

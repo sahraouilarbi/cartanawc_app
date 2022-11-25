@@ -1,20 +1,22 @@
+import 'package:cartanawc_app/core/error/error_handler.dart';
+import 'package:cartanawc_app/core/error/failure.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/data/data_source/remote_data_source.dart';
+import 'package:cartanawc_app/data/mapper/mappers.dart';
+import 'package:cartanawc_app/data/models/login_request.dart';
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/data/network/network_info.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/domain/repositories/repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 
-import '/core/error/error_handler.dart';
-import '/core/error/failure.dart';
-import '/core/prefs/app_prefs.dart';
-import '/data/data_source/remote_data_source.dart';
-import '/data/mapper/mappers.dart';
-import '/data/models/login_request.dart';
-import '/data/models/models.dart';
-import '/data/network/network_info.dart';
-import '/domain/entities/entities.dart';
-import '/domain/repositories/repository.dart';
-
 class RepositoryImpl implements Repository {
   RepositoryImpl(
-      this._remoteDataSource, this._networkInfo, this._appPreferences);
+    this._remoteDataSource,
+    this._networkInfo,
+    this._appPreferences,
+  );
   final RemoteDataSource _remoteDataSource;
   final NetworkInfo _networkInfo;
   final AppPreferences _appPreferences;
@@ -22,7 +24,8 @@ class RepositoryImpl implements Repository {
   // Login repository implementation
   @override
   Future<Either<Failure, LoginResponseModel>> login(
-      LoginRequest loginRequest) async {
+    LoginRequest loginRequest,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.login(loginRequest);
@@ -42,7 +45,8 @@ class RepositoryImpl implements Repository {
   // Forgot password repository implementation
   @override
   Future<Either<Failure, ResetPasswordResponseEntity>> forgotPassword(
-      String email) async {
+    String email,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.forgotPassword(email);
@@ -58,7 +62,8 @@ class RepositoryImpl implements Repository {
   // Get customer profile repository implementation
   @override
   Future<Either<Failure, CustomerDetailEntity>> getCustomerProfile(
-      int userId) async {
+    int userId,
+  ) async {
     final userID = await _appPreferences.getUserId();
     if (await _networkInfo.isConnected) {
       try {
@@ -77,11 +82,15 @@ class RepositoryImpl implements Repository {
   // Update Shipping Informations repository implementation
   @override
   Future<Either<Failure, CustomerDetailEntity>> updateShippingInformations(
-      int _userId, ShippingEntity _shippingEntity) async {
+    int _userId,
+    ShippingEntity _shippingEntity,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.updateShippingInformations(
-            _userId, _shippingEntity.toModel());
+          _userId,
+          _shippingEntity.toModel(),
+        );
         if (true) {
           return Right(_response.toDomain());
         }
@@ -95,7 +104,8 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, CartResponseEntity>> addToCart(
-      CartRequestEntity _cart) async {
+    CartRequestEntity _cart,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.addToCart(_cart.toModel());
@@ -110,7 +120,8 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, Map<String, dynamic>>> createOrder(
-      OrderEntity _order) async {
+    OrderEntity _order,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.createOrder(_order.toModel());
@@ -125,7 +136,8 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, CartResponseEntity>> getCartItems(
-      int customerId) async {
+    int customerId,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.getCartItem();
@@ -156,7 +168,8 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<Either<Failure, OrderDetailEntity>> getOrderDetails(
-      int orderId) async {
+    int orderId,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.getOrderDetails(orderId);
@@ -252,7 +265,8 @@ class RepositoryImpl implements Repository {
         final _response = await _remoteDataSource.getPaymentGateways();
         final List<PaymentGatewaysEntity> _paymentGateways =
             List<PaymentGatewaysEntity>.from(
-                _response.map((e) => e.toDomain()));
+          _response.map((e) => e.toDomain()),
+        );
         return Right(_paymentGateways);
       } catch (_error) {
         return Left(ErrorHandler.handle(_error).failure);
@@ -290,7 +304,8 @@ class RepositoryImpl implements Repository {
   // Contact
   @override
   Future<Either<Failure, ContactResponseEntity>> contact(
-      ContactRequestEntity _formData) async {
+    ContactRequestEntity _formData,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.contact(
@@ -322,7 +337,8 @@ class RepositoryImpl implements Repository {
   // Get Paiements
   @override
   Future<Either<Failure, List<PaiementEntity>>> getPaiements(
-      int customerId) async {
+    int customerId,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
         final _response = await _remoteDataSource.getPaiements();
@@ -351,7 +367,8 @@ class RepositoryImpl implements Repository {
         final _response = await _remoteDataSource.getMagasinsCosmetiques();
         final List<MagasinCosmetiqueEntity> _magasinsCosmetiques =
             List<MagasinCosmetiqueEntity>.from(
-                _response.map((e) => e.toDomain()));
+          _response.map((e) => e.toDomain()),
+        );
         return Right(_magasinsCosmetiques);
       } catch (_error) {
         return Left(ErrorHandler.handle(_error.toString()).failure);

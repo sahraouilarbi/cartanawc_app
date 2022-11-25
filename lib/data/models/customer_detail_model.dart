@@ -1,4 +1,4 @@
-import 'models.dart';
+import 'package:cartanawc_app/data/models/models.dart';
 
 class CustomerDetailModel {
   int? id;

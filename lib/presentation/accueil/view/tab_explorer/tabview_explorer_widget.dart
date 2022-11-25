@@ -1,14 +1,13 @@
 import 'dart:async';
 
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/domain/entities/magasin_cosmetique_entity.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_explorer/tabview_explorer_viewmodel.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '/core/dependency_injection.dart';
-import '/domain/entities/magasin_cosmetique_entity.dart';
-import '/presentation/accueil/view/tab_explorer/tabview_explorer_viewmodel.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/ressources/appsize_manager.dart';
 
 /*
  * Build Explorer Page from de site : www2.cartana.dz
@@ -47,7 +46,8 @@ class _TabExplorerState extends State<TabExplorer> {
 
     if (_permission == LocationPermission.deniedForever) {
       return Future.error(
-          "L'autorisation de localisation est définitivement refusée, nous ne pouvons pas demander à nouveau d'autres autorisations");
+        "L'autorisation de localisation est définitivement refusée, nous ne pouvons pas demander à nouveau d'autres autorisations",
+      );
     }
     return Geolocator.getCurrentPosition();
   }
@@ -79,26 +79,27 @@ class _TabExplorerState extends State<TabExplorer> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<FlowState>(
-        stream: _explorerViewModel.outputState,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                snapshot.error.toString(),
-              ),
-            );
-          }
-          if (snapshot.hasData) {
-            return snapshot.data!.getScreenWidget(
-              context,
-              getScreenWidget(),
-              () {
-                _explorerViewModel.start();
-              },
-            );
-          }
-          return const SizedBox();
-        });
+      stream: _explorerViewModel.outputState,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              snapshot.error.toString(),
+            ),
+          );
+        }
+        if (snapshot.hasData) {
+          return snapshot.data!.getScreenWidget(
+            context,
+            getScreenWidget(),
+            () {
+              _explorerViewModel.start();
+            },
+          );
+        }
+        return const SizedBox();
+      },
+    );
   }
 
   Widget getScreenWidget() {

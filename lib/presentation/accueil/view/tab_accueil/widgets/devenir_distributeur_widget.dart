@@ -1,8 +1,7 @@
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/widgets/background_image_with_overlay_widget.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/pages.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import 'background_image_with_overlay_widget.dart';
 
 class DevenirDistributeur extends StatelessWidget {
   const DevenirDistributeur({Key? key}) : super(key: key);
@@ -13,7 +12,8 @@ class DevenirDistributeur extends StatelessWidget {
       alignment: AlignmentDirectional.center,
       children: [
         const BackgroundImageWithOverlay(
-            src: 'assets/images/devenir_distributeur_bg.jpg'),
+          src: 'assets/images/devenir_distributeur_bg.jpg',
+        ),
         Row(
           children: [
             Container(
@@ -27,9 +27,10 @@ class DevenirDistributeur extends StatelessWidget {
               child: const Text(
                 'REJOIGNEZ\nNOTRE RESEAU',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16.0),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
               ),
             ),
             TextButton(
@@ -38,7 +39,9 @@ class DevenirDistributeur extends StatelessWidget {
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                    vertical: AppPadding.p5, horizontal: AppPadding.p10),
+                  vertical: AppPadding.p5,
+                  horizontal: AppPadding.p10,
+                ),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(

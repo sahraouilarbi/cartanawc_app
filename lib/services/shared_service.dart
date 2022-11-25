@@ -1,7 +1,7 @@
 // import 'dart:convert';
 
 // import 'package:shared_preferences/shared_preferences.dart';
-// import '/data/models/models.dart';
+// import 'package:cartanawc_app/data/models/models.dart';
 
 // class SharedService {
 //   static Future<bool> isLoggedIn() async {

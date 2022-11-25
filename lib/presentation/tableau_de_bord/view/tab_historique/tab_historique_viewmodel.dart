@@ -1,12 +1,11 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/domain/usecase/historique_usecase.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
 import 'package:rxdart/subjects.dart';
-
-import '/core/dependency_injection.dart';
-import '/core/prefs/app_prefs.dart';
-import '/domain/entities/entities.dart';
-import '/domain/usecase/historique_usecase.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/common/state_render/state_renderer.dart';
-import '/presentation/pages.dart';
 
 class TabHistoriqueViewModel extends BaseViewModel
     with TabHistoriqueViewModelInputs, TabHistoriqueViewModelOutputs {

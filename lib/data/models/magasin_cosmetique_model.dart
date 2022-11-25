@@ -60,7 +60,8 @@ class MagasinCosmetiqueModel {
       dateGmt: map['date_gmt'] != null ? map['date_gmt'] as String : null,
       guid: map['guid'] != null
           ? MagasinCosmetiqueModelGUID.fromMap(
-              map['guid'] as Map<String, dynamic>)
+              map['guid'] as Map<String, dynamic>,
+            )
           : null,
       modified: map['modified'] != null ? map['modified'] as String : null,
       modifiedGmt:
@@ -71,16 +72,19 @@ class MagasinCosmetiqueModel {
       link: map['link'] != null ? map['link'] as String : null,
       title: map['title'] != null
           ? MagasinCosmetiqueModelTitle.fromMap(
-              map['title'] as Map<String, dynamic>)
+              map['title'] as Map<String, dynamic>,
+            )
           : null,
       template: map['template'] != null ? map['template'] as String : null,
       meta: map['meta'] != null
           ? MagasinCosmetiqueModelMeta.fromMap(
-              map['meta'] as Map<String, dynamic>)
+              map['meta'] as Map<String, dynamic>,
+            )
           : null,
       acf: map['acf'] != null
           ? MagasinCosmetiqueModelACF.fromMap(
-              map['acf'] as Map<String, dynamic>)
+              map['acf'] as Map<String, dynamic>,
+            )
           : null,
     );
   }
@@ -89,7 +93,8 @@ class MagasinCosmetiqueModel {
 
   factory MagasinCosmetiqueModel.fromJson(String source) =>
       MagasinCosmetiqueModel.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+        json.decode(source) as Map<String, dynamic>,
+      );
 }
 
 class MagasinCosmetiqueModelGUID {
@@ -114,7 +119,8 @@ class MagasinCosmetiqueModelGUID {
 
   factory MagasinCosmetiqueModelGUID.fromJson(String source) =>
       MagasinCosmetiqueModelGUID.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+        json.decode(source) as Map<String, dynamic>,
+      );
 }
 
 class MagasinCosmetiqueModelTitle {
@@ -139,7 +145,8 @@ class MagasinCosmetiqueModelTitle {
 
   factory MagasinCosmetiqueModelTitle.fromJson(String source) =>
       MagasinCosmetiqueModelTitle.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+        json.decode(source) as Map<String, dynamic>,
+      );
 }
 
 class MagasinCosmetiqueModelMeta {
@@ -166,7 +173,8 @@ class MagasinCosmetiqueModelMeta {
 
   factory MagasinCosmetiqueModelMeta.fromJson(String source) =>
       MagasinCosmetiqueModelMeta.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+        json.decode(source) as Map<String, dynamic>,
+      );
 }
 
 class MagasinCosmetiqueModelACF {
@@ -195,5 +203,6 @@ class MagasinCosmetiqueModelACF {
 
   factory MagasinCosmetiqueModelACF.fromJson(String source) =>
       MagasinCosmetiqueModelACF.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+        json.decode(source) as Map<String, dynamic>,
+      );
 }

@@ -1,12 +1,11 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/data/api/api_service.dart';
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/presentation/common/checkpoint_widget.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/core/dependency_injection.dart';
-import '/data/api/api_service.dart';
-import '/data/models/models.dart';
-import '/presentation/common/checkpoint_widget.dart';
-import '/presentation/pages.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/color_manager.dart';
 
 class OrderDetailsPage extends BasePage {
   const OrderDetailsPage({Key? key, required this.orderId}) : super(key: key);
@@ -94,12 +93,13 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
 
   Widget _listOrderItems(OrderDetailModel model) {
     return ListView.builder(
-        itemCount: model.lineItems!.length,
-        physics: const ScrollPhysics(),
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return _productItems(model.lineItems![index]);
-        });
+      itemCount: model.lineItems!.length,
+      physics: const ScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return _productItems(model.lineItems![index]);
+      },
+    );
   }
 
   Widget _productItems(OrderDetailLineItemsModel product) {
@@ -123,7 +123,11 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
       visualDensity: const VisualDensity(vertical: AppSize.s_4),
       // p_10 = -10.0;
       contentPadding: const EdgeInsets.fromLTRB(
-          AppPadding.p2, AppPadding.p_10, AppPadding.p2, AppPadding.p_10),
+        AppPadding.p2,
+        AppPadding.p_10,
+        AppPadding.p2,
+        AppPadding.p_10,
+      ),
       title: Text(
         label,
         style: textStyle,

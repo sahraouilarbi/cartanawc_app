@@ -1,4 +1,4 @@
-import '/core/extensions.dart';
+import 'package:cartanawc_app/core/extensions.dart';
 
 class DevenirDistributeurRequestModel {
   String yourName;
@@ -52,7 +52,8 @@ class DevenirDistributeurResponseModel {
     this.invalidFields,
   });
   factory DevenirDistributeurResponseModel.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       DevenirDistributeurResponseModel(
         contactFormId: json['contact_form_id'] != null
             ? json['contact_form_id'] as int

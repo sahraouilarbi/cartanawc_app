@@ -1,10 +1,9 @@
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/my_text_buttom_widget.dart';
-import '/presentation/common/my_text_form_field_widget.dart';
-import '/presentation/common/section_header_widget.dart';
-import '/presentation/ressources/appsize_manager.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -64,7 +63,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     ),
                     const SizedBox(height: AppSize.s10),
                     const Text(
-                        "Mot de passe perdu ? Veuillez saisir votre votre adresse e-mail. Vous recevrez un code de 04 chiffres par e-mail."),
+                      "Mot de passe perdu ? Veuillez saisir votre votre adresse e-mail. Vous recevrez un code de 04 chiffres par e-mail.",
+                    ),
                     const SizedBox(height: AppSize.s10),
                     MyTextFormFieldWidget(
                       controller: _emailController,

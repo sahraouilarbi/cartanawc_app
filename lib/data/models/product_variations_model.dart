@@ -56,7 +56,8 @@ class ProductVariationsAttributesModel {
   String? name;
   String? option;
   factory ProductVariationsAttributesModel.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       ProductVariationsAttributesModel(
         id: json['id'] != null ? json['id'] as int : null,
         name: json['name'] != null ? json['name'] as String : null,

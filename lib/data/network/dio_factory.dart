@@ -1,11 +1,10 @@
 import 'dart:io';
 
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/data/api/api_endpoint.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
-import '/core/prefs/app_prefs.dart';
-import '/data/api/api_endpoint.dart';
 
 class DioFactory {
   DioFactory(this._appPreferences);
@@ -31,11 +30,13 @@ class DioFactory {
     if (kReleaseMode) {
       print('release mode no logs');
     } else {
-      dio.interceptors.add(PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: true,
-      ));
+      dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: true,
+        ),
+      );
     }
     return dio;
   }

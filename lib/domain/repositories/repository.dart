@@ -1,9 +1,8 @@
+import 'package:cartanawc_app/core/error/failure.dart';
+import 'package:cartanawc_app/data/models/login_request.dart';
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
 import 'package:dartz/dartz.dart';
-
-import '/core/error/failure.dart';
-import '/data/models/login_request.dart';
-import '/data/models/models.dart';
-import '/domain/entities/entities.dart';
 
 abstract class Repository {
   // Login
@@ -11,15 +10,19 @@ abstract class Repository {
 
   // Forgot Password
   Future<Either<Failure, ResetPasswordResponseEntity>> forgotPassword(
-      String email);
+    String email,
+  );
 
   // Get Customer Profile
   Future<Either<Failure, CustomerDetailEntity>> getCustomerProfile(
-      int customerId);
+    int customerId,
+  );
 
   // Update Customer Profile
   Future<Either<Failure, CustomerDetailEntity>> updateShippingInformations(
-      int _userId, ShippingEntity _shippingEntity);
+    int _userId,
+    ShippingEntity _shippingEntity,
+  );
 
   // Get Categories
   Future<Either<Failure, List<CategoryEntity>>> getCategories();
@@ -73,7 +76,8 @@ abstract class Repository {
 
   // Contact
   Future<Either<Failure, ContactResponseEntity>> contact(
-      ContactRequestEntity _formData);
+    ContactRequestEntity _formData,
+  );
 
   // Get Paiements
   Future<Either<Failure, List<PaiementEntity>>> getPaiements(int customerId);

@@ -22,7 +22,8 @@ class LoginResponseModel {
         message: json['message'] != null ? json['message'] as String : null,
         data: json['data'] != null
             ? LoginResponseDataModel.fromJson(
-                json['data'] as Map<String, dynamic>)
+                json['data'] as Map<String, dynamic>,
+              )
             : null,
       );
 

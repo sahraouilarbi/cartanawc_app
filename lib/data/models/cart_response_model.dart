@@ -1,4 +1,4 @@
-import '/core/extensions.dart';
+import 'package:cartanawc_app/core/extensions.dart';
 
 class CartResponseModel {
   bool? status;
@@ -14,8 +14,11 @@ class CartResponseModel {
       CartResponseModel(
         status: json['status'] != null ? json['status'] as bool : null,
         data: json['data'] != null
-            ? List<CartItemModel>.from((json['data'] as List<dynamic>)
-                .map((e) => CartItemModel.fromJson(e as Map<String, dynamic>)))
+            ? List<CartItemModel>.from(
+                (json['data'] as List<dynamic>).map(
+                  (e) => CartItemModel.fromJson(e as Map<String, dynamic>),
+                ),
+              )
             : <CartItemModel>[],
       );
 
@@ -85,7 +88,6 @@ class CartItemModel {
           ? Map<String, dynamic>.from(json['attribute'] as Map<String, dynamic>)
               .keys
               .first
-              .toString()
           : kEMPTY;
       attributeValue = (json['attribute'].toString() != "[]")
           ? Map<String, dynamic>.from(json['attribute'] as Map<String, dynamic>)

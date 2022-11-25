@@ -1,8 +1,7 @@
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/widgets/background_image_with_overlay_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/widgets/badge_widget.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/ressources/appsize_manager.dart';
-import 'background_image_with_overlay_widget.dart';
-import 'badge_widget.dart';
 
 class EspaceProfessionnel extends StatelessWidget {
   const EspaceProfessionnel({
@@ -35,25 +34,31 @@ class EspaceProfessionnel extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: AppMargin.m20),
               decoration: const BoxDecoration(
                 border: Border(
-                    left: BorderSide(width: AppSize.s3, color: Colors.white)),
+                  left: BorderSide(width: AppSize.s3, color: Colors.white),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: AppPadding.p5, horizontal: AppPadding.p10),
+                      vertical: AppPadding.p5,
+                      horizontal: AppPadding.p10,
+                    ),
                     child: Text(
                       headerText,
                       style: const TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        vertical: AppPadding.p5, horizontal: AppPadding.p10),
+                      vertical: AppPadding.p5,
+                      horizontal: AppPadding.p10,
+                    ),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [

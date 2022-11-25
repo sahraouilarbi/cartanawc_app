@@ -1,10 +1,9 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/size_config.dart';
+import 'package:cartanawc_app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '/core/dependency_injection.dart';
-import '/presentation/pages.dart';
-import '/presentation/ressources/size_config.dart';
-import '/providers/auth_provider.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);

@@ -1,17 +1,16 @@
+import 'package:cartanawc_app/presentation/cart/view/cart_product_widget.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
+import 'package:cartanawc_app/presentation/common/page_sub_header.dart';
+import 'package:cartanawc_app/presentation/common/row_montant.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
+import 'package:cartanawc_app/presentation/verify_address/view/verify_address_page.dart';
+import 'package:cartanawc_app/providers/cart_provider.dart';
+import 'package:cartanawc_app/providers/loader_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '/presentation/cart/view/cart_product_widget.dart';
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
-import '/presentation/common/my_text_buttom_widget.dart';
-import '/presentation/common/page_sub_header.dart';
-import '/presentation/common/row_montant.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/color_manager.dart';
-import '/presentation/verify_address/view/verify_address_page.dart';
-import '/providers/cart_provider.dart';
-import '/providers/loader_provider.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -41,24 +40,25 @@ class _CartPageState extends State<CartPage> {
           if (loginModel.hasData) {
             if (loginModel.data!) {
               return Consumer<LoaderProvider>(
-                  builder: (context, loaderProvider, child) {
-                return Scaffold(
-                  body: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        PageSubHeaderWidget(
-                          title: 'PANIER',
-                          svgUrl: 'assets/images/shopping_cart.svg',
-                          textColor: Colors.white,
-                          backgroundColor: ColorManager.blue,
-                          hasBackReturn: true,
-                        ),
-                        _cartItemsList(),
-                      ],
+                builder: (context, loaderProvider, child) {
+                  return Scaffold(
+                    body: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          PageSubHeaderWidget(
+                            title: 'PANIER',
+                            svgUrl: 'assets/images/shopping_cart.svg',
+                            textColor: Colors.white,
+                            backgroundColor: ColorManager.blue,
+                            hasBackReturn: true,
+                          ),
+                          _cartItemsList(),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              });
+                  );
+                },
+              );
             }
           }
           return const Center(child: CircularProgressIndicator());

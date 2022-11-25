@@ -1,7 +1,6 @@
+import 'package:cartanawc_app/presentation/common/cartana_logo_widget.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/common/cartana_logo_widget.dart';
-import '/presentation/ressources/appsize_manager.dart';
 
 class AppBarCartanaLogo extends StatelessWidget {
   const AppBarCartanaLogo({Key? key}) : super(key: key);

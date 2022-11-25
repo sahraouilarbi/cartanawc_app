@@ -1,21 +1,22 @@
 import 'dart:io';
 
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/data/api/api_endpoint.dart';
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/presentation/common/utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-
-import '/core/dependency_injection.dart';
-import '/core/extensions.dart';
-import '/core/prefs/app_prefs.dart';
-import '/data/api/api_endpoint.dart';
-import '/data/models/models.dart';
-import '/presentation/common/utils.dart';
 
 abstract class APIService {
   factory APIService(Dio dio) = _APIServiceImpl;
   Future<LoginResponseModel> login(String _username, String _password);
   Future<CustomerDetailModel> getCustomerDetails(int _userId);
   Future<CustomerDetailModel> updateShippingInformations(
-      int _userId, ShippingModel _shippingModel);
+    int _userId,
+    ShippingModel _shippingModel,
+  );
   Future<ResetPasswordResponseModel> forgotPassword(String _email);
   //Future<CustomerDetailModel> customerDetails();
   Future<List<CategoryModel>> getCategories();
@@ -48,7 +49,8 @@ abstract class APIService {
   Future<OrderDetailModel> getOrderDetails(int _orderId);
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
-      DevenirDistributeurRequestModel _formData);
+    DevenirDistributeurRequestModel _formData,
+  );
   Future<ContactResponseModel> contact(ContactRequestModel _formData);
   Future<List<PaiementModel>> getPaiements();
   Future<List<MagasinCosmetiqueModel>> getMagasinsCosmetiques();
@@ -138,7 +140,7 @@ class _APIServiceImpl implements APIService {
       if (e.response!.statusCode == 404) {
         printDebugMessage(e.response!.statusCode.toString());
       } else {
-        debugPrint(e.message.toString());
+        debugPrint(e.message);
         debugPrint(e.error.toString());
       }
     }
@@ -149,7 +151,9 @@ class _APIServiceImpl implements APIService {
   // Update Customer Details
   @override
   Future<CustomerDetailModel> updateShippingInformations(
-      int _userId, ShippingModel _shippingModel) async {
+    int _userId,
+    ShippingModel _shippingModel,
+  ) async {
     late CustomerDetailModel _customerDetailModel;
 
     const Map<String, dynamic> _extra = <String, dynamic>{};
@@ -179,7 +183,7 @@ class _APIServiceImpl implements APIService {
       if (e.response!.statusCode == 404) {
         printDebugMessage(e.response!.statusCode.toString());
       } else {
-        debugPrint(e.message.toString());
+        debugPrint(e.message);
         debugPrint(e.error.toString());
       }
     }
@@ -254,7 +258,7 @@ class _APIServiceImpl implements APIService {
       _queryParameters['tag'] = tagName;
     }
     if (productsIds != null) {
-      _queryParameters['include'] = productsIds.join(',').toString();
+      _queryParameters['include'] = productsIds.join(',');
     }
     if (categoryId != null) {
       _queryParameters['category'] = categoryId;
@@ -355,14 +359,17 @@ class _APIServiceImpl implements APIService {
         ),
       );
       _responseModel = CartResponseModel.fromJson(
-          _response.data!); // as Map<String, dynamic>);
+        _response.data!,
+      ); // as Map<String, dynamic>);
     } on DioError catch (e) {
       if (e.response!.statusCode == 404) {
         printDebugMessage(
-            'APIService.addToCart Exception (response.statusCode): ${e.response!.statusCode}');
+          'APIService.addToCart Exception (response.statusCode): ${e.response!.statusCode}',
+        );
       } else {
         printDebugMessage(
-            'APIService.addToCart Exception (message): ${e.message}');
+          'APIService.addToCart Exception (message): ${e.message}',
+        );
         printDebugMessage('APIService.addToCart Exception (error): ${e.error}');
       }
     }
@@ -396,7 +403,8 @@ class _APIServiceImpl implements APIService {
         ),
       );
       _responseModel = CartResponseModel.fromJson(
-          _response.data!); // as Map<String, dynamic>);
+        _response.data!,
+      ); // as Map<String, dynamic>);
     } on DioError catch (e) {
       printDebugMessage(e.response.toString());
     }
@@ -519,7 +527,8 @@ class _APIServiceImpl implements APIService {
       );
       return (_response.data!) // as List<dynamic>)
           .map(
-              (element) => OrderModel.fromJson(element as Map<String, dynamic>))
+            (element) => OrderModel.fromJson(element as Map<String, dynamic>),
+          )
           .toList();
     } on DioError catch (e) {
       printDebugMessage(e.response.toString());
@@ -586,12 +595,15 @@ class _APIServiceImpl implements APIService {
         ),
       );
       return (_response.data!)
-          .map((element) =>
-              PaymentGatewaysModel.fromJson(element as Map<String, dynamic>))
+          .map(
+            (element) =>
+                PaymentGatewaysModel.fromJson(element as Map<String, dynamic>),
+          )
           .toList();
     } on DioError catch (e) {
       printDebugMessage(
-          'api_service - getPaymentGateways Exception : ${e.response}');
+        'api_service - getPaymentGateways Exception : ${e.response}',
+      );
     }
 
     return <PaymentGatewaysModel>[];
@@ -600,7 +612,8 @@ class _APIServiceImpl implements APIService {
   // Devenir Distributeur
   @override
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
-      DevenirDistributeurRequestModel _formData) async {
+    DevenirDistributeurRequestModel _formData,
+  ) async {
     DevenirDistributeurResponseModel _devenirDistributeurResponse =
         DevenirDistributeurResponseModel();
     const Map<String, dynamic> _extra = <String, dynamic>{};
@@ -630,7 +643,8 @@ class _APIServiceImpl implements APIService {
           DevenirDistributeurResponseModel.fromJson(_response.data!);
     } on DioError catch (e) {
       printDebugMessage(
-          'api_service - devenirDistributeur Exception - DioError: ${e.response}');
+        'api_service - devenirDistributeur Exception - DioError: ${e.response}',
+      );
     }
     return _devenirDistributeurResponse;
   }
@@ -667,7 +681,8 @@ class _APIServiceImpl implements APIService {
       _contactResponse = ContactResponseModel.fromMap(_response.data!);
     } on DioError catch (e) {
       printDebugMessage(
-          'api_service - contact Exception - DioError : ${e.response}');
+        'api_service - contact Exception - DioError : ${e.response}',
+      );
     }
     return _contactResponse;
   }

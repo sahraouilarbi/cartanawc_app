@@ -1,7 +1,6 @@
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/core/extensions.dart';
-import '/presentation/ressources/appsize_manager.dart';
 
 enum StateRendererType {
   // POPUP STATE

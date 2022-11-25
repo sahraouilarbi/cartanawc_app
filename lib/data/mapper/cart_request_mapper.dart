@@ -1,5 +1,5 @@
-import '/data/models/models.dart';
-import '/domain/entities/entities.dart';
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
 
 extension CartRequestEntityMapper on CartRequestEntity {
   CartRequestModel toModel() {

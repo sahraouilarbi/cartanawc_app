@@ -1,8 +1,7 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
 import 'package:flutter/material.dart';
-
-import '/core/dependency_injection.dart';
-import '/domain/entities/entities.dart';
-import '/presentation/pages.dart';
 
 class RouteGenerator {
   final textIntrouvable = '404, Page Introuvable';
@@ -15,9 +14,10 @@ class RouteGenerator {
         initDIGetProductsModule();
         initDIMagasinsCosmetiquesModule();
         return AccueilPage.route(
-            tabSelected: routeSettings.arguments != null
-                ? routeSettings.arguments! as int
-                : 1);
+          tabSelected: routeSettings.arguments != null
+              ? routeSettings.arguments! as int
+              : 1,
+        );
       case AuthPage.routeName:
         return AuthPage.route();
       case CartPage.routeName:
@@ -26,8 +26,8 @@ class RouteGenerator {
         return CustomerProfilePage.route();
       case CustomerProfileEditCopyPage.routeName:
         return CustomerProfileEditCopyPage.route(
-            customerProfileEdit:
-                routeSettings.arguments! as CustomerDetailEntity);
+          customerProfileEdit: routeSettings.arguments! as CustomerDetailEntity,
+        );
       case ContactPage.routeName:
         initDIContactModule();
         return ContactPage.route();
@@ -47,13 +47,15 @@ class RouteGenerator {
         return PaymentMethodsPage.route();
       case ProductDetailsPage.routeName:
         return ProductDetailsPage.route(
-            data: routeSettings.arguments! as ProductEntity);
+          data: routeSettings.arguments! as ProductEntity,
+        );
       case TableauBordPage.routeName:
         initDITabCommanderModule();
         return TableauBordPage.route(
-            tabSelected: routeSettings.arguments != null
-                ? routeSettings.arguments! as int
-                : 0);
+          tabSelected: routeSettings.arguments != null
+              ? routeSettings.arguments! as int
+              : 0,
+        );
       case VerifyAddressPage.routeName:
         return VerifyAddressPage.route();
       default:

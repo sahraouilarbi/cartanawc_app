@@ -1,9 +1,8 @@
+import 'package:cartanawc_app/core/error/failure.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/domain/repositories/repository.dart';
+import 'package:cartanawc_app/domain/usecase/base_usecase.dart';
 import 'package:dartz/dartz.dart';
-
-import '/core/error/failure.dart';
-import '/domain/entities/entities.dart';
-import '/domain/repositories/repository.dart';
-import '/domain/usecase/base_usecase.dart';
 
 class ShippingEditUsecase
     implements BaseUsecase<ShippingEditEntity, CustomerDetailEntity> {
@@ -11,9 +10,12 @@ class ShippingEditUsecase
   ShippingEditUsecase(this._repository);
   @override
   Future<Either<Failure, CustomerDetailEntity>> execute(
-      ShippingEditEntity shippingEditEntity) async {
+    ShippingEditEntity shippingEditEntity,
+  ) async {
     return _repository.updateShippingInformations(
-        shippingEditEntity.userId, shippingEditEntity.shippingEntity);
+      shippingEditEntity.userId,
+      shippingEditEntity.shippingEntity,
+    );
   }
 }
 

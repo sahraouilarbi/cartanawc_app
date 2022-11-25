@@ -1,6 +1,5 @@
+import 'package:cartanawc_app/core/error/failure.dart';
 import 'package:dio/dio.dart';
-
-import '/core/error/failure.dart';
 
 enum DataSource {
   badRequest,
@@ -76,20 +75,28 @@ extension DataSourceExtension on DataSource {
         return Failure(ResponseCode.cancel, ResponseMessage.cancel);
       case DataSource.connectTimeout:
         return Failure(
-            ResponseCode.connectTimeout, ResponseMessage.connectTimeout);
+          ResponseCode.connectTimeout,
+          ResponseMessage.connectTimeout,
+        );
       case DataSource.forbidden:
         return Failure(ResponseCode.forbidden, ResponseMessage.forbidden);
       case DataSource.internalServerError:
-        return Failure(ResponseCode.internalServerError,
-            ResponseMessage.internalServerError);
+        return Failure(
+          ResponseCode.internalServerError,
+          ResponseMessage.internalServerError,
+        );
       case DataSource.noInternetConnection:
-        return Failure(ResponseCode.noInternetConnection,
-            ResponseMessage.noInternetConnection);
+        return Failure(
+          ResponseCode.noInternetConnection,
+          ResponseMessage.noInternetConnection,
+        );
       case DataSource.notFound:
         return Failure(ResponseCode.notFound, ResponseMessage.notFound);
       case DataSource.receiveTimeout:
         return Failure(
-            ResponseCode.receiveTimeout, ResponseMessage.receiveTimeout);
+          ResponseCode.receiveTimeout,
+          ResponseMessage.receiveTimeout,
+        );
       case DataSource.sendTimeout:
         return Failure(ResponseCode.sendTimeout, ResponseMessage.sendTimeout);
       case DataSource.unAuthorised:
