@@ -22,14 +22,10 @@ class CartResponseModel {
             : <CartItemModel>[],
       );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'status': status,
+        'data': data != null ? data!.map((_e) => _e.toJson()).toList() : null,
+      };
 }
 
 class CartItemModel {
@@ -97,19 +93,16 @@ class CartItemModel {
           : kEMPTY;
     }
   }
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data['product_id'] = productId;
-    _data['product_name'] = productName;
-    _data['product_regular_price'] = productRegularPrice;
-    _data['product_sale_price'] = productSalePrice;
-    _data['thumbnail'] = thumbnail;
-    _data['qty'] = qty;
-    _data['product_step'] = productStep;
-    _data['line_subtotal'] = lineSubtotal;
-    _data['line_total'] = lineTotal;
-    _data['variation_id'] = variationId;
-
-    return _data;
-  }
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'product_name': productName,
+        'product_regular_price': productRegularPrice,
+        'product_sale_price': productSalePrice,
+        'thumbnail': thumbnail,
+        'qty': qty,
+        'product_step': productStep,
+        'line_subtotal': lineSubtotal,
+        'line_total': lineTotal,
+        'variation_id': variationId,
+      };
 }

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class PaiementModel {
@@ -19,6 +18,7 @@ class PaiementModel {
   String? template;
   PaiementModelMeta? meta;
   PaiementModelACF? acf;
+
   PaiementModel({
     this.id,
     this.date,
@@ -38,6 +38,7 @@ class PaiementModel {
     this.meta,
     this.acf,
   });
+
   factory PaiementModel.fromJson(Map<String, dynamic> json) => PaiementModel(
         id: json['id'] != null ? json['id'] as int : null,
         date: json['date'] != null ? json['date'] as String : null,

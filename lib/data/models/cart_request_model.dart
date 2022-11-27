@@ -15,14 +15,12 @@ class CartRequestModel {
             : <CartProductsModel>[],
       );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['user_id'] = userId;
-    if (products != null) {
-      data['products'] = products!.map((product) => product.toJson()).toList();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'products': products != null
+            ? products!.map((product) => product.toJson()).toList()
+            : null,
+      };
 }
 
 class CartProductsModel {
@@ -49,12 +47,10 @@ class CartProductsModel {
             : null,
       );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data['product_id'] = productId;
-    _data['variation_id'] = variationId;
-    _data['quantity'] = quantity;
-    _data['product_step'] = productStep;
-    return _data;
-  }
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'variation_id': variationId,
+        'quantity': quantity,
+        'product_step': productStep,
+      };
 }

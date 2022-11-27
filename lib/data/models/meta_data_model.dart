@@ -15,20 +15,11 @@ class MetaDataModel {
         value: json['value'] != null ? json['value'] as String : null,
       );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data['key'] = key;
-    _data['value'] = value;
-    return _data;
-  }
+  Map<String, dynamic> toJson() => {
+        'key': key,
+        'value': value,
+      };
 
   @override
-  String toString() {
-    return """
-    MetaData:
-      id: $id
-      key: $key
-      value: $value
-    """;
-  }
+  String toString() => "MetaData(id: $id, key: $key, value: $value,";
 }

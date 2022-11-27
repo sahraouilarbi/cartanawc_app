@@ -1,4 +1,23 @@
 class WdpRulesModel {
+  String? id;
+  String? deleted;
+  String? enabled;
+  String? exclusive;
+  String? type;
+  String? title;
+  String? priority;
+  WdpRulesOptionsModel? options;
+  WdpRulesAdditionalModel? additional;
+  List<dynamic>? conditions;
+  List<WdpRulesFiltersModel>? filters;
+  List<dynamic>? limits;
+  WdpRulesProductAdjustmentsModel? productAdjustments;
+  WdpRulesBulkAdjustmentsModel? bulkAdjustments;
+  List<String>? sortableBlocksPriority;
+  List<WdpRulesRoleDiscountsModel>? roleDiscounts;
+  List<dynamic>? cartAdjustments;
+  WdpRulesGetProductsModel? getProducts;
+
   WdpRulesModel({
     this.id,
     this.deleted,
@@ -19,25 +38,6 @@ class WdpRulesModel {
     this.cartAdjustments,
     this.getProducts,
   });
-
-  String? id;
-  String? deleted;
-  String? enabled;
-  String? exclusive;
-  String? type;
-  String? title;
-  String? priority;
-  WdpRulesOptionsModel? options;
-  WdpRulesAdditionalModel? additional;
-  List<dynamic>? conditions;
-  List<WdpRulesFiltersModel>? filters;
-  List<dynamic>? limits;
-  WdpRulesProductAdjustmentsModel? productAdjustments;
-  WdpRulesBulkAdjustmentsModel? bulkAdjustments;
-  List<String>? sortableBlocksPriority;
-  List<WdpRulesRoleDiscountsModel>? roleDiscounts;
-  List<dynamic>? cartAdjustments;
-  WdpRulesGetProductsModel? getProducts;
 
   factory WdpRulesModel.fromJson(Map<String, dynamic> json) => WdpRulesModel(
         id: json['id'] != null ? json['id'] as String : null,
@@ -187,6 +187,12 @@ class WdpRulesAdditionalModel {
 
 // Advanced Dynamic Pricing - filters
 class WdpRulesFiltersModel {
+  String? qty;
+  String? type;
+  String? limitation;
+  String? method;
+  List<String>? value;
+
   WdpRulesFiltersModel({
     this.qty,
     this.type,
@@ -194,11 +200,7 @@ class WdpRulesFiltersModel {
     this.method,
     this.value,
   });
-  String? qty;
-  String? type;
-  String? limitation;
-  String? method;
-  List<String>? value;
+
   factory WdpRulesFiltersModel.fromJson(Map<String, dynamic> json) =>
       WdpRulesFiltersModel(
         qty: json['qty'] != null ? json['qty'] as String : null,
@@ -244,7 +246,7 @@ class WdpRulesProductAdjustmentsModel {
                   ),
                 ),
               )
-            : <WdpRulesProductAdjustmentsSplitModel>[],
+            : null,
 
         maxDiscountSum: json['max_discount_sum'] != null
             ? json['max_discount_sum'] as String
@@ -257,12 +259,13 @@ class WdpRulesProductAdjustmentsModel {
 
 // Advanced Dynamic Pricing - product_adjustments -> total
 class WdpRulesProductAdjustmentsTotalModel {
+  String? type;
+  String? value;
+
   WdpRulesProductAdjustmentsTotalModel({
     this.type,
     this.value,
   });
-  String? type;
-  String? value;
 
   factory WdpRulesProductAdjustmentsTotalModel.fromJson(
     Map<String, dynamic> json,
@@ -326,7 +329,7 @@ class WdpRulesRoleDiscountsModel {
   factory WdpRulesRoleDiscountsModel.fromJson(Map<String, dynamic> json) =>
       WdpRulesRoleDiscountsModel(
         roles: json['roles'] != null
-            ? json['roles'].cast<String>() as List<String>
+            ? List<String>.from(json['roles'] as List<dynamic>).toList()
             : null,
         discountType: json['discount_type'] != null
             ? json['discount_type'] as String
@@ -374,12 +377,12 @@ class CartanaWdpRulesModel {
         cartanaWdpRulesRoles: json['roles'] != null
             ? List<CartanaWdpRulesRolesModel>.from(
                 (json['roles'] as List<dynamic>).map(
-                  (e) => CartanaWdpRulesRolesModel.fromJson(
-                    e as Map<String, dynamic>,
+                  (_e) => CartanaWdpRulesRolesModel.fromJson(
+                    _e as Map<String, dynamic>,
                   ),
                 ),
               )
-            : <CartanaWdpRulesRolesModel>[],
+            : null,
       );
 }
 

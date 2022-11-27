@@ -72,9 +72,8 @@ class PaiementEntity {
   }
 
   @override
-  String toString() {
-    return 'PaiementEntity(id: $id, date: $date, dateGMT: $dateGMT, modified: $modified, modifiedGMT: $modifiedGMT, slug: $slug, status: $status, type: $type, link: $link, commentStatus: $commentStatus, pingStatus: $pingStatus, template: $template)';
-  }
+  String toString() =>
+      'PaiementEntity(id: $id, date: $date, dateGMT: $dateGMT, modified: $modified, modifiedGMT: $modifiedGMT, slug: $slug, status: $status, type: $type, link: $link, commentStatus: $commentStatus, pingStatus: $pingStatus, template: $template)';
 }
 
 class PaiementEntityGUID {
@@ -246,8 +245,5 @@ class PaiementEntityACFClient {
   }
 
   @override
-  String toString() {
-    return 'PaiementEntityACFClient(id: $id, )';
-    //return 'PaiementEntityACFClient(id: $id, userFirstname: $userFirstname, userLastname: $userLastname, nickname: $nickname, userNicename: $userNicename, displayName: $displayName, userEmail: $userEmail, userUrl: $userUrl, userRegistered: $userRegistered, userDescription: $userDescription,)';
-  }
+  String toString() => 'PaiementEntityACFClient(id: $id, )';
 }

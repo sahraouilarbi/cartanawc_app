@@ -66,72 +66,54 @@ class ProductModel {
         images: json['images'] != null
             ? List<ProductImageModel>.from(
                 (json['images'] as List<dynamic>).map(
-                  (e) => ProductImageModel.fromJson(e as Map<String, dynamic>),
+                  (_e) =>
+                      ProductImageModel.fromJson(_e as Map<String, dynamic>),
                 ),
               )
-            : <ProductImageModel>[],
+            : null,
         categories: json['categories'] != null
             ? List<ProductCategoriesModel>.from(
                 (json['categories'] as List<dynamic>).map(
-                  (e) => ProductCategoriesModel.fromJson(
-                    e as Map<String, dynamic>,
+                  (_e) => ProductCategoriesModel.fromJson(
+                    _e as Map<String, dynamic>,
                   ),
                 ),
               )
-            : <ProductCategoriesModel>[],
-        attributes: json['attributes'] != null || json['attributes'].length == 0
+            : null,
+        attributes: json['attributes'] != null
             ? List<ProductAttributesModel>.from(
                 (json['attributes'] as List<dynamic>).map(
-                  (e) => ProductAttributesModel.fromJson(
-                    e as Map<String, dynamic>,
+                  (_e) => ProductAttributesModel.fromJson(
+                    _e as Map<String, dynamic>,
                   ),
                 ),
               )
-            : <ProductAttributesModel>[],
+            : null,
         relatedIds: json['related_ids'] != null
             ? List<int>.from(
-                (json['related_ids'] as List<dynamic>).map((e) => e),
+                (json['related_ids'] as List<dynamic>).map((_e) => _e),
               )
-            : <int>[],
+            : null,
         variations: json['variations'] != null
             ? List<dynamic>.from(
-                (json['variations'] as List<dynamic>).map((e) => e),
+                (json['variations'] as List<dynamic>).map((_e) => _e),
               )
-            : <dynamic>[],
+            : null,
         metaData: json['meta_data'] != null
             ? List<MetaDataModel>.from(
                 (json['meta_data'] as List<dynamic>).map(
-                  (e) => MetaDataModel.fromJson(e as Map<String, dynamic>),
+                  (_e) => MetaDataModel.fromJson(_e as Map<String, dynamic>),
                 ),
               )
-            : <MetaDataModel>[],
+            : null,
         acf: (json['acf'] != null)
             ? ProductACFModel.fromJson(json['acf'] as Map<String, dynamic>)
             : null,
       );
 
   @override
-  String toString() {
-    return """
-ProductModel :
-    id: ${id.toString()}
-    name:$name
-    description: $description
-    shortDescription: $shortDescription
-    type: $type
-    status: $status
-    sku: $sku
-    price: $price
-    regularPrice: $regularPrice
-    salePrice: $salePrice
-    stockStatus: $stockStatus
-    relatedIds: ${relatedIds.toString()}
-    categories: ${categories.toString()}
-    images: ${images.toString()}
-    metaData:${metaData.toString()}
-    acf: ${acf.toString()}
-    """;
-  }
+  String toString() =>
+      "ProductModel(id: ${id.toString()}, name:$name, description: $description, shortDescription: $shortDescription, type: $type, status: $status, sku: $sku, price: $price, regularPrice: $regularPrice, salePrice: $salePrice, stockStatus: $stockStatus, relatedIds: ${relatedIds.toString()}, categories: ${categories.toString()}, images: ${images.toString()}, metaData:${metaData.toString()}, acf: ${acf.toString()},)";
 }
 
 class ProductImageModel {
@@ -149,55 +131,55 @@ class ProductImageModel {
 
   factory ProductImageModel.fromJson(Map<String, dynamic> json) =>
       ProductImageModel(
-        src: json['src'] != null
-            ? json['src'] as String
-            : "assets/images/no_image_placeholder.png",
+        src: json['src'] != null ? json['src'] as String : null,
         woocommerceThumbnail: json['woocommerce_thumbnail'] != null
             ? json['woocommerce_thumbnail'] as String
-            : "assets/images/no_image_placeholder.png",
+            : null,
         woocommerceSingle: json['woocommerce_single'] != null
             ? json['woocommerce_single'] as String
-            : "assets/images/no_image_placeholder.png",
+            : null,
         woocommerceGalleryThumbnail:
             json['woocommerce_gallery_thumbnail'] != null
                 ? json['woocommerce_gallery_thumbnail'] as String
-                : "assets/images/no_image_placeholder.png",
+                : null,
       );
   @override
-  String toString() {
-    return """
-ProductImageModel:
- src: $src
-  woocommerceThumbnail: $woocommerceThumbnail
-  woocommerceSingle: $woocommerceSingle
-  woocommerceGalleryThumbnail: $woocommerceGalleryThumbnail
-""";
-  }
+  String toString() =>
+      "ProductImageModel(src: $src, woocommerceThumbnail: $woocommerceThumbnail, woocommerceSingle: $woocommerceSingle, woocommerceGalleryThumbnail: $woocommerceGalleryThumbnail, )";
 }
 
 class ProductCategoriesModel {
-  ProductCategoriesModel({this.id, this.name});
   int? id;
   String? name;
+
+  ProductCategoriesModel({
+    this.id,
+    this.name,
+  });
+
   factory ProductCategoriesModel.fromJson(Map<String, dynamic> json) =>
       ProductCategoriesModel(
         id: json['id'] != null ? json['id'] as int : null,
         name: json['name'] != null ? json['name'] as String : null,
       );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+      };
 }
 
 class ProductAttributesModel {
-  ProductAttributesModel({this.id, this.name, this.options});
   int? id;
   String? name;
   List<dynamic>? options;
+
+  ProductAttributesModel({
+    this.id,
+    this.name,
+    this.options,
+  });
+
   factory ProductAttributesModel.fromJson(Map<String, dynamic> json) =>
       ProductAttributesModel(
         id: json['id'] != null ? json['id'] as int : null,
@@ -206,11 +188,17 @@ class ProductAttributesModel {
             ? List<dynamic>.from(
                 (json['option'] as List<dynamic>).map((e) => e),
               )
-            : <dynamic>[],
+            : null,
       );
 }
 
 class ProductACFModel {
+  String? contenance;
+  String? grossite;
+  String? superGros;
+  String? grandeMoyenneSurface;
+  String? hypermarche;
+
   ProductACFModel({
     this.contenance,
     this.grossite,
@@ -218,11 +206,6 @@ class ProductACFModel {
     this.grandeMoyenneSurface,
     this.hypermarche,
   });
-  String? contenance;
-  String? grossite;
-  String? superGros;
-  String? grandeMoyenneSurface;
-  String? hypermarche;
 
   factory ProductACFModel.fromJson(Map<String, dynamic> json) =>
       ProductACFModel(

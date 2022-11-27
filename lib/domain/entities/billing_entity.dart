@@ -26,19 +26,6 @@ class BillingEntity {
   String phone;
 
   @override
-  String toString() {
-    return """
-firstName: $firstName,
-lastName: $lastName,
-company: $company,
-address1: $address1,
-address2: $address2,
-city: $city,
-postcode: $postcode,
-country: $country,
-state: $state,
-email: $email,
-phone: $phone,
-""";
-  }
+  String toString() =>
+      "BillingEntity(firstName: $firstName, lastName: $lastName, company: $company, address1: $address1, address2: $address2, city: $city, postcode: $postcode, country: $country, state: $state, email: $email, phone: $phone, )";
 }
