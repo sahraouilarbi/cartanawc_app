@@ -1,12 +1,11 @@
 import 'dart:io';
 
+import 'package:cartanawc_app/presentation/common/cartana_logo_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '/presentation/common/cartana_logo_widget.dart';
-import '/presentation/common/section_header_widget.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/color_manager.dart';
 
 class AProposPage extends StatefulWidget {
   const AProposPage({Key? key}) : super(key: key);
@@ -49,7 +48,9 @@ class _AProposPageState extends State<AProposPage> {
                       children: [
                         const SizedBox(height: AppSize.s30),
                         const SizedBox(
-                            height: AppSize.s100, child: CartanaLogo()),
+                          height: AppSize.s100,
+                          child: CartanaLogo(),
+                        ),
                         const SizedBox(height: AppSize.s30),
                         buildContainer('Notre Histoire'),
                         const SizedBox(height: AppSize.s5),
@@ -92,13 +93,17 @@ class _AProposPageState extends State<AProposPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             buildSocialMediaLink(
-                                asset: 'assets/images/facebook.svg'),
+                              asset: 'assets/images/facebook.svg',
+                            ),
                             buildSocialMediaLink(
-                                asset: 'assets/images/instagram.svg'),
+                              asset: 'assets/images/instagram.svg',
+                            ),
                             buildSocialMediaLink(
-                                asset: 'assets/images/linkedin.svg'),
+                              asset: 'assets/images/linkedin.svg',
+                            ),
                             buildSocialMediaLink(
-                                asset: 'assets/images/twitter.svg'),
+                              asset: 'assets/images/twitter.svg',
+                            ),
                           ],
                         ),
                         const SizedBox(height: AppSize.s50),
@@ -132,9 +137,10 @@ class _AProposPageState extends State<AProposPage> {
                                     const Text(
                                       'Service Clients',
                                       style: TextStyle(
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ],
                                 ),

@@ -1,4 +1,5 @@
-import '/core/extensions.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cartanawc_app/core/extensions.dart';
 
 class DevenirDistributeurRequestModel {
   String yourName;
@@ -21,18 +22,20 @@ class DevenirDistributeurRequestModel {
     this.yourMessage,
   );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data['your-name'] = yourName;
-    _data['your-email'] = yourEmail;
-    _data['your-phone'] = yourPhone;
-    _data['your-address'] = yourAddress;
-    _data['your-city'] = yourCity;
-    _data['your-postcode'] = yourPostcode;
-    _data['your-subject'] = yourSubject;
-    _data['your-message'] = yourMessage;
-    return _data;
-  }
+  Map<String, dynamic> toJson() => {
+        'your-name': yourName,
+        'your-email': yourEmail,
+        'your-phone': yourPhone,
+        'your-address': yourAddress,
+        'your-city': yourCity,
+        'your-postcode': yourPostcode,
+        'your-subject': yourSubject,
+        'your-message': yourMessage,
+      };
+
+  @override
+  String toString() =>
+      'DevenirDistributeurRequestModel(yourName: $yourName, yourEmail: $yourEmail, yourPhone: $yourPhone, yourAddress: $yourAddress, yourCity: $yourCity, yourPostcode: $yourPostcode, yourSubject: $yourSubject, yourMessage: $yourMessage)';
 }
 
 class DevenirDistributeurResponseModel {
@@ -52,7 +55,8 @@ class DevenirDistributeurResponseModel {
     this.invalidFields,
   });
   factory DevenirDistributeurResponseModel.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       DevenirDistributeurResponseModel(
         contactFormId: json['contact_form_id'] != null
             ? json['contact_form_id'] as int
@@ -64,7 +68,7 @@ class DevenirDistributeurResponseModel {
             : kEMPTY,
         into: json['into'] != null ? json['into'] as String : kEMPTY,
         invalidFields: json['invalid_fields'] != null
-            ? List.from(json['invalid_fields'] as List)
+            ? List.from(json['invalid_fields'] as List<dynamic>)
             : <dynamic>[],
       );
 }

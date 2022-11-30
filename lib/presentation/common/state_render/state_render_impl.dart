@@ -1,7 +1,6 @@
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
 import 'package:flutter/material.dart';
-
-import '/core/extensions.dart';
-import '/presentation/common/state_render/state_renderer.dart';
 
 abstract class FlowState {
   StateRendererType getStateRendererType();
@@ -155,8 +154,11 @@ extension FlowStateExtension on FlowState {
       ModalRoute.of(context)?.isCurrent != true;
 
   void _showPopUp(
-      BuildContext context, StateRendererType stateRendererType, String message,
-      {String title = kEMPTY}) {
+    BuildContext context,
+    StateRendererType stateRendererType,
+    String message, {
+    String title = kEMPTY,
+  }) {
     WidgetsBinding.instance!.addPostFrameCallback(
       (_) => showDialog(
         context: context,

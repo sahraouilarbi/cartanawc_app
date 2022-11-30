@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import '/domain/entities/contact_entity.dart';
-import '/domain/usecase/contact_usecase.dart';
-import '/presentation/base/base.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/common/state_render/state_renderer.dart';
+import 'package:cartanawc_app/domain/entities/contact_entity.dart';
+import 'package:cartanawc_app/domain/usecase/contact_usecase.dart';
+import 'package:cartanawc_app/presentation/base/base.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
 
 class ContactViewModel extends BaseViewModel
     with ContactModelInputs, ContactModelOutputs {

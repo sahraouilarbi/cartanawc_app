@@ -1,10 +1,9 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_produits/products_page.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_produits/tabview_categories_viewmodel.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
 import 'package:flutter/material.dart';
-
-import '/core/dependency_injection.dart';
-import '/domain/entities/entities.dart';
-import '/presentation/accueil/view/tab_produits/tabview_categories_viewmodel.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import 'products_page.dart';
 
 /*
  * Build Woocommerce Categories List

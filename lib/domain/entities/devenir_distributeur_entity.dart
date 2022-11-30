@@ -9,14 +9,15 @@ class DevenirDistributeurRequestEntity {
   String yourMessage;
 
   DevenirDistributeurRequestEntity(
-      this.yourName,
-      this.yourEmail,
-      this.yourPhone,
-      this.yourAddress,
-      this.yourCity,
-      this.yourPostcode,
-      this.yourSubject,
-      this.yourMessage);
+    this.yourName,
+    this.yourEmail,
+    this.yourPhone,
+    this.yourAddress,
+    this.yourCity,
+    this.yourPostcode,
+    this.yourSubject,
+    this.yourMessage,
+  );
 }
 
 class DevenirDistributeurResponseEntity {

@@ -1,9 +1,8 @@
+import 'package:cartanawc_app/core/error/failure.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/domain/repositories/repository.dart';
+import 'package:cartanawc_app/domain/usecase/base_usecase.dart';
 import 'package:dartz/dartz.dart';
-
-import '/core/error/failure.dart';
-import '/domain/entities/entities.dart';
-import '/domain/repositories/repository.dart';
-import '/domain/usecase/base_usecase.dart';
 
 class ContactUsecase
     implements BaseUsecase<ContactRequestEntity, ContactResponseEntity> {
@@ -11,7 +10,8 @@ class ContactUsecase
   ContactUsecase(this._repository);
   @override
   Future<Either<Failure, ContactResponseEntity>> execute(
-      ContactRequestEntity _formData) {
+    ContactRequestEntity _formData,
+  ) {
     return _repository.contact(_formData);
   }
 }

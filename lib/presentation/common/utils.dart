@@ -1,6 +1,5 @@
+import 'package:cartanawc_app/core/extensions.dart';
 import 'package:flutter/material.dart';
-
-import '/core/extensions.dart';
 
 class Utils {
   void showMessage(

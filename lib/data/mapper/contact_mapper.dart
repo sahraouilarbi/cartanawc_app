@@ -1,6 +1,6 @@
-import '/core/extensions.dart';
-import '/data/models/models.dart';
-import '/domain/entities/entities.dart';
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
 
 extension ContactRequestModelMapper on ContactRequestEntity {
   ContactRequestModel toModel() {
@@ -18,7 +18,7 @@ extension ContactRequestModelMapper on ContactRequestEntity {
 extension ContactResponseModelMapper on ContactResponseModel? {
   ContactResponseEntity toDomain() {
     final List<dynamic> _invalidFieldsMapped =
-        (this?.invalidFields?.map((v) => v) ?? const Iterable.empty())
+        (this?.invalidFields?.map((_e) => _e) ?? const Iterable.empty())
             .cast<dynamic>()
             .toList();
     return ContactResponseEntity(

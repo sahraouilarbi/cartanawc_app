@@ -1,16 +1,15 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_anonymous_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/contact/view/contact_viewmodel.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
-import '/core/dependency_injection.dart';
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/drawer/drawer_for_anonymous_widget.dart';
-import '/presentation/common/my_text_buttom_widget.dart';
-import '/presentation/common/my_text_form_field_widget.dart';
-import '/presentation/common/section_header_widget.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/contact/view/contact_viewmodel.dart';
-import '/presentation/pages.dart';
-import '/presentation/ressources/appsize_manager.dart';
 
 enum ClientType { consomateur, distributeur, client }
 
@@ -150,7 +149,8 @@ class _ContactPageState extends State<ContactPage> {
             child: Column(
               children: <Widget>[
                 const Text(
-                    'Pour nous écrire, veuillez renseignez le formulaire ci-dessous et nous vous contacterons dans les 24 à 48h.'),
+                  'Pour nous écrire, veuillez renseignez le formulaire ci-dessous et nous vous contacterons dans les 24 à 48h.',
+                ),
                 const SizedBox(
                   height: AppSize.s30,
                 ),

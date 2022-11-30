@@ -1,12 +1,11 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_produits/products_viewmodel.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_produits/widgets/product_card_widget.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_anonymous_widget.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
 import 'package:flutter/material.dart';
-
-import '/core/dependency_injection.dart';
-import '/domain/entities/entities.dart';
-import '/presentation/accueil/view/tab_produits/widgets/product_card_widget.dart';
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/drawer/drawer_for_anonymous_widget.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import 'products_viewmodel.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({Key? key, required this.categoryId}) : super(key: key);

@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import '/domain/entities/devenir_distributeur_entity.dart';
-import '/domain/usecase/devenir_distributeur_usecase.dart';
-import '/presentation/base/base.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/common/state_render/state_renderer.dart';
+import 'package:cartanawc_app/domain/entities/devenir_distributeur_entity.dart';
+import 'package:cartanawc_app/domain/usecase/devenir_distributeur_usecase.dart';
+import 'package:cartanawc_app/presentation/base/base.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
 
 class DevenirDistributeurViewModel extends BaseViewModel
     with

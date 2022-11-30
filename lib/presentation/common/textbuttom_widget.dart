@@ -1,6 +1,5 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/ressources/appsize_manager.dart';
 
 Widget textButton({
   VoidCallback? onPressed,
@@ -11,9 +10,10 @@ Widget textButton({
 }) {
   return TextButton(
     style: TextButton.styleFrom(
-        primary: textColor,
-        backgroundColor: backgroundColor,
-        padding: const EdgeInsets.all(AppPadding.p20)),
+      primary: textColor,
+      backgroundColor: backgroundColor,
+      padding: const EdgeInsets.all(AppPadding.p20),
+    ),
     onPressed: onPressed,
     child: iconRight != null
         ? Row(

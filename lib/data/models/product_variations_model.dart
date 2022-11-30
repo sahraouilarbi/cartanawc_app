@@ -1,4 +1,11 @@
 class ProductVariationsModel {
+  int? id;
+  String? sku;
+  String? price;
+  String? regularPrice;
+  String? salePrice;
+  List<ProductVariationsAttributesModel>? attributes;
+
   ProductVariationsModel({
     this.id,
     this.sku,
@@ -7,12 +14,6 @@ class ProductVariationsModel {
     this.salePrice,
     this.attributes,
   });
-  int? id;
-  String? sku;
-  String? price;
-  String? regularPrice;
-  String? salePrice;
-  List<ProductVariationsAttributesModel>? attributes;
 
   factory ProductVariationsModel.fromJson(Map<String, dynamic> json) =>
       ProductVariationsModel(
@@ -29,44 +30,42 @@ class ProductVariationsModel {
                   ),
                 ),
               )
-            : <ProductVariationsAttributesModel>[],
+            : null,
       );
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['sku'] = sku;
-    data['price'] = price;
-    data['regular_price'] = regularPrice;
-    data['sale_price'] = salePrice;
-    if (attributes != null) {
-      data['attributes'] =
-          attributes!.map((element) => element.toJson()).toList();
-    }
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'sku': sku,
+        'price': price,
+        'regular_price': regularPrice,
+        'sale_price': salePrice,
+        'attributes': attributes != null
+            ? attributes!.map((_element) => _element.toJson()).toList()
+            : null,
+      };
 }
 
 class ProductVariationsAttributesModel {
+  int? id;
+  String? name;
+  String? option;
+
   ProductVariationsAttributesModel({
     this.id,
     this.name,
     this.option,
   });
-  int? id;
-  String? name;
-  String? option;
+
   factory ProductVariationsAttributesModel.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       ProductVariationsAttributesModel(
         id: json['id'] != null ? json['id'] as int : null,
         name: json['name'] != null ? json['name'] as String : null,
         option: json['option'] != null ? json['option'] as String : null,
       );
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['option'] = option;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'option': option,
+      };
 }

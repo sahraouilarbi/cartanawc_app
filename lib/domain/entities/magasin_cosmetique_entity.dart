@@ -33,9 +33,8 @@ class MagasinCosmetiqueEntity {
   });
 
   @override
-  String toString() {
-    return 'MagasinCosmetiqueEntity(id: $id, date: $date, dateGmt: $dateGmt, modified: $modified, modifiedGmt: $modifiedGmt, slug: $slug, status: $status, type: $type, link: $link, title: $title, template: $template, meta: $meta, acf: $acf,)';
-  }
+  String toString() =>
+      'MagasinCosmetiqueEntity(id: $id, date: $date, dateGmt: $dateGmt, modified: $modified, modifiedGmt: $modifiedGmt, slug: $slug, status: $status, type: $type, link: $link, title: $title, template: $template, meta: $meta, acf: $acf,)';
 
   @override
   bool operator ==(covariant MagasinCosmetiqueEntity other) {

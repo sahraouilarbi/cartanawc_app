@@ -17,5 +17,5 @@ export 'shipping_mapper.dart';
 
 /*
     Fonction pour maper les lists
-    List<Entity> VARIABLE_mapped = (VARIABLE.map((v) => v.toDomain()) ?? const Iterable.empty()).cast<Entity>().toList();
+    List<Entity> VARIABLE_mapped = (VARIABLE.map((_e) => _e.toDomain()) ?? const Iterable.empty()).cast<Entity>().toList();
  */

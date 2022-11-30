@@ -1,13 +1,12 @@
+import 'package:cartanawc_app/presentation/common/appbar/widgets/action_customer.dart';
+import 'package:cartanawc_app/presentation/common/appbar/widgets/action_shopping.dart';
+import 'package:cartanawc_app/presentation/common/appbar/widgets/cartana_logo.dart';
+import 'package:cartanawc_app/presentation/common/white_and_green_top_bar.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
+import 'package:cartanawc_app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '/presentation/common/appbar/widgets/action_customer.dart';
-import '/presentation/common/appbar/widgets/action_shopping.dart';
-import '/presentation/common/appbar/widgets/cartana_logo.dart';
-import '/presentation/common/white_and_green_top_bar.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/color_manager.dart';
-import '/providers/auth_provider.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({

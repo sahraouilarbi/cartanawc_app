@@ -1,16 +1,15 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/presentation/accueil/accueil.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_anonymous_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/devenir_distributeur/view/devenir_distributeur_viewmodel.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
-import '/core/dependency_injection.dart';
-import '/presentation/accueil/accueil.dart';
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/drawer/drawer_for_anonymous_widget.dart';
-import '/presentation/common/my_text_buttom_widget.dart';
-import '/presentation/common/my_text_form_field_widget.dart';
-import '/presentation/common/section_header_widget.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/devenir_distributeur/view/devenir_distributeur_viewmodel.dart';
-import '/presentation/ressources/appsize_manager.dart';
 
 class DevenirDistributeurPage extends StatefulWidget {
   const DevenirDistributeurPage({Key? key}) : super(key: key);
@@ -124,24 +123,25 @@ class _DevenirDistributeurPageState extends State<DevenirDistributeurPage> {
       drawer: const DrawerForAnonymous(),
       backgroundColor: Colors.black,
       body: StreamBuilder<FlowState>(
-          stream: _viewModel.outputState,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  snapshot.error.toString(),
-                ),
-              );
-            }
-            if (snapshot.hasData) {
-              return snapshot.data!.getScreenWidget(
-                context,
-                _getContentWidget(),
-                () {},
-              );
-            }
-            return const SizedBox();
-          }),
+        stream: _viewModel.outputState,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                snapshot.error.toString(),
+              ),
+            );
+          }
+          if (snapshot.hasData) {
+            return snapshot.data!.getScreenWidget(
+              context,
+              _getContentWidget(),
+              () {},
+            );
+          }
+          return const SizedBox();
+        },
+      ),
     );
   }
 
@@ -172,7 +172,8 @@ class _DevenirDistributeurPageState extends State<DevenirDistributeurPage> {
               child: Column(
                 children: <Widget>[
                   const Text(
-                      'Vous souhaitez rejoindre notre réseaux de distribution, alors renseignez le formulaire ci-dessous et nous vous contacterons dans les 24 à 48h.'),
+                    'Vous souhaitez rejoindre notre réseaux de distribution, alors renseignez le formulaire ci-dessous et nous vous contacterons dans les 24 à 48h.',
+                  ),
                   const SizedBox(height: AppSize.s30),
                   Form(
                     key: _globalKey,

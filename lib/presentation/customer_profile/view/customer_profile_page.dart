@@ -1,18 +1,17 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/text_customer_profile_view_widget.dart';
+import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
+import 'package:cartanawc_app/presentation/customer_profile/view/customer_profile_viewmodel.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/core/dependency_injection.dart';
-import '/core/prefs/app_prefs.dart';
-import '/domain/entities/entities.dart';
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
-import '/presentation/common/my_text_buttom_widget.dart';
-import '/presentation/common/section_header_widget.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/common/text_customer_profile_view_widget.dart';
-import '/presentation/common/textbuttom_widget.dart';
-import '/presentation/pages.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import 'customer_profile_viewmodel.dart';
 
 class CustomerProfilePage extends StatefulWidget {
   const CustomerProfilePage({Key? key}) : super(key: key);
@@ -91,7 +90,9 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
             const SectionHeader(sectionTitle: 'PROFIL'),
             Container(
               padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.p20, vertical: AppPadding.p40),
+                horizontal: AppPadding.p20,
+                vertical: AppPadding.p40,
+              ),
               color: Colors.white,
               child: Column(
                 children: [
@@ -190,9 +191,11 @@ class _CustomerProfileState extends State<CustomerProfilePage> {
                               //MyTextButtonWidget(
                               textButton(
                                 onPressed: () {
-                                  Navigator.pushNamed(context,
-                                      CustomerProfileEditCopyPage.routeName,
-                                      arguments: snapshot.data);
+                                  Navigator.pushNamed(
+                                    context,
+                                    CustomerProfileEditCopyPage.routeName,
+                                    arguments: snapshot.data,
+                                  );
                                 },
                                 text: 'MODIFIER',
                               ),

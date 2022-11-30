@@ -10,7 +10,8 @@ part of 'freezed_data_classes.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods',
+);
 
 /// @nodoc
 class _$LoginObjectTearOff {
@@ -40,8 +41,9 @@ mixin _$LoginObject {
 /// @nodoc
 abstract class $LoginObjectCopyWith<$Res> {
   factory $LoginObjectCopyWith(
-          LoginObject value, $Res Function(LoginObject) then) =
-      _$LoginObjectCopyWithImpl<$Res>;
+    LoginObject value,
+    $Res Function(LoginObject) then,
+  ) = _$LoginObjectCopyWithImpl<$Res>;
   $Res call({String username, String password});
 }
 
@@ -58,16 +60,18 @@ class _$LoginObjectCopyWithImpl<$Res> implements $LoginObjectCopyWith<$Res> {
     Object username = freezed,
     Object password = freezed,
   }) {
-    return _then(_value.copyWith(
-      username: username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _value.copyWith(
+        username: username == freezed
+            ? _value.username
+            : username // ignore: cast_nullable_to_non_nullable
+                as String,
+        password: password == freezed
+            ? _value.password
+            : password // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
   }
 }
 
@@ -75,8 +79,9 @@ class _$LoginObjectCopyWithImpl<$Res> implements $LoginObjectCopyWith<$Res> {
 abstract class _$LoginObjectCopyWith<$Res>
     implements $LoginObjectCopyWith<$Res> {
   factory _$LoginObjectCopyWith(
-          _LoginObject value, $Res Function(_LoginObject) then) =
-      __$LoginObjectCopyWithImpl<$Res>;
+    _LoginObject value,
+    $Res Function(_LoginObject) then,
+  ) = __$LoginObjectCopyWithImpl<$Res>;
   @override
   $Res call({String username, String password});
 }
@@ -85,8 +90,9 @@ abstract class _$LoginObjectCopyWith<$Res>
 class __$LoginObjectCopyWithImpl<$Res> extends _$LoginObjectCopyWithImpl<$Res>
     implements _$LoginObjectCopyWith<$Res> {
   __$LoginObjectCopyWithImpl(
-      _LoginObject _value, $Res Function(_LoginObject) _then)
-      : super(_value, (v) => _then(v as _LoginObject));
+    _LoginObject _value,
+    $Res Function(_LoginObject) _then,
+  ) : super(_value, (v) => _then(v as _LoginObject));
 
   @override
   _LoginObject get _value => super._value as _LoginObject;
@@ -96,16 +102,18 @@ class __$LoginObjectCopyWithImpl<$Res> extends _$LoginObjectCopyWithImpl<$Res>
     Object username = freezed,
     Object password = freezed,
   }) {
-    return _then(_LoginObject(
-      username == freezed
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    return _then(
+      _LoginObject(
+        username == freezed
+            ? _value.username
+            : username // ignore: cast_nullable_to_non_nullable
+                as String,
+        password == freezed
+            ? _value.password
+            : password // ignore: cast_nullable_to_non_nullable
+                as String,
+      ),
+    );
   }
 }
 

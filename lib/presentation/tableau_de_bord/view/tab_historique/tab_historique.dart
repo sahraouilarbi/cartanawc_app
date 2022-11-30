@@ -1,12 +1,11 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
+import 'package:cartanawc_app/presentation/tableau_de_bord/view/tab_historique/tab_historique_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '/core/dependency_injection.dart';
-import '/domain/entities/entities.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/color_manager.dart';
-import '/presentation/tableau_de_bord/view/tab_historique/tab_historique_viewmodel.dart';
 
 class TabHistorique extends StatefulWidget {
   const TabHistorique({Key? key}) : super(key: key);

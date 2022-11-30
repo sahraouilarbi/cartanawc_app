@@ -1,15 +1,14 @@
 import 'dart:async';
 
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/domain/usecase/customer_profile_edit_usecase.dart';
+import 'package:cartanawc_app/domain/usecase/customer_profile_usecase.dart';
+import 'package:cartanawc_app/presentation/base/base_viewmodel.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
 import 'package:rxdart/rxdart.dart';
-
-import '/core/dependency_injection.dart';
-import '/core/prefs/app_prefs.dart';
-import '/domain/entities/entities.dart';
-import '/domain/usecase/customer_profile_edit_usecase.dart';
-import '/domain/usecase/customer_profile_usecase.dart';
-import '/presentation/base/base_viewmodel.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/common/state_render/state_renderer.dart';
 
 class CustomerProfileEditCopyViewModel extends BaseViewModel
     with
@@ -162,7 +161,9 @@ class CustomerProfileEditCopyViewModel extends BaseViewModel
     (await _shippingEditUsecase.execute(shippingEditEntity)).fold(
         (failure) => inputState.add(
               ErrorState(
-                  StateRendererType.fullScreenErrorState, failure.message),
+                StateRendererType.fullScreenErrorState,
+                failure.message,
+              ),
             ), (data) {
       inputState.add(ContentState());
       isCustomerProfilEditSuccessfullyStreamController.add(true);
@@ -276,28 +277,37 @@ class CustomerProfileEditCopyViewModel extends BaseViewModel
   // Outputs ******************************************************************
   @override
   Stream<bool> get outputIsFirstNameShippingValid =>
-      _firstNameShippingStreamController.stream.map((firstNameShipping) =>
-          _isFirstNameShippingValid(firstNameShipping as String));
+      _firstNameShippingStreamController.stream.map(
+        (firstNameShipping) =>
+            _isFirstNameShippingValid(firstNameShipping as String),
+      );
 
   @override
   Stream<bool> get outputIsLastNameShippingValid =>
-      _lastNameShippingStreamController.stream.map((lastNameShipping) =>
-          _isLastNameShippingValid(lastNameShipping as String));
+      _lastNameShippingStreamController.stream.map(
+        (lastNameShipping) =>
+            _isLastNameShippingValid(lastNameShipping as String),
+      );
 
   @override
   Stream<bool> get outputIsCompanyShippingValid =>
-      _companyShippingStreamController.stream.map((companyShipping) =>
-          _isCompanyShippingValid(companyShipping as String));
+      _companyShippingStreamController.stream.map(
+        (companyShipping) => _isCompanyShippingValid(companyShipping as String),
+      );
 
   @override
   Stream<bool> get outputIsAddress1ShippingValid =>
-      _address1ShippingStreamController.stream.map((address1Shipping) =>
-          _isAddress1ShippingValid(address1Shipping as String));
+      _address1ShippingStreamController.stream.map(
+        (address1Shipping) =>
+            _isAddress1ShippingValid(address1Shipping as String),
+      );
 
   @override
   Stream<bool> get outputIsAddress2ShippingValid =>
-      _address2ShippingStreamController.stream.map((address2Shipping) =>
-          _isAddress2ShippingValid(address2Shipping as String));
+      _address2ShippingStreamController.stream.map(
+        (address2Shipping) =>
+            _isAddress2ShippingValid(address2Shipping as String),
+      );
 
   @override
   Stream<bool> get outputIsCityShippingValid =>
@@ -306,13 +316,16 @@ class CustomerProfileEditCopyViewModel extends BaseViewModel
 
   @override
   Stream<bool> get outputIsPostCodeShippingValid =>
-      _postCodeShippingStreamController.stream.map((postCodeShipping) =>
-          _isPostCodeShippingValid(postCodeShipping as String));
+      _postCodeShippingStreamController.stream.map(
+        (postCodeShipping) =>
+            _isPostCodeShippingValid(postCodeShipping as String),
+      );
 
   @override
   Stream<bool> get outputIsCountryShippingValid =>
-      _countryShippingStreamController.stream.map((countryShipping) =>
-          _isCountryShippingValid(countryShipping as String));
+      _countryShippingStreamController.stream.map(
+        (countryShipping) => _isCountryShippingValid(countryShipping as String),
+      );
 
   @override
   Stream<bool> get outputIsStateShippingValid => _stateShippingStreamController

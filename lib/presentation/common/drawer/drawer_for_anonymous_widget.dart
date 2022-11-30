@@ -1,9 +1,8 @@
+import 'package:cartanawc_app/presentation/common/drawer/models/drawer_model.dart';
+import 'package:cartanawc_app/presentation/common/drawer/widgets/drawer_customer_tile.dart';
+import 'package:cartanawc_app/presentation/common/white_and_green_top_bar.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/common/drawer/widgets/drawer_customer_tile.dart';
-import '/presentation/common/white_and_green_top_bar.dart';
-import '/presentation/pages.dart';
-import 'models/drawer_model.dart';
 
 class DrawerForAnonymous extends StatelessWidget {
   const DrawerForAnonymous({Key? key}) : super(key: key);

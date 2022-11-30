@@ -1,6 +1,17 @@
-import '/data/models/models.dart';
+import 'package:cartanawc_app/data/models/models.dart';
 
 class OrderDetailModel {
+  int? orderId;
+  String? orderNumber;
+  String? paymentMethod;
+  String? orderStatus;
+  DateTime? orderDate;
+  ShippingModel? shipping;
+  List<OrderDetailLineItemsModel>? lineItems;
+  double? totalAmount;
+  double? shippingTotal;
+  double? itemTotalAmount;
+
   OrderDetailModel({
     this.orderId,
     this.orderNumber,
@@ -13,63 +24,64 @@ class OrderDetailModel {
     this.shippingTotal,
     this.itemTotalAmount,
   });
-  int? orderId;
-  String? orderNumber;
-  String? paymentMethod;
-  String? orderStatus;
-  DateTime? orderDate;
-  ShippingModel? shipping;
-  List<OrderDetailLineItemsModel>? lineItems;
-  double? totalAmount;
-  double? shippingTotal;
-  double? itemTotalAmount;
-  OrderDetailModel.fromJson(Map<String, dynamic> json) {
-    // orderId = id
-    orderId = json['id'] as int;
 
-    //orderNumber = order_key
-    orderNumber = json['order_key'] as String;
-
-    //paymentMethod = payment_method
-    paymentMethod = json['payment_method'] as String;
-
-    //orderStatus = status
-    orderStatus = json['status'] as String;
-
-    //orderData = date_created
-    orderDate = DateTime.parse(json['date_created'] as String);
-
-    //shipping = shipping
-    shipping = json['shipping'] != null
-        ? ShippingModel.fromJson(json['shipping'] as Map<String, dynamic>)
-        : null;
-
-    //lineItems = line_items
-    if (json['line_items'] != null) {
-      lineItems = <OrderDetailLineItemsModel>[];
-      json['line_items'].forEach((element) {
-        lineItems!.add(OrderDetailLineItemsModel.fromJson(
-            element as Map<String, dynamic>));
-      });
-      //TODO PEUT ETRE PLACER itemTotalAmount ICI
-    }
-
-    //totalAmount = total
-    totalAmount = double.parse(json['total'] as String);
-
-    //shippingTotal = shipping_total
-    shippingTotal = double.parse(json['shipping_total'] as String);
-
-    //TODO A VERIFIER
-    itemTotalAmount = lineItems != null
-        ? lineItems!
-            .map<double>((e) => e.totalAmount!)
-            .reduce((value, element) => value + element)
-        : 0;
+  factory OrderDetailModel.fromJson(Map<String, dynamic> json) {
+    return OrderDetailModel(
+      orderId: json['id'] != null ? json['id'] as int : null,
+      orderNumber:
+          json['order_key'] != null ? json['order_key'] as String : null,
+      paymentMethod: json['payment_method'] != null
+          ? json['payment_method'] as String
+          : null,
+      orderStatus: json['status'] != null ? json['status'] as String : null,
+      orderDate: json['date_created'] != null
+          ? DateTime.parse(json['date_created'] as String)
+          : null,
+      shipping: json['shipping'] != null
+          ? ShippingModel.fromJson(
+              json['shipping'] as Map<String, dynamic>,
+            )
+          : null,
+      lineItems: json['line_items'] != null
+          ? List<OrderDetailLineItemsModel>.from(
+              json['line_items'] as List,
+            )
+              .map(
+                (_e) => OrderDetailLineItemsModel.fromJson(
+                  _e as Map<String, dynamic>,
+                ),
+              )
+              .toList()
+          : null,
+      totalAmount:
+          json['total'] != null ? double.parse(json['total'] as String) : null,
+      shippingTotal: json['shipping_total'] != null
+          ? double.parse(json['shipping_total'] as String)
+          : null,
+      itemTotalAmount: json['line_items'] != null
+          ? List<OrderDetailLineItemsModel>.from(
+              json['line_items'] as List,
+            )
+              .map(
+                (_e) => OrderDetailLineItemsModel.fromJson(
+                  _e as Map<String, dynamic>,
+                ),
+              )
+              .toList()
+              .map<double>((_e) => _e.totalAmount!)
+              .reduce((_value, _element) => _value + _element)
+          : 0,
+    );
   }
 }
 
 class OrderDetailLineItemsModel {
+  int? productId;
+  String? productName;
+  int? quantity;
+  int? variationId;
+  double? totalAmount;
+
   OrderDetailLineItemsModel({
     this.productId,
     this.productName,
@@ -77,25 +89,16 @@ class OrderDetailLineItemsModel {
     this.variationId,
     this.totalAmount,
   });
-  int? productId;
-  String? productName;
-  int? quantity;
-  int? variationId;
-  double? totalAmount;
-  OrderDetailLineItemsModel.fromJson(Map<String, dynamic> json) {
-    //productId = product_id
-    productId = json['product_id'] as int;
 
-    // productName = name
-    productName = json['name'] as String;
-
-    // quantity = quantity
-    quantity = json['quantity'] as int;
-
-    // variationId = variation_id
-    variationId = json['variation_id'] as int;
-
-    //totalAmount = total
-    totalAmount = double.parse(json['total'] as String);
+  factory OrderDetailLineItemsModel.fromJson(Map<String, dynamic> json) {
+    return OrderDetailLineItemsModel(
+      productId: json['product_id'] != null ? json['product_id'] as int : null,
+      productName: json['name'] != null ? json['name'] as String : null,
+      quantity: json['quantity'] != null ? json['quantity'] as int : null,
+      variationId:
+          json['variation_id'] != null ? json['variation_id'] as int : null,
+      totalAmount:
+          json['total'] != null ? double.parse(json['total'] as String) : null,
+    );
   }
 }

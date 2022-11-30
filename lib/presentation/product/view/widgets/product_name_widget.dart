@@ -1,6 +1,5 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/ressources/appsize_manager.dart';
 
 class ProductNameWidget extends StatelessWidget {
   const ProductNameWidget({Key? key, required this.productName})

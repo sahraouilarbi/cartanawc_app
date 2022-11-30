@@ -1,9 +1,8 @@
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/widgets/background_image_with_overlay_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/widgets/badge_widget.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/color_manager.dart';
-import 'background_image_with_overlay_widget.dart';
-import 'badge_widget.dart';
 
 class Nouveautes extends StatelessWidget {
   const Nouveautes({Key? key}) : super(key: key);
@@ -14,8 +13,9 @@ class Nouveautes extends StatelessWidget {
       alignment: AlignmentDirectional.centerStart,
       children: [
         const BackgroundImageWithOverlay(
-            src: 'assets/images/serum_capillaire_bg.jpg',
-            overlayOpacity: AppSize.s0_1),
+          src: 'assets/images/serum_capillaire_bg.jpg',
+          overlayOpacity: AppSize.s0_1,
+        ),
         Padding(
           padding: const EdgeInsets.only(left: AppPadding.p20),
           child: Column(
@@ -30,7 +30,9 @@ class Nouveautes extends StatelessWidget {
                 onPressed: () {},
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      vertical: AppPadding.p5, horizontal: AppPadding.p10),
+                    vertical: AppPadding.p5,
+                    horizontal: AppPadding.p10,
+                  ),
                   decoration: const BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.all(

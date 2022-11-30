@@ -1,12 +1,11 @@
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/widgets/devenir_distributeur_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/widgets/espace_professionnel_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/widgets/nouveautes_widget.dart';
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/widgets/partenaires_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/common/section_header_widget.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/color_manager.dart';
-import 'widgets/devenir_distributeur_widget.dart';
-import 'widgets/espace_professionnel_widget.dart';
-import 'widgets/nouveautes_widget.dart';
-import 'widgets/partenaires_widget.dart';
 
 /*
  * Build Page Accueil from de site : www2.cartana.dz

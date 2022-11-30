@@ -1,18 +1,17 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_buttom_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/login/view/login_viewmodel.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-
-import '/core/dependency_injection.dart';
-import '/core/prefs/app_prefs.dart';
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/my_text_buttom_widget.dart';
-import '/presentation/common/my_text_form_field_widget.dart';
-import '/presentation/common/section_header_widget.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/pages.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/providers/auth_provider.dart';
-import 'login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -43,9 +42,11 @@ class _LoginPageState extends State<LoginPage> {
   void _bind() {
     _loginViewModel.start();
     _usernameController.addListener(
-        () => _loginViewModel.setUsername(_usernameController.text));
+      () => _loginViewModel.setUsername(_usernameController.text),
+    );
     _passwordController.addListener(
-        () => _loginViewModel.setPassword(_passwordController.text));
+      () => _loginViewModel.setPassword(_passwordController.text),
+    );
     _loginViewModel.isUserLoggedInSuccessfullyStreamController.stream.listen(
       (dataEntity) {
         SchedulerBinding.instance!.addPostFrameCallback(
@@ -216,20 +217,21 @@ class _LoginPageState extends State<LoginPage> {
 //*******************************************************************
   Widget buttonLogin() {
     return StreamBuilder<bool>(
-        stream: _loginViewModel.outputIsAllInputsValid,
-        builder: (context, snapshot) {
-          return SizedBox(
-            width: MediaQuery.of(context).size.width / 2,
-            child: MyTextButtonWidget(
-              onPressed: snapshot.data ?? false
-                  ? () {
-                      _loginViewModel.login();
-                    }
-                  : null,
-              textButton: 'SE CONNECTER',
-            ),
-          );
-        });
+      stream: _loginViewModel.outputIsAllInputsValid,
+      builder: (context, snapshot) {
+        return SizedBox(
+          width: MediaQuery.of(context).size.width / 2,
+          child: MyTextButtonWidget(
+            onPressed: snapshot.data ?? false
+                ? () {
+                    _loginViewModel.login();
+                  }
+                : null,
+            textButton: 'SE CONNECTER',
+          ),
+        );
+      },
+    );
   }
 
 //*******************************************************************

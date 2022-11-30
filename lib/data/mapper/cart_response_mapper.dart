@@ -1,12 +1,12 @@
-import '/core/extensions.dart';
-import '/data/models/models.dart';
-import '/domain/entities/entities.dart';
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
 
 // CartResponseModel
 extension CartResponseModelMapper on CartResponseModel? {
   CartResponseEntity toDomain() {
     final List<CartItemEntity> dataMapped =
-        (this?.data?.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.data?.map((_e) => _e.toDomain()) ?? const Iterable.empty())
             .cast<CartItemEntity>()
             .toList();
     return CartResponseEntity(

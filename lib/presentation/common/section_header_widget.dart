@@ -1,6 +1,5 @@
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/presentation/ressources/appsize_manager.dart';
 
 class SectionHeader extends StatelessWidget {
   const SectionHeader({Key? key, required this.sectionTitle}) : super(key: key);

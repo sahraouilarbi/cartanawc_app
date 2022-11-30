@@ -126,10 +126,11 @@ class WdpRulesBulkAdjustmentsEntity {
 
 // Advanced Dynamic Pricing - role_discounts
 class WdpRulesRoleDiscountsEntity {
-  WdpRulesRoleDiscountsEntity(
-      {required this.roles,
-      required this.discountType,
-      required this.discountValue});
+  WdpRulesRoleDiscountsEntity({
+    required this.roles,
+    required this.discountType,
+    required this.discountValue,
+  });
   List<String> roles;
   String discountType;
   String discountValue;
@@ -156,8 +157,10 @@ class CartanaWdpRulesEntity {
 }
 
 class CartanaWdpRulesRolesEntity {
-  CartanaWdpRulesRolesEntity(
-      {required this.roles, required this.discountValue});
+  CartanaWdpRulesRolesEntity({
+    required this.roles,
+    required this.discountValue,
+  });
   String roles;
   String discountValue;
 }

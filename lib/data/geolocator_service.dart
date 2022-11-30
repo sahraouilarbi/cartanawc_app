@@ -6,7 +6,8 @@ import 'package:geolocator/geolocator.dart';
 class GeoLocatorService {
   Future<Position> getLocation() async {
     final Position getCurrentPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+      desiredAccuracy: LocationAccuracy.high,
+    );
     return getCurrentPosition;
   }
 }

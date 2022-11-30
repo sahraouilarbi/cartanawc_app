@@ -1,15 +1,14 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/presentation/common/appbar/custom_appbar_widget.dart';
+import 'package:cartanawc_app/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
+import 'package:cartanawc_app/presentation/common/my_text_form_field_widget.dart';
+import 'package:cartanawc_app/presentation/common/section_header_widget.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/textbuttom_widget.dart';
+import 'package:cartanawc_app/presentation/customer_profile_edit_copy/view/customer_profile_edit_copy_viewmodel.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/core/dependency_injection.dart';
-import '/domain/entities/entities.dart';
-import '/presentation/common/appbar/custom_appbar_widget.dart';
-import '/presentation/common/drawer/drawer_for_authenticated_user_widget.dart';
-import '/presentation/common/my_text_form_field_widget.dart';
-import '/presentation/common/section_header_widget.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/common/textbuttom_widget.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import 'customer_profile_edit_copy_viewmodel.dart';
 
 class CustomerProfileEditCopyPage extends StatefulWidget {
   const CustomerProfileEditCopyPage({
@@ -229,7 +228,9 @@ class _CustomerProfileEditCopyState extends State<CustomerProfileEditCopyPage> {
             const SectionHeader(sectionTitle: 'PROFIL: MODIFICATION'),
             Container(
               padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.p20, vertical: AppPadding.p40),
+                horizontal: AppPadding.p20,
+                vertical: AppPadding.p40,
+              ),
               color: Colors.white,
               child: Column(
                 children: [

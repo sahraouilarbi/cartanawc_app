@@ -1,8 +1,7 @@
+import 'package:cartanawc_app/presentation/accueil/view/tab_accueil/widgets/background_image_with_overlay_widget.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '/presentation/ressources/appsize_manager.dart';
-import 'background_image_with_overlay_widget.dart';
 
 class Partenaire extends StatelessWidget {
   const Partenaire({Key? key}) : super(key: key);
@@ -13,8 +12,8 @@ class Partenaire extends StatelessWidget {
       alignment: AlignmentDirectional.centerStart,
       children: [
         const BackgroundImageWithOverlay(
-            src:
-                'assets/images/partenaire_1_des_professionnels_en_algerie.jpg'),
+          src: 'assets/images/partenaire_1_des_professionnels_en_algerie.jpg',
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

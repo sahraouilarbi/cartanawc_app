@@ -1,11 +1,10 @@
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/presentation/common/expanded_text_widget.dart';
+import 'package:cartanawc_app/presentation/common/image_network_loading_progress.dart';
+import 'package:cartanawc_app/presentation/common/no_image_placeholder.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/size_config.dart';
 import 'package:flutter/material.dart';
-
-import '/core/extensions.dart';
-import '/presentation/common/expanded_text_widget.dart';
-import '/presentation/common/image_network_loading_progress.dart';
-import '/presentation/common/no_image_placeholder.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/size_config.dart';
 
 class ProductDescriptionWidget extends StatelessWidget {
   const ProductDescriptionWidget({

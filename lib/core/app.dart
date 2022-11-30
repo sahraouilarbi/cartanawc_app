@@ -1,14 +1,13 @@
+import 'package:cartanawc_app/data/geolocator_service.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/routes_manager.dart';
+import 'package:cartanawc_app/providers/auth_provider.dart';
+import 'package:cartanawc_app/providers/cart_provider.dart';
+import 'package:cartanawc_app/providers/loader_provider.dart';
+import 'package:cartanawc_app/providers/order_provider.dart';
+import 'package:cartanawc_app/providers/product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '/data/geolocator_service.dart';
-import '/presentation/pages.dart';
-import '/presentation/ressources/routes_manager.dart';
-import '/providers/auth_provider.dart';
-import '/providers/cart_provider.dart';
-import '/providers/loader_provider.dart';
-import '/providers/order_provider.dart';
-import '/providers/product_provider.dart';
 
 class CartanaApp extends StatelessWidget {
   factory CartanaApp() => instance;

@@ -1,12 +1,12 @@
 /// Reset Password Request
 class ResetPasswordRequestModel {
   String email;
+
   ResetPasswordRequestModel(this.email);
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data['email'] = email;
-    return _data;
-  }
+
+  Map<String, dynamic> toJson() => {
+        'email': email,
+      };
 }
 
 /// Set New Password Request
@@ -14,18 +14,18 @@ class SetNewPasswordRequestModel {
   String email;
   String code;
   String password;
+
   SetNewPasswordRequestModel(
     this.email,
     this.code,
     this.password,
   );
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data['email'] = email;
-    _data['code'] = code;
-    _data['password'] = code;
-    return _data;
-  }
+
+  Map<String, dynamic> toJson() => {
+        'email': email,
+        'code': code,
+        'password': code,
+      };
 }
 
 /// Validate Code Request
@@ -37,23 +37,24 @@ class ValidateCodeRequestModel {
     this.email,
     this.code,
   );
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data['email'] = email;
-    _data['code'] = code;
-    return _data;
-  }
+
+  Map<String, dynamic> toJson() => {
+        'email': email,
+        'code': code,
+      };
 }
 
 /// Reset Password Response
 class ResetPasswordResponseModel {
+  String? code;
+  String? message;
+
   ResetPasswordResponseModel({
     this.code,
     this.message,
     this.data,
   });
-  String? code;
-  String? message;
+
   ResetPasswordResponseModelDataModel? data;
   factory ResetPasswordResponseModel.fromJson(Map<String, dynamic> json) =>
       ResetPasswordResponseModel(
@@ -61,16 +62,20 @@ class ResetPasswordResponseModel {
         message: json['message'] != null ? json['message'] as String : null,
         data: json['data'] != null
             ? ResetPasswordResponseModelDataModel.fromJson(
-                json['data'] as Map<String, dynamic>)
+                json['data'] as Map<String, dynamic>,
+              )
             : null,
       );
 }
 
 class ResetPasswordResponseModelDataModel {
   int? status;
+
   ResetPasswordResponseModelDataModel({this.status});
+
   factory ResetPasswordResponseModelDataModel.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       ResetPasswordResponseModelDataModel(
         status: json['status'] != null ? json['status'] as int : null,
       );

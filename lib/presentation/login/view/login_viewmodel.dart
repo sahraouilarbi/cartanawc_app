@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import '/core/extensions.dart';
-import '/data/models/models.dart';
-import '/domain/usecase/login_usecase.dart';
-import '/presentation/base/base_viewmodel.dart';
-import '/presentation/common/freezed_data_class/freezed_data_classes.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/common/state_render/state_renderer.dart';
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/data/models/models.dart';
+import 'package:cartanawc_app/domain/usecase/login_usecase.dart';
+import 'package:cartanawc_app/presentation/base/base_viewmodel.dart';
+import 'package:cartanawc_app/presentation/common/freezed_data_class/freezed_data_classes.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
@@ -47,17 +47,26 @@ class LoginViewModel extends BaseViewModel
   @override
   Future<void> login() async {
     inputState.add(
-        LoadingState(stateRendererType: StateRendererType.popupLoadingState));
+      LoadingState(stateRendererType: StateRendererType.popupLoadingState),
+    );
     (await _loginUsecase.execute(
-            LoginUsecaseInput(loginObject.username, loginObject.password)))
+      LoginUsecaseInput(
+        loginObject.username,
+        loginObject.password,
+      ),
+    ))
         .fold(
-            (failure) => inputState.add(
-                  ErrorState(
-                      StateRendererType.popupErrorState, failure.message),
-                ), (data) {
-      inputState.add(ContentState());
-      isUserLoggedInSuccessfullyStreamController.add(data.data);
-    });
+      (failure) => inputState.add(
+        ErrorState(
+          StateRendererType.popupErrorState,
+          failure.message,
+        ),
+      ),
+      (data) {
+        inputState.add(ContentState());
+        isUserLoggedInSuccessfullyStreamController.add(data.data);
+      },
+    );
   }
 
   @override

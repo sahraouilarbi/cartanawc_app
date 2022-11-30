@@ -8,7 +8,6 @@ class CustomExpansionTile extends StatefulWidget {
     this.leading,
     required this.title,
     this.subtitle,
-    this.backgroundColor,
     this.onExpansionChanged,
     this.children = const <Widget>[],
     this.trailing,
@@ -18,7 +17,13 @@ class CustomExpansionTile extends StatefulWidget {
     this.expandedCrossAxisAlignment,
     this.expandedAlignment,
     this.childrenPadding,
+    this.backgroundColor,
     this.collapsedBackgroundColor,
+    this.textColor,
+    this.collapsedTextColor,
+    this.iconColor,
+    this.collapsedIconColor,
+    this.controlAffinity,
   })  : assert(initiallyExpanded != null),
         assert(maintainState != null),
         assert(
@@ -29,7 +34,6 @@ class CustomExpansionTile extends StatefulWidget {
         super(key: key);
 
   final Widget? leading;
-
   final Widget title;
   final Widget? subtitle;
   final ValueChanged<bool>? onExpansionChanged;
@@ -43,9 +47,14 @@ class CustomExpansionTile extends StatefulWidget {
   final Alignment? expandedAlignment;
   final CrossAxisAlignment? expandedCrossAxisAlignment;
   final EdgeInsetsGeometry? childrenPadding;
+  final Color? iconColor;
+  final Color? collapsedIconColor;
+  final Color? textColor;
+  final Color? collapsedTextColor;
+  final ListTileControlAffinity? controlAffinity;
 
   @override
-  _CustomExpansionTileState createState() => _CustomExpansionTileState();
+  State<CustomExpansionTile> createState() => _CustomExpansionTileState();
 }
 
 class _CustomExpansionTileState extends State<CustomExpansionTile>
@@ -54,8 +63,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
       CurveTween(curve: Curves.easeOut);
   static final Animatable<double> _easeInTween =
       CurveTween(curve: Curves.easeIn);
-  // static final Animatable<double> _halfTween =
-  //     Tween<double>(begin: 0.0, end: 0.5);
+  // static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: 0.5);
   static final Animatable<double> _quarterTween =
       Tween<double>(begin: 0.0, end: 0.25);
 
@@ -112,9 +120,40 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
       }
       PageStorage.of(context)?.writeState(context, _isExpanded);
     });
-    if (widget.onExpansionChanged != null) {
-      widget.onExpansionChanged?.call(_isExpanded);
+
+    widget.onExpansionChanged?.call(_isExpanded);
+  }
+
+  // Platform or nul affinity defaults to trailing.
+  ListTileControlAffinity _effectiveAffinity(
+    ListTileControlAffinity? affinity,
+  ) {
+    switch (affinity ?? ListTileControlAffinity.trailing) {
+      case ListTileControlAffinity.leading:
+        return ListTileControlAffinity.leading;
+      case ListTileControlAffinity.trailing:
+      case ListTileControlAffinity.platform:
+        return ListTileControlAffinity.trailing;
     }
+  }
+
+  Widget? _buildIcon(BuildContext context) {
+    return RotationTransition(
+      turns: _iconTurns,
+      child: const Icon(Icons.expand_more),
+    );
+  }
+
+  Widget? _buildLeadingIcon(BuildContext context) {
+    if (_effectiveAffinity(widget.controlAffinity) !=
+        ListTileControlAffinity.leading) return null;
+    return _buildIcon(context);
+  }
+
+  Widget? _buildTrailingIcon(BuildContext context) {
+    if (_effectiveAffinity(widget.controlAffinity) !=
+        ListTileControlAffinity.trailing) return null;
+    return _buildIcon(context);
   }
 
   Widget _buildChildren(BuildContext context, Widget? child) {
@@ -137,18 +176,15 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
             child: ListTile(
               onTap: _handleTap,
               contentPadding: widget.tilePadding,
-              leading: widget.leading ??
-                  RotationTransition(
-                    turns: _iconTurns,
-                    child: const Icon(Icons.keyboard_arrow_right),
-                  ),
+              leading: widget.leading != null
+                  ? RotationTransition(
+                      turns: _iconTurns,
+                      child: widget.leading,
+                    )
+                  : _buildLeadingIcon(context),
               title: widget.title,
               subtitle: widget.subtitle,
-              trailing: widget.trailing ??
-                  RotationTransition(
-                    turns: _iconTurns,
-                    child: const Icon(Icons.expand_more),
-                  ),
+              trailing: widget.trailing ?? _buildTrailingIcon(context),
             ),
           ),
           ClipRect(
@@ -166,13 +202,14 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
   @override
   void didChangeDependencies() {
     final ThemeData theme = Theme.of(context);
+    final ColorScheme colorScheme = theme.colorScheme;
     _borderColorTween.end = theme.dividerColor;
     _headerColorTween
-      ..begin = theme.textTheme.subtitle1!.color
-      ..end = theme.colorScheme.secondary;
+      ..begin = widget.collapsedTextColor ?? theme.textTheme.subtitle1!.color
+      ..end = widget.textColor ?? theme.colorScheme.secondary;
     _iconColorTween
-      ..begin = theme.unselectedWidgetColor
-      ..end = theme.colorScheme.secondary;
+      ..begin = widget.collapsedIconColor ?? theme.unselectedWidgetColor
+      ..end = widget.iconColor ?? colorScheme.primary;
     _backgroundColorTween
       ..begin = widget.collapsedBackgroundColor
       ..end = widget.backgroundColor;

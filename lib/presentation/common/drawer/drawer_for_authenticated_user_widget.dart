@@ -1,14 +1,13 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/core/prefs/app_prefs.dart';
+import 'package:cartanawc_app/presentation/common/drawer/models/drawer_model.dart';
+import 'package:cartanawc_app/presentation/common/drawer/widgets/drawer_customer_tile.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/ressources/color_manager.dart';
+import 'package:cartanawc_app/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '/core/dependency_injection.dart';
-import '/core/prefs/app_prefs.dart';
-import '/presentation/common/drawer/widgets/drawer_customer_tile.dart';
-import '/presentation/pages.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import '/presentation/ressources/color_manager.dart';
-import '/providers/auth_provider.dart';
-import 'models/drawer_model.dart';
 
 class DrawerForAuthenticatedUser extends StatelessWidget {
   DrawerForAuthenticatedUser({Key? key}) : super(key: key);

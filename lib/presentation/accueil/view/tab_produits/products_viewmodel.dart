@@ -1,10 +1,9 @@
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/domain/usecase/products_usecase.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
 import 'package:rxdart/subjects.dart';
-
-import '/domain/entities/entities.dart';
-import '/domain/usecase/products_usecase.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/common/state_render/state_renderer.dart';
-import '/presentation/pages.dart';
 
 class ProductsViewModel extends BaseViewModel
     with ProductsViewModelInput, ProductsViewModelOutput {
@@ -51,7 +50,7 @@ class ProductsViewModel extends BaseViewModel
 
   @override
   Stream<List<ProductEntity>> get outputProducts =>
-      _productsStreamController.stream.map((e) => e);
+      _productsStreamController.stream.map((_e) => _e);
 }
 
 abstract class ProductsViewModelInput {

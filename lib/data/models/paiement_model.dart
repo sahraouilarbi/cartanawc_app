@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class PaiementModel {
@@ -19,6 +18,7 @@ class PaiementModel {
   String? template;
   PaiementModelMeta? meta;
   PaiementModelACF? acf;
+
   PaiementModel({
     this.id,
     this.date,
@@ -38,6 +38,7 @@ class PaiementModel {
     this.meta,
     this.acf,
   });
+
   factory PaiementModel.fromJson(Map<String, dynamic> json) => PaiementModel(
         id: json['id'] != null ? json['id'] as int : null,
         date: json['date'] != null ? json['date'] as String : null,
@@ -58,7 +59,8 @@ class PaiementModel {
             : null,
         content: json['content'] != null
             ? PaiementModelContent.fromJson(
-                json['content'] as Map<String, dynamic>)
+                json['content'] as Map<String, dynamic>,
+              )
             : null,
         commentStatus: json['comment_status'] != null
             ? json['comment_status'] as String
@@ -149,7 +151,8 @@ class PaiementModelACF {
           : null,
       client: map['client'] != null
           ? PaiementModelACFClient.fromMap(
-              map['client'] as Map<String, dynamic>)
+              map['client'] as Map<String, dynamic>,
+            )
           : null,
     );
   }
@@ -182,5 +185,6 @@ class PaiementModelACFClient {
 
   factory PaiementModelACFClient.fromJson(String source) =>
       PaiementModelACFClient.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+        json.decode(source) as Map<String, dynamic>,
+      );
 }

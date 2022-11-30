@@ -18,21 +18,18 @@ class ContactRequestModel {
     this.yourMessage,
   );
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'your-name': yourName,
-      'your-email': yourEmail,
-      'your-telephone': yourTelephone,
-      'vous-etes': vousEtes,
-      'your-subject': yourSubject,
-      'your-message': yourMessage,
-    };
-  }
+  Map<String, dynamic> toMap() => {
+        'your-name': yourName,
+        'your-email': yourEmail,
+        'your-telephone': yourTelephone,
+        'vous-etes': vousEtes,
+        'your-subject': yourSubject,
+        'your-message': yourMessage,
+      };
 
   @override
-  String toString() {
-    return 'ContactRequestModel(name: $yourName, email: $yourEmail, telephone: $yourTelephone, vous-êtes: $vousEtes, : $yourSubject, message: $yourMessage)';
-  }
+  String toString() =>
+      'ContactRequestModel(name: $yourName, email: $yourEmail, telephone: $yourTelephone, vous-êtes: $vousEtes, : $yourSubject, message: $yourMessage)';
 }
 
 class ContactResponseModel {
@@ -51,16 +48,14 @@ class ContactResponseModel {
     this.invalidFields,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'contactFormId': contactFormId,
-      'status': status,
-      'message': message,
-      'posteDataHash': postedDataHash,
-      'into': into,
-      'invalidFields': invalidFields,
-    };
-  }
+  Map<String, dynamic> toMap() => {
+        'contactFormId': contactFormId,
+        'status': status,
+        'message': message,
+        'posteDataHash': postedDataHash,
+        'into': into,
+        'invalidFields': invalidFields,
+      };
 
   factory ContactResponseModel.fromMap(Map<String, dynamic> map) {
     return ContactResponseModel(
@@ -73,7 +68,7 @@ class ContactResponseModel {
           : null,
       into: map['into'] != null ? map['into'] as String : null,
       invalidFields: map['invalid_fields'] != null
-          ? List.from(map['invalid_fields'] as List)
+          ? List.from(map['invalid_fields'] as List<dynamic>)
           : null,
     );
   }
@@ -84,7 +79,6 @@ class ContactResponseModel {
       ContactResponseModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'ContactResponseModel(contactFormId: $contactFormId, status: $status, message: $message, posteDataHash: $postedDataHash, into: $into, invalidFields: $invalidFields)';
-  }
+  String toString() =>
+      'ContactResponseModel(contactFormId: $contactFormId, status: $status, message: $message, posteDataHash: $postedDataHash, into: $into, invalidFields: $invalidFields)';
 }

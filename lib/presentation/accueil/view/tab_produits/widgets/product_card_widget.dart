@@ -1,11 +1,10 @@
+import 'package:cartanawc_app/core/extensions.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/presentation/common/image_network_loading_progress.dart';
+import 'package:cartanawc_app/presentation/common/no_image_placeholder.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
 import 'package:flutter/material.dart';
-
-import '/core/extensions.dart';
-import '/domain/entities/entities.dart';
-import '/presentation/common/image_network_loading_progress.dart';
-import '/presentation/common/no_image_placeholder.dart';
-import '/presentation/pages.dart';
-import '/presentation/ressources/appsize_manager.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({Key? key, required this.data}) : super(key: key);

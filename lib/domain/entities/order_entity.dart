@@ -1,4 +1,4 @@
-import '/domain/entities/entities.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
 
 class OrderEntity {
   OrderEntity({

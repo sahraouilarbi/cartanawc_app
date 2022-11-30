@@ -4,9 +4,9 @@ class LoginRequest {
   String password;
 
   Map<String, String> toJson() {
-    final Map<String, String> _data = <String, String>{};
-    _data['username'] = username;
-    _data['password'] = password;
-    return _data;
+    return <String, String>{
+      'username': username,
+      'password': password,
+    };
   }
 }

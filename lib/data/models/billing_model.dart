@@ -40,37 +40,21 @@ class BillingModel {
         email: json['email'] != null ? json['email'] as String : null,
         phone: json['phone'] != null ? json['phone'] as String : null,
       );
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data['first_name'] = firstName;
-    _data['last_name'] = lastName;
-    _data['company'] = company;
-    _data['address_1'] = address1;
-    _data['address_2'] = address2;
-    _data['city'] = city;
-    _data['state'] = state;
-    _data['postcode'] = postcode;
-    _data['country'] = country;
-    _data['email'] = email;
-    _data['phone'] = phone;
-    return _data;
-  }
+  Map<String, dynamic> toJson() => {
+        'first_name': firstName,
+        'last_name': lastName,
+        'company': company,
+        'address_1': address1,
+        'address_2': address2,
+        'city': city,
+        'state': state,
+        'postcode': postcode,
+        'country': country,
+        'email': email,
+        'phone': phone,
+      };
 
   @override
-  String toString() {
-    final String billingModel = """
-firstName: $firstName,
-lastName: $lastName,
-company: $company,
-address1: $address1,
-address2: $address2,
-city: $city,
-state: $state,
-postcode: $postcode,
-country: $country,
-email: $email,
-phone: $phone
-""";
-    return billingModel;
-  }
+  String toString() =>
+      "billingModel(firstName: $firstName, lastName: $lastName, company: $company, address1: $address1, address2: $address2, city: $city, state: $state, postcode: $postcode, country: $country, email: $email, phone: $phone, )";
 }

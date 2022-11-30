@@ -1,14 +1,16 @@
-import '/data/api/api_service.dart';
-import '/data/models/login_request.dart';
+import 'package:cartanawc_app/data/api/api_service.dart';
+import 'package:cartanawc_app/data/models/login_request.dart';
 
-import '/data/models/models.dart';
+import 'package:cartanawc_app/data/models/models.dart';
 
 abstract class RemoteDataSource {
   Future<LoginResponseModel> login(LoginRequest loginRequest);
   Future<ResetPasswordResponseModel> forgotPassword(String email);
   Future<CustomerDetailModel> getCustomerProfile(int userId);
   Future<CustomerDetailModel> updateShippingInformations(
-      int _userId, ShippingModel _shippingModel);
+    int _userId,
+    ShippingModel _shippingModel,
+  );
   Future<List<CategoryModel>> getCategories();
   Future<List<ProductModel>> getProducts({
     String? status = 'publish',
@@ -39,7 +41,8 @@ abstract class RemoteDataSource {
   Future<OrderDetailModel> getOrderDetails(int orderId);
   Future<List<PaymentGatewaysModel>> getPaymentGateways();
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
-      DevenirDistributeurRequestModel _formData);
+    DevenirDistributeurRequestModel _formData,
+  );
   Future<ContactResponseModel> contact(ContactRequestModel _formData);
   Future<List<PaiementModel>> getPaiements();
   Future<List<MagasinCosmetiqueModel>> getMagasinsCosmetiques();
@@ -64,7 +67,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   // Update Shipping Informations
   @override
   Future<CustomerDetailModel> updateShippingInformations(
-      int _userId, ShippingModel shippingModel) {
+    int _userId,
+    ShippingModel shippingModel,
+  ) {
     return _apiService.updateShippingInformations(_userId, shippingModel);
   }
 
@@ -140,16 +145,17 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   // Get Products
   @override
-  Future<List<ProductModel>> getProducts(
-      {String? status = 'publish',
-      String? strSearch,
-      int? perPage,
-      int? pageNumber,
-      String? tagName,
-      List<int>? productsIds,
-      String? categoryId,
-      String? sortBy,
-      String? sortOrder = 'asc'}) {
+  Future<List<ProductModel>> getProducts({
+    String? status = 'publish',
+    String? strSearch,
+    int? perPage,
+    int? pageNumber,
+    String? tagName,
+    List<int>? productsIds,
+    String? categoryId,
+    String? sortBy,
+    String? sortOrder = 'asc',
+  }) {
     return _apiService.getProducts(
       status: status,
       strSearch: strSearch,
@@ -166,7 +172,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   // Devenir Distributeur
   @override
   Future<DevenirDistributeurResponseModel> devenirDistributeur(
-      DevenirDistributeurRequestModel _formData) {
+    DevenirDistributeurRequestModel _formData,
+  ) {
     return _apiService.devenirDistributeur(_formData);
   }
 

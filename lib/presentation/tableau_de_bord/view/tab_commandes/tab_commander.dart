@@ -1,13 +1,11 @@
+import 'package:cartanawc_app/core/dependency_injection.dart';
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
+import 'package:cartanawc_app/presentation/ressources/appsize_manager.dart';
+import 'package:cartanawc_app/presentation/tableau_de_bord/view/tab_commandes/custom_expansion_tile.dart';
+import 'package:cartanawc_app/presentation/tableau_de_bord/view/tab_commandes/tab_commander_viewmodel.dart';
 import 'package:flutter/material.dart';
-
-import '/core/dependency_injection.dart';
-import '/core/extensions.dart';
-import '/domain/entities/entities.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/pages.dart';
-import '/presentation/ressources/appsize_manager.dart';
-import 'custom_expansion_tile.dart';
-import 'tab_commander_viewmodel.dart';
 
 class TabCommander extends StatefulWidget {
   const TabCommander({Key? key}) : super(key: key);
@@ -88,10 +86,11 @@ class _TabCommanderState extends State<TabCommander> {
   }
 
   CustomScrollView _displayCategories(
-      AsyncSnapshot<List<ProductEntity>> snapshot) {
+    AsyncSnapshot<List<ProductEntity>> snapshot,
+  ) {
     var seen = Set<String>();
     final List<ProductCategoryEntity> uniqueCategory = snapshot.data!
-        .map((e) => e.categories[1])
+        .map((_e) => _e.categories[1])
         .where((element) => seen.add(element.name))
         .cast<ProductCategoryEntity>()
         .toList()
@@ -103,14 +102,17 @@ class _TabCommanderState extends State<TabCommander> {
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               final List<ProductEntity> _productsInCategory = snapshot.data!
-                  .where((element) =>
-                      element.categories[1].id == uniqueCategory[index].id)
+                  .where(
+                    (element) =>
+                        element.categories[1].id == uniqueCategory[index].id,
+                  )
                   .toList()
                 ..sort((a, b) => a.name.compareTo(b.name));
 
               return CustomExpansionTile(
-                title: Text(uniqueCategory[index].name.toString()),
-                trailing: const Text(kEMPTY),
+                title: Text(uniqueCategory[index].name),
+                trailing: const Text(''),
+                leading: const Icon(Icons.keyboard_arrow_right),
                 children: [
                   CustomScrollView(
                     shrinkWrap: true,
@@ -123,8 +125,9 @@ class _TabCommanderState extends State<TabCommander> {
                               decoration: BoxDecoration(
                                 border: Border(
                                   bottom: BorderSide(
-                                      color: Colors.grey
-                                          .withOpacity(AppSize.s0_5)),
+                                    color:
+                                        Colors.grey.withOpacity(AppSize.s0_5),
+                                  ),
                                 ),
                               ),
                               child: ListTile(
@@ -138,8 +141,10 @@ class _TabCommanderState extends State<TabCommander> {
                                   //   ),
                                   // );
                                   Navigator.pushNamed(
-                                      context, ProductDetailsPage.routeName,
-                                      arguments: _productsInCategory[j]);
+                                    context,
+                                    ProductDetailsPage.routeName,
+                                    arguments: _productsInCategory[j],
+                                  );
                                 },
                                 leading: Image.network(
                                   _productsInCategory[j]

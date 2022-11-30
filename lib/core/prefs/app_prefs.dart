@@ -1,6 +1,5 @@
+import 'package:cartanawc_app/core/extensions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '/core/extensions.dart';
 
 abstract class AppPreferences {
   Future<void> setUsername(String username);

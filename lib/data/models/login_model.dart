@@ -22,24 +22,29 @@ class LoginResponseModel {
         message: json['message'] != null ? json['message'] as String : null,
         data: json['data'] != null
             ? LoginResponseDataModel.fromJson(
-                json['data'] as Map<String, dynamic>)
+                json['data'] as Map<String, dynamic>,
+              )
             : null,
       );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data['success'] = success;
-    _data['statusCode'] = statusCode;
-    _data['code'] = code;
-    _data['message'] = message;
-    if (data != null) {
-      _data['data'] = data!.toJson();
-    }
-    return _data;
-  }
+  Map<String, dynamic> toJson() => {
+        'success': success,
+        'statusCode': statusCode,
+        'code': code,
+        'message': message,
+        'data': data != null ? data!.toJson() : null
+      };
 }
 
 class LoginResponseDataModel {
+  String? token;
+  int? id;
+  String? email;
+  String? nicename;
+  String? firstName;
+  String? lastName;
+  String? displayName;
+
   LoginResponseDataModel({
     this.token,
     this.id,
@@ -49,13 +54,6 @@ class LoginResponseDataModel {
     this.lastName,
     this.displayName,
   });
-  String? token;
-  int? id;
-  String? email;
-  String? nicename;
-  String? firstName;
-  String? lastName;
-  String? displayName;
 
   factory LoginResponseDataModel.fromJson(Map<String, dynamic> json) =>
       LoginResponseDataModel(
@@ -69,15 +67,14 @@ class LoginResponseDataModel {
         displayName:
             json['displayName'] != null ? json['displayName'] as String : null,
       );
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data['token'] = token;
-    _data['id'] = id;
-    _data['email'] = email;
-    _data['nicename'] = nicename;
-    _data['firstName'] = firstName;
-    _data['lastName'] = lastName;
-    _data['displayName'] = displayName;
-    return _data;
-  }
+
+  Map<String, dynamic> toJson() => {
+        'token': token,
+        'id': id,
+        'email': email,
+        'nicename': nicename,
+        'firstName': firstName,
+        'lastName': lastName,
+        'displayName': displayName,
+      };
 }

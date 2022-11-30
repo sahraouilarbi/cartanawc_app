@@ -2,8 +2,8 @@
 
 // import 'package:dio/dio.dart';
 
-// import '/data/api/api_endpoint.dart';
-// import '/presentation/common/utils.dart';
+// import 'package:cartanawc_app/data/api/api_endpoint.dart';
+// import 'package:cartanawc_app/presentation/common/utils.dart';
 
 // class HttpService {
 //   Dio _dio = Dio();

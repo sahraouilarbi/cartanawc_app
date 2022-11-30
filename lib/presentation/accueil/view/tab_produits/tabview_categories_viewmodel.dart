@@ -1,12 +1,11 @@
 import 'dart:ffi';
 
+import 'package:cartanawc_app/domain/entities/entities.dart';
+import 'package:cartanawc_app/domain/usecase/categories_usecase.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
+import 'package:cartanawc_app/presentation/common/state_render/state_renderer.dart';
+import 'package:cartanawc_app/presentation/pages.dart';
 import 'package:rxdart/subjects.dart';
-
-import '/domain/entities/entities.dart';
-import '/domain/usecase/categories_usecase.dart';
-import '/presentation/common/state_render/state_render_impl.dart';
-import '/presentation/common/state_render/state_renderer.dart';
-import '/presentation/pages.dart';
 
 class TabCategoriesViewModel extends BaseViewModel
     with TabCategoriesViewModelInput, TabCategoriesViewModelOutput {
@@ -32,13 +31,16 @@ class TabCategoriesViewModel extends BaseViewModel
     );
     (await categoriesUsecase.execute(Void)).fold((failure) {
       inputState.add(
-          ErrorState(StateRendererType.fullScreenErrorState, failure.message));
+        ErrorState(StateRendererType.fullScreenErrorState, failure.message),
+      );
     }, (categories) async {
       inputState.add(ContentState());
       final List<CategoryEntity> _categoriesParentAndNonClass = categories
-          .where((element) =>
-              element.categoryParent == 0 &&
-              element.categorySlug != 'non-classe')
+          .where(
+            (element) =>
+                element.categoryParent == 0 &&
+                element.categorySlug != 'non-classe',
+          )
           .toList();
       inputCategories.add(_categoriesParentAndNonClass);
     });
@@ -49,7 +51,7 @@ class TabCategoriesViewModel extends BaseViewModel
 
   @override
   Stream<List<CategoryEntity>> get outputCategories =>
-      _categoriesStreamController.stream.map((e) => e);
+      _categoriesStreamController.stream.map((_e) => _e);
 }
 
 abstract class TabCategoriesViewModelInput {
