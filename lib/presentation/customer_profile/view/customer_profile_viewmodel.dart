@@ -71,7 +71,7 @@ class CustomerProfileViewModel extends BaseViewModel
 
   @override
   Stream<CustomerDetailEntity> get outputCustomerProfileData =>
-      _customerProfileStreamController.stream.map((data) => data);
+      _customerProfileStreamController.stream.map((_data) => _data);
 }
 
 abstract class CustomerProfileViewModelInputs {

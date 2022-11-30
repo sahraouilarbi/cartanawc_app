@@ -156,7 +156,7 @@ class RepositoryImpl implements Repository {
       try {
         final _response = await _remoteDataSource.getCategories();
         final List<CategoryEntity> _categories =
-            List<CategoryEntity>.from(_response.map((e) => e.toDomain()));
+            List<CategoryEntity>.from(_response.map((_e) => _e.toDomain()));
         return Right(_categories);
       } catch (_error) {
         return Left(ErrorHandler.handle(_error).failure);
@@ -210,7 +210,7 @@ class RepositoryImpl implements Repository {
           product: product,
         );
         final List<OrderEntity> _orderEntity =
-            List<OrderEntity>.from(_response.map((e) => e.toDomain()));
+            List<OrderEntity>.from(_response.map((_e) => _e.toDomain()));
         return Right(_orderEntity);
       } catch (_error) {
         return Left(ErrorHandler.handle(_error).failure);
@@ -247,7 +247,7 @@ class RepositoryImpl implements Repository {
           sortOrder: sortOrder,
         );
         final List<ProductEntity> _products =
-            List<ProductEntity>.from(_response.map((e) => e.toDomain()));
+            List<ProductEntity>.from(_response.map((_e) => _e.toDomain()));
         return Right(_products);
       } catch (_error) {
         return Left(ErrorHandler.handle(_error).failure);
@@ -265,7 +265,7 @@ class RepositoryImpl implements Repository {
         final _response = await _remoteDataSource.getPaymentGateways();
         final List<PaymentGatewaysEntity> _paymentGateways =
             List<PaymentGatewaysEntity>.from(
-          _response.map((e) => e.toDomain()),
+          _response.map((_e) => _e.toDomain()),
         );
         return Right(_paymentGateways);
       } catch (_error) {
@@ -343,7 +343,7 @@ class RepositoryImpl implements Repository {
       try {
         final _response = await _remoteDataSource.getPaiements();
         final List<PaiementEntity> _paiements =
-            List<PaiementEntity>.from(_response.map((e) => e.toDomain()))
+            List<PaiementEntity>.from(_response.map((_e) => _e.toDomain()))
                 .where((element) {
           return element.acf.client.id == customerId;
         }).toList();
@@ -367,7 +367,7 @@ class RepositoryImpl implements Repository {
         final _response = await _remoteDataSource.getMagasinsCosmetiques();
         final List<MagasinCosmetiqueEntity> _magasinsCosmetiques =
             List<MagasinCosmetiqueEntity>.from(
-          _response.map((e) => e.toDomain()),
+          _response.map((_e) => _e.toDomain()),
         );
         return Right(_magasinsCosmetiques);
       } catch (_error) {

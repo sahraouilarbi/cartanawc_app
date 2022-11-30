@@ -218,7 +218,7 @@ class _APIServiceImpl implements APIService {
         ),
       );
       return (_response.data!)
-          .map((i) => CategoryModel.fromJson(i as Map<String, dynamic>))
+          .map((_e) => CategoryModel.fromJson(_e as Map<String, dynamic>))
           .toList();
     } on DioError catch (e) {
       printDebugMessage('## getCategories DioError : ${e.message}');
@@ -290,7 +290,7 @@ class _APIServiceImpl implements APIService {
         ),
       );
       _products = (_response.data!)
-          .map((i) => ProductModel.fromJson(i as Map<String, dynamic>))
+          .map((_e) => ProductModel.fromJson(_e as Map<String, dynamic>))
           .toList();
 
       String _userRole = kEMPTY;
@@ -716,7 +716,7 @@ class _APIServiceImpl implements APIService {
         ),
       );
       return (_response.data!)
-          .map((e) => PaiementModel.fromJson(e as Map<String, dynamic>))
+          .map((_e) => PaiementModel.fromJson(_e as Map<String, dynamic>))
           .toList();
     } on DioError catch (e) {
       printDebugMessage(e.response.toString());
@@ -753,7 +753,9 @@ class _APIServiceImpl implements APIService {
             ),
       );
       return (_response.data!)
-          .map((e) => MagasinCosmetiqueModel.fromMap(e as Map<String, dynamic>))
+          .map(
+            (_e) => MagasinCosmetiqueModel.fromMap(_e as Map<String, dynamic>),
+          )
           .toList();
     } on DioError catch (_e) {
       printDebugMessage(_e.response.toString());

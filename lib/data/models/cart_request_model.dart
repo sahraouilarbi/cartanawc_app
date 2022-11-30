@@ -18,7 +18,7 @@ class CartRequestModel {
   Map<String, dynamic> toJson() => {
         'user_id': userId,
         'products': products != null
-            ? products!.map((product) => product.toJson()).toList()
+            ? products!.map((_product) => _product.toJson()).toList()
             : null,
       };
 }

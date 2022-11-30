@@ -7,27 +7,27 @@ import 'package:cartanawc_app/domain/entities/entities.dart';
 extension ProductModelMapper on ProductModel? {
   ProductEntity toDomain() {
     final List<ProductImageEntity> _imagesMapped =
-        (this?.images?.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.images?.map((_e) => _e.toDomain()) ?? const Iterable.empty())
             .cast<ProductImageEntity>()
             .toList();
     final List<ProductCategoryEntity> _categoriesMapped =
-        (this?.categories?.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.categories?.map((_e) => _e.toDomain()) ?? const Iterable.empty())
             .cast<ProductCategoryEntity>()
             .toList();
     final List<ProductAttributesEntity> _attributesMapped =
-        (this?.attributes?.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.attributes?.map((_e) => _e.toDomain()) ?? const Iterable.empty())
             .cast<ProductAttributesEntity>()
             .toList();
     final List<int> _relatedIdsMapped =
-        (this?.relatedIds?.map((v) => v) ?? const Iterable.empty())
+        (this?.relatedIds?.map((_e) => _e) ?? const Iterable.empty())
             .cast<int>()
             .toList();
     final List<dynamic> _variationsMapped =
-        (this?.variations?.map((v) => v) ?? const Iterable.empty())
+        (this?.variations?.map((_e) => _e) ?? const Iterable.empty())
             .cast<dynamic>()
             .toList();
     final List<MetaDataEntity> _metaDataMapped =
-        (this?.metaData?.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.metaData?.map((_e) => _e.toDomain()) ?? const Iterable.empty())
             .cast<MetaDataEntity>()
             .toList();
     return ProductEntity(
@@ -93,7 +93,7 @@ extension ProductVariationsAttributesModelMapper
 extension ProductVariationsModelMapper on ProductVariationsModel? {
   ProductVariationsEntity toDomain() {
     final List<ProductVariationsAttributesEntity> _attributesMapped =
-        (this?.attributes?.map((e) => e.toDomain()) ?? const Iterable.empty())
+        (this?.attributes?.map((_e) => _e.toDomain()) ?? const Iterable.empty())
             .cast<ProductVariationsAttributesEntity>()
             .toList();
     return ProductVariationsEntity(
@@ -123,7 +123,7 @@ extension ProductACFModelMapper on ProductACFModel? {
 extension ProductAttributesModelMapper on ProductAttributesModel? {
   ProductAttributesEntity toDomain() {
     final List<String> _optionsMapped =
-        (this?.options?.map((v) => v) ?? const Iterable.empty())
+        (this?.options?.map((_e) => _e) ?? const Iterable.empty())
             .cast<String>()
             .toList();
     return ProductAttributesEntity(

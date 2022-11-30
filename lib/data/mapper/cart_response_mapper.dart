@@ -6,7 +6,7 @@ import 'package:cartanawc_app/domain/entities/entities.dart';
 extension CartResponseModelMapper on CartResponseModel? {
   CartResponseEntity toDomain() {
     final List<CartItemEntity> dataMapped =
-        (this?.data?.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.data?.map((_e) => _e.toDomain()) ?? const Iterable.empty())
             .cast<CartItemEntity>()
             .toList();
     return CartResponseEntity(

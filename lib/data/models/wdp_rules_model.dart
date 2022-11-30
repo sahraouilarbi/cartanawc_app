@@ -66,7 +66,7 @@ class WdpRulesModel {
         //conditions
         conditions: json['conditions'] != null
             ? List<dynamic>.from(
-                (json['conditions'] as List<dynamic>).map((e) => e),
+                (json['conditions'] as List<dynamic>).map((_e) => _e),
               )
             : [],
 
@@ -84,7 +84,7 @@ class WdpRulesModel {
         //limits
         limits: json['limits'] != null
             ? List<dynamic>.from(
-                (json['limits'] as List<dynamic>).map((e) => e),
+                (json['limits'] as List<dynamic>).map((_e) => _e),
               )
             : <dynamic>[],
 
@@ -106,7 +106,7 @@ class WdpRulesModel {
         sortableBlocksPriority: json['sortable_blocks_priority'] != null
             ? List<String>.from(
                 (json['sortable_blocks_priority'] as List<dynamic>)
-                    .map((e) => e as String),
+                    .map((_e) => _e as String),
               )
             : <String>[],
 
@@ -124,7 +124,7 @@ class WdpRulesModel {
         //cart_adjustments
         cartAdjustments: json['cart_adjustments'] != null
             ? List<dynamic>.from(
-                (json['cart_adjustments'] as List<dynamic>).map((e) => e),
+                (json['cart_adjustments'] as List<dynamic>).map((_e) => _e),
               )
             : <dynamic>[],
 
@@ -209,7 +209,9 @@ class WdpRulesFiltersModel {
             json['limitation'] != null ? json['limitation'] as String : null,
         method: json['method'] != null ? json['method'] as String : null,
         value: json['value'] != null
-            ? List<String>.from((json['value'] as List<dynamic>).map((e) => e))
+            ? List<String>.from(
+                (json['value'] as List<dynamic>).map((_e) => _e),
+              )
             : <String>[],
       );
 }

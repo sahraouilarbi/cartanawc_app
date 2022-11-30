@@ -30,8 +30,8 @@ class CheckPoints extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
                 child: Row(
-                  children: checkPoints.map((e) {
-                    final int index = checkPoints.indexOf(e);
+                  children: checkPoints.map((_e) {
+                    final int index = checkPoints.indexOf(_e);
                     return SizedBox(
                       height: circleDia,
                       child: Row(
@@ -73,9 +73,9 @@ class CheckPoints extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p2),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: checkPoints.map((e) {
+                  children: checkPoints.map((_e) {
                     return Text(
-                      e,
+                      _e,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     );
                   }).toList(),

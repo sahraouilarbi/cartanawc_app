@@ -57,7 +57,7 @@ class TabviewExplorerViewModel extends BaseViewModel
 
   @override
   Stream<List<MagasinCosmetiqueEntity>> get outputMagasinsCosmetiques =>
-      _magasinsCosmetiquesStreamController.stream.map((e) => e);
+      _magasinsCosmetiquesStreamController.stream.map((_e) => _e);
 }
 
 abstract class TabviewExplorerViewModelInput {

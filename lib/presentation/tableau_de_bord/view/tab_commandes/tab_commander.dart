@@ -1,5 +1,4 @@
 import 'package:cartanawc_app/core/dependency_injection.dart';
-import 'package:cartanawc_app/core/extensions.dart';
 import 'package:cartanawc_app/domain/entities/entities.dart';
 import 'package:cartanawc_app/presentation/common/state_render/state_render_impl.dart';
 import 'package:cartanawc_app/presentation/pages.dart';
@@ -91,7 +90,7 @@ class _TabCommanderState extends State<TabCommander> {
   ) {
     var seen = Set<String>();
     final List<ProductCategoryEntity> uniqueCategory = snapshot.data!
-        .map((e) => e.categories[1])
+        .map((_e) => _e.categories[1])
         .where((element) => seen.add(element.name))
         .cast<ProductCategoryEntity>()
         .toList()
@@ -112,7 +111,8 @@ class _TabCommanderState extends State<TabCommander> {
 
               return CustomExpansionTile(
                 title: Text(uniqueCategory[index].name),
-                trailing: const Text(kEMPTY),
+                trailing: const Text(''),
+                leading: const Icon(Icons.keyboard_arrow_right),
                 children: [
                   CustomScrollView(
                     shrinkWrap: true,

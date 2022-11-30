@@ -19,7 +19,7 @@ class TabPaiementViewModel extends BaseViewModel
 
   @override
   Stream<List<PaiementEntity>> get outputPaiement =>
-      _paiementStreamController.stream.map((e) => e);
+      _paiementStreamController.stream.map((_e) => _e);
 
   @override
   Future<void> start() async {

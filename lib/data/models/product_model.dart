@@ -186,7 +186,7 @@ class ProductAttributesModel {
         name: json['name'] != null ? json['name'] as String : null,
         options: json['option'] != null
             ? List<dynamic>.from(
-                (json['option'] as List<dynamic>).map((e) => e),
+                (json['option'] as List<dynamic>).map((_e) => _e),
               )
             : null,
       );

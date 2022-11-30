@@ -51,7 +51,7 @@ class TabCategoriesViewModel extends BaseViewModel
 
   @override
   Stream<List<CategoryEntity>> get outputCategories =>
-      _categoriesStreamController.stream.map((e) => e);
+      _categoriesStreamController.stream.map((_e) => _e);
 }
 
 abstract class TabCategoriesViewModelInput {

@@ -39,7 +39,7 @@ class ProductVariationsModel {
         'regular_price': regularPrice,
         'sale_price': salePrice,
         'attributes': attributes != null
-            ? attributes!.map((element) => element.toJson()).toList()
+            ? attributes!.map((_element) => _element.toJson()).toList()
             : null,
       };
 }

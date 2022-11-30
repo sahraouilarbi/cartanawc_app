@@ -5,7 +5,7 @@ import 'package:cartanawc_app/domain/entities/entities.dart';
 extension PaymentGatewaysMapper on PaymentGatewaysModel? {
   PaymentGatewaysEntity toDomain() {
     final List<String> _methodSupportsMapped = List<String>.from(
-      this?.methodSupports?.map((e) => e) ?? const Iterable.empty(),
+      this?.methodSupports?.map((_e) => _e) ?? const Iterable.empty(),
     );
     return PaymentGatewaysEntity(
       id: this?.id?.orEmpty() ?? kEMPTY,
@@ -27,11 +27,11 @@ extension LinksModelMapper on LinksModel? {
   PaymentGatewaysLinksEntity toDomain() {
     final List<PaymentGatewaysCollectionEntity> _selfMapped =
         List<PaymentGatewaysCollectionEntity>.from(
-      this?.self?.map((e) => e) ?? const Iterable.empty(),
+      this?.self?.map((_e) => _e) ?? const Iterable.empty(),
     );
     final List<PaymentGatewaysCollectionEntity> _collectionMapped =
         List<PaymentGatewaysCollectionEntity>.from(
-      this?.self?.map((e) => e) ?? const Iterable.empty(),
+      this?.self?.map((_e) => _e) ?? const Iterable.empty(),
     );
     return PaymentGatewaysLinksEntity(
       self: _selfMapped,

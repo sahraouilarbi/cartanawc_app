@@ -7,7 +7,7 @@ import 'package:cartanawc_app/domain/entities/entities.dart';
 extension OrderModelMapper on OrderModel? {
   OrderEntity toDomain() {
     final List<OrderLineItemsEntity> _lineItemsMapped =
-        (this?.lineItems?.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.lineItems?.map((_e) => _e.toDomain()) ?? const Iterable.empty())
             .cast<OrderLineItemsEntity>()
             .toList();
     return OrderEntity(
@@ -43,7 +43,7 @@ extension OrderLineItemsModelMapper on OrderLineItemsModel? {
 extension OrderDetailModelMappser on OrderDetailModel? {
   OrderDetailEntity toDomain() {
     final List<OrderDetailsLineItemsEntity> lineItemsMapped =
-        (this?.lineItems?.map((v) => v.toDomain()) ?? const Iterable.empty())
+        (this?.lineItems?.map((_e) => _e.toDomain()) ?? const Iterable.empty())
             .cast<OrderDetailsLineItemsEntity>()
             .toList();
     return OrderDetailEntity(
@@ -78,7 +78,7 @@ extension LineItemsModelMapper on OrderDetailLineItemsModel? {
 extension OrderEntityMapper on OrderEntity {
   OrderModel toModel() {
     final List<OrderLineItemsModel> _lineItemsMapped =
-        (lineItems.map((e) => e)).cast<OrderLineItemsModel>().toList();
+        (lineItems.map((_e) => _e)).cast<OrderLineItemsModel>().toList();
     return OrderModel(
       orderId: orderId,
       orderNumber: orderNumber,

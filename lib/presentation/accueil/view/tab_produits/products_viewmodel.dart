@@ -50,7 +50,7 @@ class ProductsViewModel extends BaseViewModel
 
   @override
   Stream<List<ProductEntity>> get outputProducts =>
-      _productsStreamController.stream.map((e) => e);
+      _productsStreamController.stream.map((_e) => _e);
 }
 
 abstract class ProductsViewModelInput {

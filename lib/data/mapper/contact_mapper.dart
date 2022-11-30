@@ -18,7 +18,7 @@ extension ContactRequestModelMapper on ContactRequestEntity {
 extension ContactResponseModelMapper on ContactResponseModel? {
   ContactResponseEntity toDomain() {
     final List<dynamic> _invalidFieldsMapped =
-        (this?.invalidFields?.map((v) => v) ?? const Iterable.empty())
+        (this?.invalidFields?.map((_e) => _e) ?? const Iterable.empty())
             .cast<dynamic>()
             .toList();
     return ContactResponseEntity(

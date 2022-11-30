@@ -320,6 +320,6 @@ class EnumValuesModel<T> {
   EnumValuesModel(this.map);
 
   Map<T, String> get reverse {
-    return reverseMap ??= map.map((k, v) => MapEntry(v, k));
+    return reverseMap ??= map.map((_k, _v) => MapEntry(_v, _k));
   }
 }

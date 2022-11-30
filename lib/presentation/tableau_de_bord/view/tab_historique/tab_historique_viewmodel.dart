@@ -22,7 +22,7 @@ class TabHistoriqueViewModel extends BaseViewModel
 
   @override
   Stream<List<OrderEntity>> get outputHistoque =>
-      _historiqueStreamController.stream.map((e) => e);
+      _historiqueStreamController.stream.map((_e) => _e);
 
   @override
   Future<void> start() async {
